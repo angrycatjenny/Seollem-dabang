@@ -1,17 +1,15 @@
-# 대전 1반 3팀
+# frontend
 
 ## :four_leaf_clover: STEPS TO RUN :four_leaf_clover:
 
-#### Frontend/
-
-###### npm
+#### npm
 
 ```bash
 $ npm i
 $ npm start
 ```
 
-###### yarn
+#### yarn
 
 ```bash
 $ yarn install
