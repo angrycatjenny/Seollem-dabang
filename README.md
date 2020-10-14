@@ -2,7 +2,7 @@
 
 ## :four_leaf_clover: STEPS TO RUN :four_leaf_clover:
 
-#### Frontend/
+#### frontend/
 
 ###### npm
 
@@ -18,6 +18,3 @@ $ yarn install
 $ yarn start
 ```
 
-
-
-test
