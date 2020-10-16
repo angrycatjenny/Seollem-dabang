@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from '../../../node_modules/axios/index';
 
 const SignupPage = () => {
   const [ username, setUsername ] = useState('');
@@ -14,16 +15,23 @@ const SignupPage = () => {
   const setPasswordText = e => {
     setPassword(e.target.value);
   };
-  const saveSignupData = e => {
+
+  const sendSignupData = e => {
     e.preventDefault();
-    console.log(username, email, password, '회원가입 정보')
+    const signupData = [username, email, password];
+    console.log(signupData, '회원가입 정보')
+    axios.post('/signup', signupData)
+      .then(
+        console.log('회원가입 성공')
+      )
+      .catch((error) => console.log(error))
   };
 
   return (
     <div>
       <h1>회원가입</h1>
       <div className="w-25">
-        <form onSubmit={saveSignupData} className="d-flex flex-column">
+        <form onSubmit={sendSignupData} className="d-flex flex-column">
           <input placeholder="이름" username={username} onChange={setUsernameText} />
           <input placeholder="이메일" email={email} onChange={setEmailText} />
           <input placeholder="비밀번호" password={password} onChange={setPasswordText} />
