@@ -21,9 +21,7 @@ const SignupPage = () => {
     const signupData = [username, email, password];
     console.log(signupData, '회원가입 정보')
     axios.post('/signup', signupData)
-      .then(
-        console.log('회원가입 성공')
-      )
+      .then(console.log('회원가입 성공'))
       .catch((error) => console.log(error))
   };
 
