@@ -8,6 +8,7 @@ import { Route } from 'react-router-dom';
 
 // base
 import MainPage from './pages/base/MainPage';
+import HomePage from './pages/base/HomePage';
 
 // Accounts
 import LoginPage from './pages/accounts/LoginPage';
@@ -17,7 +18,8 @@ const App = () => {
   return (
     <>
       {/* base */}
-      <Route component={MainPage} path="/" />
+      <Route component={HomePage} exact path="/" />
+      <Route component={MainPage} path="/main" />
 
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
