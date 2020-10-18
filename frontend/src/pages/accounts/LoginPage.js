@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeaderComp from '../../components/base/HeaderComp';
 import axios from '../../../node_modules/axios/index';
 
 const LoginPage = () => {
@@ -30,6 +31,7 @@ const LoginPage = () => {
 
   return (
     <div>
+      <HeaderComp />
       <h1>로그인</h1>
       <div className="w-25">
         <form onSubmit={sendLoginData} className="d-flex flex-column">

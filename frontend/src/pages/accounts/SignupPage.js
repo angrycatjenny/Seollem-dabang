@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeaderComp from '../../components/base/HeaderComp';
 import axios from '../../../node_modules/axios/index';
 
 const SignupPage = () => {
@@ -31,6 +32,7 @@ const SignupPage = () => {
 
   return (
     <div>
+      <HeaderComp />
       <h1>회원가입</h1>
       <div className="w-25">
         <form onSubmit={sendSignupData} className="d-flex flex-column">
