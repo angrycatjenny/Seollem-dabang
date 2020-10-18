@@ -14,6 +14,9 @@ import HomePage from './pages/base/HomePage';
 import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
 
+// Articels
+import ArticleListPage from './pages/articles/ArticleListPage';
+
 const App = () => {
   return (
     <>
@@ -24,6 +27,9 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
+
+      {/* Articles */}
+      <Route component={ArticleListPage} path="/articles" />
     </>
   );
 };
