@@ -6,3 +6,5 @@ const palette = {
     '#e3dede',
   ]
 }
+
+export default palette;
