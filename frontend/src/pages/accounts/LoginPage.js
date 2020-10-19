@@ -4,21 +4,16 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
 const LoginPage = ({ history }) => {
-  const [ username, setUsername ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [ username, setUsername ] = useState('');             // 이름
+  const [ email, setEmail ] = useState('');                   // 이메일
+  const [ password, setPassword ] = useState('');             // 비밀번호
+  
+  // 토큰
+  const [cookies, setCookie] = useCookies(['access-token']);  // 토큰
 
-  const [cookies, setCookie] = useCookies(['access-token']);
-
-  const setUsernameText = e => {
-    setUsername(e.target.value);
-  }
-  const setEmailText = e => {
-    setEmail(e.target.value);
-  };
-  const setPasswordText = e => {
-    setPassword(e.target.value);
-  };
+  const setUsernameText = e => {setUsername(e.target.value)}; // 이름
+  const setEmailText = e => {setEmail(e.target.value)};       // 이메일
+  const setPasswordText = e => {setPassword(e.target.value)}; // 비밀번호
 
   const sendLoginData = e => {
     e.preventDefault()
