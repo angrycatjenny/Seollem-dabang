@@ -14,8 +14,9 @@ import HomePage from './pages/base/HomePage';
 import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
 
-// Articels
-import ArticleListPage from './pages/articles/ArticleListPage';
+// Exam
+import ExamDetailPage from './pages/exam/ExamDetailPage';
+import ExamCreatePage from './pages/exam/ExamCreatePage';
 
 const App = () => {
   return (
@@ -28,8 +29,9 @@ const App = () => {
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
 
-      {/* Articles */}
-      <Route component={ArticleListPage} path="/articles" />
+      {/* exam */}
+      <Route component={ExamDetailPage} path="/exam" />
+      <Route component={ExamCreatePage} path="/exam/create" />
     </>
   );
 };
