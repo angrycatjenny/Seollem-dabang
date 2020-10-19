@@ -43,6 +43,8 @@ const SignupPage = () => {
           <button type="submit">회원가입</button>
         </form>
       </div>
+      <small>이미 회원이신가요?</small>
+      <a href="/login">로그인</a>
     </div>
   );
 };
