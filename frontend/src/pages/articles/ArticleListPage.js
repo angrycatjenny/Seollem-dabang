@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from React;
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
@@ -8,14 +7,14 @@ import axios from 'axios';
 const ArticleListPage = () => {
     const [articleList, setArticleList] = useState([]);
 
-    componentDidMount(){
+    useEffect(() => {
         axios.get('/articles/')
         .then((response) => {
             console.log(response,'옴?')
             setArticleList(response.data);
         })
         .catch((error) => console.log(error));
-    }
+      }, []);
 
     const { articles } = articleList;
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from React;
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
