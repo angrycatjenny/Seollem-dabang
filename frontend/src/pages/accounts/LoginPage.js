@@ -4,11 +4,28 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
 const LoginPage = ({ history }) => {
-  const [ username, setUsername ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  // 기본 정보
+  const [ username, setUsername ] = useState('');             // 이름
+  const [ email, setEmail ] = useState('');                   // 이메일
+  const [ password, setPassword ] = useState('');             // 비밀번호
+  
+  // 추가 정보
+  const [ image, setImage ] = useState('');                   // 프로필 사진
+  const [ nickname, setNickname ] = useState('');             // 닉네임
+  const [ university, setUniversity ] = useState('');         // 학교
+  const [ major, setMajor] = useState('');                    // 전공
+  const [ job, setJob ] = useState('');                       // 직업
+  const [ work, setWork ] = useState('');                     // 직장
+  const [ birth, setBirth ] = useState('');                   // 생년월일
+  const [ height, setHeight ] = useState('');                 // 키
+  const [ weight, setWeight ] = useState('');                 // 체형
+  const [ personality, setPersonality ] = useState('');       // 성격
+  const [ bloodType, setBloodType ] = useState('');           // 혈액형
+  const [ smoking, setSmoking ] = useState('');               // 흡연여부
+  const [ religion, setReligion ] = useState('');             // 종교
 
-  const [cookies, setCookie] = useCookies(['access-token']);
+  // 토큰
+  const [cookies, setCookie] = useCookies(['access-token']);  // 토큰
 
   const setUsernameText = e => {
     setUsername(e.target.value);
