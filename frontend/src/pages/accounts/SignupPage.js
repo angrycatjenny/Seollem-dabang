@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
-import axios from '../../../node_modules/axios/index';
+import axios from 'axios';
 
 const SignupPage = ({ history }) => {
   const [ username, setUsername ] = useState('');
