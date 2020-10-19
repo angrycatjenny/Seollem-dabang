@@ -20,7 +20,7 @@ const SignupPage = ({ history }) => {
   const [ height, setHeight ] = useState('');                 // 키
   const [ weight, setWeight ] = useState('');                 // 체형
   const [ personality, setPersonality ] = useState('');       // 성격
-  const [ bloodType, setBloodType ] = useState('');           // 혈액형
+  const [ bloodtype, setBloodtype ] = useState('');           // 혈액형
   const [ smoking, setSmoking ] = useState('');               // 흡연여부
   const [ religion, setReligion ] = useState('');             // 종교
 
@@ -41,7 +41,7 @@ const SignupPage = ({ history }) => {
   const setHeightText = e => {setHeight(e.target.value)};           // 키
   const setWeightText = e => {setWeight(e.target.value)};           // 체형
   const setPersonalityText = e => {setPersonality(e.target.value)}; // 성격
-  const setBloodTypeText = e => {setBloodType(e.target.value)};     // 혈액형
+  const setBloodtypeText = e => {setBloodtype(e.target.value)};     // 혈액형
   const setSmokingText = e => {setSmoking(e.target.value)};         // 흡연여부
   const setReligionText = e => {setReligion(e.target.value)};       // 종교
 
@@ -81,7 +81,7 @@ const SignupPage = ({ history }) => {
           <input placeholder="키" height={height} onChange={setHeightText} />
           <input placeholder="체형" weight={weight} onChange={setWeightText} />
           <input placeholder="성격" personality={personality} onChange={setPersonalityText} />
-          <input placeholder="혈액형" bloodType={bloodType} onChange={setBloodTypeText} />
+          <input placeholder="혈액형" bloodtype={bloodtype} onChange={setBloodtypeText} />
           <input placeholder="흡연여부" smoking={smoking} onChange={setSmokingText} />
           <input placeholder="종교" religion={religion} onChange={setReligionText} />
           <button type="submit">회원가입</button>
