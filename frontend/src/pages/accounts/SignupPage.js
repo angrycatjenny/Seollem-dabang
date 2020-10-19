@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from '../../../node_modules/axios/index';
 
-const SignupPage = () => {
+const SignupPage = ({ history }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password1, setPassword1 ] = useState('');
@@ -26,7 +26,10 @@ const SignupPage = () => {
     const signupData = {username, email, password1, password2};
     console.log(signupData, '회원가입 정보')
     axios.post('/rest-auth/signup/', signupData)
-      .then(console.log('회원가입 성공'))
+      .then(() => {
+        console.log('회원가입 성공')
+        history.push('/login')
+      })
       .catch((error) => console.log(error))
   };
 
