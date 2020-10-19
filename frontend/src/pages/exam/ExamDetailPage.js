@@ -27,27 +27,27 @@ const ExamDetailPage = () => {
     return (
       <>
         <HeaderComp />
-        {/* {questions.map((question) => {
-          return (
-            <>
-            <h4>{question.title}</h4>
-            <h5>{question.content}</h5>
-            </>
-            )
-          })} */}
-        {/* 푸터에 홈버튼 있으니까 필요x */}
-        {/* <Link to="/"><button>홈으로</button></Link> */}
+        
         {isExam ? (
           <>
-        <Link to="/exam/update"><button>시험지 수정</button></Link>
-        <button>시험지 삭제</button>
-        </>
-      ) : (
-        <Link to="/exam/create"><button>시험지+</button></Link>
-      )}
+            <Link to="/exam/update"><button>시험지 수정</button></Link>
+            <button>시험지 삭제</button>
+            {/* {questions.map((question) => {
+              return (
+                <>
+                <h4>{question.title}</h4>
+                <h5>{question.content}</h5>
+                </>
+                )
+              })} */}
+          </>
+        ) : (
+          <Link to="/exam/create"><button>시험지+</button></Link>
+        )}
         <FooterComp/>
+        {/* 푸터에 홈버튼 있으니까 필요x */}
+        {/* <Link to="/"><button>홈으로</button></Link> */}
       </>
     );
   };
-  //글쓰기로 가는 주소 수정 필요. 
   export default ExamDetailPage;
