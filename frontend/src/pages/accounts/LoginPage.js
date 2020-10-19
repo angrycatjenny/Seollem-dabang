@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from '../../../node_modules/axios/index';
 
-const LoginPage = () => {
+const LoginPage = ({ history }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -25,6 +25,7 @@ const LoginPage = () => {
       .then((response) => {
         console.log(response, '토큰이 오겠지?')
         console.log('로그인 성공')
+        history.push('/main')
       })
       .catch((error) => console.log(error))
   };
@@ -41,6 +42,8 @@ const LoginPage = () => {
           <button type="submit">로그인</button>
         </form>
       </div>
+      <small>아직 회원이 아니신가요?</small>
+      <a href="/signup">회원가입</a>
     </div>
   );
 };
