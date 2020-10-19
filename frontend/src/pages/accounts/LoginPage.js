@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
-import axios from '../../../node_modules/axios/index';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const LoginPage = ({ history }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
+
+  const [cookies, setCookie] = useCookies(['access-token']);
 
   const setUsernameText = e => {
     setUsername(e.target.value);
@@ -23,8 +26,8 @@ const LoginPage = ({ history }) => {
     console.log(loginData, '로그인 정보')
     axios.post('/rest-auth/login/', loginData)
       .then((response) => {
-        console.log(response, '토큰이 오겠지?')
         console.log('로그인 성공')
+        setCookie('access-token', response.data.key)
         history.push('/main')
       })
       .catch((error) => console.log(error))

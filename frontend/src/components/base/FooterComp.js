@@ -1,11 +1,14 @@
 import React from 'react';
+import { Navbar } from 'react-bootstrap';
 
-const FoooterComp = () => {
+const FooterComp = () => {
   return (
-    <div>
-      <h1>푸터</h1>
-    </div>
+    <Navbar bg="dark" variant="dark" className="fixed-bottom">
+      <Navbar.Brand href="#">
+        푸터
+      </Navbar.Brand>
+    </Navbar>
   );
-};
+}
 
-export default FoooterComp;
+export default FooterComp;
