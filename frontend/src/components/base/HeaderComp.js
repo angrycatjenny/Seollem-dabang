@@ -1,21 +1,16 @@
 import React from 'react';
-import HeaderLogo from '../../assets/logos/header-logo.png'
-import { Navbar } from 'react-bootstrap';
+import './HeaderComp.css';
+import ProfileImage from '../../assets/profile/profile-image.png';
 
 const HeaderComp = () => {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#">
-        <img
-          alt=""
-          src={HeaderLogo}
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
-        프로젝트 이름
-      </Navbar.Brand>
-    </Navbar>
+    <div className="navbar">
+      <div>
+        <img className="profile-image" src={ProfileImage} />
+        <small>이한솔</small>
+      </div>
+      <small>로그아웃</small>
+    </div>
   );
 }
 

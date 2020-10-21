@@ -1,0 +1,8 @@
+.navbar {
+  border-bottom: 1px solid lightgray;
+  height: 50px;
+}
+.profile-image {
+  width: 30px;
+  margin-right: 7px;
+}

@@ -6,7 +6,7 @@ import FooterComp from '../../components/base/FooterComp';
 // import axios from 'axios';
 
 //로그인 여부에 따른 글쓰기 허용은 나중에
-const ExamDetailPage = () => {
+const QuestionDetailPage = () => {
     // const [exam, setExam] = useState([]);
     const [isExam, setIsExam] = useState(false);
 
@@ -42,7 +42,7 @@ const ExamDetailPage = () => {
               })} */}
           </>
         ) : (
-          <Link to="/exam/create"><button>시험지+</button></Link>
+          <Link to="/question/create"><button>시험지+</button></Link>
         )}
         <FooterComp/>
         {/* 푸터에 홈버튼 있으니까 필요x */}
@@ -50,4 +50,4 @@ const ExamDetailPage = () => {
       </>
     );
   };
-  export default ExamDetailPage;
+  export default QuestionDetailPage;

@@ -7,7 +7,7 @@ import axios from 'axios';
 //로그인 여부에 따른 시험지 작성 허용
 //데이터 변수 하나 설정하고 조건부 렌더링
 //null이면 질문 개수 설정, !null이면 질문create
-const ExamCreatePage = () => {
+const QuestionCreatePage = () => {
   const [ cnt, setCnt ] = useState(0);
   const [ isChecked, setIsChecked ] = useState(false);
   const [ title, setTitle ] = useState('');
@@ -26,7 +26,7 @@ const ExamCreatePage = () => {
     const sendExamData = (e) => {
       e.preventDefault()
       const ExamData = {title, content}
-      axios.post('/exam/', ExamData)
+      axios.post('/question/', ExamData)
         .then(() => {
             setTitle('');
             setContent('');
@@ -70,4 +70,4 @@ const ExamCreatePage = () => {
     );
   };
   
-  export default ExamCreatePage;
+  export default QuestionCreatePage;
