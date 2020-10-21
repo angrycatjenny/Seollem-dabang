@@ -1,8 +1,18 @@
+/* Home Template */
+.home-template {
+  padding-top: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #00133A;
+  min-height: 640px;
+}
+
+/* Home Logo */
 @font-face {
   font-family: neon;
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 }
-
 .neon {
   font-family: neon;
   color: #FB4264;
@@ -10,7 +20,6 @@
   line-height: 9vw;
   text-shadow: 0 0 3vw #F40A35;
 }
-
 .flux {
   font-family: neon;
   color: #426DFB;
@@ -18,13 +27,11 @@
   line-height: 9vw;
   text-shadow: 0 0 3vw #2356FF;
 }
-
 .neon {
   animation: neon 1s ease infinite;
   -moz-animation: neon 1s ease infinite;
   -webkit-animation: neon 1s ease infinite;
 }
-
 @keyframes neon {
   0%,
   100% {
@@ -36,14 +43,12 @@
     color: #806914;
   }
 }
-
 .flux {
   animation: flux 2s linear infinite;
   -moz-animation: flux 2s linear infinite;
   -webkit-animation: flux 2s linear infinite;
   -o-animation: flux 2s linear infinite;
 }
-
 @keyframes flux {
   0%,
   100% {
@@ -54,4 +59,20 @@
     text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
     color: #146C80;
   }
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+.login-button {
+  margin-top: 200px;
+  width: 250px;
+  height: 40px;
+}
+.signup-button {
+  margin-top: 7px;
+  width: 250px;
+  height: 40px;
 }
