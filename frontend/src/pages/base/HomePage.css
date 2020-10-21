@@ -1,6 +1,6 @@
 /* Home Template */
 .home-template {
-  padding-top: 40%;
+  padding-top: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,16 +16,16 @@
 .neon {
   font-family: neon;
   color: #FB4264;
-  font-size: 9vw;
-  line-height: 9vw;
-  text-shadow: 0 0 3vw #F40A35;
+  font-size: 50px;
+  line-height: 55px;
+  text-shadow: 0 0 1px #F40A35;
 }
 .flux {
   font-family: neon;
   color: #426DFB;
-  font-size: 9vw;
-  line-height: 9vw;
-  text-shadow: 0 0 3vw #2356FF;
+  font-size: 50px;
+  line-height: 55px;
+  text-shadow: 0 0 1px #2356FF;
 }
 .neon {
   animation: neon 1s ease infinite;
