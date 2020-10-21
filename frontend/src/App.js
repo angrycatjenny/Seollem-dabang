@@ -14,14 +14,14 @@ import HomePage from './pages/base/HomePage';
 import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
 
-// Exam
-import ExamDetailPage from './pages/exam/ExamDetailPage';
-import ExamCreatePage from './pages/exam/ExamCreatePage';
+// Question
+import QuestionDetailPage from './pages/question/QuestionDetailPage';
+import QuestionCreatePage from './pages/question/QuestionCreatePage';
 
 const App = () => {
   return (
     <>
-      {/* base */}
+      {/* Base */}
       <Route component={HomePage} exact path="/" />
       <Route component={MainPage} path="/main" />
 
@@ -29,9 +29,9 @@ const App = () => {
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
 
-      {/* exam */}
-      <Route component={ExamDetailPage} path="/exam" />
-      <Route component={ExamCreatePage} path="/exam/create" />
+      {/* Question */}
+      <Route component={QuestionDetailPage} path="/question" />
+      <Route component={QuestionCreatePage} path="/question/create" />
     </>
   );
 };
