@@ -2,12 +2,16 @@ package com.web.backend.model.question;
 
 import com.web.backend.model.accounts.User;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
+@Getter
+@Setter
 public class Question {
 
     @Id
