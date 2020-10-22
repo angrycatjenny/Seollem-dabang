@@ -2,16 +2,13 @@ package com.web.backend.controller.question;
 
 import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.question.Question;
-import com.web.backend.model.question.QuestionRequest;
+import com.web.backend.payload.question.QuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.*;
-import java.util.Optional;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -34,8 +31,18 @@ public class QuestionController {
     }
 
     @PutMapping("/update/{questionId}")
-    public String update(@PathVariable int questionId){
-        System.out.println(questionDao.getQuestionByQuestionId(questionId));
-        return "AAAA";
+    public Object update(@Valid @RequestBody QuestionRequest req, @PathVariable int questionId){
+        Question question = questionDao.getQuestionByQuestionId(questionId);
+        question.setContent(req.getContent());
+        question.setAnswer(req.getAnswer());
+        questionDao.save(question);
+        return question;
+    }
+
+    @DeleteMapping("/delete/{questionId}")
+    public Object delete(@PathVariable int questionId){
+        Question question = questionDao.getQuestionByQuestionId(questionId);
+        questionDao.delete(question);
+        return new ResponseEntity<>("게시글 삭제 완료",HttpStatus.OK);
     }
 }
