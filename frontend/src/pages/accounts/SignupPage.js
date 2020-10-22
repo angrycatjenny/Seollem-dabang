@@ -10,7 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { ReactMic } from 'react-mic';
+import {Recorder} from 'react-voice-recorder'
+import 'react-voice-recorder/dist/index.css'
 
 // 지역
 const ITEM_HEIGHT = 48;
@@ -34,7 +35,16 @@ const SignupPage = ({ history }) => {
   const [ age, setAge ] = useState('');
   const [ location, setLocation ] = useState('');
   const [ image, setImage ] = useState('');
-  const [ voice, setVoice ] = useState(false);
+  const [ voices, setVoices ] = useState({
+    url: '',
+    blob: '',
+    chunks: '',
+    duration: {
+      h: '',
+      m: '',
+      s: '',
+    },
+  });
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -44,21 +54,34 @@ const SignupPage = ({ history }) => {
   const setAgeText = e => {setAge(e.target.value)};
   const setLocationText = e => {setLocation(e.target.value)};
   const setImageText = e => {setImage(e.target.value)};
-  const startRecording = e => {
-    setVoice(true)
+
+  const handleAudioStop = (data) => {
+    console.log(data)
+    setVoices({voices: data});
   };
-  const stopRecording = e => {
-    setVoice(false)
+
+  const handleAudioUpload = (file) => {
+    console.log(file);
   };
-  const onData = (recordedBlob) => {
-    console.log('음성파일', recordedBlob)
-  }
-  const onStop = (recordedBlob) => {
-    console.log('음성파일', recordedBlob)
+
+  const handleRest = () => {
+    const reset = {
+      url: '',
+      blob: '',
+      chunks: '',
+      duration: {
+        h: '',
+        m: '',
+        s: '',
+      }
+    }
+    setVoices({voices: reset});
   }
 
   const sendSignupData = e => {
     e.preventDefault();
+    const voice = voices.voices.blob
+    console.log(voice)
     if (password === passwordConf) {
       const signupData = { email, password, nickname, gender, age, location, image, voice };
       console.log(signupData, '회원가입 정보')
@@ -109,19 +132,14 @@ const SignupPage = ({ history }) => {
           onChange={setImageText}
         />
 
-        <div>
-          <ReactMic
-            record={voice}
-            className="sound-wave"
-            onStop={onStop}
-            onData={onData}
-            strokeColor="black"
-            backgroundColor="white"
-            visualSetting="sinewave"
-          />
-          <button onClick={startRecording} type="button">Start</button>
-          <button onClick={stopRecording} type="button">Stop</button>
-        </div>
+        <Recorder
+          record={true}
+          audioURL={voices.url}
+          showUIAudio
+          handleAudioStop={handleAudioStop}
+          handleAudioUpload={handleAudioUpload}
+          handleRest={handleRest}
+        />
   
         <div className="signup-footer">
           <small>이미 회원이신가요?</small>
