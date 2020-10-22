@@ -10,18 +10,10 @@ import Select from '@material-ui/core/Select';
 import { ReactMic } from 'react-mic';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import TextField from '@material-ui/core/TextField';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-const locations = [ '서울', '경기', '인천', '강원', '대전', '세종', '충남', '충북', '부산', '울산', '경남', '경북', '대구', '전남', '전북', '제주', '광주',];
+const locations = [ '서울', '경기', '인천', '강원', '대전', '세종', '충남', '충북', '부산', '울산', '경남', '경북', '대구', '전남', '전북', '제주', '광주' ];
+const genders = [ '남자', '여자' ]
 
 const SignupPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
@@ -79,8 +71,36 @@ const SignupPage = ({ history }) => {
         <input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <input className="signup-input" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
         <input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
-        <input className="signup-input" placeholder="성별" gender={gender} onChange={setGenderText} />
-        <input className="signup-input" placeholder="나이" age={age} onChange={setAgeText} />
+
+        <FormControl>
+          <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
+          <Select
+            labelId="demo-mutiple-name-label1"
+            id="demo-mutiple-name1"
+            value={gender}
+            onChange={setGenderText}
+            input={<Input />}
+          >
+            {genders.map((gender) => (
+              <MenuItem key={gender} value={gender}>
+                {gender}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <TextField
+            id="date"
+            label="생년월일"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            age={age}
+            onChange={setAgeText}
+          />
+        </FormControl>
 
         <FormControl>
           <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
@@ -90,7 +110,6 @@ const SignupPage = ({ history }) => {
             value={location}
             onChange={setLocationText}
             input={<Input />}
-            MenuProps={MenuProps}
           >
             {locations.map((location) => (
               <MenuItem key={location} value={location}>
