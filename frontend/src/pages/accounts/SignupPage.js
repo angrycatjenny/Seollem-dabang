@@ -2,7 +2,29 @@ import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
 import './signupPage.css';
-import { Dropdown } from 'react-bootstrap';
+
+// 지역
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+// 지역
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+// 지역
+const locations = [ '서울', '경기', '인천', '강원', '대전', '세종', '충남', '충북', '부산', '울산', '경남', '경북', '대구', '전남', '전북', '제주', '광주',];
 
 const SignupPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
@@ -53,34 +75,24 @@ const SignupPage = ({ history }) => {
           <input placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
           <input placeholder="성별" gender={gender} onChange={setGenderText} />
           <input placeholder="나이" age={age} onChange={setAgeText} />
-          <input placeholder="지역" location={location} onChange={setLocationText} />
 
-          <Dropdown>
-            <Dropdown.Toggle variant="dark" id="dropdown-basic">
-              선택
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">서울</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">경기</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">인천</Dropdown.Item>
-              <Dropdown.Item href="#/action-4">강원</Dropdown.Item>
-              <Dropdown.Item href="#/action-5">대전</Dropdown.Item>
-              <Dropdown.Item href="#/action-6">세종</Dropdown.Item>
-              <Dropdown.Item href="#/action-7">충남</Dropdown.Item>
-              <Dropdown.Item href="#/action-8">충북</Dropdown.Item>
-              <Dropdown.Item href="#/action-9">부산</Dropdown.Item>
-              <Dropdown.Item href="#/action-10">울산</Dropdown.Item>
-              <Dropdown.Item href="#/action-11">경남</Dropdown.Item>
-              <Dropdown.Item href="#/action-12">경북</Dropdown.Item>
-              <Dropdown.Item href="#/action-13">대구</Dropdown.Item>
-              <Dropdown.Item href="#/action-14">전남</Dropdown.Item>
-              <Dropdown.Item href="#/action-15">전북</Dropdown.Item>
-              <Dropdown.Item href="#/action-16">제주</Dropdown.Item>
-              <Dropdown.Item href="#/action-17">광주</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-
+          <FormControl>
+            <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
+            <Select
+              labelId="demo-mutiple-name-label"
+              id="demo-mutiple-name"
+              value={location}
+              onChange={setLocationText}
+              input={<Input />}
+              MenuProps={MenuProps}
+            >
+              {locations.map((location) => (
+                <MenuItem key={location} value={location}>
+                  {location}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           <input placeholder="프로필 사진" image={image} onChange={setImageText} />
           <input placeholder="사용자 소개 음성" voice={voice} onChange={setVoiceText} />
