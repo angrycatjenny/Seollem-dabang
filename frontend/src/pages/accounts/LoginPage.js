@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import './LoginPage.css';
 
 const LoginPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
@@ -28,16 +29,16 @@ const LoginPage = ({ history }) => {
   return (
     <div>
       <HeaderComp />
-      <h1>로그인</h1>
-      <div className="w-25">
-        <form onSubmit={sendLoginData} className="d-flex flex-column">
-          <input placeholder="이메일" email={email} onChange={setEmailText} />
-          <input placeholder="비밀번호" password={password} onChange={setPasswordText} />
-          <button type="submit">로그인</button>
-        </form>
-      </div>
-      <small>아직 회원이 아니신가요?</small>
-      <a href="/signup">회원가입</a>
+      <h1 className="login-header">로그인</h1>
+      <form onSubmit={sendLoginData} className="login-form">
+        <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
+        <input className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <div className="login-footer">
+          <small>아직 회원이 아니신가요?</small>
+          <a href="/signup">회원가입</a>
+        </div>
+        <button className="login-button" type="submit">로그인</button>
+      </form>
     </div>
   );
 };
