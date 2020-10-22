@@ -8,6 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { ReactMic } from 'react-mic';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,6 +34,7 @@ const SignupPage = ({ history }) => {
   const [ image, setImage ] = useState('');
   const [ record, setRecord ] = useState(false);
   const [ voice, setVoice ] = useState('');
+  const [ voiceurl, setVoiceurl ] = useState('');
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -47,6 +50,7 @@ const SignupPage = ({ history }) => {
   const onStop = (recordedBlob) => {
     console.log(recordedBlob)
     setVoice(recordedBlob.blob)
+    setVoiceurl(recordedBlob.blobURL)
   }
 
   const sendSignupData = e => {
@@ -95,6 +99,7 @@ const SignupPage = ({ history }) => {
             ))}
           </Select>
         </FormControl>
+
         <Input
           className="signup-input"
           placeholder="프로필 사진"
@@ -114,6 +119,13 @@ const SignupPage = ({ history }) => {
             <button onClick={stopRecording} type="button">녹음종료</button>
           </div>
         </div>
+
+        <AudioPlayer
+          src={voiceurl}
+          showJumpControls={false}
+          customVolumeControls={[]}
+          customAdditionalControls={[]}
+        />
   
         <div className="signup-footer">
           <small>이미 회원이신가요?</small>
