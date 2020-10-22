@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import { ReactMic } from 'react-mic';
+
 // 지역
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,7 +34,7 @@ const SignupPage = ({ history }) => {
   const [ age, setAge ] = useState('');
   const [ location, setLocation ] = useState('');
   const [ image, setImage ] = useState('');
-  const [ voice, setVoice ] = useState('');
+  const [ voice, setVoice ] = useState(false);
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -42,7 +44,18 @@ const SignupPage = ({ history }) => {
   const setAgeText = e => {setAge(e.target.value)};
   const setLocationText = e => {setLocation(e.target.value)};
   const setImageText = e => {setImage(e.target.value)};
-  const setVoiceText = e => {setVoice(e.target.value)};
+  const startRecording = e => {
+    setVoice(true)
+  };
+  const stopRecording = e => {
+    setVoice(false)
+  };
+  const onData = (recordedBlob) => {
+    console.log('음성파일', recordedBlob)
+  }
+  const onStop = (recordedBlob) => {
+    console.log('음성파일', recordedBlob)
+  }
 
   const sendSignupData = e => {
     e.preventDefault();
@@ -95,7 +108,21 @@ const SignupPage = ({ history }) => {
           type="file"
           onChange={setImageText}
         />
-        <input placeholder="사용자 소개 음성" voice={voice} onChange={setVoiceText} />
+
+        <div>
+          <ReactMic
+            record={voice}
+            className="sound-wave"
+            onStop={onStop}
+            onData={onData}
+            strokeColor="black"
+            backgroundColor="white"
+            visualSetting="sinewave"
+          />
+          <button onClick={startRecording} type="button">Start</button>
+          <button onClick={stopRecording} type="button">Stop</button>
+        </div>
+  
         <div className="signup-footer">
           <small>이미 회원이신가요?</small>
           <a href="/login">로그인</a>
