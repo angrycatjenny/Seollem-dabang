@@ -12,7 +12,20 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import TextField from '@material-ui/core/TextField';
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+
 const locations = [ '서울', '경기', '인천', '강원', '대전', '세종', '충남', '충북', '부산', '울산', '경남', '경북', '대구', '전남', '전북', '제주', '광주' ];
+
 const genders = [ '남자', '여자' ]
 
 const SignupPage = ({ history }) => {
@@ -40,10 +53,15 @@ const SignupPage = ({ history }) => {
   const stopRecording = () => {setRecord(false)};
 
   const onStop = (recordedBlob) => {
-    console.log(recordedBlob)
-    setVoice(recordedBlob.blob)
-    setVoiceurl(recordedBlob.blobURL)
-  }
+    console.log(recordedBlob);
+    setVoice(recordedBlob.blob);
+    setVoiceurl(recordedBlob.blobURL);
+  };
+
+  const removeRecord = () => {
+    setVoice('');
+    setVoiceurl('');
+  };
 
   const sendSignupData = e => {
     e.preventDefault();
@@ -67,10 +85,13 @@ const SignupPage = ({ history }) => {
       <HeaderComp />
       <h1 className="signup-logo">회원가입</h1>
       <form onSubmit={sendSignupData} className="signup-form">
+      <Input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
         <Input className="signup-input" placeholder="이메일" email={email} onChange={setEmailText} />
         <Input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <Input className="signup-input" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
-        <Input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
+        
+        <hr />
+
         <div className="gender-and-age">
           <FormControl className="w-25">
             <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
@@ -102,6 +123,7 @@ const SignupPage = ({ history }) => {
             />
           </FormControl>
         </div>
+                
         <FormControl>
           <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
           <Select
@@ -110,6 +132,7 @@ const SignupPage = ({ history }) => {
             value={location}
             onChange={setLocationText}
             input={<Input />}
+            MenuProps={MenuProps}
           >
             {locations.map((location) => (
               <MenuItem key={location} value={location}>
@@ -119,6 +142,8 @@ const SignupPage = ({ history }) => {
           </Select>
         </FormControl>
 
+        <hr />
+
         <InputLabel className="mt-3">프로필 사진</InputLabel>
         <Input
           className="signup-input"
@@ -126,27 +151,37 @@ const SignupPage = ({ history }) => {
           onChange={setImageText}
         />
 
-        <div>
-          <InputLabel className="mt-3">음성 녹음</InputLabel>
-          <ReactMic
-            record={record}
-            className="sound-wave w-100"
-            onStop={onStop}
-            strokeColor="black"
-            backgroundColor="white" />
+        {!voice && (
           <div>
-            <button onClick={startRecording} type="button">녹음시작</button>
-            <button onClick={stopRecording} type="button">녹음종료</button>
+            <InputLabel className="mt-3">음성 녹음</InputLabel>
+            <ReactMic
+              record={record}
+              className="sound-wave w-100"
+              onStop={onStop}
+              strokeColor="black"
+              backgroundColor="lightgray" />
+            <div>
+              <button onClick={startRecording} type="button">녹음시작</button>
+              <button onClick={stopRecording} type="button">녹음종료</button>
+              
+            </div>
           </div>
-        </div>
+        )}
 
-        <AudioPlayer
-          src={voiceurl}
-          showJumpControls={false}
-          customVolumeControls={[]}
-          customAdditionalControls={[]}
-        />
-  
+        {voice && (
+          <div>
+            <AudioPlayer
+              src={voiceurl}
+              showJumpControls={false}
+              customVolumeControls={[]}
+              customAdditionalControls={[]}
+            />
+            <button onClick={removeRecord} type="button">다시녹음</button>
+          </div>
+        )}
+
+        <hr />
+
         <div className="signup-footer">
           <small>이미 회원이신가요?</small>
           <a href="/login">로그인</a>
