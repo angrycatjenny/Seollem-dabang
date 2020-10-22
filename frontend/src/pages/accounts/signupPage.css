@@ -1,0 +1,22 @@
+.signup-logo {
+  margin-top: 70px;
+  text-align: center;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 70%;
+}
+
+.signup-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.signup-input {
+  margin-bottom: 5px;
+}
+.signup-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
