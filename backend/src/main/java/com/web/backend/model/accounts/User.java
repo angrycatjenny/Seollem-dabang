@@ -33,10 +33,8 @@ public class User extends DateAudit {
     @Size(max = 10)
     private String location;
 
-    @NotBlank
     private int gender;
 
-    @NotBlank
     private int age;
 
     @OneToMany(mappedBy="user")
@@ -54,59 +52,59 @@ public class User extends DateAudit {
         this.age = age;
     }
 
-    public Long getUserId() {
+    public Long getId() {
         return id;
     }
 
-    public void setUserId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUserEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setUserEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getUserPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setUserPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getUserNickname() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setUserNickname(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public String getUserLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setUserLocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public int getUserGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setUserGender(int gender) {
+    public void setGender(int gender) {
         this.gender =gender;
     }
 
-    public int getUserAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setUserAge(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }
