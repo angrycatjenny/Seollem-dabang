@@ -30,7 +30,8 @@ const SignupPage = ({ history }) => {
   const [ age, setAge ] = useState('');
   const [ location, setLocation ] = useState('');
   const [ image, setImage ] = useState('');
-  const [ voice, setVoice ] = useState(false);
+  const [ record, setRecord ] = useState(false);
+  const [ voice, setVoice ] = useState('');
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -40,18 +41,17 @@ const SignupPage = ({ history }) => {
   const setAgeText = e => {setAge(e.target.value)};
   const setLocationText = e => {setLocation(e.target.value)};
   const setImageText = e => {setImage(e.target.value)};
-  const startRecording = () => {setVoice(true)};
-  const stopRecording = () => {setVoice(false)};
+  const startRecording = () => {setRecord(true)};
+  const stopRecording = () => {setRecord(false)};
 
-  const onData = (recordedBlob) => {
-    console.log(recordedBlob)
-  }
   const onStop = (recordedBlob) => {
     console.log(recordedBlob)
+    setVoice(recordedBlob.blob)
   }
 
   const sendSignupData = e => {
     e.preventDefault();
+    
     if (password === passwordconfirm) {
       const signupData = { email, password, nickname, gender, age, location, image, voice };
       console.log(signupData, '회원가입 정보')
@@ -104,10 +104,9 @@ const SignupPage = ({ history }) => {
 
         <div>
           <ReactMic
-            record={voice}
+            record={record}
             className="sound-wave w-100"
             onStop={onStop}
-            onData={onData}
             strokeColor="black"
             backgroundColor="white" />
           <div>
