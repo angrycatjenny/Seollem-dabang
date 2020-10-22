@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionDao extends JpaRepository<Question, String> {
     Question getQuestionByQuestionId(int questionId);
-    Question findQuestionByQuestionId(int questionId);
+    Question findQuestionByUserId(int userId);
 }
