@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
+import './signupPage.css';
+import { Dropdown } from 'react-bootstrap';
 
 const SignupPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
@@ -52,6 +54,34 @@ const SignupPage = ({ history }) => {
           <input placeholder="성별" gender={gender} onChange={setGenderText} />
           <input placeholder="나이" age={age} onChange={setAgeText} />
           <input placeholder="지역" location={location} onChange={setLocationText} />
+
+          <Dropdown>
+            <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              선택
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">서울</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">경기</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">인천</Dropdown.Item>
+              <Dropdown.Item href="#/action-4">강원</Dropdown.Item>
+              <Dropdown.Item href="#/action-5">대전</Dropdown.Item>
+              <Dropdown.Item href="#/action-6">세종</Dropdown.Item>
+              <Dropdown.Item href="#/action-7">충남</Dropdown.Item>
+              <Dropdown.Item href="#/action-8">충북</Dropdown.Item>
+              <Dropdown.Item href="#/action-9">부산</Dropdown.Item>
+              <Dropdown.Item href="#/action-10">울산</Dropdown.Item>
+              <Dropdown.Item href="#/action-11">경남</Dropdown.Item>
+              <Dropdown.Item href="#/action-12">경북</Dropdown.Item>
+              <Dropdown.Item href="#/action-13">대구</Dropdown.Item>
+              <Dropdown.Item href="#/action-14">전남</Dropdown.Item>
+              <Dropdown.Item href="#/action-15">전북</Dropdown.Item>
+              <Dropdown.Item href="#/action-16">제주</Dropdown.Item>
+              <Dropdown.Item href="#/action-17">광주</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+
           <input placeholder="프로필 사진" image={image} onChange={setImageText} />
           <input placeholder="사용자 소개 음성" voice={voice} onChange={setVoiceText} />
           <button type="submit">회원가입</button>
