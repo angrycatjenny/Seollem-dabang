@@ -63,6 +63,8 @@ public class UserController {
         }
 
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         User result = userDao.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/{id}").buildAndExpand(result.getId()).toUri();

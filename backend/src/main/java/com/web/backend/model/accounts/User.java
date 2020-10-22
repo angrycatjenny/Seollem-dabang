@@ -30,10 +30,8 @@ public class User extends DateAudit {
     @Size(max = 10)
     private String location;
 
-    @NotBlank
     private int gender;
 
-    @NotBlank
     private int age;
 
     public User() { }
