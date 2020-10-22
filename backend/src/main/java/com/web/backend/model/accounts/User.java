@@ -7,99 +7,99 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "userEmail" }), @UniqueConstraint(columnNames = { "userNickname" })})
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }), @UniqueConstraint(columnNames = { "nickname" })})
 public class User extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @NotBlank
     @Size(max = 40)
-    private String userEmail;
+    private String email;
 
     @NotBlank
     @Size(max = 100)
-    private String userPassword;
+    private String password;
 
     @NotBlank
     @Size(max = 20)
-    private String userNickname;
+    private String nickname;
 
     @NotBlank
     @Size(max = 10)
-    private String userLocation;
+    private String location;
 
     @NotBlank
-    private int userGender;
+    private int gender;
 
     @NotBlank
-    private int userAge;
+    private int age;
 
     public User() { }
 
-    public User(String userEmail, String userPassword, String userNickname, String userLocation, int userGender, int userAge) {
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userNickname = userNickname;
-        this.userLocation = userLocation;
-        this.userGender = userGender;
-        this.userAge = userAge;
+    public User(String email, String password, String nickname, String location, int gender, int age) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.location = location;
+        this.gender = gender;
+        this.age = age;
     }
 
     public Long getUserId() {
-        return userId;
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserId(Long id) {
+        this.id = id;
     }
 
     public String getUserEmail() {
-        return userEmail;
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserEmail(String email) {
+        this.email = email;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserPassword(String password) {
+        this.password = password;
     }
 
     public String getUserNickname() {
-        return userNickname;
+        return nickname;
     }
 
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
+    public void setUserNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUserLocation() {
-        return userLocation;
+        return location;
     }
 
-    public void setUserLocation(String userLocation) {
-        this.userLocation = userLocation;
+    public void setUserLocation(String location) {
+        this.location = location;
     }
 
     public int getUserGender() {
-        return userGender;
+        return gender;
     }
 
-    public void setUserGender(int userGender) {
-        this.userGender =userGender;
+    public void setUserGender(int gender) {
+        this.gender =gender;
     }
 
     public int getUserAge() {
-        return userAge;
+        return age;
     }
 
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
+    public void setUserAge(int age) {
+        this.age = age;
     }
 }
