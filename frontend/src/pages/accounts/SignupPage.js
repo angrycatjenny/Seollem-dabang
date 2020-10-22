@@ -67,41 +67,41 @@ const SignupPage = ({ history }) => {
       <HeaderComp />
       <h1 className="signup-logo">회원가입</h1>
       <form onSubmit={sendSignupData} className="signup-form">
-        <input className="signup-input" placeholder="이메일" email={email} onChange={setEmailText} />
-        <input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
-        <input className="signup-input" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
-        <input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
+        <Input className="signup-input" placeholder="이메일" email={email} onChange={setEmailText} />
+        <Input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <Input className="signup-input" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
+        <Input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
+        <div className="gender-and-age">
+          <FormControl className="w-25">
+            <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
+            <Select
+              labelId="demo-mutiple-name-label1"
+              id="demo-mutiple-name1"
+              value={gender}
+              onChange={setGenderText}
+              input={<Input />}
+            >
+              {genders.map((gender) => (
+                <MenuItem key={gender} value={gender}>
+                  {gender}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        <FormControl>
-          <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
-          <Select
-            labelId="demo-mutiple-name-label1"
-            id="demo-mutiple-name1"
-            value={gender}
-            onChange={setGenderText}
-            input={<Input />}
-          >
-            {genders.map((gender) => (
-              <MenuItem key={gender} value={gender}>
-                {gender}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl>
-          <TextField
-            id="date"
-            label="생년월일"
-            type="date"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            age={age}
-            onChange={setAgeText}
-          />
-        </FormControl>
-
+          <FormControl>
+            <TextField
+              id="date"
+              label="생년월일"
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              age={age}
+              onChange={setAgeText}
+            />
+          </FormControl>
+        </div>
         <FormControl>
           <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
           <Select
@@ -119,14 +119,15 @@ const SignupPage = ({ history }) => {
           </Select>
         </FormControl>
 
+        <InputLabel className="mt-3">프로필 사진</InputLabel>
         <Input
           className="signup-input"
-          placeholder="프로필 사진"
           type="file"
           onChange={setImageText}
         />
 
         <div>
+          <InputLabel className="mt-3">음성 녹음</InputLabel>
           <ReactMic
             record={record}
             className="sound-wave w-100"

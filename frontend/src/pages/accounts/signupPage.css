@@ -1,5 +1,5 @@
 .signup-logo {
-  margin-top: 65px;
+  margin-top: 30px;
   text-align: center;
 }
 .signup-form {
@@ -22,4 +22,8 @@
 }
 .signup-record {
   width: 100px;
+}
+.gender-and-age {
+  display: flex;
+  justify-content: space-between;
 }
