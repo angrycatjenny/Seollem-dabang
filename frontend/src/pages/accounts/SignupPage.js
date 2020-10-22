@@ -65,12 +65,12 @@ const SignupPage = ({ history }) => {
       <HeaderComp />
       <h1 className="signup-logo">회원가입</h1>
       <form onSubmit={sendSignupData} className="signup-form">
-        <input placeholder="이메일" email={email} onChange={setEmailText} />
-        <input placeholder="비밀번호" password={password} onChange={setPasswordText} />
-        <input placeholder="비밀번호 확인" passwordConf={passwordConf} onChange={setPasswordConfText} />
-        <input placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
-        <input placeholder="성별" gender={gender} onChange={setGenderText} />
-        <input placeholder="나이" age={age} onChange={setAgeText} />
+        <input className="signup-input" placeholder="이메일" email={email} onChange={setEmailText} />
+        <input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <input className="signup-input" placeholder="비밀번호 확인" passwordConf={passwordConf} onChange={setPasswordConfText} />
+        <input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
+        <input className="signup-input" placeholder="성별" gender={gender} onChange={setGenderText} />
+        <input className="signup-input" placeholder="나이" age={age} onChange={setAgeText} />
 
         <FormControl>
           <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
@@ -89,8 +89,12 @@ const SignupPage = ({ history }) => {
             ))}
           </Select>
         </FormControl>
-
-        <input placeholder="프로필 사진" image={image} onChange={setImageText} />
+        <Input
+          className="signup-input"
+          placeholder="프로필 사진"
+          type="file"
+          onChange={setImageText}
+        />
         <input placeholder="사용자 소개 음성" voice={voice} onChange={setVoiceText} />
         <div className="signup-footer">
           <small>이미 회원이신가요?</small>
