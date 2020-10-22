@@ -1,10 +1,13 @@
 package com.web.backend.model.accounts;
 
 import com.web.backend.model.audit.DateAudit;
+import com.web.backend.model.question.Question;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }), @UniqueConstraint(columnNames = { "nickname" })})
@@ -35,6 +38,10 @@ public class User extends DateAudit {
 
     @NotBlank
     private int age;
+
+    @OneToMany(mappedBy="user")
+    private List<Question> questions = new ArrayList<Question>();
+
 
     public User() { }
 
