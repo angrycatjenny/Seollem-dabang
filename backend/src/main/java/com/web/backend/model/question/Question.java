@@ -1,11 +1,15 @@
 package com.web.backend.model.question;
 
 import com.web.backend.model.accounts.User;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="question_id")
@@ -22,10 +26,9 @@ public class Question {
     private User user;
 
 
-
-    public Question(int questionId, String title, Boolean answer){
-        this.questionId=questionId;
-        this.content = title;
-        this.answer=answer;
+    @Builder
+    public Question(String content, Boolean answer){
+        this.content = content;
+        this.answer = answer;
     }
 }
