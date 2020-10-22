@@ -12,7 +12,20 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import TextField from '@material-ui/core/TextField';
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+
 const locations = [ '서울', '경기', '인천', '강원', '대전', '세종', '충남', '충북', '부산', '울산', '경남', '경북', '대구', '전남', '전북', '제주', '광주' ];
+
 const genders = [ '남자', '여자' ]
 
 const SignupPage = ({ history }) => {
@@ -102,6 +115,7 @@ const SignupPage = ({ history }) => {
             />
           </FormControl>
         </div>
+
         <FormControl>
           <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
           <Select
@@ -110,6 +124,7 @@ const SignupPage = ({ history }) => {
             value={location}
             onChange={setLocationText}
             input={<Input />}
+            MenuProps={MenuProps}
           >
             {locations.map((location) => (
               <MenuItem key={location} value={location}>
