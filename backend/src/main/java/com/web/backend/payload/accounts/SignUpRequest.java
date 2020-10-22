@@ -1,30 +1,21 @@
-package com.web.backend.model.accounts;
+package com.web.backend.payload.accounts;
 
-import com.web.backend.model.audit.DateAudit;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }), @UniqueConstraint(columnNames = { "nickname" })})
-public class User extends DateAudit {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SignUpRequest {
 
     @NotBlank
     @Size(max = 40)
     private String email;
 
     @NotBlank
-    @Size(max = 100)
-    private String password;
+    @Size(min = 2, max = 10)
+    private String nickname;
 
     @NotBlank
-    @Size(max = 20)
-    private String nickname;
+    @Size(min = 6, max = 20)
+    private String password;
 
     @NotBlank
     @Size(max = 10)
@@ -35,25 +26,6 @@ public class User extends DateAudit {
 
     @NotBlank
     private int age;
-
-    public User() { }
-
-    public User(String email, String password, String nickname, String location, int gender, int age) {
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.location = location;
-        this.gender = gender;
-        this.age = age;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -92,7 +64,7 @@ public class User extends DateAudit {
     }
 
     public void setGender(int gender) {
-        this.gender =gender;
+        this.gender = gender;
     }
 
     public int getAge() {

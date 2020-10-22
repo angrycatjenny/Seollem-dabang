@@ -1,7 +1,6 @@
 package com.web.backend.controller.question;
 
 import com.web.backend.dao.question.QuestionDao;
-import com.web.backend.model.question.QuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
