@@ -1,0 +1,21 @@
+.login-header {
+  margin-top: 160px;
+  text-align: center;
+}
+.login-form {
+  margin: auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.login-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.login-input {
+  margin-bottom: 5px;
+}
+.login-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

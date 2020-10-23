@@ -1,0 +1,7 @@
+.navbar-footer {
+  border-top: 1px solid lightgray;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
