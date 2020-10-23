@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -37,8 +38,6 @@ public class User extends DateAudit {
 
     private int age;
 
-    @OneToMany(mappedBy="user")
-    private List<Question> questions = new ArrayList<Question>();
 
 
     public User() { }

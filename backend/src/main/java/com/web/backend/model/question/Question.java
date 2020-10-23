@@ -1,12 +1,14 @@
 package com.web.backend.model.question;
 
 import com.web.backend.model.accounts.User;
+import com.web.backend.security.UserPrincipal;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @NoArgsConstructor
@@ -26,13 +28,14 @@ public class Question {
     private Boolean answer;
 
     @ManyToOne
-    @JoinColumn(name ="user_id")
+    @JoinColumn(name="user_id")
     private User user;
 
 
     @Builder
-    public Question(String content, Boolean answer){
+    public Question(String content, Boolean answer, User user){
         this.content = content;
         this.answer = answer;
+        this.user = user;
     }
 }
