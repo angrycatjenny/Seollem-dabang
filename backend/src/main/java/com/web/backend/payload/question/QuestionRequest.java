@@ -5,10 +5,8 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
+@NotNull
 public class QuestionRequest {
-    int articleId;
-    @NotNull
     String content;
     Boolean answer;
-    int userId;
 }
