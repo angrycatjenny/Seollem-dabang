@@ -6,25 +6,42 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import { useHistory } from "react-router-dom";
-import { useLocation } from 'react-router-dom'
-
+import { useRouteMatch } from 'react-router-dom';
 import './FooterComp.css';
+import axios from 'axios';
+import { withCookies  } from 'react-cookie';
 
 export default function FooterComp() {
-  let [value, setValue] = React.useState(0);
+  let [value, setValue] = React.useState();
+  let [userId, setUserId] = React.useState();
   const history = useHistory();
-  const location = useLocation();
-  console.log(location.pathname)
-  if (location.pathname ==='/main'){
+  const match = useRouteMatch();
+  if (match.path ==='/main'){
     value = 0
-  }else if (location.pathname==='/question'){
+  }else if (match.path==='/question'||match.path==='/question/create'||match.path==='/question/update'){
     value = 1
-  }else if (location.pathname==='/conversation'){
+  }else if (match.path==='/conversation'||match.path==='/conversation/detail'||match.path==='/conversation'){
     value = 2
-  }else if (location.pathname==='/:userId'){
+  }else if (match.path==='/user/:id' || match.path==='/user/:id/update'){
     value = 3
   }
-  
+  const axiosConfig = {
+    headers: { token: withCookies('access-token') } 
+  }
+  const getUserId = () => {
+    axios.get(`/user`,axiosConfig)
+    .then((response) => {
+      setUserId(response.id)
+    })
+    .catch((err) => {
+      console.log(err)
+      })
+  }
+    // 현재 유저 정보 가져오기
+  React.useEffect(()=>{
+    getUserId()
+  })
+
   return (
     <BottomNavigation
       value={value}
@@ -37,7 +54,7 @@ export default function FooterComp() {
       <BottomNavigationAction onClick={() => history.push('/main')} label="홈"  icon={<HomeRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/question')} label="모의고사" icon={<AssignmentRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/conversation')} label="채팅"  icon={<FavoriteIcon />} />
-      <BottomNavigationAction onClick={() => history.push('/:userId')} label="내정보"  icon={<PersonRoundedIcon />} />
+      <BottomNavigationAction onClick={() => history.push(`/user/${userId}`)} label="내정보"  icon={<PersonRoundedIcon />} />
     </BottomNavigation>
   );
 }
