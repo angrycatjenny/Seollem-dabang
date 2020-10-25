@@ -9,11 +9,12 @@ import { useHistory } from "react-router-dom";
 import { useRouteMatch } from 'react-router-dom';
 import './FooterComp.css';
 import axios from 'axios';
-import { withCookies  } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 export default function FooterComp() {
   let [value, setValue] = React.useState();
   let [userId, setUserId] = React.useState();
+  const [cookies, setCookie] = useCookies(['accessToken']);
   const history = useHistory();
   const match = useRouteMatch();
   if (match.path ==='/main'){
@@ -22,11 +23,11 @@ export default function FooterComp() {
     value = 1
   }else if (match.path==='/conversation'||match.path==='/conversation/detail'||match.path==='/conversation'){
     value = 2
-  }else if (match.path==='/user/:id' || match.path==='/user/:id/update'){
+  }else if (match.path==='/profile/:userId' || match.path==='/profile/:userId/update'){
     value = 3
   }
   const axiosConfig = {
-    headers: { token: withCookies('access-token') } 
+    headers: { token: cookies.accessToken } 
   }
   const getUserId = () => {
     axios.get(`/user`,axiosConfig)
@@ -54,7 +55,7 @@ export default function FooterComp() {
       <BottomNavigationAction onClick={() => history.push('/main')} label="홈"  icon={<HomeRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/question')} label="모의고사" icon={<AssignmentRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/conversation')} label="채팅"  icon={<FavoriteIcon />} />
-      <BottomNavigationAction onClick={() => history.push(`/user/${userId}`)} label="내정보"  icon={<PersonRoundedIcon />} />
+      <BottomNavigationAction onClick={() => history.push(`/profile/${userId}`)} label="내정보"  icon={<PersonRoundedIcon />} />
     </BottomNavigation>
   );
 }

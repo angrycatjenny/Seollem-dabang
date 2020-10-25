@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
-import './signupPage.css';
+import './SignupPage.css';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
