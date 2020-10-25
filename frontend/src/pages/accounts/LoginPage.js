@@ -8,7 +8,7 @@ const LoginPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   
-  const [cookies, setCookie] = useCookies(['access-token']);
+  const [cookies, setCookie] = useCookies(['accessToken']);
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -20,7 +20,7 @@ const LoginPage = ({ history }) => {
     axios.post('/login', loginData)
       .then((response) => {
         console.log('로그인 성공')
-        setCookie('access-token', response.data.key)
+        setCookie('accessToken', response.data.key)
         history.push('/main')
       })
       .catch((error) => console.log(error))
