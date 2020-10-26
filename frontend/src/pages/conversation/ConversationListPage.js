@@ -1,12 +1,78 @@
 import React from 'react';
+
+// Header
 import HeaderComp from '../../components/base/HeaderComp';
+
+// Footer
 import FooterComp from '../../components/base/FooterComp';
 
+// Material-UI
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
 const ConversationListPage = () => {
+  const classes = useStyles();
+
   return (
     <div>
       <HeaderComp />
-      <h1>대화 리스트</h1>
+      <div className={classes.root}>
+        <List component="nav" aria-label="main mailbox folders">
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            </ListItemAvatar>
+            <ListItemText
+              primary="사람이름"
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    대화내용
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            </ListItemAvatar>
+            <ListItemText
+              primary="사람이름"
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    대화내용
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        </List>
+      </div>
       <FooterComp />    
     </div>
   )
