@@ -155,10 +155,6 @@ const SignupPage = () => {
     });
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   const setEmailText = e => {
     setEmail(e.target.value);
   };
@@ -218,27 +214,6 @@ const SignupPage = () => {
   return (
     <div>
       <HeaderComp />
-      <h3 className="signup-logo">회원가입</h3>
-      <form 
-        onSubmit={sendSignupData}
-        className="signup-form"
-      >
-        
-
-        <hr />
-
-        <div className="signup-footer">
-          <small>이미 회원이신가요?</small>
-          <a href="/login">로그인</a>
-        </div>
-        <button
-          className="signup-button"
-          type="submit"
-        >
-          회원가입
-        </button>
-      </form>
-
       <div className={classes.root}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
@@ -337,6 +312,17 @@ const SignupPage = () => {
                   ))}
                 </Select>
               </FormControl>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                Next
+              </Button>
             </div>
           )}
           {activeStep === 1 && (
@@ -348,6 +334,17 @@ const SignupPage = () => {
                 type="file"
                 onChange={setImageText}
               />
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                Next
+              </Button>
             </div>
           )}
           {activeStep === 2 && (
@@ -365,7 +362,6 @@ const SignupPage = () => {
                   <div>
                     <button onClick={startRecording} type="button">녹음시작</button>
                     <button onClick={stopRecording} type="button">녹음종료</button>
-                    
                   </div>
                 </div>
               )}
@@ -386,53 +382,28 @@ const SignupPage = () => {
                   </button>
                 </div>
               )}
-
-            </div>
-          )}
-
-
-
-
-
-
-
-
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                All steps completed - you&apos;re finished
-              </Typography>
-              <Button onClick={handleReset} className={classes.button}>
-                Reset
-              </Button>
-            </div>
-          ) : (
-            <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-              <div>
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  Back
-                </Button>
-                {isStepOptional(activeStep) && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSkip}
-                    className={classes.button}
-                  >
-                    Skip
-                  </Button>
-                )}
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
+              <form
+                onSubmit={sendSignupData}
+                className="signup-form"
+              >
+                <button
+                  className="signup-button"
+                  type="submit"
                 >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
+                  회원가입
+                </button>
+              </form>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                Finish
+              </Button>
             </div>
           )}
         </div>
