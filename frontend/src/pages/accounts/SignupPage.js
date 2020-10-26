@@ -183,13 +183,15 @@ const SignupPage = () => {
     if (password === passwordconfirm) {
 
       const signupData = new FormData();
+      const imageFileName = Date.now();
+      const voiceFileName = Date.new();
       signupData.append('email', email);
       signupData.append('password', password);
       signupData.append('nickname', nickname);
       signupData.append('gender', gender);
       signupData.append('location', location);
-      signupData.append('image', image);
-      signupData.append('voice', voice);
+      signupData.append('image', image, imageFileName);
+      signupData.append('voice', voice, voiceFileName);
 
       console.log(signupData, '회원가입 정보')
       axios.post('/signup', signupData)
