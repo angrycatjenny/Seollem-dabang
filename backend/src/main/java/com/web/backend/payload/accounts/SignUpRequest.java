@@ -25,6 +25,8 @@ public class SignUpRequest {
 
     private int age;
 
+    private String image;
+
     public String getEmail() {
         return email;
     }
@@ -72,4 +74,8 @@ public class SignUpRequest {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image=image; }
 }
