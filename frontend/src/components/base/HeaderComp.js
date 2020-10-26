@@ -21,7 +21,7 @@ const HeaderComp = () => {
         <img className="profile-image" src={ProfileImage} />
         <small>닉네임</small>
       </div>
-      <button onClick={logout}>로그아웃</button>
+      <small onClick={logout}>로그아웃</small>
     </div>
   );
 }
