@@ -9,10 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
 
 // CSS
 import './QuestionCreatePage.css';
@@ -85,6 +83,15 @@ const QuestionCreatePage = () => {
       setIsChecked(true);
     }
   }
+  const exam = [];
+  const makeExam = () =>{
+    console.log(isChecked)
+    for(let i = 1; i<=cnt; i++){
+      exam.push(
+        <h4>{i}</h4>
+      )
+    }
+  }
 
   //stepper
   const classes = useStyles();
@@ -93,9 +100,10 @@ const QuestionCreatePage = () => {
 
   const handleNext = () => {
     if(activeStep===0){
-      if(cnt>5 && cnt <= 20){
-        console.log('ㅎㅇ')
+      if(cnt>=5 && cnt <= 20){
         setIsChecked(true);
+        makeExam();
+        console.log(exam)
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }else{
         alert('질문은 5개 이상 20개 이하여야 합니다!')
@@ -112,25 +120,21 @@ const QuestionCreatePage = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+
   
     return (
       <>
         <HeaderComp />
         <div>
-        {isChecked ? (
-          <>
-            <form onSubmit={sendExamData}>
-                <input placeholder="제목" value={title} onChange={onChangeTitle} />
-                <input placeholder="내용" value={content} onChange={onChangeContent} />
-                <button type="submit">완료</button>
-            </form>
-            <Link to="/question"><button>취소</button></Link>
-          </>
-        ) : (
-          <h4>하이</h4>
-        )}
+          {isChecked ? (
+            <>
+              <Link to="/question"><button>취소</button></Link>
+            </>
+          ) : (
+            <div></div>
+          )}
         </div>
-
         {/* stepper */}
         <div className={classes.root}>
           <Stepper activeStep={activeStep} alternativeLabel>
@@ -141,85 +145,66 @@ const QuestionCreatePage = () => {
             ))}
           </Stepper>
           <div>
-          {activeStep === 0 && (
-            <div>
-              <h4>5개 ~ 20개의 질문을 만들어 주세요.</h4>
-              <input type="number" value={cnt} onChange={onChangeCnt} />
-              {/* <form onSubmit={goNext}>
-                <input type="number" value={cnt} onChange={onChangeCnt} />
-                <button type="submit">다음</button>
-              </form> */}
-
-              <div className="signup-footer">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-          {activeStep === 1 && (
-            <div>
-              <form onSubmit={goNext}>
-                <input type="number" value={cnt} onChange={onChangeCnt} />
-                <button type="submit">다음</button>
-              </form>
-
-              <div className="signup-footer">
-                <Button
-                  disabled={!isChecked}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-          {activeStep === 2 && (
-            <div>
-              <form onSubmit={goNext}>
-                <input type="number" value={cnt} onChange={onChangeCnt} />
-                <button type="submit">다음</button>
-              </form>
-
-              <div className="signup-footer">
-                <Button
-                  disabled={!isChecked}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-            {activeStep === steps.length ? (
+            {activeStep === 0 && (
               <div>
-                <Typography className={classes.instructions}>시험지 작성이 완료되었습니다!</Typography>
-                <Link to="/question"><Button>목록</Button></Link>
-              </div>
-            ) : (
-              <div>
-                {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
-                <div>
+                <h4>5개 ~ 20개의 질문을 만들어 주세요.</h4>
+                <input type="number" value={cnt} onChange={onChangeCnt} />
+                <div className="stepper-btn">
                   <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.backButton}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
                   >
-                    Back
+                    다음
                   </Button>
-                  <Button variant="contained" color="primary" onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </div>
+              </div>
+            )}
+            {activeStep === 1 && (
+              <div>
+                <h1>{cnt}</h1>
+                {exam.map((quest) => (
+                  <h4>{quest.props.children}</h4>
+              ))}
+                <form onSubmit={sendExamData}>
+                  <input placeholder="제목" value={title} onChange={onChangeTitle} />
+                  <input placeholder="내용" value={content} onChange={onChangeContent} />
+                  <button type="submit">완료</button>
+                </form>
+                <div className="stepper-btn">
+                  <Link to="/question"><Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                  >취소</Button></Link>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    다음
+                  </Button>
+                </div>
+              </div>
+            )}
+            {activeStep === 2 && (
+              <div>
+                <form onSubmit={goNext}>
+                  <input type="number" value={cnt} onChange={onChangeCnt} />
+                  <button type="submit">다음</button>
+                </form>
+
+                <div className="stepper-btn">
+                  <Button
+                    disabled={!isChecked}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    다음
                   </Button>
                 </div>
               </div>
