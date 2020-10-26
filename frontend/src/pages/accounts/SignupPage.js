@@ -57,7 +57,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['기본 정보', '사진 입력', '목소리 녹음'];
+  return [
+    '기본 정보',
+    '사진 입력',
+    '목소리 녹음',
+  ];
 }
 
 const locations = [
@@ -116,11 +120,9 @@ const SignupPage = () => {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -159,6 +161,7 @@ const SignupPage = () => {
   const setImageText = e => {
     setImage(e.target.value);
   };
+
   const startRecording = () => {
     setRecord(true);
   };
@@ -174,10 +177,20 @@ const SignupPage = () => {
     setVoice('');
     setVoiceurl('');
   };
+
   const sendSignupData = e => {
     e.preventDefault();
     if (password === passwordconfirm) {
-      const signupData = { email, password, nickname, gender, age, location, image, voice };
+
+      const signupData = new FormData();
+      signupData.append('email', email);
+      signupData.append('password', password);
+      signupData.append('nickname', nickname);
+      signupData.append('gender', gender);
+      signupData.append('location', location);
+      signupData.append('image', image);
+      signupData.append('voice', voice);
+
       console.log(signupData, '회원가입 정보')
       axios.post('/signup', signupData)
         .then(() => {
