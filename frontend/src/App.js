@@ -43,7 +43,7 @@ const App = () => {
       <Route component={ProfileUpdatePage} path="/profile/:userId/update" />
 
       {/* Question */}
-      <Route component={QuestionListPage} path="/question" />
+      <Route component={QuestionListPage} exact path="/question" />
       <Route component={QuestionCreatePage} path="/question/create" />
 
       {/* Answer */}
