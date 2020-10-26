@@ -81,8 +81,8 @@ const locations = [
 ];
 
 const genders = [
-  0,
-  1,
+  "남자",
+  "여자",
 ];
 
 const SignupPage = () => {
@@ -258,11 +258,11 @@ const SignupPage = () => {
               <FormControl className="signup-input">
                 <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
                 <Select
-                  labelId="demo-mutiple-name-label1"
-                  id="demo-mutiple-name1"
-                  value={gender}
-                  onChange={setGenderText}
-                  input={<Input />}
+                labelId="demo-mutiple-name-label1"
+                id="demo-mutiple-name1"
+                value={gender === '1' ? '여자' : gender === '0' && "남자"}
+                onChange={setGenderText}
+                input={<Input />}
                 >
                 {genders.map((gender) => (
                   <MenuItem key={gender} value={gender}>
@@ -271,7 +271,7 @@ const SignupPage = () => {
                 ))}
                 </Select>
               </FormControl>
-            
+
               <FormControl className="birth-input mt-3">
                 <TextField
                   id="date"
