@@ -18,9 +18,7 @@ import ProfileUpdatePage from './pages/accounts/ProfileUpdatePage';
 
 // Question
 import QuestionListPage from './pages/question/QuestionListPage'; 
-import QuestionDetailPage from './pages/question/QuestionDetailPage';//detail 수정 필요
 import QuestionCreatePage from './pages/question/QuestionCreatePage';
-import QuestionUpdatePage from './pages/question/QuestionUpdatePage';
 
 // Answer
 import AnswerCreatePage from './pages/answer/AnswerCreatePage';
@@ -45,10 +43,8 @@ const App = () => {
       <Route component={ProfileUpdatePage} path="/profile/:userId/update" />
 
       {/* Question */}
-      <Route component={QuestionListPage} path="/questions" />
-      <Route component={QuestionDetailPage} exact path="/question" />
+      <Route component={QuestionListPage} exact path="/question" />
       <Route component={QuestionCreatePage} path="/question/create" />
-      <Route component={QuestionUpdatePage} path="/question/:questionId/update" />
 
       {/* Answer */}
       <Route component={AnswerCreatePage} path="/answer" />
