@@ -5,7 +5,6 @@ import FooterComp from '../../components/base/FooterComp';
 
 // import axios from 'axios';
 
-//로그인 여부에 따른 글쓰기 허용은 나중에
 const QuestionDetailPage = () => {
     // const [exam, setExam] = useState([]);
     const [isExam, setIsExam] = useState(false);
