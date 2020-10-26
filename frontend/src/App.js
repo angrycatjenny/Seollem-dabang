@@ -25,9 +25,8 @@ import AnswerCreatePage from './pages/answer/AnswerCreatePage';
 import AnswerResultPage from './pages/answer/AnswerResultPage';
 
 // Conversation
-import ConversationCreatePage from './pages/conversation/ConversationCreatePage';
-import ConversationDetail from './pages/conversation/ConversationDetail';
 import ConversationListPage from './pages/conversation/ConversationListPage';
+import ConversationDetail from './pages/conversation/ConversationDetail';
 
 const App = () => {
   return (
@@ -52,7 +51,6 @@ const App = () => {
 
       {/* Conversation */}
       <Route component={ConversationListPage} exact path="/conversation" /> 
-      <Route component={ConversationCreatePage} path="/conversation/create" />
       <Route component={ConversationDetail} path="/conversation/:conversationId" />
     </>
   );

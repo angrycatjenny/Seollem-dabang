@@ -183,8 +183,10 @@ const SignupPage = () => {
     if (password === passwordconfirm) {
 
       const signupData = new FormData();
+      
       const imageFileName = Date.now();
       const voiceFileName = Date.new();
+
       signupData.append('email', email);
       signupData.append('password', password);
       signupData.append('nickname', nickname);
