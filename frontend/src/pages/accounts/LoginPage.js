@@ -19,8 +19,8 @@ const LoginPage = ({ history }) => {
     console.log(loginData, '로그인 정보')
     axios.post('/login', loginData)
       .then((response) => {
-        console.log('로그인 성공')
-        setCookie('accessToken', response.data.key)
+        console.log('로그인 성공', response)
+        setCookie('accessToken', response.data.accessToken)
         history.push('/main')
       })
       .catch((error) => console.log(error))

@@ -28,7 +28,6 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 // History
 import { useHistory } from "react-router-dom";
@@ -61,19 +60,6 @@ function getSteps() {
   return ['기본 정보', '사진 입력', '목소리 녹음'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
-
 const locations = [
   '서울',
   '경기',
@@ -95,12 +81,13 @@ const locations = [
 ];
 
 const genders = [
-  '남자',
-  '여자',
+  0,
+  1,
 ];
 
 const SignupPage = () => {
   const history = useHistory();
+  const year = new Date();
 
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -118,10 +105,6 @@ const SignupPage = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
-
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -142,19 +125,6 @@ const SignupPage = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const setEmailText = e => {
     setEmail(e.target.value);
   };
@@ -171,7 +141,13 @@ const SignupPage = () => {
     setGender(e.target.value);
   };
   const setAgeText = e => {
-    setAge(e.target.value);
+    setAge(
+      e.target.value[0]
+      + e.target.value[1]
+      + e.target.value[2]
+      + e.target.value[3]
+      - year.getFullYear()
+      + 1);
   };
   const setLocationText = e => {
     setLocation(e.target.value);
@@ -196,11 +172,10 @@ const SignupPage = () => {
   };
   const sendSignupData = e => {
     e.preventDefault();
-    
     if (password === passwordconfirm) {
       const signupData = { email, password, nickname, gender, age, location, image, voice };
       console.log(signupData, '회원가입 정보')
-      axios.post('/signup/', signupData)
+      axios.post('signup/', signupData)
         .then(() => {
           console.log('회원가입 성공')
           history.push('/login')
