@@ -19,7 +19,7 @@ const HeaderComp = () => {
     <div className="navbar">
       <div>
         <img className="profile-image" src={ProfileImage} />
-        <small>{cookies.accessToken}</small>
+        <small>닉네임</small>
       </div>
       <button onClick={logout}>로그아웃</button>
     </div>
