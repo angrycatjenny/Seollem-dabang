@@ -87,8 +87,8 @@ const SignupPage = ({ history }) => {
       <form onSubmit={sendSignupData} className="signup-form">
       <Input className="signup-input" placeholder="닉네임" nickname={nickname} onChange={setNicknameText} />
         <Input className="signup-input" placeholder="이메일" email={email} onChange={setEmailText} />
-        <Input className="signup-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
-        <Input className="signup-input" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
+        <Input className="signup-input" type="password" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <Input className="signup-input" type="password" placeholder="비밀번호 확인" passwordconfirm={passwordconfirm} onChange={setPasswordconfirmText} />
         
         <hr />
 
