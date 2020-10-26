@@ -138,16 +138,20 @@ const SignupPage = () => {
     setNickname(e.target.value);
   };
   const setGenderText = e => {
-    setGender(e.target.value);
+    if (e.target.value === "남자") {
+      setGender('0')
+    } else {
+      setGender('1')
+    }
   };
   const setAgeText = e => {
     setAge(
-      e.target.value[0]
+      (e.target.value[0]
       + e.target.value[1]
       + e.target.value[2]
       + e.target.value[3]
       - year.getFullYear()
-      + 1);
+      + 1).toString());
   };
   const setLocationText = e => {
     setLocation(e.target.value);
@@ -175,7 +179,7 @@ const SignupPage = () => {
     if (password === passwordconfirm) {
       const signupData = { email, password, nickname, gender, age, location, image, voice };
       console.log(signupData, '회원가입 정보')
-      axios.post('signup/', signupData)
+      axios.post('/signup', signupData)
         .then(() => {
           console.log('회원가입 성공')
           history.push('/login')
