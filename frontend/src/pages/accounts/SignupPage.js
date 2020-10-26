@@ -216,15 +216,9 @@ const SignupPage = () => {
       <HeaderComp />
       <div className={classes.root}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
+          {steps.map((label) => {
             const stepProps = {};
             const labelProps = {};
-            if (isStepOptional(index)) {
-              labelProps.optional = <Typography variant="caption">Optional</Typography>;
-            }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
             return (
               <Step key={label} {...stepProps}>
                 <StepLabel {...labelProps}>{label}</StepLabel>
@@ -232,6 +226,7 @@ const SignupPage = () => {
             );
           })}
         </Stepper>
+
         <div>
           {activeStep === 0 && (
             <div>
@@ -313,7 +308,7 @@ const SignupPage = () => {
                 </Select>
               </FormControl>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+                뒤로
               </Button>
               <Button
                 variant="contained"
@@ -321,7 +316,7 @@ const SignupPage = () => {
                 onClick={handleNext}
                 className={classes.button}
               >
-                Next
+                다음
               </Button>
             </div>
           )}
@@ -335,7 +330,7 @@ const SignupPage = () => {
                 onChange={setImageText}
               />
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+                뒤로
               </Button>
               <Button
                 variant="contained"
@@ -343,7 +338,7 @@ const SignupPage = () => {
                 onClick={handleNext}
                 className={classes.button}
               >
-                Next
+                다음
               </Button>
             </div>
           )}
@@ -382,27 +377,16 @@ const SignupPage = () => {
                   </button>
                 </div>
               )}
-              <form
-                onSubmit={sendSignupData}
-                className="signup-form"
-              >
-                <button
-                  className="signup-button"
-                  type="submit"
-                >
-                  회원가입
-                </button>
-              </form>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+                뒤로
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleNext}
+                onClick={sendSignupData}
                 className={classes.button}
               >
-                Finish
+                완료
               </Button>
             </div>
           )}
