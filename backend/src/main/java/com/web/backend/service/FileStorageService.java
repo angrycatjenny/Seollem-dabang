@@ -1,5 +1,6 @@
 package com.web.backend.service;
 
+import com.web.backend.config.FileStorageConfig;
 import com.web.backend.exception.FileNotFoundException;
 import com.web.backend.exception.FileStorageException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
@@ -59,7 +61,7 @@ public class FileStorageService {
                 throw new FileNotFoundException("File not found " + fileName);
             }
         }catch (MalformedURLException e) {
-            throw new FileNotFoundException("File not found " + fileName, e)
+            throw new FileNotFoundException("File not found " + fileName, e);
         }
     }
 }
