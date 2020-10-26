@@ -223,102 +223,7 @@ const SignupPage = () => {
         onSubmit={sendSignupData}
         className="signup-form"
       >
-        <hr />
-        <h6>상세정보</h6>
-        <div className="gender-and-age">
-          <FormControl className="w-25">
-            <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
-            <Select
-              labelId="demo-mutiple-name-label1"
-              id="demo-mutiple-name1"
-              value={gender}
-              onChange={setGenderText}
-              input={<Input />}
-            >
-              {genders.map((gender) => (
-                <MenuItem key={gender} value={gender}>
-                  {gender}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <FormControl>
-            <TextField
-              id="date"
-              label="생년월일"
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              age={age}
-              onChange={setAgeText}
-            />
-          </FormControl>
-        </div>
-                
-        <FormControl>
-          <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
-          <Select
-            labelId="demo-mutiple-name-label"
-            id="demo-mutiple-name"
-            value={location}
-            onChange={setLocationText}
-            input={<Input />}
-            MenuProps={MenuProps}
-          >
-            {locations.map((location) => (
-              <MenuItem key={location} value={location}>
-                {location}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <hr />
-
-        <h6>사진</h6>
-        <InputLabel className="mt-3">프로필 사진</InputLabel>
-        <Input
-          className="signup-input"
-          type="file"
-          onChange={setImageText}
-        />
-
-        <h6>녹음</h6>
-        {!voice && (
-          <div>
-            <InputLabel className="mt-3">음성 녹음</InputLabel>
-            <ReactMic
-              record={record}
-              className="sound-wave w-100"
-              onStop={onStop}
-              strokeColor="black"
-              backgroundColor="lightgray" />
-            <div>
-              <button onClick={startRecording} type="button">녹음시작</button>
-              <button onClick={stopRecording} type="button">녹음종료</button>
-              
-            </div>
-          </div>
-        )}
-
-        {voice && (
-          <div>
-            <AudioPlayer
-              src={voiceurl}
-              showJumpControls={false}
-              customVolumeControls={[]}
-              customAdditionalControls={[]}
-            />
-            <button 
-              onClick={removeRecord}
-              type="button"
-            >
-              다시녹음
-            </button>
-          </div>
-        )}
+        
 
         <hr />
 
@@ -382,19 +287,107 @@ const SignupPage = () => {
                 passwordconfirm={passwordconfirm}
                 onChange={setPasswordconfirmText}
               />
+              <h6>상세정보</h6>
+              <div className="gender-and-age">
+                <FormControl className="w-25">
+                  <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
+                  <Select
+                    labelId="demo-mutiple-name-label1"
+                    id="demo-mutiple-name1"
+                    value={gender}
+                    onChange={setGenderText}
+                    input={<Input />}
+                  >
+                    {genders.map((gender) => (
+                      <MenuItem key={gender} value={gender}>
+                        {gender}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormControl>
+                  <TextField
+                    id="date"
+                    label="생년월일"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    age={age}
+                    onChange={setAgeText}
+                  />
+                </FormControl>
+              </div>
+                      
+              <FormControl>
+                <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
+                <Select
+                  labelId="demo-mutiple-name-label"
+                  id="demo-mutiple-name"
+                  value={location}
+                  onChange={setLocationText}
+                  input={<Input />}
+                  MenuProps={MenuProps}
+                >
+                  {locations.map((location) => (
+                    <MenuItem key={location} value={location}>
+                      {location}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </div>
-
-
-
-
-
-
           )}
           {activeStep === 1 && (
-            <div>두번째 페이지</div>
+            <div>
+              <h6>사진</h6>
+              <InputLabel className="mt-3">프로필 사진</InputLabel>
+              <Input
+                className="signup-input"
+                type="file"
+                onChange={setImageText}
+              />
+            </div>
           )}
           {activeStep === 2 && (
-            <div>세번째 페이지</div>
+            <div>
+              <h6>녹음</h6>
+              {!voice && (
+                <div>
+                  <InputLabel className="mt-3">음성 녹음</InputLabel>
+                  <ReactMic
+                    record={record}
+                    className="sound-wave w-100"
+                    onStop={onStop}
+                    strokeColor="black"
+                    backgroundColor="lightgray" />
+                  <div>
+                    <button onClick={startRecording} type="button">녹음시작</button>
+                    <button onClick={stopRecording} type="button">녹음종료</button>
+                    
+                  </div>
+                </div>
+              )}
+
+              {voice && (
+                <div>
+                  <AudioPlayer
+                    src={voiceurl}
+                    showJumpControls={false}
+                    customVolumeControls={[]}
+                    customAdditionalControls={[]}
+                  />
+                  <button 
+                    onClick={removeRecord}
+                    type="button"
+                  >
+                    다시녹음
+                  </button>
+                </div>
+              )}
+
+            </div>
           )}
 
 
