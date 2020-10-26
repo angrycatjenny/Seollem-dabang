@@ -19,8 +19,9 @@ public class UserPrincipal implements UserDetails {
     private String location;
     private int gender;
     private int age;
+    private String image;
 
-    public UserPrincipal(Long id, String email, String password, String nickname, String location, int gender, int age) {
+    public UserPrincipal(Long id, String email, String password, String nickname, String location, int gender, int age, String image) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -28,10 +29,11 @@ public class UserPrincipal implements UserDetails {
         this.location = location;
         this.gender = gender;
         this.age = age;
+        this.image = image;
     }
 
     public static UserPrincipal create(User user) {
-        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), user.getNickname(), user.getLocation(), user.getGender(), user.getAge());
+        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), user.getNickname(), user.getLocation(), user.getGender(), user.getAge(), user.getImage());
     }
 
     public Long getId() {
@@ -49,6 +51,8 @@ public class UserPrincipal implements UserDetails {
     public String getLocation() {
         return location;
     }
+
+    public String getImage() { return image; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
