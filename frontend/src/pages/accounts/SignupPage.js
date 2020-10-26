@@ -227,10 +227,10 @@ const SignupPage = () => {
           })}
         </Stepper>
 
-        <div>
+        <div className="signup-form">
           {activeStep === 0 && (
             <div>
-              <h6>기본정보</h6>
+              <h3 className="signup-logo mb-4">기본정보</h3>
               <Input
                 className="signup-input"
                 placeholder="닉네임"
@@ -257,40 +257,8 @@ const SignupPage = () => {
                 passwordconfirm={passwordconfirm}
                 onChange={setPasswordconfirmText}
               />
-              <h6>상세정보</h6>
-              <div className="gender-and-age">
-                <FormControl className="w-25">
-                  <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
-                  <Select
-                    labelId="demo-mutiple-name-label1"
-                    id="demo-mutiple-name1"
-                    value={gender}
-                    onChange={setGenderText}
-                    input={<Input />}
-                  >
-                    {genders.map((gender) => (
-                      <MenuItem key={gender} value={gender}>
-                        {gender}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    id="date"
-                    label="생년월일"
-                    type="date"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    age={age}
-                    onChange={setAgeText}
-                  />
-                </FormControl>
-              </div>
-                      
-              <FormControl>
+            
+              <FormControl className="signup-input">
                 <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
                 <Select
                   labelId="demo-mutiple-name-label"
@@ -307,17 +275,49 @@ const SignupPage = () => {
                   ))}
                 </Select>
               </FormControl>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                뒤로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                다음
-              </Button>
+
+              <FormControl className="signup-input">
+                <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
+                <Select
+                  labelId="demo-mutiple-name-label1"
+                  id="demo-mutiple-name1"
+                  value={gender}
+                  onChange={setGenderText}
+                  input={<Input />}
+                >
+                {genders.map((gender) => (
+                  <MenuItem key={gender} value={gender}>
+                    {gender}
+                  </MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            
+              <FormControl className="birth-input mt-3">
+                <TextField
+                  id="date"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  age={age}
+                  onChange={setAgeText}
+                />
+              </FormControl>
+
+              <div className="signup-footer">
+                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  뒤로
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  다음
+                </Button>
+              </div>
             </div>
           )}
           {activeStep === 1 && (

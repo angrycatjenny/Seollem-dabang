@@ -1,16 +1,21 @@
+.signup-logo {
+  margin-top: 30px;
+  text-align: center;
+}
 .signup-form {
   display: flex;
   flex-direction: column;
+  width: 60%;
   margin: auto;
-  width: 70%;
 }
-
 .signup-footer {
+  margin-top: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .signup-input {
   margin-bottom: 5px;
+  width: 100%;
 }
 .signup-button {
   margin-top: 5px;
@@ -19,7 +24,7 @@
 .signup-record {
   width: 100px;
 }
-.gender-and-age {
-  display: flex;
-  justify-content: space-between;
+.birth-input {
+  margin-bottom: 5px;
+  width: 100%;
 }
