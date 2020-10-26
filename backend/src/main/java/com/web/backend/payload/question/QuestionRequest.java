@@ -8,5 +8,5 @@ import javax.validation.constraints.NotNull;
 @NotNull
 public class QuestionRequest {
     String content;
-    Boolean answer;
+    Boolean correctAnswer;
 }

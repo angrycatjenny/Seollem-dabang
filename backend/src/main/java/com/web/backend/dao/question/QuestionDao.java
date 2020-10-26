@@ -1,6 +1,5 @@
 package com.web.backend.dao.question;
 
-import com.web.backend.model.accounts.User;
 import com.web.backend.model.question.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
