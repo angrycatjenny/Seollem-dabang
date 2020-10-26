@@ -27,10 +27,9 @@ public class QuestionController {
     QuestionDao questionDao;
 
     @PostMapping("/create")
-    public Object create(@CurrentUser UserPrincipal requser, @RequestHeader(value="Authorization") String auth, @RequestBody QuestionRequest req){
-
+    public Object create(@CurrentUser UserPrincipal requser, @RequestBody QuestionRequest req){
         User curuser = userDao.getUserById(requser.getId());
-        Question question = new Question(req.getContent(),req.getAnswer(), curuser);
+        Question question = new Question(req.getContent(),req.getCorrectAnswer(), curuser);
         questionDao.save(question);
         return new ResponseEntity<>("게시글 등록 완료",HttpStatus.OK);
     }
@@ -45,7 +44,7 @@ public class QuestionController {
     public Object update(@Valid @RequestBody QuestionRequest req, @PathVariable int questionId){
         Question question = questionDao.getQuestionByQuestionId(questionId);
         question.setContent(req.getContent());
-        question.setAnswer(req.getAnswer());
+        question.setCorrectAnswer(req.getCorrectAnswer());
         questionDao.save(question);
         return question;
     }
