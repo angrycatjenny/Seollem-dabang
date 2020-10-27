@@ -44,7 +44,6 @@ public class VoiceStorageService {
 
             Path targetLocation = this.voiceStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-
             return fileName;
         }catch (IOException e) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);

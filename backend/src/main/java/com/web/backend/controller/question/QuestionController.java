@@ -41,13 +41,10 @@ public class QuestionController {
     @PostMapping("/create")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody QuestionListRequest req){
         User curuser = userDao.getUserById(requser.getId());
-        System.out.println(req.getContentList());
-        System.out.println(req.getCorrectAnswerList());
         String [] contentList = req.getContentList();
         Boolean[] correctAnswerList = req.getCorrectAnswerList();
+
         MorphologicalAnalysis ma = new MorphologicalAnalysis();
-        System.out.println(contentList[0]);
-        System.out.println(correctAnswerList[0]);
         for(int i=0;i<contentList.length;i++){
             Question question = new Question(contentList[i],correctAnswerList[i], curuser);
             questionDao.save(question);
@@ -69,7 +66,6 @@ public class QuestionController {
 
     @PutMapping("/update/{questionId}")
     public Object update(@Valid @RequestBody QuestionRequest req, @PathVariable Long questionId){
-        System.out.println(questionId);
         Question question = questionDao.getQuestionByQuestionId(questionId);
         User curuser = userDao.getUserById(question.getUser().getId());
 
