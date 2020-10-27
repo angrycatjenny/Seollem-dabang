@@ -9,14 +9,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class Conversation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="conversation_id")
     private Long conversationId;
 
     @ManyToOne
