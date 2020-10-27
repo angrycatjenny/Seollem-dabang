@@ -13,7 +13,7 @@ const QuestionListPage = () => {
   const {questions} = questionList;
   const [cookies, setCookie] = useCookies(['accessToken']);
   const config = {
-    header: { token: cookies.accessToken } 
+    headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
   const getQuestions = () => {
       axios.get(`/question`,config)
