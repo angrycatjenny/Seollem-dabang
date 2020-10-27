@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest) {
 
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
@@ -70,11 +70,13 @@ public class UserController {
             return new ResponseEntity(new ApiResponse(false, "Nickname is already exist!"), HttpStatus.BAD_REQUEST);
         }
 
-        String fileName = fileStorageService.storeFile(image);
+        String imageName = fileStorageService.storeFile(image);
+        String voiceName = fileStorageService.storeFile(voice);
 
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setImage(fileName);
+        user.setImage(imageName);
+        user.setVoice(voiceName);
 
         User result = userDao.save(user);
 

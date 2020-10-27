@@ -36,6 +36,8 @@ public class User extends DateAudit {
 
     private String image;
 
+    private String voice;
+
     public User() { }
 
     public User(String email, String password, String nickname, String location, int gender, int age) {
@@ -106,4 +108,8 @@ public class User extends DateAudit {
     public String getImage() { return image; }
 
     public void setImage(String image) { this.image = image; }
+
+    public String getVoice() { return voice; }
+
+    public void setVoice(String voice) { this.voice = voice; }
 }
