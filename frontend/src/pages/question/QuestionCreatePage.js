@@ -136,12 +136,11 @@ const QuestionCreatePage = () => {
       }
     }else if(activeStep===1){
       {exam.map((item) => {
-        console.log(item,'아이템')
         contentList.push(item.quest)
+        correctAnswerList.push(item.ans)
         }
       )}
-      console.log(contentList,'리스트')
-      
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
 
