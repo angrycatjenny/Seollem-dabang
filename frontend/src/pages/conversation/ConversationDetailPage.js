@@ -16,10 +16,10 @@ import './ConversationDetailPage.css';
 import { useCookies } from 'react-cookie';
 
 const ConversationDetailPage = ({ match }) => {
+  const [ conversation, setConversation ] = useState('');
   const [ examinees, setExaminees ] = useState([]);
   const [ examers, setExamers ] = useState([]);
   const [ cookies, setCookie ] = useCookies(['accessToken']);
-  const { params } = this.props.match;
 
   const config = {
     headers: {
@@ -33,14 +33,27 @@ const ConversationDetailPage = ({ match }) => {
           setExaminees(response.data);
         } else {
           setExamers(response.data);
-        }
+        };
       })
-  })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
+  const sendMessage = e => {
+    axios.post(`/conversation/${match.params.conversationId}`, conversation, config)
+    .then (
+      setConversation('')
+    )
+    .catch((error) => {
+      console.log(error);
+    })
+  }
   return (
     <div>
       <HeaderComp />
       <h1>대화 디테일</h1>
+      <button onClick={sendMessage}>등록</button>
       <FooterComp />
     </div>
   )
