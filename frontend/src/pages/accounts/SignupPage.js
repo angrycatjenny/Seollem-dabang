@@ -332,22 +332,24 @@ const SignupPage = () => {
                 type="file"
                 onChange={setImageText}
               />
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                뒤로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                다음
-              </Button>
+              <div className="signup-footer">
+                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  뒤로
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  다음
+                </Button>
+              </div>
             </div>
           )}
           {activeStep === 2 && (
             <div>
-              <h3 className="signup-logo">녹음</h3>
+              <h3 className="signup-logo">목소리 녹음</h3>
               {!voice && (
                 <div>
                   <InputLabel className="mt-3">음성 녹음</InputLabel>
@@ -380,17 +382,19 @@ const SignupPage = () => {
                   </button>
                 </div>
               )}
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                뒤로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={sendSignupData}
-                className={classes.button}
-              >
-                완료
-              </Button>
+              <div className="signup-footer">
+                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  뒤로
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={sendSignupData}
+                  className={classes.button}
+                >
+                  완료
+                </Button>
+              </div>
             </div>
           )}
         </div>
