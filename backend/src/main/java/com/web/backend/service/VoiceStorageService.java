@@ -19,16 +19,16 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 @Service
-public class FileStorageService {
+public class VoiceStorageService {
 
-    private final Path fileStorageLocation;
+    private final Path voiceStorageLocation;
 
     @Autowired
-    public FileStorageService(FileStorageConfig fileStorageConfig) {
-        this.fileStorageLocation = Paths.get(fileStorageConfig.getUploadDir()).toAbsolutePath().normalize();
+    public VoiceStorageService(FileStorageConfig fileStorageConfig) {
+        this.voiceStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/voice").toAbsolutePath().normalize();
 
         try {
-            Files.createDirectories(this.fileStorageLocation);
+            Files.createDirectories(this.voiceStorageLocation);
         }catch (Exception e) {
             throw new FileStorageException("Could not create the directory where the uploaded file will be stored.", e);
         }
@@ -42,7 +42,7 @@ public class FileStorageService {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Path targetLocation = this.voiceStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
@@ -53,7 +53,7 @@ public class FileStorageService {
 
     public Resource loadFileAsResource(String fileName) {
         try {
-            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Path filePath = this.voiceStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
             if(resource.exists()) {
