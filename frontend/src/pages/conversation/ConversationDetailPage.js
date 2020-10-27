@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
+
+// Axios
+import axios from 'axios';
 
 // Header
 import HeaderComp from '../../components/base/HeaderComp';
@@ -9,7 +12,31 @@ import FooterComp from '../../components/base/FooterComp';
 // CSS
 import './ConversationDetailPage.css';
 
-const ConversationDetailPage = () => {
+// Cookie
+import { useCookies } from 'react-cookie';
+
+const ConversationDetailPage = ({ match }) => {
+  const [ examinees, setExaminees ] = useState([]);
+  const [ examers, setExamers ] = useState([]);
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const { params } = this.props.match;
+
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + cookies.accessToken
+    }
+  }
+  useEffect(() => {
+    axios.get(`/conversation/${match.params.conversationId}`, config)
+      .then((response) => {
+        if (response.data) {
+          setExaminees(response.data);
+        } else {
+          setExamers(response.data);
+        }
+      })
+  })
+
   return (
     <div>
       <HeaderComp />
