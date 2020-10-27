@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 public class ConversationContentController {
@@ -41,5 +43,11 @@ public class ConversationContentController {
         ConversationContent cc = new ConversationContent(voiceName,conversation,curuser);
         conversationContentDao.save(cc);
         return new ResponseEntity<>("대화 생성 완료", HttpStatus.OK);
+    }
+
+    @GetMapping("/conversation/list/{conversationId}")
+    public Object getList(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId){
+        List<ConversationContent> conversationContentList = conversationContentDao.findConversationContentByConversation_conversationId(conversationId);
+        return conversationContentList;
     }
 }
