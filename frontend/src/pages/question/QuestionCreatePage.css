@@ -1,5 +1,22 @@
+.cancel-btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
 .stepper-btn {
   margin-top: 30px;
   display: flex;
   justify-content: center;
+}
+
+.stepper-box {
+  /* border: 2px solid blue; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.set-quest-box {
+  margin-top: 30px;
 }

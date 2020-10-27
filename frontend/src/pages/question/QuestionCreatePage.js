@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HeaderComp from '../../components/base/HeaderComp';
 import FooterComp from '../../components/base/FooterComp';
+// History
+import { useHistory } from "react-router-dom";
 
 //materialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -50,10 +52,14 @@ function getStepContent(stepIndex) {
 //데이터 변수 하나 설정하고 조건부 렌더링
 //null이면 질문 개수 설정, !null이면 질문create
 const QuestionCreatePage = () => {
-  const [ cnt, setCnt ] = useState(0);
+  const history = useHistory();
+
+  const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
   const [ title, setTitle ] = useState('');
   const [ content, setContent ] = useState('');
+
+  const [exam, setExam] = useState([]);
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -65,13 +71,14 @@ const QuestionCreatePage = () => {
     setCnt(e.target.value);
   }
   const sendExamData = (e) => {
+    history.push('/question')//나중에 지우기
     e.preventDefault()
     const ExamData = {title, content}
     axios.post('/question/', ExamData)
       .then(() => {
           setTitle('');
           setContent('');
-          //list page로 가게 하기.
+          history.push('/question')
       })
       .catch((error) => console.log(error))
   }; 
@@ -83,16 +90,6 @@ const QuestionCreatePage = () => {
       setIsChecked(true);
     }
   }
-  const exam = [];
-  const makeExam = () =>{
-    console.log(isChecked)
-    for(let i = 1; i<=cnt; i++){
-      exam.push(
-        <h4>{i}</h4>
-      )
-    }
-  }
-
   //stepper
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -121,99 +118,128 @@ const QuestionCreatePage = () => {
     setActiveStep(0);
   };
 
+  useEffect(()=>{
+    if (activeStep === 1){
+      let arr = []
+      for (let i =0; i<cnt; i++){
+          arr = [...arr, i]
+      }
+      let objArr = arr.map(() => ({
+      }))
+      setExam(objArr)
+  }
+  }, [activeStep])
 
-  
-    return (
-      <>
-        <HeaderComp />
+  const makeExam = () =>{
+    console.log(isChecked)
+    let arr = []
+    for(let i = 1; i<=cnt; i++){
+      arr = [...arr, i]
+    }
+    let objArr = arr.map((_, index) => ({
+    }))
+    setExam(objArr)
+  }
+  return (
+    <>
+      <HeaderComp />
+      <div className="cancel-btn">
+        <Link to="/question">
+          <Button variant="contained"
+          className={classes.button}
+          >취소</Button></Link>
+      </div>
+      {/* stepper */}
+      <div className={classes.root}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
         <div>
-          {isChecked ? (
-            <>
-              <Link to="/question"><button>취소</button></Link>
-            </>
-          ) : (
-            <div></div>
+          {activeStep === 0 && (
+            <div className="stepper-box">
+              <h4>5개 ~ 20개로 질문 개수를 정해주세요!</h4>
+              <div className="set-quest-box">
+                <Input type="number" value={cnt} 
+                onChange={onChangeCnt} />개
+              </div>
+              <div className="stepper-btn">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  다음
+                </Button>
+              </div>
+            </div>
+          )}
+          {activeStep === 1 && (
+            <div className="stepper-box">
+              <h1>{cnt}</h1>
+              {/* <form onSubmit={sendExamData}>
+                <input placeholder="제목" value={title} onChange={onChangeTitle} />
+                <input placeholder="내용" value={content} onChange={onChangeContent} />
+                <button type="submit">완료</button>
+              </form> */}
+              <div style={{display:'flex',flexDirection:'column'}}>
+                {exam.map((item) => (
+                        <input 
+                        type="text"
+                        id={item}
+                        value={item}/>
+                ))}
+                <button onClick={() => console.log(exam)}>콘솔</button>
+              </div>
+              <div className="stepper-btn">
+                <Button
+              onClick={handleBack}
+              className={classes.backButton}
+            >
+              이전
+            </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  다음
+                </Button>
+              </div>
+            </div>
+          )}
+          {activeStep === 2 && (
+            <div className="stepper-box">
+              <div className="stepper-btn">
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleReset}
+                  className={classes.button}
+                >
+                  새로 만들기
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={sendExamData}
+                  className={classes.button}
+                >
+                  완료
+                </Button>
+              </div>
+            </div>
           )}
         </div>
-        {/* stepper */}
-        <div className={classes.root}>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <div>
-            {activeStep === 0 && (
-              <div>
-                <h4>5개 ~ 20개의 질문을 만들어 주세요.</h4>
-                <input type="number" value={cnt} onChange={onChangeCnt} />
-                <div className="stepper-btn">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    다음
-                  </Button>
-                </div>
-              </div>
-            )}
-            {activeStep === 1 && (
-              <div>
-                <h1>{cnt}</h1>
-                {exam.map((quest) => (
-                  <h4>{quest.props.children}</h4>
-              ))}
-                <form onSubmit={sendExamData}>
-                  <input placeholder="제목" value={title} onChange={onChangeTitle} />
-                  <input placeholder="내용" value={content} onChange={onChangeContent} />
-                  <button type="submit">완료</button>
-                </form>
-                <div className="stepper-btn">
-                  <Link to="/question"><Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  >취소</Button></Link>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    다음
-                  </Button>
-                </div>
-              </div>
-            )}
-            {activeStep === 2 && (
-              <div>
-                <form onSubmit={goNext}>
-                  <input type="number" value={cnt} onChange={onChangeCnt} />
-                  <button type="submit">다음</button>
-                </form>
-
-                <div className="stepper-btn">
-                  <Button
-                    disabled={!isChecked}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    다음
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-    <FooterComp />
-      </>
-    );
+      </div>
+  <FooterComp />
+    </>
+  );
   };
   
   export default QuestionCreatePage;
