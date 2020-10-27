@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HeaderComp from '../../components/base/HeaderComp';
 import FooterComp from '../../components/base/FooterComp';
+import { useCookies } from 'react-cookie';
+
 // History
 import { useHistory } from "react-router-dom";
 
@@ -63,15 +65,18 @@ const QuestionCreatePage = () => {
   const history = useHistory();
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [exam, setExam] = useState([]);//질문 및 모음
+  const [ noBlank, setNoBlank ] = useState(true)
+  const [exam, setExam] = useState([]);//질문 및 정답 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
   const [selectedValue, setSelectedValue] = useState(1);
+  const [cookies, setCookie] = useCookies(['accessToken']);
+  const config = {
+    headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
+  }
   //백에 보낼 데이터
   //1.질문 리스트
-  // const [contentList, setContentList] = useState([])
   const contentList = [];
   //2.정답 리스트
-  // const [correctAnswerList, setCorrectAnswerList] = useState([])
   const correctAnswerList = [];
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -98,28 +103,34 @@ const QuestionCreatePage = () => {
     setExam(exam.map((item) =>
     item.key === id ? {...item, ans:0} : item))
   }
-  const sendExamData = (e) => {
-    history.push('/question')//나중에 지우기
-    e.preventDefault()
-    const ExamData = {}
-    axios.post('/question/', ExamData)
+  const sendExamData = () => {
+    const ExamData = {
+      "contentList": contentList,
+      "correctAnswerList": correctAnswerList
+    }
+    axios.post('/question/create', ExamData, config)
       .then(() => {
           
           history.push('/question')
       })
       .catch((error) => console.log(error))
   }; 
-  const checkExam = () => {
+  const checkExam = () =>{
     {exam.map((item) => {
-      if(!item.value){
-        setIsChecked(false)
-      }else if(!item.ans){
-        setIsChecked(false)
+      console.log(item.quest.length,'길이')
+      if(item.quest.length<1){
+        console.log('123',item)
+        console.log(noBlank,'??')
+        setNoBlank(false)
+        console.log(noBlank,'??')
+      }else if(item.ans.length<1){
+        console.log('321',item)
+        setNoBlank(false)
       }
       }
     )}
     return true
-  }
+  };
   //stepper
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -135,12 +146,20 @@ const QuestionCreatePage = () => {
         alert('질문은 5개 이상 20개 이하여야 합니다!')
       }
     }else if(activeStep===1){
-      {exam.map((item) => {
-        contentList.push(item.quest)
-        correctAnswerList.push(item.ans)
-        }
-      )}
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      checkExam();
+      console.log(noBlank,'확인')
+      if(noBlank){
+        console.log('11111')
+        {exam.map((item) => {
+          contentList.push(item.quest)
+          correctAnswerList.push(item.ans)
+          }
+        )}
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }else{
+        console.log('2222')
+        alert('작성되지 않은 칸이 있습니다!')
+      }
     }
   };
 
