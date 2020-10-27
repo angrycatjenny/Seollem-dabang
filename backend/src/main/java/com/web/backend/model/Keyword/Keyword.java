@@ -21,8 +21,8 @@ public class Keyword {
     private Long keywordId;
 
     @NotBlank
-    @Column(name="keyword", nullable=false, length=200)
-    private String keyword;
+    @Column(name="word", nullable=false, length=20)
+    private String word;
 
     @ManyToOne
     @JoinColumn(name="question_id")
@@ -33,8 +33,8 @@ public class Keyword {
     private User user;
 
     @Builder
-    public Keyword(String keyword, Question question, User user){
-        this.keyword=keyword;
+    public Keyword(String word, Question question, User user){
+        this.word=word;
         this.question=question;
         this.user=user;
     }
