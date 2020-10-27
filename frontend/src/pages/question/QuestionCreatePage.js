@@ -224,26 +224,30 @@ const QuestionCreatePage = () => {
               <div style={{display:'flex',flexDirection:'column'}}>
                 {exam.map((item) => (
                   <div>
-                    <input 
-                    type="text"
-                    id={item.key}
-                    value={item.value}
-                    onChange={onChangeQuest}/>
+                    <React.Fragment key={item.key}>
+                      <label>{item.key}번 문제
+                        <input 
+                        type="text"
+                        id={item.key}
+                        value={item.value}
+                        onChange={onChangeQuest}/>
+                      </label>
+                    </React.Fragment>
                     <div>
-                    <Radio
-                      checked={selectedValue === '1'}
-                      onChange={handleChange}
-                      value="1"
-                      name="radio-button-demo"
-                      inputProps={{ 'aria-label': 'A' }}
-                    />예
-                    <Radio
-                      checked={selectedValue === '0'}
-                      onChange={handleChange}
-                      value="0"
-                      name="radio-button-demo"
-                      inputProps={{ 'aria-label': 'B' }}
-                    />아니오
+                      <Radio
+                        checked={selectedValue === '1'}
+                        onChange={handleChange}
+                        value="1"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': 'A' }}
+                      />예
+                      <Radio
+                        checked={selectedValue === '0'}
+                        onChange={handleChange}
+                        value="0"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': 'B' }}
+                      />아니오
                     </div>
                   </div>
 
