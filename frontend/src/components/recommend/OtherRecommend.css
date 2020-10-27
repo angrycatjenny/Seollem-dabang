@@ -1,0 +1,28 @@
+.other-root{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+.other-gridlist{
+    justify-content: center;
+    width: 450px;
+    height: 450px;
+}
+
+.other-gridlist-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+.other-icon{
+    color:rgba(255, 255, 255, 0.54);
+}
+
+.other-imgsize{
+    width: 150px;
+    height: 150px;
+}
