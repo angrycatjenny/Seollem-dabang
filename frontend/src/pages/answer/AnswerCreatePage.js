@@ -15,14 +15,28 @@ import HeaderComp from '../../components/base/HeaderComp';
 // Footer
 import FooterComp from '../../components/base/FooterComp';
 
+// Cookie
+import { useCookies } from 'react-cookie';
+
 const AnswerCreatePage = () => {
   const [ questions, setQuestions ] = useState([]);
   const [ answers, setAnswers ] = useState([]);
   const history = useHistory();
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
   
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + cookies.accessToken
+    }
+  }
   useEffect(() => {
-    axios.get('/')
-  })
+    console.log(cookies.accessToken)
+    console.log('질문 리스트 주세요')
+    axios.get('/question/list', config)
+      .then((response) => {
+        console.log(response)
+      })
+  }, []);
 
   const sendAnswers = e => {
     axios.post('/')
