@@ -7,6 +7,9 @@ import com.web.backend.payload.accounts.JwtAuthenticationResponse;
 import com.web.backend.payload.accounts.LoginRequest;
 import com.web.backend.payload.accounts.SignUpRequest;
 import com.web.backend.security.JwtTokenProvider;
+import com.web.backend.service.FileStorageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -25,6 +30,8 @@ import java.net.URI;
 
 @RestController
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -37,6 +44,9 @@ public class UserController {
 
     @Autowired
     JwtTokenProvider tokenProvider;
+
+    @Autowired
+    FileStorageService fileStorageService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -51,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, SignUpRequest signUpRequest) {
 
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
@@ -60,8 +70,11 @@ public class UserController {
             return new ResponseEntity(new ApiResponse(false, "Nickname is already exist!"), HttpStatus.BAD_REQUEST);
         }
 
+        String fileName = fileStorageService.storeFile(image);
+
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setImage(fileName);
 
         User result = userDao.save(user);
 
