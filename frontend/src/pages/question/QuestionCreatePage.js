@@ -23,6 +23,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 // CSS
 import './QuestionCreatePage.css';
+import { ContactsOutlined } from '../../../node_modules/@material-ui/icons/index';
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -64,8 +65,14 @@ const QuestionCreatePage = () => {
   const [ isChecked, setIsChecked ] = useState(false);
   const [exam, setExam] = useState([]);//질문 및 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
-  const [selectedValue, setSelectedValue] = React.useState(1);
-
+  const [selectedValue, setSelectedValue] = useState(1);
+  //백에 보낼 데이터
+  //1.질문 리스트
+  // const [contentList, setContentList] = useState([])
+  const contentList = [];
+  //2.정답 리스트
+  // const [correctAnswerList, setCorrectAnswerList] = useState([])
+  const correctAnswerList = [];
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -77,7 +84,7 @@ const QuestionCreatePage = () => {
   const onChangeQuest = (e) => {
     const {id, value} = e.target;
     setExam(exam.map((item) =>
-    item.key === id ? {...item, value:value} : item))
+    item.key === id ? {...item, quest:value} : item))
   }
   //정답 예
   const onChangeAnsYes = (e) => {
@@ -102,13 +109,16 @@ const QuestionCreatePage = () => {
       })
       .catch((error) => console.log(error))
   }; 
-  const goNext = (e) => {
-    e.preventDefault()
-    if(cnt<5){
-      alert('질문 개수는 최소 5개 이상이어야 합니다!')
-    }else{
-      setIsChecked(true);
-    }
+  const checkExam = () => {
+    {exam.map((item) => {
+      if(!item.value){
+        setIsChecked(false)
+      }else if(!item.ans){
+        setIsChecked(false)
+      }
+      }
+    )}
+    return true
   }
   //stepper
   const classes = useStyles();
@@ -124,8 +134,14 @@ const QuestionCreatePage = () => {
       }else{
         alert('질문은 5개 이상 20개 이하여야 합니다!')
       }
-    }else{
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }else if(activeStep===1){
+      {exam.map((item) => {
+        console.log(item,'아이템')
+        contentList.push(item.quest)
+        }
+      )}
+      console.log(contentList,'리스트')
+      
     }
   };
 
@@ -146,10 +162,11 @@ const QuestionCreatePage = () => {
       }
       let objArr = arr.map((_,index) => ({
         key:`${index+1}`,
-        value:'',
+        quest:'',
         ans:''
       }))
       setExam(objArr)
+      console.log(exam,'시험')
       //정답 arr
       let ans = []
       for (let j=0; j<cnt; j++){
@@ -162,6 +179,9 @@ const QuestionCreatePage = () => {
       setAnswers(objAns)
   }
   }, [activeStep])
+
+  //질문, 정답 분리
+  
 
   return (
     <>
