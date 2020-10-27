@@ -38,9 +38,9 @@ const ConversationDetailPage = ({ match }) => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
-  const sendMessage = e => {
+  const sendMessageA = e => {
     axios.post(`/conversation/${match.params.conversationId}`, conversation, config)
     .then (
       setConversation('')
@@ -53,7 +53,7 @@ const ConversationDetailPage = ({ match }) => {
     <div>
       <HeaderComp />
       <h1>대화 디테일</h1>
-      <button onClick={sendMessage}>등록</button>
+      <button onClick={sendMessageA}>등록A</button>
       <FooterComp />
     </div>
   )
