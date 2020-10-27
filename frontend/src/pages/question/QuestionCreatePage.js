@@ -66,7 +66,8 @@ const QuestionCreatePage = () => {
   const [ title, setTitle ] = useState('');
   const [ content, setContent ] = useState('');
 
-  const [exam, setExam] = useState([]);
+  const [exam, setExam] = useState([]);//질문 모음
+  const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
 
   const [selectedValue, setSelectedValue] = React.useState('a');
 
@@ -252,7 +253,7 @@ const QuestionCreatePage = () => {
                   </div>
 
                 ))}
-                <button onClick={() => console.log(exam)}>콘솔</button>
+                <button onClick={() => console.log(selectedValue)}>콘솔</button>
               </div>
               
             </div>
