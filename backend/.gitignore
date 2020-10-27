@@ -2,7 +2,8 @@ HELP.md
 .gradle
 build/
 bin/
-src/main/**/images/
+src/main/**/image/
+src/main/**/voice/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

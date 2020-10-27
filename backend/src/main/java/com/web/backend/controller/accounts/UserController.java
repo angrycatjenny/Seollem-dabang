@@ -91,9 +91,16 @@ public class UserController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
-    @GetMapping("/profile")
-    public ResponseEntity<?> getUserInfo(@CurrentUser UserPrincipal requestUser) {
+    @GetMapping("/my-profile")
+    public ResponseEntity<?> getMyInfo(@CurrentUser UserPrincipal requestUser) {
         User user = userDao.getUserById(requestUser.getId());
+
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/your-profile/{user_id}")
+    public ResponseEntity<?> getYourInfo(@PathVariable("user_id") Long userId) {
+        User user = userDao.getUserById(userId);
 
         return ResponseEntity.ok(user);
     }
