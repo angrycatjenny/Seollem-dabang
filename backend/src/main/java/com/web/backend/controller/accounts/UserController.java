@@ -7,7 +7,8 @@ import com.web.backend.payload.accounts.JwtAuthenticationResponse;
 import com.web.backend.payload.accounts.LoginRequest;
 import com.web.backend.payload.accounts.SignUpRequest;
 import com.web.backend.security.JwtTokenProvider;
-import com.web.backend.service.FileStorageService;
+import com.web.backend.service.ImageStorageService;
+import com.web.backend.service.VoiceStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,10 @@ public class UserController {
     JwtTokenProvider tokenProvider;
 
     @Autowired
-    FileStorageService fileStorageService;
+    ImageStorageService imageStorageService;
+
+    @Autowired
+    VoiceStorageService voiceStorageService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -70,8 +74,8 @@ public class UserController {
             return new ResponseEntity(new ApiResponse(false, "Nickname is already exist!"), HttpStatus.BAD_REQUEST);
         }
 
-        String imageName = fileStorageService.storeFile(image);
-        String voiceName = fileStorageService.storeFile(voice);
+        String imageName = imageStorageService.storeFile(image);
+        String voiceName = voiceStorageService.storeFile(voice);
 
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
