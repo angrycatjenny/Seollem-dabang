@@ -32,7 +32,7 @@ const LoginPage = ({ history }) => {
       <h1 className="login-header">로그인</h1>
       <form onSubmit={sendLoginData} className="login-form">
         <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
-        <input className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <input type="password" className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <div className="login-footer">
           <small>아직 회원이 아니신가요?</small>
           <a href="/signup">회원가입</a>

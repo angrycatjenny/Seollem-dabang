@@ -38,7 +38,7 @@ const ConversationDetailPage = ({ match }) => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   const sendMessage = e => {
     axios.post(`/conversation/${match.params.conversationId}`, conversation, config)
