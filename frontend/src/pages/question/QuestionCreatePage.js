@@ -7,12 +7,19 @@ import FooterComp from '../../components/base/FooterComp';
 import { useHistory } from "react-router-dom";
 
 //materialUI
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 // CSS
 import './QuestionCreatePage.css';
@@ -61,6 +68,12 @@ const QuestionCreatePage = () => {
 
   const [exam, setExam] = useState([]);
 
+  const [selectedValue, setSelectedValue] = React.useState('a');
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -69,6 +82,11 @@ const QuestionCreatePage = () => {
   };
   const onChangeCnt = (e) => {
     setCnt(e.target.value);
+  }
+  const onChangeQuest = (e) => {
+    const {id, value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, value:value} : item))
   }
   const sendExamData = (e) => {
     history.push('/question')//나중에 지우기
@@ -124,7 +142,9 @@ const QuestionCreatePage = () => {
       for (let i =0; i<cnt; i++){
           arr = [...arr, i]
       }
-      let objArr = arr.map(() => ({
+      let objArr = arr.map((_,index) => ({
+        key:`${index+1}`,
+        value:''
       }))
       setExam(objArr)
   }
@@ -180,28 +200,13 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 1 && (
             <div className="stepper-box">
-              <h1>{cnt}</h1>
-              {/* <form onSubmit={sendExamData}>
-                <input placeholder="제목" value={title} onChange={onChangeTitle} />
-                <input placeholder="내용" value={content} onChange={onChangeContent} />
-                <button type="submit">완료</button>
-              </form> */}
-              <div style={{display:'flex',flexDirection:'column'}}>
-                {exam.map((item) => (
-                        <input 
-                        type="text"
-                        id={item}
-                        value={item}/>
-                ))}
-                <button onClick={() => console.log(exam)}>콘솔</button>
-              </div>
               <div className="stepper-btn">
                 <Button
-              onClick={handleBack}
-              className={classes.backButton}
-            >
-              이전
-            </Button>
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  이전
+                </Button>
                 <Button
                   variant="contained"
                   color="primary"
@@ -211,6 +216,41 @@ const QuestionCreatePage = () => {
                   다음
                 </Button>
               </div>
+              {/* <form onSubmit={sendExamData}>
+                <input placeholder="제목" value={title} onChange={onChangeTitle} />
+                <input placeholder="내용" value={content} onChange={onChangeContent} />
+                <button type="submit">완료</button>
+              </form> */}
+              <div style={{display:'flex',flexDirection:'column'}}>
+                {exam.map((item) => (
+                  <div>
+                    <input 
+                    type="text"
+                    id={item.key}
+                    value={item.value}
+                    onChange={onChangeQuest}/>
+                    <div>
+                    <Radio
+                      checked={selectedValue === '1'}
+                      onChange={handleChange}
+                      value="1"
+                      name="radio-button-demo"
+                      inputProps={{ 'aria-label': 'A' }}
+                    />예
+                    <Radio
+                      checked={selectedValue === '0'}
+                      onChange={handleChange}
+                      value="0"
+                      name="radio-button-demo"
+                      inputProps={{ 'aria-label': 'B' }}
+                    />아니오
+                    </div>
+                  </div>
+
+                ))}
+                <button onClick={() => console.log(exam)}>콘솔</button>
+              </div>
+              
             </div>
           )}
           {activeStep === 2 && (
