@@ -159,7 +159,7 @@ const SignupPage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
-    setImage(e.target.value);
+    setImage(e.target.files[0]);
   };
 
   const startRecording = () => {
@@ -185,7 +185,7 @@ const SignupPage = () => {
       const signupData = new FormData();
       
       const imageFileName = Date.now();
-      const voiceFileName = Date.new();
+      const voiceFileName = Date.now();
 
       signupData.append('email', email);
       signupData.append('password', password);
@@ -216,8 +216,15 @@ const SignupPage = () => {
             const stepProps = {};
             const labelProps = {};
             return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+              <Step 
+                key={label}
+                {...stepProps} 
+              >
+                <StepLabel
+                 {...labelProps}
+                >
+                  <small>{label}</small>
+                </StepLabel>
               </Step>
             );
           })}
@@ -226,7 +233,7 @@ const SignupPage = () => {
         <div className="signup-form">
           {activeStep === 0 && (
             <div>
-              <h3 className="signup-logo mb-4">기본정보</h3>
+              <h3 className="signup-logo">기본정보</h3>
               <Input
                 className="signup-input"
                 placeholder="닉네임"
@@ -318,7 +325,7 @@ const SignupPage = () => {
           )}
           {activeStep === 1 && (
             <div>
-              <h6>사진</h6>
+              <h3 className="signup-logo">사진 입력</h3>
               <InputLabel className="mt-3">프로필 사진</InputLabel>
               <Input
                 className="signup-input"
@@ -340,7 +347,7 @@ const SignupPage = () => {
           )}
           {activeStep === 2 && (
             <div>
-              <h6>녹음</h6>
+              <h3 className="signup-logo">녹음</h3>
               {!voice && (
                 <div>
                   <InputLabel className="mt-3">음성 녹음</InputLabel>
