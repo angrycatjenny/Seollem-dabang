@@ -21,6 +21,9 @@ import Typography from '@material-ui/core/Typography';
 // Cookie
 import { useCookies } from 'react-cookie';
 
+// CSS
+import './ConversationListPage.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
