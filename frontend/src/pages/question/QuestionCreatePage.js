@@ -60,43 +60,44 @@ function getStepContent(stepIndex) {
 //null이면 질문 개수 설정, !null이면 질문create
 const QuestionCreatePage = () => {
   const history = useHistory();
-
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [ title, setTitle ] = useState('');
-  const [ content, setContent ] = useState('');
-
-  const [exam, setExam] = useState([]);//질문 모음
+  const [exam, setExam] = useState([]);//질문 및 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
-
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const [selectedValue, setSelectedValue] = React.useState(1);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
-  }
-  const onChangeContent = (e) => {
-    setContent(e.target.value);
-  };
   const onChangeCnt = (e) => {
     setCnt(e.target.value);
   }
+  //질문 추가
   const onChangeQuest = (e) => {
     const {id, value} = e.target;
     setExam(exam.map((item) =>
     item.key === id ? {...item, value:value} : item))
   }
+  //정답 예
+  const onChangeAnsYes = (e) => {
+    const {id,value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, ans:1} : item))
+  }
+  //정답 아니오 
+  const onChangeAnsNo = (e) => {
+    const {id,value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, ans:0} : item))
+  }
   const sendExamData = (e) => {
     history.push('/question')//나중에 지우기
     e.preventDefault()
-    const ExamData = {title, content}
+    const ExamData = {}
     axios.post('/question/', ExamData)
       .then(() => {
-          setTitle('');
-          setContent('');
+          
           history.push('/question')
       })
       .catch((error) => console.log(error))
@@ -118,7 +119,6 @@ const QuestionCreatePage = () => {
     if(activeStep===0){
       if(cnt>=5 && cnt <= 20){
         setIsChecked(true);
-        makeExam();
         console.log(exam)
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }else{
@@ -139,28 +139,30 @@ const QuestionCreatePage = () => {
 
   useEffect(()=>{
     if (activeStep === 1){
+      //질문 arr
       let arr = []
       for (let i =0; i<cnt; i++){
           arr = [...arr, i]
       }
       let objArr = arr.map((_,index) => ({
         key:`${index+1}`,
-        value:''
+        value:'',
+        ans:''
       }))
       setExam(objArr)
+      //정답 arr
+      let ans = []
+      for (let j=0; j<cnt; j++){
+        ans = [...ans, j]
+      }
+      let objAns = ans.map((_,index) => ({
+        key:`${index+1}`,
+        value:''
+      }))
+      setAnswers(objAns)
   }
   }, [activeStep])
 
-  const makeExam = () =>{
-    console.log(isChecked)
-    let arr = []
-    for(let i = 1; i<=cnt; i++){
-      arr = [...arr, i]
-    }
-    let objArr = arr.map((_, index) => ({
-    }))
-    setExam(objArr)
-  }
   return (
     <>
       <HeaderComp />
@@ -217,11 +219,6 @@ const QuestionCreatePage = () => {
                   다음
                 </Button>
               </div>
-              {/* <form onSubmit={sendExamData}>
-                <input placeholder="제목" value={title} onChange={onChangeTitle} />
-                <input placeholder="내용" value={content} onChange={onChangeContent} />
-                <button type="submit">완료</button>
-              </form> */}
               <div style={{display:'flex',flexDirection:'column'}}>
                 {exam.map((item) => (
                   <div>
@@ -236,24 +233,26 @@ const QuestionCreatePage = () => {
                     </React.Fragment>
                     <div>
                       <Radio
-                        checked={selectedValue === '1'}
-                        onChange={handleChange}
+                        checked={item.ans===1}
+                        onChange={onChangeAnsYes}
+                        id={item.key}
                         value="1"
                         name="radio-button-demo"
-                        inputProps={{ 'aria-label': 'A' }}
+                        inputProps={{ 'aria-label': '예' }}
                       />예
                       <Radio
-                        checked={selectedValue === '0'}
-                        onChange={handleChange}
+                        checked={item.ans===0}
+                        onChange={onChangeAnsNo}
+                        id={item.key}
                         value="0"
                         name="radio-button-demo"
-                        inputProps={{ 'aria-label': 'B' }}
+                        inputProps={{ 'aria-label': '아니오' }}
                       />아니오
                     </div>
                   </div>
 
                 ))}
-                <button onClick={() => console.log(selectedValue)}>콘솔</button>
+                <button onClick={() => console.log(exam)}>콘솔</button>
               </div>
               
             </div>
