@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileUpdatePage = () => {
+const MyProfileUpdatePage = () => {
   return (
     <div>
       <h1>프로필 수정 페이지</h1>
@@ -8,4 +8,4 @@ const ProfileUpdatePage = () => {
   )
 };
 
-export default ProfileUpdatePage;
+export default MyProfileUpdatePage;

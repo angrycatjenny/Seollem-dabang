@@ -13,8 +13,8 @@ import HomePage from './pages/base/HomePage';
 // Accounts
 import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
-import ProfilePage from './pages/accounts/ProfilePage';
-import ProfileUpdatePage from './pages/accounts/ProfileUpdatePage';
+import MyProfilePage from './pages/accounts/MyProfilePage';
+import MyProfileUpdatePage from './pages/accounts/MyProfileUpdatePage';
 
 // Question
 import QuestionListPage from './pages/question/QuestionListPage'; 
@@ -38,8 +38,8 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={ProfilePage} exact path="/profile/:userId" />
-      <Route component={ProfileUpdatePage} path="/profile/:userId/update" />
+      <Route component={MyProfilePage} exact path="/profile/:userId" />
+      <Route component={MyProfileUpdatePage} path="/profile/:userId/update" />
 
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />

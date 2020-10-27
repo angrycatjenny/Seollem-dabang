@@ -193,7 +193,7 @@ const SignupPage = () => {
       signupData.append('gender', gender);
       signupData.append('location', location);
       signupData.append('image', image, 'image' + imageFileName);
-      signupData.append('voice', voice, 'voice' + voiceFileName);
+      signupData.append('voice', voice, 'voice'+ voiceFileName);
 
       console.log(signupData, '회원가입 정보')
       axios.post('/signup', signupData)

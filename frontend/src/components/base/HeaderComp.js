@@ -22,7 +22,7 @@ const HeaderComp = () => {
 
   const [ nickname, setNickname ] = useState('');
   const [ image, setImage ] = useState('');
-
+  
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken

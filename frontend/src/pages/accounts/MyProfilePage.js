@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderComp from '../../components/base/HeaderComp';
 import FooterComp from '../../components/base/FooterComp';
 
-const ProfilePage = () => {
+const MyProfilePage = () => {
   return (
     <div>
       <HeaderComp />
@@ -12,4 +12,4 @@ const ProfilePage = () => {
   )
 };
 
-export default ProfilePage;
+export default MyProfilePage;
