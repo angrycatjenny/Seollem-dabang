@@ -10,18 +10,19 @@ import java.util.Objects;
 
 public class UserPrincipal implements UserDetails {
 
-    private Long id;
+    private final Long id;
     @JsonIgnore
-    private String email;
+    private final String email;
     @JsonIgnore
-    private String password;
-    private String nickname;
-    private String location;
-    private int gender;
-    private int age;
-    private String image;
+    private final String password;
+    private final String nickname;
+    private final String location;
+    private final int gender;
+    private final int age;
+    private final String image;
+    private final String voice;
 
-    public UserPrincipal(Long id, String email, String password, String nickname, String location, int gender, int age, String image) {
+    public UserPrincipal(Long id, String email, String password, String nickname, String location, int gender, int age, String image, String voice) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -30,10 +31,11 @@ public class UserPrincipal implements UserDetails {
         this.gender = gender;
         this.age = age;
         this.image = image;
+        this.voice = voice;
     }
 
     public static UserPrincipal create(User user) {
-        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), user.getNickname(), user.getLocation(), user.getGender(), user.getAge(), user.getImage());
+        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), user.getNickname(), user.getLocation(), user.getGender(), user.getAge(), user.getImage(), user.getVoice());
     }
 
     public Long getId() {
@@ -52,7 +54,13 @@ public class UserPrincipal implements UserDetails {
         return location;
     }
 
+    public int getGender() { return gender; }
+
+    public int getAge() { return age; }
+
     public String getImage() { return image; }
+
+    public String getVoice() { return voice; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
