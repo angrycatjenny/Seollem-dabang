@@ -21,7 +21,7 @@ const LoginPage = ({ history }) => {
       .then((response) => {
         setCookie('accessToken', response.data.accessToken)
         history.push('/main')
-        console.log('로그인 성공', response)
+        alert('로그인이 되었습니다.')
       })
       .catch((error) => console.log(error))
   };

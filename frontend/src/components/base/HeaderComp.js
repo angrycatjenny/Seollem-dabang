@@ -20,8 +20,9 @@ const HeaderComp = () => {
 
   const [ cookies, setCookie, removeCookie ] = useCookies(['accessToken']);
 
-  const [ profile, setProfile ] = useCookies([]);
-  
+  const [ nickname, setNickname ] = useState('');
+  const [ image, setImage ] = useState('');
+
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken
@@ -30,9 +31,10 @@ const HeaderComp = () => {
   useEffect(() => {
     axios.get('/profile', config)
       .then((response) => {
-        console.log(response.data)
+        setNickname(response.data.nickname)
+        setImage(response.data.image)
       })
-  })
+  }, [ nickname, image ])
 
   const logout = e => {
     removeCookie('accessToken');
@@ -44,7 +46,7 @@ const HeaderComp = () => {
     <div className="navbar">
       <div>
         <img className="profile-image" src={ProfileImage} />
-        <small>닉네임</small>
+        <small>{nickname}</small>
       </div>
       <small onClick={logout}>로그아웃</small>
     </div>
