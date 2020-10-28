@@ -107,7 +107,6 @@ public class UserController {
     @GetMapping("/your-profile/{user_id}")
     public ResponseEntity<?> getYourInfo(@PathVariable("user_id") Long userId) {
         User user = userDao.getUserById(userId);
-
         return ResponseEntity.ok(user);
     }
 
@@ -116,6 +115,11 @@ public class UserController {
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
         int gender = user.getGender();
+        if(gender==1){
+            gender=0;
+        }else{
+            gender=1;
+        }
         String address = user.getLocation();
         List<User> recommendedUserList = userDao.getUserByAgeAndGenderAndLocation(age,gender,address);
         recommendedUserList.remove(user);
