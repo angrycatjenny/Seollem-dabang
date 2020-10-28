@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +51,20 @@ public class QuestionController {
             questionDao.save(question);
             ArrayList<String> words = ma.MorAnalysis(contentList[i]);
             for(String word:words){
-                Keyword keyword = new Keyword(word,question,curuser);
-                keywordDao.save(keyword);
+                if(!keywordDao.existsByWord(word)){
+                    Keyword keyword = new Keyword(word,question,curuser);
+                    keywordDao.save(keyword);
+                }
             }
         }
 
         return new ResponseEntity<>("게시글 등록 완료",HttpStatus.OK);
     }
 
-    @GetMapping("/list/{userId}")
-    public Object getList(@PathVariable Long userId){
-        List<Question> questionList = questionDao.findQuestionByUserId(userId);
+    @GetMapping("/list")
+    public Object getList(@CurrentUser UserPrincipal requser){
+        User curuser = userDao.getUserById(requser.getId());
+        List<Question> questionList = questionDao.findQuestionByUserId(curuser.getId());
         return questionList;
     }
 
