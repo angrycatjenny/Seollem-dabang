@@ -54,7 +54,7 @@ const App = () => {
       <Route component={SignupPage} path="/signup" />
       <Route component={MyProfilePage} exact path="/profile/" />
       <Route component={MyProfileUpdatePage} path="/myprofile/update" />
-      <Route component={YourProfilePage} exact path="/yourprofile/:userId" />
+      <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />

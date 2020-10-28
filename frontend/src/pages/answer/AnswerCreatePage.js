@@ -13,23 +13,37 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 const AnswerCreatePage = () => {
-  const [ questions, setQuestions ] = useState([]);
-  const [ answers, setAnswers ] = useState([]);
   const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
-  
+
+  const [ questions, setQuestions ] = useState({
+    items: [],
+  });
+  const { items } = questions;
+
+  const [ answers, setAnswers ] = useState([]);
+
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken
     }
   }
   useEffect(() => {
-    console.log(cookies.accessToken)
-    console.log('질문 리스트 주세요')
     axios.get('/question/list', config)
       .then((response) => {
-        console.log(response)
+        const questionList = response.data.map((question, index) => {
+          return {
+            questionId: question.questionId,
+            content: question.content,
+          };
+        });
+        setQuestions({
+          items: items.concat(questionList),
+        });
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const sendAnswers = e => {
@@ -43,6 +57,11 @@ const AnswerCreatePage = () => {
   return (
     <div>
       <h1>답변 등록</h1>
+      <div>
+        <p>{questions.content}</p>
+        <button>YES</button>
+        <button>NO</button>
+      </div>
       <button onClick={sendAnswers}>제출하기</button>
     </div>
   )
