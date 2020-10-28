@@ -35,8 +35,6 @@ public class ConversationContentController {
 
     @PostMapping("/conversation/create/{conversationId}")
     public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice) {
-
-//        List<ConversationContent> conversationContentList = conversationContentDao.findConversationContentByConversationId(ConversationId);
         User curuser = userDao.getUserById(requser.getId());
         Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
         String voiceName = voiceStorageService.storeFile(voice);
@@ -46,7 +44,7 @@ public class ConversationContentController {
     }
 
     @GetMapping("/conversation/list/{conversationId}")
-    public Object getList(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId){
+    public Object getList(@PathVariable Long conversationId){
         List<ConversationContent> conversationContentList = conversationContentDao.findConversationContentByConversation_conversationId(conversationId);
         return conversationContentList;
     }
