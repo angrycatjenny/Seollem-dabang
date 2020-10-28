@@ -29,9 +29,22 @@ import AnswerResultPage from './pages/answer/AnswerResultPage';
 import ConversationListPage from './pages/conversation/ConversationListPage';
 import ConversationDetailPage from './pages/conversation/ConversationDetailPage';
 
+// Header
+import HeaderComp from './components/base/HeaderComp';
+
+// Footer
+import FooterComp from './components/base/FooterComp';
+
+import { useCookies } from 'react-cookie';
+
 const App = () => {
+  const [cookies, setCookie] = useCookies(['accessToken']);
+
   return (
     <>
+      {/* Header */}
+      {cookies.accessToken && <HeaderComp />}
+      
       {/* Base */}
       <Route component={HomePage} exact path="/" />
       <Route component={MainPage} path="/main" />
@@ -54,6 +67,9 @@ const App = () => {
       {/* Conversation */}
       <Route component={ConversationListPage} exact path="/conversation" /> 
       <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+      
+      {/* Footer */}
+      {cookies.accessToken && <FooterComp />}
     </>
   );
 };

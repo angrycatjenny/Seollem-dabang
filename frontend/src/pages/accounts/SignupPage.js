@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// Header
-import HeaderComp from '../../components/base/HeaderComp';
-
 // Axios
 import axios from 'axios';
 
@@ -209,7 +206,6 @@ const SignupPage = () => {
 
   return (
     <div>
-      <HeaderComp />
       <div className={classes.root}>
         <Stepper activeStep={activeStep}>
           {steps.map((label) => {
