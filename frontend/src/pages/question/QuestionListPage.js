@@ -1,7 +1,5 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderComp from '../../components/base/HeaderComp';
-import FooterComp from '../../components/base/FooterComp';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
@@ -41,7 +39,6 @@ const QuestionListPage = () => {
   
   return (
     <>
-      <HeaderComp/>
         {isExam ? (
           <>
             {questions.map((question) => {
@@ -57,7 +54,6 @@ const QuestionListPage = () => {
         ) : (
           <Link to="/question/create"><button>시험지+</button></Link>
         )}
-      <FooterComp />
     </>
   );
   };

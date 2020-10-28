@@ -1,8 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import HeaderComp from '../../components/base/HeaderComp';
-import FooterComp from '../../components/base/FooterComp';
 import { useCookies } from 'react-cookie';
 
 // History
@@ -147,7 +145,6 @@ const QuestionCreatePage = () => {
     if(activeStep===0){
       if(cnt>=5 && cnt <= 20){
         setIsChecked(true);
-        console.log(exam)
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }else{
         alert('질문은 5개 이상 20개 이하여야 합니다!')
@@ -205,7 +202,6 @@ const QuestionCreatePage = () => {
         ans:''
       }))
       setExam(objArr)
-      console.log(exam,'시험')
       //정답 arr
       let ans = []
       for (let j=0; j<cnt; j++){
@@ -224,7 +220,6 @@ const QuestionCreatePage = () => {
 
   return (
     <>
-      <HeaderComp />
       <div className="cancel-btn">
         <Link to="/question">
           <Button variant="contained"
@@ -340,7 +335,6 @@ const QuestionCreatePage = () => {
           )}
         </div>
       </div>
-  <FooterComp />
     </>
   );
   };
