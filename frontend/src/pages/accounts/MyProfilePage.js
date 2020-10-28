@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Header
-import HeaderComp from '../../components/base/HeaderComp';
-
-// Footer
-import FooterComp from '../../components/base/FooterComp';
-
 // Axios
 import axios from 'axios';
 
@@ -49,7 +43,6 @@ const MyProfilePage = () => {
 
   return (
     <div>
-      <HeaderComp />
       <p>이메일: {email}</p>
       <p>성별: {gender}</p>
       <p>이미지: {image}</p>
@@ -57,7 +50,6 @@ const MyProfilePage = () => {
       <p>목소리: {voice}</p>
       <p>지역: {location}</p>
       <p>나이: {age}</p>
-      <FooterComp />
     </div>
   )
 };

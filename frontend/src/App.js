@@ -15,6 +15,7 @@ import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
 import MyProfilePage from './pages/accounts/MyProfilePage';
 import MyProfileUpdatePage from './pages/accounts/MyProfileUpdatePage';
+import YourProfilePage from './pages/accounts/YourProfilePage';
 
 // Question
 import QuestionListPage from './pages/question/QuestionListPage'; 
@@ -28,9 +29,22 @@ import AnswerResultPage from './pages/answer/AnswerResultPage';
 import ConversationListPage from './pages/conversation/ConversationListPage';
 import ConversationDetailPage from './pages/conversation/ConversationDetailPage';
 
+// Header
+import HeaderComp from './components/base/HeaderComp';
+
+// Footer
+import FooterComp from './components/base/FooterComp';
+
+import { useCookies } from 'react-cookie';
+
 const App = () => {
+  const [cookies, setCookie] = useCookies(['accessToken']);
+
   return (
     <>
+      {/* Header */}
+      {cookies.accessToken && <HeaderComp />}
+      
       {/* Base */}
       <Route component={HomePage} exact path="/" />
       <Route component={MainPage} path="/main" />
@@ -38,8 +52,9 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={MyProfilePage} exact path="/profile/:userId" />
-      <Route component={MyProfileUpdatePage} path="/profile/:userId/update" />
+      <Route component={MyProfilePage} exact path="/profile/" />
+      <Route component={MyProfileUpdatePage} path="/myprofile/update" />
+      <Route component={YourProfilePage} exact path="/yourprofile/:userId" />
 
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />
@@ -52,6 +67,9 @@ const App = () => {
       {/* Conversation */}
       <Route component={ConversationListPage} exact path="/conversation" /> 
       <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+      
+      {/* Footer */}
+      {cookies.accessToken && <FooterComp />}
     </>
   );
 };

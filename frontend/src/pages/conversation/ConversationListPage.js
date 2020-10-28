@@ -3,12 +3,6 @@ import React, { useState, useEffect } from 'react';
 // Axios
 import axios from 'axios';
 
-// Header
-import HeaderComp from '../../components/base/HeaderComp';
-
-// Footer
-import FooterComp from '../../components/base/FooterComp';
-
 // Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -54,7 +48,6 @@ const ConversationListPage = () => {
 
   return (
     <div>
-      <HeaderComp />
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
           <ListItem button>
@@ -79,7 +72,6 @@ const ConversationListPage = () => {
           </ListItem>
         </List>
       </div>
-      <FooterComp />    
     </div>
   )
 };

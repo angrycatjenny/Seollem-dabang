@@ -3,12 +3,6 @@ import React, { useState, useEffect }  from 'react';
 // Axios
 import axios from 'axios';
 
-// Header
-import HeaderComp from '../../components/base/HeaderComp';
-
-// Footer
-import FooterComp from '../../components/base/FooterComp';
-
 // CSS
 import './ConversationDetailPage.css';
 
@@ -51,10 +45,8 @@ const ConversationDetailPage = ({ match }) => {
   }
   return (
     <div>
-      <HeaderComp />
       <h1>대화 디테일</h1>
       <button onClick={sendMessageA}>등록A</button>
-      <FooterComp />
     </div>
   )
 };
