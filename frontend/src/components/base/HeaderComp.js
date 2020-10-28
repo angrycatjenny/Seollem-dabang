@@ -29,7 +29,7 @@ const HeaderComp = () => {
     }
   }
   useEffect(() => {
-    axios.get('/profile', config)
+    axios.get('/my-profile', config)
       .then((response) => {
         setNickname(response.data.nickname)
         setImage(response.data.image)
