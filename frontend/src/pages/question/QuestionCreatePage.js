@@ -3,19 +3,29 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HeaderComp from '../../components/base/HeaderComp';
 import FooterComp from '../../components/base/FooterComp';
+import { useCookies } from 'react-cookie';
+
 // History
 import { useHistory } from "react-router-dom";
 
 //materialUI
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+
 // CSS
 import './QuestionCreatePage.css';
+import { ContactsOutlined } from '../../../node_modules/@material-ui/icons/index';
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -53,43 +63,74 @@ function getStepContent(stepIndex) {
 //null이면 질문 개수 설정, !null이면 질문create
 const QuestionCreatePage = () => {
   const history = useHistory();
-
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [ title, setTitle ] = useState('');
-  const [ content, setContent ] = useState('');
-
-  const [exam, setExam] = useState([]);
-
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
+  const [ noBlank, setNoBlank ] = useState(true)
+  const [exam, setExam] = useState([]);//질문 및 정답 모음
+  const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
+  const [selectedValue, setSelectedValue] = useState(1);
+  const [cookies, setCookie] = useCookies(['accessToken']);
+  const config = {
+    headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
-  const onChangeContent = (e) => {
-    setContent(e.target.value);
+  //백에 보낼 데이터
+  //1.질문 리스트
+  const contentList = [];
+  //2.정답 리스트
+  const correctAnswerList = [];
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
+
   const onChangeCnt = (e) => {
     setCnt(e.target.value);
   }
-  const sendExamData = (e) => {
-    history.push('/question')//나중에 지우기
-    e.preventDefault()
-    const ExamData = {title, content}
-    axios.post('/question/', ExamData)
+  //질문 추가
+  const onChangeQuest = (e) => {
+    const {id, value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, quest:value} : item))
+  }
+  //정답 예
+  const onChangeAnsYes = (e) => {
+    const {id,value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, ans:1} : item))
+  }
+  //정답 아니오 
+  const onChangeAnsNo = (e) => {
+    const {id,value} = e.target;
+    setExam(exam.map((item) =>
+    item.key === id ? {...item, ans:0} : item))
+  }
+  const sendExamData = () => {
+    const ExamData = {
+      "contentList": contentList,
+      "correctAnswerList": correctAnswerList
+    }
+    axios.post('/question/create', ExamData, config)
       .then(() => {
-          setTitle('');
-          setContent('');
+          
           history.push('/question')
       })
       .catch((error) => console.log(error))
   }; 
-  const goNext = (e) => {
-    e.preventDefault()
-    if(cnt<5){
-      alert('질문 개수는 최소 5개 이상이어야 합니다!')
-    }else{
-      setIsChecked(true);
-    }
-  }
+  const checkExam = () =>{
+    {exam.map((item) => {
+      console.log(item.quest.length,'길이')
+      if(item.quest.length<1){
+        console.log('123',item)
+        console.log(noBlank,'??')
+        setNoBlank(false)
+        console.log(noBlank,'??')
+      }else if(item.ans.length<1){
+        console.log('321',item)
+        setNoBlank(false)
+      }
+      }
+    )}
+    return true
+  };
   //stepper
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -99,14 +140,26 @@ const QuestionCreatePage = () => {
     if(activeStep===0){
       if(cnt>=5 && cnt <= 20){
         setIsChecked(true);
-        makeExam();
         console.log(exam)
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }else{
         alert('질문은 5개 이상 20개 이하여야 합니다!')
       }
-    }else{
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }else if(activeStep===1){
+      checkExam();
+      console.log(noBlank,'확인')
+      if(noBlank){
+        console.log('11111')
+        {exam.map((item) => {
+          contentList.push(item.quest)
+          correctAnswerList.push(item.ans)
+          }
+        )}
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }else{
+        console.log('2222')
+        alert('작성되지 않은 칸이 있습니다!')
+      }
     }
   };
 
@@ -120,26 +173,34 @@ const QuestionCreatePage = () => {
 
   useEffect(()=>{
     if (activeStep === 1){
+      //질문 arr
       let arr = []
       for (let i =0; i<cnt; i++){
           arr = [...arr, i]
       }
-      let objArr = arr.map(() => ({
+      let objArr = arr.map((_,index) => ({
+        key:`${index+1}`,
+        quest:'',
+        ans:''
       }))
       setExam(objArr)
+      console.log(exam,'시험')
+      //정답 arr
+      let ans = []
+      for (let j=0; j<cnt; j++){
+        ans = [...ans, j]
+      }
+      let objAns = ans.map((_,index) => ({
+        key:`${index+1}`,
+        value:''
+      }))
+      setAnswers(objAns)
   }
   }, [activeStep])
 
-  const makeExam = () =>{
-    console.log(isChecked)
-    let arr = []
-    for(let i = 1; i<=cnt; i++){
-      arr = [...arr, i]
-    }
-    let objArr = arr.map((_, index) => ({
-    }))
-    setExam(objArr)
-  }
+  //질문, 정답 분리
+  
+
   return (
     <>
       <HeaderComp />
@@ -180,28 +241,13 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 1 && (
             <div className="stepper-box">
-              <h1>{cnt}</h1>
-              {/* <form onSubmit={sendExamData}>
-                <input placeholder="제목" value={title} onChange={onChangeTitle} />
-                <input placeholder="내용" value={content} onChange={onChangeContent} />
-                <button type="submit">완료</button>
-              </form> */}
-              <div style={{display:'flex',flexDirection:'column'}}>
-                {exam.map((item) => (
-                        <input 
-                        type="text"
-                        id={item}
-                        value={item}/>
-                ))}
-                <button onClick={() => console.log(exam)}>콘솔</button>
-              </div>
               <div className="stepper-btn">
                 <Button
-              onClick={handleBack}
-              className={classes.backButton}
-            >
-              이전
-            </Button>
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  이전
+                </Button>
                 <Button
                   variant="contained"
                   color="primary"
@@ -211,6 +257,42 @@ const QuestionCreatePage = () => {
                   다음
                 </Button>
               </div>
+              <div style={{display:'flex',flexDirection:'column'}}>
+                {exam.map((item) => (
+                  <div>
+                    <React.Fragment key={item.key}>
+                      <label>{item.key}번 문제
+                        <input 
+                        type="text"
+                        id={item.key}
+                        value={item.value}
+                        onChange={onChangeQuest}/>
+                      </label>
+                    </React.Fragment>
+                    <div>
+                      <Radio
+                        checked={item.ans===1}
+                        onChange={onChangeAnsYes}
+                        id={item.key}
+                        value="1"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': '예' }}
+                      />예
+                      <Radio
+                        checked={item.ans===0}
+                        onChange={onChangeAnsNo}
+                        id={item.key}
+                        value="0"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': '아니오' }}
+                      />아니오
+                    </div>
+                  </div>
+
+                ))}
+                <button onClick={() => console.log(exam)}>콘솔</button>
+              </div>
+              
             </div>
           )}
           {activeStep === 2 && (
