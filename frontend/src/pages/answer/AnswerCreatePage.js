@@ -9,12 +9,6 @@ import './AnswerCreatePage.css';
 // History
 import { useHistory } from "react-router-dom";
 
-// Header
-import HeaderComp from '../../components/base/HeaderComp';
-
-// Footer
-import FooterComp from '../../components/base/FooterComp';
-
 // Cookie
 import { useCookies } from 'react-cookie';
 
@@ -48,10 +42,8 @@ const AnswerCreatePage = () => {
 
   return (
     <div>
-      <HeaderComp />
       <h1>답변 등록</h1>
       <button onClick={sendAnswers}>제출하기</button>
-      <FooterComp />
     </div>
   )
 };

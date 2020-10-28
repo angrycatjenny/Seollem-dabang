@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import './LoginPage.css';
@@ -28,7 +27,6 @@ const LoginPage = ({ history }) => {
 
   return (
     <div>
-      <HeaderComp />
       <h1 className="login-header">로그인</h1>
       <form onSubmit={sendLoginData} className="login-form">
         <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
