@@ -76,8 +76,10 @@ const QuestionCreatePage = () => {
   //백에 보낼 데이터
   //1.질문 리스트
   const contentList = [];
+  const [one, setOne] = useState('')
   //2.정답 리스트
   const correctAnswerList = [];
+  const [two, setTwo] = useState('')
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -104,13 +106,18 @@ const QuestionCreatePage = () => {
     item.key === id ? {...item, ans:0} : item))
   }
   const sendExamData = () => {
+    {exam.map((item) => {
+      contentList.push(item.quest)
+      correctAnswerList.push(item.ans)
+      }
+    )}
     const ExamData = {
       "contentList": contentList,
       "correctAnswerList": correctAnswerList
     }
+    console.log(ExamData,'보낼거')
     axios.post('/question/create', ExamData, config)
       .then(() => {
-          
           history.push('/question')
       })
       .catch((error) => console.log(error))
@@ -146,20 +153,34 @@ const QuestionCreatePage = () => {
         alert('질문은 5개 이상 20개 이하여야 합니다!')
       }
     }else if(activeStep===1){
-      checkExam();
-      console.log(noBlank,'확인')
-      if(noBlank){
-        console.log('11111')
         {exam.map((item) => {
           contentList.push(item.quest)
           correctAnswerList.push(item.ans)
           }
         )}
+        console.log(contentList,'하나')
+        console.log(correctAnswerList,'둘')
+        console.log(one,'1')
+        console.log(two,'2')
+        setOne(contentList)
+        setTwo(correctAnswerList)
+        console.log(one,'3')
+        console.log(two,'4')
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }else{
-        console.log('2222')
-        alert('작성되지 않은 칸이 있습니다!')
-      }
+      // checkExam();
+      // console.log(noBlank,'확인')
+      // if(noBlank){
+      //   console.log('11111')
+      //   {exam.map((item) => {
+      //     contentList.push(item.quest)
+      //     correctAnswerList.push(item.ans)
+      //     }
+      //   )}
+      //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      // }else{
+      //   console.log('2222')
+      //   alert('작성되지 않은 칸이 있습니다!')
+      // }
     }
   };
 

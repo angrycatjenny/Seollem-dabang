@@ -16,14 +16,18 @@ const QuestionListPage = () => {
     headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
   const getQuestions = () => {
-      axios.get(`/question`,config)
+    console.log(config,'헤더')
+      axios.get(`/question/list`,config)
       .then((response) => {
-        if(response.data){
+        if(response.data.length>0){
           console.log(response,'질문들 옴?')
           setQuestionList({
             questions: response.data
           })
           setIsExam(true)
+        }else{
+          console.log('시험지 없뜜')
+          setIsExam(false)
         }
       })
       .catch((err) => {
@@ -33,7 +37,7 @@ const QuestionListPage = () => {
 
   useEffect(()=>{
     getQuestions()
-  })
+  },[])
   
   return (
     <>
