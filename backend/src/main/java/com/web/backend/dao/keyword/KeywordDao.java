@@ -13,5 +13,5 @@ import java.util.List;
 public interface KeywordDao extends JpaRepository<Keyword,String> {
     List<Keyword> findKeywordByQuestion_questionId(Long question_id);
     List<Keyword> findKeywordByUser(User user);
-    boolean existsByWord(String word);
+    boolean existsByWordAndUserId(String word, Long user_id);
 }
