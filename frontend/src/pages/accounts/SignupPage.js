@@ -198,7 +198,7 @@ const SignupPage = () => {
       console.log(signupData, '회원가입 정보')
       axios.post('/signup', signupData)
         .then(() => {
-          console.log('회원가입 성공')
+          alert('회원가입이 완료되었습니다.')
           history.push('/login')
         })
         .catch((error) => console.log(error))
