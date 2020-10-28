@@ -64,7 +64,7 @@ public class QuestionController {
     public Object getList(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Question> questionList = questionDao.findQuestionByUserId(curuser.getId());
-        return questionList;
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
     @PutMapping("/update/{questionId}")
