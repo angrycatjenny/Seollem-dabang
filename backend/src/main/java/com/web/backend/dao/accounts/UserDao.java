@@ -24,4 +24,6 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     List<User> getUserByAgeAndGenderAndLocation(int age, int gender, String Location);
 
+    List<User> getUserByGender(int gender);
+
 }

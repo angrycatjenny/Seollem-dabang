@@ -130,7 +130,11 @@ public class UserController {
     public Object getUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
-        List<User> allUsers = userDao.findAll();
+        int gender = 0;
+        if(curuser.getGender()==0){
+            gender=1;
+        }
+        List<User> allUsers = userDao.getUserByGender(gender);
         allUsers.remove(curuser);
         List<User> recommendedUserList = null;
         for(User user:allUsers){
