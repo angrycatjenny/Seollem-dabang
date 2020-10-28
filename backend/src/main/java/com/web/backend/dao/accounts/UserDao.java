@@ -1,8 +1,9 @@
 package com.web.backend.dao.accounts;
 
 import com.web.backend.model.accounts.User;
-import com.web.backend.model.question.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,9 @@ public interface UserDao extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
     Boolean existsByNickname(String nickname);
+
+    List<User> getUserByAgeAndGenderAndLocation(int age, int gender, String Location);
+
+    List<User> getUserByGender(int gender);
+
 }

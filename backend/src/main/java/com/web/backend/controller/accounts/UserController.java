@@ -1,6 +1,8 @@
 package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
+import com.web.backend.dao.keyword.KeywordDao;
+import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
 import com.web.backend.payload.accounts.ApiResponse;
 import com.web.backend.payload.accounts.JwtAuthenticationResponse;
@@ -27,6 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -39,6 +42,9 @@ public class UserController {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    KeywordDao keywordDao;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -101,7 +107,44 @@ public class UserController {
     @GetMapping("/your-profile/{user_id}")
     public ResponseEntity<?> getYourInfo(@PathVariable("user_id") Long userId) {
         User user = userDao.getUserById(userId);
-
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/recommend-user-by-profile")
+    public Object getUserByProfile(@CurrentUser UserPrincipal requser){
+        User user = userDao.getUserById(requser.getId());
+        int age = user.getAge();
+        int gender = user.getGender();
+        if(gender==1){
+            gender=0;
+        }else{
+            gender=1;
+        }
+        String address = user.getLocation();
+        List<User> recommendedUserList = userDao.getUserByAgeAndGenderAndLocation(age,gender,address);
+        recommendedUserList.remove(user);
+        return recommendedUserList;
+    }
+
+    @GetMapping("/recommend-user-by-keyword")
+    public Object getUserByKeyword(@CurrentUser UserPrincipal requser){
+        User curuser = userDao.getUserById(requser.getId());
+        List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
+        int gender = 0;
+        if(curuser.getGender()==0){
+            gender=1;
+        }
+        List<User> allUsers = userDao.getUserByGender(gender);
+        allUsers.remove(curuser);
+        List<User> recommendedUserList = null;
+        for(User user:allUsers){
+            List<Keyword> othersKeywords = keywordDao.findKeywordByUser(user);
+            for(Keyword keyword:keywords){
+                if(othersKeywords.contains(keyword)){
+                    recommendedUserList.add(user);
+                }
+            }
+        }
+        return recommendedUserList;
     }
 }
