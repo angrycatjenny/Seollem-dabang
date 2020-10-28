@@ -54,22 +54,25 @@ const KeywordRecommend = () => {
             classname="carusel-outline"
         >
             {tileData.map((tile) => (
-                <GridList cellHeight={300}>
-                    <GridListTile>
-                        <Button>
-                            <img src={tile.img} alt="img" />
-                        </Button>
-                        <GridListTileBar
-                            title='title'
-                            subtitle='by'
-                            actionIcon={
-                                <IconButton>
-                                    <RecordVoiceOverIcon color="secondary" />
-                                </IconButton>
-                            }
-                        />
-                    </GridListTile>
-                </GridList>
+                <div className="keyword-root">
+                    <GridList cellHeight={300} className="keyword-gridlist">
+                        <GridListTile key={tile.img} className="keyword-gridlist-item">
+                            <Button>
+                                <img src={tile.img} alt="img" className="keyword-imgsize"/>
+                            </Button>
+                            <GridListTileBar
+                                title='title'
+                                subtitle='by'
+                                actionIcon={
+                                    <IconButton className="keyword-icon">
+                                        <RecordVoiceOverIcon color="secondary" />
+                                    </IconButton>
+                                }
+                            />
+                        </GridListTile>
+                    </GridList>
+
+                </div>
 
             ))}
         </Carousel>
