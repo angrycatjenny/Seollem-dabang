@@ -15,6 +15,7 @@ import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
 import MyProfilePage from './pages/accounts/MyProfilePage';
 import MyProfileUpdatePage from './pages/accounts/MyProfileUpdatePage';
+import YourProfilePage from './pages/accounts/YourProfilePage';
 
 // Question
 import QuestionListPage from './pages/question/QuestionListPage'; 
@@ -38,8 +39,9 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={MyProfilePage} exact path="/profile/:userId" />
-      <Route component={MyProfileUpdatePage} path="/profile/:userId/update" />
+      <Route component={MyProfilePage} exact path="/profile/" />
+      <Route component={MyProfileUpdatePage} path="/myprofile/update" />
+      <Route component={YourProfilePage} exact path="/yourprofile/:userId" />
 
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />
