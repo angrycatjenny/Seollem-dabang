@@ -50,7 +50,7 @@ public class QuestionController {
             questionDao.save(question);
             ArrayList<String> words = ma.MorAnalysis(contentList[i]);
             for(String word:words){
-                if(!keywordDao.existsByWord(word)){
+                if(!keywordDao.existsByWordAndUserId(word, curuser.getId())){
                     Keyword keyword = new Keyword(word,question,curuser);
                     keywordDao.save(keyword);
                 }
