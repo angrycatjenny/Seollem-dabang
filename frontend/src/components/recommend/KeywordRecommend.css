@@ -1,4 +1,33 @@
 .carusel-outline {
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
   }
+  .keyword-root{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+.keyword-gridlist{
+    justify-content: center;
+    width: 800px;
+    height: 380px;
+}
+
+.keyword-gridlist-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100% !important;}
+
+.keyword-icon{
+    color:rgba(255, 255, 255, 0.54);
+}
+
+.keyword-imgsize{
+    width: 300px;
+    height: 300px;
+}
