@@ -20,4 +20,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
     Boolean existsByNickname(String nickname);
+
+    List<User> getUserByAgeAndGenderAndLocation(int age, int gender, String Location);
 }

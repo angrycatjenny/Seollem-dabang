@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class QuestionController {
     public Object getList(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Question> questionList = questionDao.findQuestionByUserId(curuser.getId());
-        return questionList;
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
     @PutMapping("/update/{questionId}")
