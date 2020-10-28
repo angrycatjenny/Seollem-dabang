@@ -1,0 +1,21 @@
+.exam-create-btn {
+  border: 2px solid purple;
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  background-color: transparent;
+}
+.exam-update-btn {
+  border: 2px solid rgb(238, 37, 161);
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  background-color: transparent;
+}
+.exam-delete-btn {
+  border: 2px solid rgb(219, 63, 63);
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  background-color: transparent;
+}

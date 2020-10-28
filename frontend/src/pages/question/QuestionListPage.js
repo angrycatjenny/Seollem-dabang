@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
+import './QuestionListPage.css';
+
+
 const QuestionListPage = () => {
   const [ exam, setExam ] = useState(null);
   const [ isExam, setIsExam ] = useState(false);
@@ -59,7 +62,7 @@ const QuestionListPage = () => {
   }
 
   if(!exam){
-    return null;
+    return <Link to="/question/create"><button>시험지+</button></Link>;
   }
   
   return (
@@ -67,6 +70,8 @@ const QuestionListPage = () => {
       {exam.map(item => (
         <h4 key={item.questionId} item={item}>{item.content}</h4>
       ))}
+      <button className="exam-update-btn">시험지 수정</button>
+      <button className="exam-delete-btn">시험지 삭제</button>
         {/* {isExam ? (
           <>
             {questions.map((question) => {
