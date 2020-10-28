@@ -100,6 +100,7 @@ import womenImage5 from '../../assets/mainImg/png/여성5.png';
 import womenImage6 from '../../assets/mainImg/png/여성6.png';
 import womenImage7 from '../../assets/mainImg/png/여성7.png';
 import womenImage8 from '../../assets/mainImg/png/여성8.png';
+import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -108,6 +109,7 @@ const KeywordRecommend = () => {
     const womenImgData = [womenImage5, womenImage6, womenImage7, womenImage8]
     const [loading, setLoading] = React.useState(false)
     const [gender, setGender] = React.useState();
+    const history = useHistory();
 
     const [tileData, setTileData] = React.useState()
     const [cookies] = useCookies(['accessToken']);
@@ -146,7 +148,7 @@ const KeywordRecommend = () => {
 
     if (!tileData) {
         return (
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => history.push('/question/create')}>
                 시험지를 만들어 주세요.
             </Button>
         )
@@ -166,7 +168,7 @@ const KeywordRecommend = () => {
                 <div className="keyword-root">
                     <GridList cellHeight={300} className="keyword-gridlist">
                         <GridListTile key={tile.img} className="keyword-gridlist-item">
-                            <Button>
+                            <Button onClick={() => history.push('/question/create')}>
                                 <img src={tile.img} alt={tile.nickname} className="keyword-imgsize" />
                             </Button>
                             <GridListTileBar

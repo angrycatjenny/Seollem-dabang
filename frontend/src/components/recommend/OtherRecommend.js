@@ -81,12 +81,14 @@ import womenImage1 from '../../assets/mainImg/png/여성1.png';
 import womenImage2 from '../../assets/mainImg/png/여성2.png';
 import womenImage3 from '../../assets/mainImg/png/여성3.png';
 import womenImage4 from '../../assets/mainImg/png/여성4.png';
+import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const OtherRecommend = () => {
   const menImgData = [menImage1, menImage2, menImage3, menImage4]
   const womenImgData = [womenImage1, womenImage2, womenImage3, womenImage4]
+  const history = useHistory();
 
   const [gender, setGender] = React.useState();
   const [loading, setLoading] = React.useState(false)
@@ -140,7 +142,7 @@ if(!tileData){
       <GridList cellHeight={200} className="other-gridlist">
         {tileData.map((tile) => (
           <GridListTile key={tile.img} className="other-gridlist-item">
-            <Button>
+            <Button onClick={() => history.push('/question/create')}>
               <img src={tile.img} alt={tile.nickname} className="other-imgsize" />
             </Button>
             <GridListTileBar
