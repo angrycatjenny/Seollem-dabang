@@ -131,6 +131,26 @@ public class UserController {
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType)).header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"").body(resource);
     }
 
+    @GetMapping("/voice/{voiceName:.+}")
+    public ResponseEntity<Resource> downloadVoice(@PathVariable String voiceName, HttpServletRequest request) {
+
+        Resource resource = voiceStorageService.loadFileAsResource(voiceName);
+
+        String contentType = null;
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        }catch (IOException e) {
+            logger.info("Could not determine file type");
+        }
+
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType)).header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"").body(resource);
+    }
+
     @GetMapping("/my-profile")
     public ResponseEntity<?> getMyInfo(@CurrentUser UserPrincipal requestUser) {
         User user = userDao.getUserById(requestUser.getId());
