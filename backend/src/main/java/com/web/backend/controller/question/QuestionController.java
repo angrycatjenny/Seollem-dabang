@@ -92,8 +92,6 @@ public class QuestionController {
     @DeleteMapping("/delete/{questionId}")
     public Object delete(@PathVariable Long questionId){
         Question question = questionDao.getQuestionByQuestionId(questionId);
-        answerDao.deleteAll(answerDao.findAnswerByExaminerId(question.getUser().getId()));
-        keywordDao.deleteAll(keywordDao.findKeywordByQuestion_questionId(questionId));
         questionDao.delete(question);
         return new ResponseEntity<>("게시글 삭제 완료",HttpStatus.OK);
     }
