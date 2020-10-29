@@ -43,13 +43,13 @@ const QuestionDetailPage = () => {
         }
     }
 
-    const onChangeAnsYes = (e) => {
+    const onChangeNewAnsYes = (e) => {
         const {value} = e.target;
         setNewAns(1)
         console.log(newAns)
     }
 
-    const onChangeAnsNo = (e) => {
+    const onChangeNewAnsNo = (e) => {
         const {value} = e.target;
         setNewAns(0)
         console.log(newAns)
@@ -111,14 +111,14 @@ const QuestionDetailPage = () => {
         <div>
                       <Radio
                         checked={newAns===1}
-                        onChange={onChangeAnsYes}
+                        onChange={onChangeNewAnsYes}
                         value="1"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '예' }}
                       />예
                       <Radio
                         checked={newAns===0}
-                        onChange={onChangeAnsNo}
+                        onChange={onChangeNewAnsNo}
                         value="0"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '아니오' }}
