@@ -108,6 +108,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PutMapping("/my-profile")
+    public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, ) {
+
+    }
+
     @GetMapping("/your-profile/{user_id}")
     public ResponseEntity<?> getYourInfo(@PathVariable("user_id") Long userId) {
         User user = userDao.getUserById(userId);
