@@ -65,14 +65,14 @@ const QuestionListPage = () => {
   if(!exam){
     return <Link to="/question/create"><button>시험지+</button></Link>;
   }
-  //시험지 전체 삭제
-  const delExam = () => {
-    axios.delete('/question/delete', config)
-      .then(() => {
-          history.push('/question')
-      })
-      .catch((error) => console.log(error))
-  }
+  // //시험지 전체 삭제
+  // const delExam = () => {
+  //   axios.delete('/question/delete', config)
+  //     .then(() => {
+  //         history.push('/question')
+  //     })
+  //     .catch((error) => console.log(error))
+  // }
   
   return (
     <div>
@@ -80,10 +80,10 @@ const QuestionListPage = () => {
         <h4 key={item.questionId} item={item}>{item.content}</h4>
       ))}
       <Link to="/question/detail">
-        <button className="exam-update-btn">시험지 수정</button>
+        <button className="exam-update-btn">편집</button>
       </Link>
-      <button className="exam-delete-btn"
-      onClick={delExam}>시험지 삭제</button>
+      {/* <button className="exam-delete-btn"
+      onClick={delExam}>시험지 삭제</button> */}
         {/* {isExam ? (
           <>
             {questions.map((question) => {

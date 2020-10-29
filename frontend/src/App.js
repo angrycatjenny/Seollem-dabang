@@ -53,7 +53,7 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={MyProfilePage} exact path="/profile/" />
+      <Route component={MyProfilePage} exact path="/profile" />
       <Route component={MyProfileUpdatePage} path="/myprofile/update" />
       <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
