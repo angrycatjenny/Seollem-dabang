@@ -168,7 +168,7 @@ const KeywordRecommend = () => {
                 <div className="keyword-root">
                     <GridList cellHeight={300} className="keyword-gridlist">
                         <GridListTile key={tile.img} className="keyword-gridlist-item">
-                            <Button onClick={() => history.push('/question/create')}>
+                            <Button onClick={() => history.push(`/answer/${tile.id}`)}>
                                 <img src={tile.img} alt={tile.nickname} className="keyword-imgsize" />
                             </Button>
                             <GridListTileBar
