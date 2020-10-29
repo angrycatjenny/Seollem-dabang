@@ -108,6 +108,30 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PutMapping("/my-profile")
+    public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
+
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
+        
+        User user = userDao.getUserById(requestUser.getId());
+        user.setNickname(updateRequest.getNickname());
+        user.setLocation(updateRequest.getLocation());
+
+        if(image != null) {
+            String imageName = imageStorageService.storeFile(image);
+            user.setImage(imageName);
+        }
+        if(voice != null) {
+            String voiceName = voiceStorageService.storeFile(voice);
+            user.setVoice(voiceName);
+        }
+        userDao.save(user);
+
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("/your-profile/{user_id}")
     public ResponseEntity<?> getYourInfo(@PathVariable("user_id") Long userId) {
         User user = userDao.getUserById(userId);
