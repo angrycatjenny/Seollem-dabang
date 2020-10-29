@@ -7,7 +7,7 @@ import './HeaderComp.css';
 import { useCookies } from 'react-cookie';
 
 // History
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // Axios
 import axios from 'axios';
