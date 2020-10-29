@@ -12,25 +12,12 @@ import { useHistory } from "react-router-dom";
 // Cookie
 import { useCookies } from 'react-cookie';
 
-// Material-UI
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-
 const AnswerCreatePage = () => {
   const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
 
   const [ questions, setQuestions ] = useState(null);
   const [ loading, setLoading ] = useState(false);
-
-  const [value, setValue] = useState('');
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   const config = {
     headers: {
@@ -53,20 +40,25 @@ const AnswerCreatePage = () => {
     fetchData();
   }, []);
 
-  const sendAnswers = e => {
-    axios.post('/')
-    .then(
-      history.push('/result')
-    )
-    .catch()
-  }
+  const selectedYes = (index) => {
+    questions[index].answer = 1
+    console.log(questions);
+  };
+  const selectedNo = (index) => {
+    questions[index].answer = 0
+    console.log(questions);
+  };
+
+  const sendAnswers = () => {
+
+  };
 
   if (loading) {
     return <h1>대기 중...</h1>;
-  }
+  };
   if (!questions) {
     return null;
-  }
+  };
 
   return (
     <div>
@@ -74,12 +66,8 @@ const AnswerCreatePage = () => {
       {questions.map((question, index) => (
         <div key={index}>
           <h1>{question.content}</h1>
-          <FormControl component="fieldset">
-            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-              <FormControlLabel value="1" control={<Radio />} label="Yes" />
-              <FormControlLabel value="0" control={<Radio />} label="No" />
-            </RadioGroup>
-          </FormControl>
+          <button onClick={() => selectedYes(index)}>YES</button>
+          <button onClick={() => selectedNo(index)}>NO</button>
         </div>
       ))}
       <button onClick={sendAnswers}>제출하기</button>
