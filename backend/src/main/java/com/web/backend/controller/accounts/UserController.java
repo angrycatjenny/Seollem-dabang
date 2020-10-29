@@ -78,15 +78,10 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest) throws IOException {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
-        try {
-            kakaoVisionService.getResponse(image);
-        }catch (IOException e){
-            throw e;
-        }
-
-
+        kakaoVisionService.getResponse(image);
+        
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
         }
