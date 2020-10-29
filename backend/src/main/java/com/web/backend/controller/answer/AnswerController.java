@@ -43,7 +43,6 @@ public class AnswerController {
             }
         }
         double correctRate = rightAnswer/n;
-        System.out.println();
         User examinee = userDao.getUserById(requser.getId());
         User examiner = userDao.getUserById(req.getExaminer());
 

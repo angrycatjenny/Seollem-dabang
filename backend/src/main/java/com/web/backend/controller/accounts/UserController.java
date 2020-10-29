@@ -152,18 +152,12 @@ public class UserController {
         for(User user:allUsers){
             List<Keyword> othersKeywords = keywordDao.findKeywordByUser(user);
             for(Keyword keyword:keywords){
-                System.out.println(keyword);
                 if(othersKeywords.contains(keyword)){
                     recommendedUserList.add(user);
-                    break;
                 }
             }
         }
-        //추천 할 유저가 없을 때
-        if(recommendedUserList.isEmpty()){
-            return data;
-        }
-
+        System.out.println(recommendedUserList);
         return recommendedUserList;
     }
 }
