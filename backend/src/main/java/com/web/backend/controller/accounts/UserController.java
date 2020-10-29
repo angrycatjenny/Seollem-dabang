@@ -111,6 +111,10 @@ public class UserController {
     @PutMapping("/my-profile")
     public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
 
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
+        
         User user = userDao.getUserById(requestUser.getId());
         user.setNickname(updateRequest.getNickname());
         user.setLocation(updateRequest.getLocation());
