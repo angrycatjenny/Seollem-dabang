@@ -8,5 +8,4 @@ import javax.validation.constraints.NotNull;
 @NotNull
 public class AnswerReqeust {
     boolean [] answerList;
-    Long examiner;
 }
