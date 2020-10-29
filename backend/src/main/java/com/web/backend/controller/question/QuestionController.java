@@ -14,6 +14,7 @@ import com.web.backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,6 +40,7 @@ public class QuestionController {
 
 
     @PostMapping("/create")
+    @Async("threadPoolTaskExecutor")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody QuestionListRequest req){
         User curuser = userDao.getUserById(requser.getId());
         String [] contentList = req.getContentList();
@@ -94,5 +96,12 @@ public class QuestionController {
         Question question = questionDao.getQuestionByQuestionId(questionId);
         questionDao.delete(question);
         return new ResponseEntity<>("게시글 삭제 완료",HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public Object deleteAll(@CurrentUser UserPrincipal requser){
+        User curuser = userDao.getUserById(requser.getId());
+        questionDao.deleteAll(questionDao.findQuestionByUserId(curuser.getId()));
+        return new ResponseEntity<>("게시글 전체 삭제 완료",HttpStatus.OK);
     }
 }
