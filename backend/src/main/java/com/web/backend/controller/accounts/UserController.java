@@ -28,9 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class UserController {
@@ -130,6 +130,12 @@ public class UserController {
     public Object getUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
+        if(keywords.isEmpty()){
+            HashMap<String,Integer> data = new HashMap<String,Integer>();
+            data.put("is_exam",0);
+            data.put("gender",curuser.getGender());
+            return data;
+        }
         int gender = 0;
         if(curuser.getGender()==0){
             gender=1;
@@ -145,6 +151,6 @@ public class UserController {
                 }
             }
         }
-        return recommendedUserList;
+        return recommendedUserList.subList(0,4);
     }
 }
