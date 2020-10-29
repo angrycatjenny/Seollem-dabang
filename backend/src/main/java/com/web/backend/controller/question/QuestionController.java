@@ -69,6 +69,13 @@ public class QuestionController {
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
+    @GetMapping("/list/{examinerId}")
+    public Object getOthersList(@PathVariable Long examinerId){
+        User curuser = userDao.getUserById(examinerId);
+        List<Question> questionList = questionDao.findQuestionByUserId(curuser.getId());
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
+    }
+
     @PutMapping("/update/{questionId}")
     public Object update(@Valid @RequestBody QuestionRequest req, @PathVariable Long questionId){
         Question question = questionDao.getQuestionByQuestionId(questionId);
