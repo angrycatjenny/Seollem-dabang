@@ -33,9 +33,9 @@ const QuestionDetailPage = () => {
             }
             axios.post('/question/create', ExamData, config)
               .then(() => {
+                setNewQuest('')
+                setNewAns(-1)
                   history.push('/question')
-                  setNewQuest('')
-                  setNewAns(-1)
               })
               .catch((error) => console.log(error))
         }
