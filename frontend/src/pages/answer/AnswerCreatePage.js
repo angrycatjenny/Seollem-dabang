@@ -43,14 +43,31 @@ const AnswerCreatePage = () => {
   const selectedYes = (index) => {
     questions[index].answer = 1
     console.log(questions);
+    setQuestions(questions);
   };
   const selectedNo = (index) => {
     questions[index].answer = 0
     console.log(questions);
+    setQuestions(questions);
   };
 
   const sendAnswers = () => {
-
+    const answerData = [];
+    for (var i = 0; i <= questions.length; i++) {
+      if (questions[i]) {
+        if (questions[i].answer === 1) {
+          answerData.push(1)
+        } else if (questions[i].answer === 0) {
+          answerData.push(0)
+        }
+      }
+    }
+    axios.post('/answer', answerData, config)
+      .then(() => {
+        console.log('디비보자');
+        history.push('/main')
+      })
+    console.log(answerData)
   };
 
   if (loading) {
