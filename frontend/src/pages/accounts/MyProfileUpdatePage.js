@@ -85,7 +85,7 @@ const MyProfileUpdatePage = () => {
   const [ voice, setVoice ] = useState('');
   const [ voicePush, setVoicePush] = useState(false)
   const [ voiceurl, setVoiceurl ] = useState('');
-
+  const [ objectURL, setObjectURL ] = useState('');
   React.useEffect(() => {
     axios.get(`/my-profile`, axiosConfig)
         .then((response) => {
@@ -108,8 +108,10 @@ const MyProfileUpdatePage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
+    console.log(e.target.files)
     setImagePush(true)
     setImage(e.target.files[0]);
+    setObjectURL (URL.createObjectURL(e.target.files[0]))
   };
 
   const startRecording = () => {
@@ -135,7 +137,7 @@ const MyProfileUpdatePage = () => {
       const voiceFileName = Date.now();
       UpdateData.append('nickname', nickname);
       UpdateData.append('location', location);
-      if (voicePush){
+      if (imagePush){
         UpdateData.append('image', image, 'image' + imageFileName);
       }
       if (voicePush){
@@ -186,6 +188,12 @@ const MyProfileUpdatePage = () => {
                 type="file"
                 onChange={setImageText}
               />
+              {imagePush &&(
+                <img src={objectURL} alt={objectURL} className="Update-img" />
+              )}
+              {!imagePush &&(
+                <img src={objectURL} alt={objectURL} className="Update-img" />
+              )}
 
             </div>
             <div>
