@@ -18,30 +18,14 @@ const QuestionDetailPage = () => {
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
     }
+
+    //새로운 질문 추가
     const [ newQuest, setNewQuest  ] = useState('')
     const [ newAns, setNewAns ] = useState(-1)
 
     const onChangeNewQuest = (e) => {
         setNewQuest(e.target.value);
       }
-
-    const addNewQuest = () => {
-        if(!newQuest | newAns < 0) {
-            alert('질문과 정답을 제대로 작성해주세요!')
-        }else{
-            const ExamData = {
-              "contentList": [newQuest],
-              "correctAnswerList": [newAns]
-            }
-            axios.post('/question/create', ExamData, config)
-              .then(() => {
-                setNewQuest('')
-                setNewAns(-1)
-                  history.push('/question')
-              })
-              .catch((error) => console.log(error))
-        }
-    }
 
     const onChangeNewAnsYes = (e) => {
         const {value} = e.target;
@@ -55,20 +39,39 @@ const QuestionDetailPage = () => {
         console.log(newAns)
     }
 
-    useEffect(() => {
-        const fetchData = async() => {
-          setIsExam(true);
-          try {
-            const getExam = await axios.get(`/question/list`,config);
-            setExam(getExam.data)
-            console.log(getExam.data,'??')
-          } catch(e) {
-            console.log(e);
-          } 
-          setIsExam(false);
-        };
-        fetchData();
-      }, []);
+    const addNewQuest = () => {
+      if(!newQuest | newAns < 0) {
+          alert('질문과 정답을 제대로 작성해주세요!')
+      }else{
+          const ExamData = {
+            "contentList": [newQuest],
+            "correctAnswerList": [newAns]
+          }
+          axios.post('/question/create', ExamData, config)
+            .then(() => {
+              setNewQuest('')
+              setNewAns(-1)
+                history.push('/question')
+            })
+            .catch((error) => console.log(error))
+      }
+  }
+
+  //만들어둔 시험 문제 get
+  useEffect(() => {
+      const fetchData = async() => {
+        setIsExam(true);
+        try {
+          const getExam = await axios.get(`/question/list`,config);
+          setExam(getExam.data)
+          console.log(getExam.data,'??')
+        } catch(e) {
+          console.log(e);
+        } 
+        setIsExam(false);
+      };
+      fetchData();
+    }, []);
 
       if(isExam){
         return <div>로딩중</div>
@@ -95,35 +98,38 @@ const QuestionDetailPage = () => {
                 {item.content}</h4>
         </div>
         ))}
-        <TextField
-          id="outlined-full-width"
-          label="문제"
-          style={{ margin: 8 }}
-          placeholder="추가 문제를 써주세요!"
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          value={newQuest}
-          onChange={onChangeNewQuest}
-        />
-        <div>
-                      <Radio
-                        checked={newAns===1}
-                        onChange={onChangeNewAnsYes}
-                        value="1"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '예' }}
-                      />예
-                      <Radio
-                        checked={newAns===0}
-                        onChange={onChangeNewAnsNo}
-                        value="0"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '아니오' }}
-                      />아니오
-                    </div>
+
+        <div className="new-quest-box">
+          <TextField
+            id="outlined-full-width"
+            label="문제"
+            style={{ margin: 8 }}
+            placeholder="추가 문제를 써주세요!"
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+            value={newQuest}
+            onChange={onChangeNewQuest}
+          />
+          <div>
+            <Radio
+              checked={newAns===1}
+              onChange={onChangeNewAnsYes}
+              value="1"
+              name="radio-button-demo"
+              inputProps={{ 'aria-label': '예' }}
+            />예
+            <Radio
+              checked={newAns===0}
+              onChange={onChangeNewAnsNo}
+              value="0"
+              name="radio-button-demo"
+              inputProps={{ 'aria-label': '아니오' }}
+            />아니오
+          </div>
+        </div>
         <button onClick={addNewQuest}>추가</button>
         <br />
         <Link to="/question">
