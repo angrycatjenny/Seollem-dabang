@@ -8,8 +8,8 @@ import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 
-//완료: 질문 추가
-//아직: 시험지 전체 삭제, 질문 각각 수정 및 삭제
+//완료: 질문 추가, 시험지 전체 삭제
+//아직: 질문 각각 수정 및 삭제
 const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
@@ -83,7 +83,7 @@ const QuestionDetailPage = () => {
 
     //시험지 전체 삭제
     const delExam = () => {
-        axios.delete('/question', config)
+        axios.delete('/question/delete', config)
         .then(() => {
             history.push('/question')
         })

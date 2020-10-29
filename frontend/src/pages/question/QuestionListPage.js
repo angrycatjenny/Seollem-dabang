@@ -49,13 +49,12 @@ const QuestionListPage = () => {
         // }
         const getExam = await axios.get(`/question/list`,config);
         if(getExam.data.length>0){
+          console.log(getExam.data,'??')
           setExam(getExam.data)
           setIsExam(true)
         }else{
           setIsExam(false)
         }
-        
-        console.log(getExam.data,'??')
       } catch(e) {
         console.log(e);
       } 
