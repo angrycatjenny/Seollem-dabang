@@ -142,7 +142,7 @@ if(!tileData){
       <GridList cellHeight={200} className="other-gridlist">
         {tileData.map((tile) => (
           <GridListTile key={tile.img} className="other-gridlist-item">
-            <Button onClick={() => history.push('/question/create')}>
+            <Button onClick={() => history.push(`/answer/${tile.id}`)}>
               <img src={tile.img} alt={tile.nickname} className="other-imgsize" />
             </Button>
             <GridListTileBar
