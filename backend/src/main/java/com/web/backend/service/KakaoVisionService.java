@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
@@ -51,7 +54,8 @@ public class KakaoVisionService {
         String url = "https://dapi.kakao.com/v2/vision/face/detect";
 
         ResponseEntity<Map> response = restTemplate.postForEntity(url, entity, Map.class);
-        System.out.println(response.getBody().get("faces"));
-        return response.getBody().get("faces") != null;
+        Map getBody = (Map) response.getBody().get("result");
+        ArrayList result = (ArrayList) getBody.get("faces");
+        return result.size() > 0;
     }
 }

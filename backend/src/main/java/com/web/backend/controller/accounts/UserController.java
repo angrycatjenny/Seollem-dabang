@@ -4,10 +4,7 @@ import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.keyword.KeywordDao;
 import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
-import com.web.backend.payload.accounts.ApiResponse;
-import com.web.backend.payload.accounts.JwtAuthenticationResponse;
-import com.web.backend.payload.accounts.LoginRequest;
-import com.web.backend.payload.accounts.SignUpRequest;
+import com.web.backend.payload.accounts.*;
 import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
 import com.web.backend.security.UserPrincipal;
@@ -137,15 +134,6 @@ public class UserController {
     public Object recUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
-        
-        HashMap<String,Integer> data = new HashMap<String,Integer>();
-        data.put("is_exam",0);
-        data.put("gender",curuser.getGender());
-        
-        //키워드가 없을 때
-        if(keywords.isEmpty()){
-            return data;
-        }
 
         int gender = 0;
         if(curuser.getGender()==0){
@@ -154,23 +142,29 @@ public class UserController {
         
         List<User> allUsers = userDao.getUserByGender(gender);
         allUsers.remove(curuser);
-        ArrayList<User> recommendedUserList = null;
-
+        ArrayList<User> recommendedUserList = new ArrayList<>();
         for(User user:allUsers){
-            List<Keyword> othersKeywords = keywordDao.findKeywordByUser(user);
+            List<String> othersKeywords = keywordDao.findWordByUserId(user.getId());
+            System.out.println(othersKeywords);
             for(Keyword keyword:keywords){
-                System.out.println(keyword);
-                if(othersKeywords.contains(keyword)){
+                if(othersKeywords.contains(keyword.getWord())){
                     recommendedUserList.add(user);
                     break;
                 }
             }
+            if(recommendedUserList.toArray().length==4){
+                break;
+            }
         }
-        //추천 할 유저가 없을 때
+        HashMap<String,Integer> nullData = new HashMap<String,Integer>();
+        nullData.put("is_exam",0);
+        nullData.put("gender",curuser.getGender());
+
         if(recommendedUserList.isEmpty()){
-            return data;
+            return nullData;
         }
 
-        return recommendedUserList;
+        RecommendResponse userList = new RecommendResponse(1, curuser.getGender(), recommendedUserList);
+        return userList;
     }
 }

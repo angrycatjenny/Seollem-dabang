@@ -8,6 +8,8 @@ import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 
+//완료: 질문 추가
+//아직: 시험지 전체 삭제, 질문 각각 수정 및 삭제
 const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
@@ -33,21 +35,21 @@ const QuestionDetailPage = () => {
             }
             axios.post('/question/create', ExamData, config)
               .then(() => {
+                setNewQuest('')
+                setNewAns(-1)
                   history.push('/question')
-                  setNewQuest('')
-                  setNewAns(-1)
               })
               .catch((error) => console.log(error))
         }
     }
 
-    const onChangeAnsYes = (e) => {
+    const onChangeNewAnsYes = (e) => {
         const {value} = e.target;
         setNewAns(1)
         console.log(newAns)
     }
 
-    const onChangeAnsNo = (e) => {
+    const onChangeNewAnsNo = (e) => {
         const {value} = e.target;
         setNewAns(0)
         console.log(newAns)
@@ -109,14 +111,14 @@ const QuestionDetailPage = () => {
         <div>
                       <Radio
                         checked={newAns===1}
-                        onChange={onChangeAnsYes}
+                        onChange={onChangeNewAnsYes}
                         value="1"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '예' }}
                       />예
                       <Radio
                         checked={newAns===0}
-                        onChange={onChangeAnsNo}
+                        onChange={onChangeNewAnsNo}
                         value="0"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '아니오' }}
