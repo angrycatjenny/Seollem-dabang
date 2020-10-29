@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
 
 // Axios
 import axios from 'axios';
@@ -19,6 +21,7 @@ const MyProfilePage = () => {
   const [ voice, setVoice ] = useState('');
   const [ location, setLocation ] = useState('');
   const [ age, setAge ] = useState('');
+  const history = useHistory();
 
   const config = {
     headers: {
@@ -50,6 +53,9 @@ const MyProfilePage = () => {
       <p>목소리: {voice}</p>
       <p>지역: {location}</p>
       <p>나이: {age}</p>
+      <Button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')}>
+        개인정보수정
+      </Button>
     </div>
   )
 };
