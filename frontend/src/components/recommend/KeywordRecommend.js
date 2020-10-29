@@ -107,7 +107,7 @@ import axios from 'axios';
 const KeywordRecommend = () => {
     const menImgData = [ManImage5, ManImage6, ManImage7, ManImage8]
     const womenImgData = [womenImage5, womenImage6, womenImage7, womenImage8]
-    const [loading, setLoading] = React.useState(false)
+    const [exam, setExam] = React.useState(0)
     const [gender, setGender] = React.useState();
     const history = useHistory();
 
@@ -123,30 +123,24 @@ const KeywordRecommend = () => {
             .then((response) => {
                 console.log('keyword', response)
                 setTileData(response.data)
-                setGender(response.data.gender)
-                setLoading(true)
+                setGender(response.data[0].gender)
+                setExam(response.data[0].is_exam)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
-    if (loading) {
+    if (exam === 1) {
         if (gender === 0) {
-            for (let i = 0; i < tileData.length; i++) {
-                tileData[i].img = menImgData[i]
-            }
-        } else {
             for (let i = 0; i < tileData.length; i++) {
                 tileData[i].img = womenImgData[i]
             }
+        } else {
+            for (let i = 0; i < tileData.length; i++) {
+                tileData[i].img = menImgData[i]
+            }
         }
     } else {
-        return (
-            <h1>대기 중...</h1>
-        )
-    }
-
-    if (!tileData) {
         return (
             <Button variant="contained" color="primary" onClick={() => history.push('/question/create')}>
                 시험지를 만들어 주세요.
@@ -168,7 +162,7 @@ const KeywordRecommend = () => {
                 <div className="keyword-root">
                     <GridList cellHeight={300} className="keyword-gridlist">
                         <GridListTile key={tile.img} className="keyword-gridlist-item">
-                            <Button onClick={() => history.push('/question/create')}>
+                            <Button onClick={() => history.push(`/answer/${tile.id}`)}>
                                 <img src={tile.img} alt={tile.nickname} className="keyword-imgsize" />
                             </Button>
                             <GridListTileBar

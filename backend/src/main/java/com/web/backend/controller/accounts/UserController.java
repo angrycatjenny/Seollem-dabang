@@ -12,6 +12,7 @@ import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
 import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.ImageStorageService;
+import com.web.backend.service.KakaoVisionService;
 import com.web.backend.service.VoiceStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class UserController {
@@ -58,6 +59,9 @@ public class UserController {
     @Autowired
     VoiceStorageService voiceStorageService;
 
+    @Autowired
+    KakaoVisionService kakaoVisionService;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -73,8 +77,11 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
         }
@@ -111,7 +118,7 @@ public class UserController {
     }
 
     @GetMapping("/recommend-user-by-profile")
-    public Object getUserByProfile(@CurrentUser UserPrincipal requser){
+    public Object recUserByProfile(@CurrentUser UserPrincipal requser){
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
         int gender = user.getGender();
@@ -127,24 +134,43 @@ public class UserController {
     }
 
     @GetMapping("/recommend-user-by-keyword")
-    public Object getUserByKeyword(@CurrentUser UserPrincipal requser){
+    public Object recUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
+        
+        HashMap<String,Integer> data = new HashMap<String,Integer>();
+        data.put("is_exam",0);
+        data.put("gender",curuser.getGender());
+        
+        //키워드가 없을 때
+        if(keywords.isEmpty()){
+            return data;
+        }
+
         int gender = 0;
         if(curuser.getGender()==0){
             gender=1;
         }
+        
         List<User> allUsers = userDao.getUserByGender(gender);
         allUsers.remove(curuser);
-        List<User> recommendedUserList = null;
+        ArrayList<User> recommendedUserList = null;
+
         for(User user:allUsers){
             List<Keyword> othersKeywords = keywordDao.findKeywordByUser(user);
             for(Keyword keyword:keywords){
+                System.out.println(keyword);
                 if(othersKeywords.contains(keyword)){
                     recommendedUserList.add(user);
+                    break;
                 }
             }
         }
+        //추천 할 유저가 없을 때
+        if(recommendedUserList.isEmpty()){
+            return data;
+        }
+
         return recommendedUserList;
     }
 }

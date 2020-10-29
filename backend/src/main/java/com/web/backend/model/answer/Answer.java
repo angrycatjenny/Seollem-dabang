@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.web.backend.model.accounts.User;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -21,12 +23,13 @@ public class Answer {
     @Column(name="correct_rate", nullable=false)
     private double correctRate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="examinee_id")
     private User examinee;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="examiner_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User examiner;
 
     @Builder

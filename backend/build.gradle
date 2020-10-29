@@ -29,6 +29,7 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.github.shin285:KOMORAN:3.3.4'
+	implementation 'org.apache.httpcomponents:httpclient:4.5'
 	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.1")
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
