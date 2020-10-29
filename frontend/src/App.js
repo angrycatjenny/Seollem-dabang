@@ -4,7 +4,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 // Router
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 // base
 import MainPage from './pages/base/MainPage';
@@ -76,4 +76,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRouter(App);
