@@ -7,7 +7,7 @@ import './HeaderComp.css';
 import { useCookies } from 'react-cookie';
 
 // History
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 // Axios
 import axios from 'axios';
@@ -42,9 +42,15 @@ const HeaderComp = () => {
     alert('로그아웃 되었습니다.')
   }
 
+  const goBack = () => {
+    console.log('뒤로')
+    history.goBack(1);
+  }
+
   return (
     <div className="navbar">
       <div>
+        <i class="fas fa-chevron-left back-button" onClick={goBack}></i>
         <img className="profile-image" src={ProfileImage} />
         <small>{nickname}</small>
       </div>
