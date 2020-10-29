@@ -118,7 +118,7 @@ public class UserController {
     }
 
     @GetMapping("/recommend-user-by-profile")
-    public Object getUserByProfile(@CurrentUser UserPrincipal requser){
+    public Object recUserByProfile(@CurrentUser UserPrincipal requser){
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
         int gender = user.getGender();
@@ -134,30 +134,43 @@ public class UserController {
     }
 
     @GetMapping("/recommend-user-by-keyword")
-    public Object getUserByKeyword(@CurrentUser UserPrincipal requser){
+    public Object recUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
+        
+        HashMap<String,Integer> data = new HashMap<String,Integer>();
+        data.put("is_exam",0);
+        data.put("gender",curuser.getGender());
+        
+        //키워드가 없을 때
         if(keywords.isEmpty()){
-            HashMap<String,Integer> data = new HashMap<String,Integer>();
-            data.put("is_exam",0);
-            data.put("gender",curuser.getGender());
             return data;
         }
+
         int gender = 0;
         if(curuser.getGender()==0){
             gender=1;
         }
+        
         List<User> allUsers = userDao.getUserByGender(gender);
         allUsers.remove(curuser);
-        List<User> recommendedUserList = null;
+        ArrayList<User> recommendedUserList = null;
+
         for(User user:allUsers){
             List<Keyword> othersKeywords = keywordDao.findKeywordByUser(user);
             for(Keyword keyword:keywords){
+                System.out.println(keyword);
                 if(othersKeywords.contains(keyword)){
                     recommendedUserList.add(user);
+                    break;
                 }
             }
         }
-        return recommendedUserList.subList(0,4);
+        //추천 할 유저가 없을 때
+        if(recommendedUserList.isEmpty()){
+            return data;
+        }
+
+        return recommendedUserList;
     }
 }
