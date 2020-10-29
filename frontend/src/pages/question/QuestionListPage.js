@@ -2,11 +2,14 @@ import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { useHistory } from "react-router-dom";
+
 
 import './QuestionListPage.css';
 
 
 const QuestionListPage = () => {
+  const history = useHistory();
   const [ exam, setExam ] = useState(null);
   const [ isExam, setIsExam ] = useState(false);
   const [cookies, setCookie] = useCookies(['accessToken']);
@@ -64,6 +67,14 @@ const QuestionListPage = () => {
   if(!exam){
     return <Link to="/question/create"><button>시험지+</button></Link>;
   }
+
+  const delExam = () => {
+    axios.delete('/question/delete', config)
+      .then(() => {
+          history.push('/question')
+      })
+      .catch((error) => console.log(error))
+  }
   
   return (
     <div>
@@ -71,7 +82,8 @@ const QuestionListPage = () => {
         <h4 key={item.questionId} item={item}>{item.content}</h4>
       ))}
       <button className="exam-update-btn">시험지 수정</button>
-      <button className="exam-delete-btn">시험지 삭제</button>
+      <button className="exam-delete-btn"
+      onClick={delExam}>시험지 삭제</button>
         {/* {isExam ? (
           <>
             {questions.map((question) => {
