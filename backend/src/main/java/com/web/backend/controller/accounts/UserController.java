@@ -12,6 +12,7 @@ import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
 import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.ImageStorageService;
+import com.web.backend.service.KakaoVisionService;
 import com.web.backend.service.VoiceStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,9 @@ public class UserController {
     @Autowired
     VoiceStorageService voiceStorageService;
 
+    @Autowired
+    KakaoVisionService kakaoVisionService;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -73,8 +77,11 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
         }
