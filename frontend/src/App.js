@@ -60,7 +60,7 @@ const App = () => {
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />
       <Route component={QuestionCreatePage} path="/question/create" />
-      <Route component={QuestionDetailPage} path="/question/:userId" />      
+      <Route component={QuestionDetailPage} path="/question/detail" />      
 
       {/* Answer */}
       <Route component={AnswerCreatePage} path="/answer" />

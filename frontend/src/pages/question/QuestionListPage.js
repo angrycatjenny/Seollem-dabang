@@ -4,9 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
-
 import './QuestionListPage.css';
-
 
 const QuestionListPage = () => {
   const history = useHistory();
@@ -67,7 +65,7 @@ const QuestionListPage = () => {
   if(!exam){
     return <Link to="/question/create"><button>시험지+</button></Link>;
   }
-
+  //시험지 전체 삭제
   const delExam = () => {
     axios.delete('/question/delete', config)
       .then(() => {
@@ -81,7 +79,9 @@ const QuestionListPage = () => {
       {exam.map(item => (
         <h4 key={item.questionId} item={item}>{item.content}</h4>
       ))}
-      <button className="exam-update-btn">시험지 수정</button>
+      <Link to="/question/detail">
+        <button className="exam-update-btn">시험지 수정</button>
+      </Link>
       <button className="exam-delete-btn"
       onClick={delExam}>시험지 삭제</button>
         {/* {isExam ? (
