@@ -20,12 +20,18 @@ public class KakaoVisionService {
     @Autowired
     public KakaoVisionService() {}
 
-    public void getResponse(MultipartFile image){
+    public Boolean getResponse(MultipartFile image){
 
         ByteArrayResource resource;
 
         try {
-            resource = new ByteArrayResource(image.getBytes());
+            resource = new ByteArrayResource(image.getBytes()) {
+
+                @Override
+                public String getFilename() {
+                    return "requestFile.wav";
+                }
+            };
         }catch (IOException e) {
             throw new ByteConvertException("Could not convert image to bytes");
         }
@@ -44,7 +50,8 @@ public class KakaoVisionService {
 
         String url = "https://dapi.kakao.com/v2/vision/face/detect";
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-        System.out.println(response);
+        ResponseEntity<Map> response = restTemplate.postForEntity(url, entity, Map.class);
+        System.out.println(response.getBody().get("faces"));
+        return response.getBody().get("faces") != null;
     }
 }
