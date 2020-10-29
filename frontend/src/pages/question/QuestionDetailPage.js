@@ -8,6 +8,8 @@ import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 
+//완료: 질문 추가
+//아직: 시험지 전체 삭제, 질문 각각 수정 및 삭제
 const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
