@@ -122,6 +122,25 @@ const SignupPage = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
+  const checkHandle = (k) =>{
+    if(k===1){
+      if(nickname && email && password && passwordconfirm && location && gender && age){
+        if(password === passwordconfirm){
+          handleNext()
+        }else {
+          alert('비밀번호가 일치 하지 않습니다.')
+        }
+      } else{
+        alert('기본 정보를 입력해주세요.')
+      }
+    }else if(k===2){
+      if(image){
+        handleNext()
+      }else {
+        alert('사진을 등록 해 주세요.')
+      }
+    }
+  }
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -170,7 +189,6 @@ const SignupPage = () => {
     setRecord(false)
   };
   const onStop = (recordedBlob) => {
-    console.log(recordedBlob);
     setVoice(recordedBlob.blob);
     setVoiceurl(recordedBlob.blobURL);
   };
@@ -181,7 +199,7 @@ const SignupPage = () => {
 
   const sendSignupData = e => {
     e.preventDefault();
-    if (password === passwordconfirm) {
+    if (voice) {
 
       const signupData = new FormData();
       
@@ -202,9 +220,12 @@ const SignupPage = () => {
           alert('회원가입이 완료되었습니다.')
           history.push('/login')
         })
-        .catch((error) => console.log(error))
-    } else {
-      alert('비밀번호를 확인하세요.')
+        .catch(err => {
+          if(err.message==="Request failed with status code 400"){
+          alert('사진에서 얼굴을 찾을 수 없습니다.')
+          }})    
+        } else {
+      alert('목소리 녹음을 해주세요.')
     }
   };
 
@@ -315,7 +336,7 @@ const SignupPage = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={()=>checkHandle(1)}
                   className={classes.button}
                 >
                   다음
@@ -342,7 +363,7 @@ const SignupPage = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={()=>checkHandle(2)}
                   className={classes.button}
                 >
                   다음
