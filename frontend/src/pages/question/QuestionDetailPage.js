@@ -14,9 +14,13 @@ const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
     const [ isExam, setIsExam ] = useState(false);
+
+    //수정 담당 data
     const [ editId, setEditId ] = useState(-1);
     const [ editQuest, setEditQuest ] = useState('');
     const [ editAns, setEditAns ] = useState(null);
+
+    //토큰
     const [cookies, setCookie] = useCookies(['accessToken']);
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
@@ -95,48 +99,47 @@ const QuestionDetailPage = () => {
         .catch((error) => console.log(error))
     }
 
-    //질문 개별 수정 및 삭제
-
+    ////질문 개별 수정 및 삭제
+    //수정할 질문 ID 설정
+    const sendEditId = (Id) => {
+      setEditId(Id);
+    //   const targeting = exam.filter((quest) => {
+    //     return quest.name.indexOf(exam) > -1;
+    // });
+    }
     //질문 수정
     const EditQuestion = (e) => {
       const {id, value} = e.target;
       setEditQuest(e.target)
+      setExam(exam.map((item) =>
+      item.questionId === id ? {...item, content:value} : item))
     }
     //정답 수정
-    const EditAnswerYes = (e) => {
-      const {id, value} = e.target;
+    const EditAnswerYes = (Id) => {
       setEditAns(true)
       setExam(exam.map((item) =>
-      item.questionId === id ? {...item, correctAnswer:true} : item))
+      item.questionId === Id ? {...item, correctAnswer:true} : item))
     }
-    const EditAnswerNo = (e) => {
-      const {id, value} = e.target;
+    const EditAnswerNo = (Id) => {
       setEditAns(false)
       setExam(exam.map((item) =>
-      item.questionId === id ? {...item, correctAnswer:false} : item))
+      item.questionId === Id ? {...item, correctAnswer:false} : item))
     }
-
+    //수정된 데이터 보내기
     const updateQuest = (Id) => {
-      setEditId(Id)
-      // console.log(Id,'수정')
-      // console.log(exam,'exam')
-      {exam.filter((question) => {
-        if( question.questionId == Id){
-          console.log(question.content,'수정할거')
-          
-          // const ExamData = {
-          //   "content": ,
-          //   "correctAnswer": 
-          // }
-          // console.log(ExamData,'보낼거')
-          // axios.put(`/question/update/${Id}`, ExamData, config)
-          //   .then(() => {
-          //       history.push('/question/detail')
-          //       history.go();
-          //   })
-          //   .catch((error) => console.log(error))
-        }
-      })};
+      console.log(Id,'수정')
+      console.log(exam,'exam')
+      const ExamData = {
+        "content": editQuest,
+        "correctAnswer": editAns
+      }
+      console.log(ExamData,'보낼거')
+      // axios.put(`/question/update/${Id}`, ExamData, config)
+      //   .then(() => {
+      //       history.push('/question/detail')
+      //       history.go();
+      //   })
+      //   .catch((error) => console.log(error))
     }
 
     //삭제
@@ -168,7 +171,7 @@ const QuestionDetailPage = () => {
                 <div>
                   <Radio
                     checked={item.correctAnswer}
-                    onChange={EditAnswerYes}
+                    onChange={() =>EditAnswerYes(item.questionId)}
                     id={item.questionId}
                     value="true"
                     name="radio-button-demo"
@@ -176,13 +179,15 @@ const QuestionDetailPage = () => {
                   />예
                   <Radio
                     checked={!item.correctAnswer}
-                    onChange={EditAnswerNo}
+                    onChange={() => EditAnswerNo(item.questionId)}
                     id={item.questionId}
                     value="false"
                     name="radio-button-demo"
                     inputProps={{ 'aria-label': '아니오' }}
                   />아니오
-                  </div>
+                </div>
+                <button onClick={() => updateQuest(item.questionId)}>완료</button>
+                <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
                 </div>
                 ) : (
                   <div style={{display:"flex", flexDirection:"row"}}>
@@ -194,7 +199,7 @@ const QuestionDetailPage = () => {
                     ) : (
                       <h6>정답: 아니오</h6>
                     )}
-                    <button onClick={() => updateQuest(item.questionId)}>수정</button>
+                    <button onClick={() => sendEditId(item.questionId)}>수정</button>
                     <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
                   </div>
                   
