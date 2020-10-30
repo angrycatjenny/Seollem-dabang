@@ -6,25 +6,25 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import { useHistory } from "react-router-dom";
-import { useLocation } from 'react-router-dom'
-
+import { useRouteMatch } from 'react-router-dom';
 import './FooterComp.css';
+import { useCookies } from 'react-cookie';
 
 export default function FooterComp() {
-  let [value, setValue] = React.useState(0);
+  let [value, setValue] = React.useState();
+  const [cookies, setCookie] = useCookies(['accessToken']);
   const history = useHistory();
-  const location = useLocation();
-  console.log(location.pathname)
-  if (location.pathname ==='/main'){
+  const match = useRouteMatch();
+  if (match.path ==='/main'){
     value = 0
-  }else if (location.pathname==='/question'){
+  }else if (match.path==='/question'||match.path==='/question/create'||match.path==='/question/update'){
     value = 1
-  }else if (location.pathname==='/conversation'){
+  }else if (match.path==='/conversation'||match.path==='/conversation/:conversationId'){
     value = 2
-  }else if (location.pathname==='/:userId'){
+  }else if (match.path==='/profile' || match.path==='/myprofile/update'|| match.path==='/yourprofile/:userId'){
     value = 3
   }
-  
+
   return (
     <BottomNavigation
       value={value}
@@ -37,7 +37,7 @@ export default function FooterComp() {
       <BottomNavigationAction onClick={() => history.push('/main')} label="홈"  icon={<HomeRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/question')} label="모의고사" icon={<AssignmentRoundedIcon />} />
       <BottomNavigationAction onClick={() => history.push('/conversation')} label="채팅"  icon={<FavoriteIcon />} />
-      <BottomNavigationAction onClick={() => history.push('/:userId')} label="내정보"  icon={<PersonRoundedIcon />} />
+      <BottomNavigationAction onClick={() => history.push(`/profile`)} label="내정보"  icon={<PersonRoundedIcon />} />
     </BottomNavigation>
   );
 }

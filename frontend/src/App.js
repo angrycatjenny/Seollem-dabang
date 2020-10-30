@@ -4,7 +4,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 // Router
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 // base
 import MainPage from './pages/base/MainPage';
@@ -13,26 +13,39 @@ import HomePage from './pages/base/HomePage';
 // Accounts
 import LoginPage from './pages/accounts/LoginPage';
 import SignupPage from './pages/accounts/SignupPage';
-import ProfilePage from './pages/accounts/ProfilePage';
-import ProfileUpdatePage from './pages/accounts/ProfileUpdatePage';
+import MyProfilePage from './pages/accounts/MyProfilePage';
+import MyProfileUpdatePage from './pages/accounts/MyProfileUpdatePage';
+import YourProfilePage from './pages/accounts/YourProfilePage';
 
 // Question
-import QuestionDetailPage from './pages/question/QuestionDetailPage';
 import QuestionCreatePage from './pages/question/QuestionCreatePage';
-import QuestionUpdatePage from './pages/question/QuestionUpdatePage';
+import QuestionListPage from './pages/question/QuestionListPage'; 
+import QuestionDetailPage from './pages/question/QuestionDetailPage'; 
 
 // Answer
-import AnswerListPage from './pages/answer/AnswerListPage';
 import AnswerCreatePage from './pages/answer/AnswerCreatePage';
+import AnswerResultPage from './pages/answer/AnswerResultPage';
 
 // Conversation
-import ConversationCreatePage from './pages/conversation/ConversationCreatePage';
-import ConversationDetail from './pages/conversation/ConversationDetail';
 import ConversationListPage from './pages/conversation/ConversationListPage';
+import ConversationDetailPage from './pages/conversation/ConversationDetailPage';
+
+// Header
+import HeaderComp from './components/base/HeaderComp';
+
+// Footer
+import FooterComp from './components/base/FooterComp';
+
+import { useCookies } from 'react-cookie';
 
 const App = () => {
+  const [cookies, setCookie] = useCookies(['accessToken']);
+
   return (
     <>
+      {/* Header */}
+      {cookies.accessToken && <HeaderComp />}
+      
       {/* Base */}
       <Route component={HomePage} exact path="/" />
       <Route component={MainPage} path="/main" />
@@ -40,24 +53,27 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={ProfilePage} exact path="/profile/:userId" />
-      <Route component={ProfileUpdatePage} path="/profile/:userId/update" />
+      <Route component={MyProfilePage} exact path="/profile" />
+      <Route component={MyProfileUpdatePage} path="/myprofile/update" />
+      <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
       {/* Question */}
-      <Route component={QuestionDetailPage} exact path="/question" />
+      <Route component={QuestionListPage} exact path="/question" />
       <Route component={QuestionCreatePage} path="/question/create" />
-      <Route component={QuestionUpdatePage} path="/question/:questionId/update" />
+      <Route component={QuestionDetailPage} path="/question/detail" />      
 
       {/* Answer */}
-      <Route component={AnswerListPage} exact path="/answer" />
-      <Route component={AnswerCreatePage} path="/answer/create" />
+      <Route component={AnswerCreatePage} path="/answer" />
+      <Route component={AnswerResultPage} path="/result" />
 
       {/* Conversation */}
       <Route component={ConversationListPage} exact path="/conversation" /> 
-      <Route component={ConversationCreatePage} path="/conversation/create" />
-      <Route component={ConversationDetail} path="/conversation/:conversationId" />
+      <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+      
+      {/* Footer */}
+      {cookies.accessToken && <FooterComp />}
     </>
   );
 };
 
-export default App;
+export default withRouter(App);

@@ -1,0 +1,31 @@
+.signup-logo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+.signup-footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.signup-input {
+  margin-bottom: 5px;
+  width: 100%;
+}
+.signup-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.signup-record {
+  width: 100px;
+}
+.birth-input {
+  margin-bottom: 5px;
+  width: 100%;
+}

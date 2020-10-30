@@ -1,13 +1,10 @@
 package com.web.backend.model.accounts;
 
 import com.web.backend.model.audit.DateAudit;
-import com.web.backend.model.question.Question;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }), @UniqueConstraint(columnNames = { "nickname" })})
@@ -37,9 +34,13 @@ public class User extends DateAudit {
 
     private int age;
 
-    @OneToMany(mappedBy="user")
-    private List<Question> questions = new ArrayList<Question>();
+    private String image;
 
+    private String imageDownloadUri;
+
+    private String voice;
+
+    private String voiceDownloadUri;
 
     public User() { }
 
@@ -107,4 +108,20 @@ public class User extends DateAudit {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
+
+    public String getImageDownloadUri() { return imageDownloadUri;}
+
+    public void setImageDownloadUri(String imageDownloadUri) { this.imageDownloadUri = imageDownloadUri; }
+
+    public String getVoice() { return voice; }
+
+    public void setVoice(String voice) { this.voice = voice; }
+
+    public String getVoiceDownloadUri() { return voiceDownloadUri; }
+
+    public void setVoiceDownloadUri(String voiceDownloadUri) { this.voiceDownloadUri = voiceDownloadUri; }
 }

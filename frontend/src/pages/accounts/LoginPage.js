@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HeaderComp from '../../components/base/HeaderComp';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import './LoginPage.css';
@@ -8,7 +7,7 @@ const LoginPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   
-  const [cookies, setCookie] = useCookies(['access-token']);
+  const [cookies, setCookie] = useCookies(['accessToken']);
 
   const setEmailText = e => {setEmail(e.target.value)};
   const setPasswordText = e => {setPassword(e.target.value)};
@@ -19,20 +18,19 @@ const LoginPage = ({ history }) => {
     console.log(loginData, '로그인 정보')
     axios.post('/login', loginData)
       .then((response) => {
-        console.log('로그인 성공')
-        setCookie('access-token', response.data.key)
+        setCookie('accessToken', response.data.accessToken)
         history.push('/main')
+        alert('로그인이 되었습니다.')
       })
       .catch((error) => console.log(error))
   };
 
   return (
     <div>
-      <HeaderComp />
       <h1 className="login-header">로그인</h1>
       <form onSubmit={sendLoginData} className="login-form">
         <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
-        <input className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
+        <input type="password" className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <div className="login-footer">
           <small>아직 회원이 아니신가요?</small>
           <a href="/signup">회원가입</a>
