@@ -14,6 +14,7 @@ const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
     const [ isExam, setIsExam ] = useState(false);
+    const [ editId, setEditId ] = useState(-1)
     const [cookies, setCookie] = useCookies(['accessToken']);
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
@@ -55,7 +56,7 @@ const QuestionDetailPage = () => {
             })
             .catch((error) => console.log(error))
       }
-  }
+    }
 
   //만들어둔 시험 문제 get
   useEffect(() => {
@@ -95,15 +96,35 @@ const QuestionDetailPage = () => {
     //질문 개별 수정 및 삭제
     const updateQuest = (Id) => {
       console.log(Id,'수정')
+      console.log(exam,'exam')
+      {exam.filter((question) => {
+        if( question.questionId == Id){
+          const ExamData = {
+            "content": '수정됨???',
+            "correctAnswer": false
+          }
+          console.log(ExamData,'보낼거')
+          axios.put(`/question/update/${Id}`, ExamData, config)
+            .then(() => {
+                history.push('/question/detail')
+                history.go();
+            })
+            .catch((error) => console.log(error))
+        }
+      })};
     }
 
     const deleteQuest = (Id) => {
-      axios.delete(`/question/delete/${Id}`, config)
-        .then(() => {
-          //push하니까 안됨
-            history.go('/question/detail')
-        })
-        .catch((error) => console.log(error))
+      if(exam.length>5){
+        axios.delete(`/question/delete/${Id}`, config)
+          .then(() => {
+            //push하니까 안됨
+              history.go('/question/detail')
+          })
+          .catch((error) => console.log(error))
+      }else{
+        alert('질문은 최소 5개여야합니다!')
+      }
     }
             
   return (
@@ -111,16 +132,23 @@ const QuestionDetailPage = () => {
         {exam.map((item) => (
           <React.Fragment>
             <div>
-              <h4 key={item.questionId} item={item}>
-                  {item.content}</h4>
-                  {item.correctAnswer ? (
+            {editId==item.questionId ? (
+                  <h6>같음</h6>
+                ) : (
+                  <div style={{display:"flex", flexDirection:"row"}}>
+                    <h6 key={item.questionId} item={item}>
+                      {item.content}
+                    </h6>
+                    {item.correctAnswer ? (
                       <h6>정답: 예</h6>
                     ) : (
-                      <h6>정답: 아니요</h6>
+                      <h6>정답: 아니오</h6>
                     )}
-
-              <button onClick={() => updateQuest(item.questionId)}>수정</button>
-              <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                    <button onClick={() => updateQuest(item.questionId)}>수정</button>
+                    <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                  </div>
+                  
+                )}
             </div>
           </React.Fragment>
         ))}
