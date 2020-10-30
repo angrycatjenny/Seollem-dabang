@@ -105,8 +105,8 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const KeywordRecommend = () => {
-    const menImgData = [ManImage5, ManImage6, ManImage7, ManImage8]
-    const womenImgData = [womenImage5, womenImage6, womenImage7, womenImage8]
+    const menImgData = [0,ManImage5, ManImage6, ManImage7, ManImage8]
+    const womenImgData = [0,womenImage5, womenImage6, womenImage7, womenImage8]
     const [exam, setExam] = React.useState(0)
     const [gender, setGender] = React.useState();
     const history = useHistory();
@@ -132,11 +132,11 @@ const KeywordRecommend = () => {
     }, [])
     if (exam === 1) {
         if (gender === 0) {
-            for (let i = 0; i < tileData.length; i++) {
+            for (let i = 1; i < tileData.length; i++) {
                 tileData[i].img = womenImgData[i]
             }
         } else {
-            for (let i = 0; i < tileData.length; i++) {
+            for (let i = 1; i < tileData.length; i++) {
                 tileData[i].img = menImgData[i]
             }
         }
