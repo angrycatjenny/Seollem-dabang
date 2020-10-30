@@ -107,13 +107,13 @@ const QuestionDetailPage = () => {
       const {id, value} = e.target;
       setEditAns(true)
       setExam(exam.map((item) =>
-      item.key === id ? {...item, ans:1} : item))
+      item.questionId === id ? {...item, correctAnswer:true} : item))
     }
     const EditAnswerNo = (e) => {
       const {id, value} = e.target;
       setEditAns(false)
       setExam(exam.map((item) =>
-      item.key === id ? {...item, ans:1} : item))
+      item.questionId === id ? {...item, correctAnswer:false} : item))
     }
 
     const updateQuest = (Id) => {
