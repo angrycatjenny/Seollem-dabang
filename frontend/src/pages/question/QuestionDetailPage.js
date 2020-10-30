@@ -114,6 +114,7 @@ const QuestionDetailPage = () => {
       item.questionId === editId ? {...item, content:edited} : item))
       setEditQuest(edited)
     }
+  
     //정답 수정
     const EditAnswerYes = (Id) => {
       setEditAns(true)
@@ -127,13 +128,13 @@ const QuestionDetailPage = () => {
     }
     //수정된 데이터 보내기
     const updateQuest = (Id) => {
-      console.log(Id,'수정')
-      console.log(exam,'exam')
+      // console.log(Id,'수정')
+      // console.log(exam,'exam')
       const ExamData = {
         "content": editQuest,
         "correctAnswer": editAns
       }
-      console.log(ExamData,'보낼거')
+      // console.log(ExamData,'보낼거')
       axios.put(`/question/update/${Id}`, ExamData, config)
         .then(() => {
             history.push('/question/detail')
