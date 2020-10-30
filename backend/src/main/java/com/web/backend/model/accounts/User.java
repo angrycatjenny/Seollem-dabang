@@ -36,7 +36,11 @@ public class User extends DateAudit {
 
     private String image;
 
+    private String imageDownloadUri;
+
     private String voice;
+
+    private String voiceDownloadUri;
 
     public User() { }
 
@@ -109,7 +113,15 @@ public class User extends DateAudit {
 
     public void setImage(String image) { this.image = image; }
 
+    public String getImageDownloadUri() { return imageDownloadUri;}
+
+    public void setImageDownloadUri(String imageDownloadUri) { this.imageDownloadUri = imageDownloadUri; }
+
     public String getVoice() { return voice; }
 
     public void setVoice(String voice) { this.voice = voice; }
+
+    public String getVoiceDownloadUri() { return voiceDownloadUri; }
+
+    public void setVoiceDownloadUri(String voiceDownloadUri) { this.voiceDownloadUri = voiceDownloadUri; }
 }
