@@ -108,11 +108,11 @@ const QuestionDetailPage = () => {
     // });
     }
     //질문 수정
-    const EditQuestion = (e) => {
-      const {id, value} = e.target;
-      setEditQuest(e.target)
+    const EditQuestion = (editedContent) => {
+      // const {id, value} = e.target;
       setExam(exam.map((item) =>
-      item.questionId === id ? {...item, content:value} : item))
+      item.questionId === editId ? {...item, content:editedContent} : item))
+      // setEditQuest(value)
     }
     //정답 수정
     const EditAnswerYes = (Id) => {
@@ -130,16 +130,16 @@ const QuestionDetailPage = () => {
       console.log(Id,'수정')
       console.log(exam,'exam')
       const ExamData = {
-        "content": '수정됨?',
+        "content": editQuest,
         "correctAnswer": editAns
       }
       console.log(ExamData,'보낼거')
-      axios.put(`/question/update/${Id}`, ExamData, config)
-        .then(() => {
-            history.push('/question/detail')
-            history.go();
-        })
-        .catch((error) => console.log(error))
+      // axios.put(`/question/update/${Id}`, ExamData, config)
+      //   .then(() => {
+      //       history.push('/question/detail')
+      //       history.go();
+      //   })
+      //   .catch((error) => console.log(error))
     }
 
     //삭제
@@ -162,12 +162,12 @@ const QuestionDetailPage = () => {
           <React.Fragment>
             <div>
             {editId==item.questionId ? (
-              <div>
+              <div key={item.questionId}>
                 <input 
                 type="text"
                 id={item.questionId}
                 value={item.content}
-                onChange={EditQuestion}/>
+                onChange={() => EditQuestion(item.content)}/>
                 <div>
                   <Radio
                     checked={item.correctAnswer}
