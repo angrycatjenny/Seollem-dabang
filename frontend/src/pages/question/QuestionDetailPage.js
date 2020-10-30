@@ -8,8 +8,8 @@ import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 
-//완료: 질문 추가, 시험지 전체 삭제
-//아직: 질문 각각 수정 및 삭제
+//완료: 질문 추가, 시험지 전체 삭제, 질문 삭제
+//아직: 질문 수정
 const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
@@ -51,7 +51,7 @@ const QuestionDetailPage = () => {
             .then(() => {
               setNewQuest('')
               setNewAns(-1)
-                history.push('/question')
+                history.go('/question/detail')
             })
             .catch((error) => console.log(error))
       }
@@ -59,18 +59,20 @@ const QuestionDetailPage = () => {
 
   //만들어둔 시험 문제 get
   useEffect(() => {
+    setTimeout(() => {
       const fetchData = async() => {
         setIsExam(true);
         try {
-          const getExam = await axios.get(`/question/list`,config);
+          const getExam = await axios.get(`/question/list`,config);  
           setExam(getExam.data)
-          console.log(getExam.data,'??')
+          console.log(getExam.data,'exam')
         } catch(e) {
           console.log(e);
         } 
         setIsExam(false);
       };
       fetchData();
+    },1000);
     }, []);
 
       if(isExam){
@@ -89,16 +91,41 @@ const QuestionDetailPage = () => {
         })
         .catch((error) => console.log(error))
     }
+
+    //질문 개별 수정 및 삭제
+    const updateQuest = (Id) => {
+      console.log(Id,'수정')
+    }
+
+    const deleteQuest = (Id) => {
+      axios.delete(`/question/delete/${Id}`, config)
+        .then(() => {
+          //push하니까 안됨
+            history.go('/question/detail')
+        })
+        .catch((error) => console.log(error))
+    }
             
   return (
     <div>
-        {exam.map(item => (
+        {exam.map((item) => (
+          <React.Fragment>
             <div>
-            <h4 key={item.questionId} item={item}>
-                {item.content}</h4>
-        </div>
+              <h4 key={item.questionId} item={item}>
+                  {item.content}</h4>
+                  {item.correctAnswer ? (
+                      <h6>정답: 예</h6>
+                    ) : (
+                      <h6>정답: 아니요</h6>
+                    )}
+
+              <button onClick={() => updateQuest(item.questionId)}>수정</button>
+              <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+            </div>
+          </React.Fragment>
         ))}
 
+        {/* 질문 추가 부분 */}
         <div className="new-quest-box">
           <TextField
             id="outlined-full-width"
@@ -132,6 +159,8 @@ const QuestionDetailPage = () => {
         </div>
         <button onClick={addNewQuest}>추가</button>
         <br />
+        
+        {/* 목록으로 돌아가기 & 시험지 통째로 삭제 */}
         <Link to="/question">
             <button className="exam-update-btn">취소</button>
         </Link>
