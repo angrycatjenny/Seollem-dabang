@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = {"*"})
@@ -33,7 +34,10 @@ public class AnswerController {
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody AnswerReqeust req){
 
         boolean [] answerList = req.getAnswerList();
-        List<Question> questionList = questionDao.findQuestionByUserId(req.getExaminer());
+        ArrayList<Question> questionList = questionDao.findQuestionByUserId(req.getExaminer());
+        System.out.println(questionList);
+        for(int j=0;j<1;j++){
+        }
 
         double n = questionList.toArray().length;
         int rightAnswer=0;
@@ -43,9 +47,12 @@ public class AnswerController {
             }
         }
         double correctRate = rightAnswer/n;
+
+        //만일 n이 0일 경우 correctRate의 값이 NaN이 되어 에러가 날수 있음
+        //이미 등록한 답변일 경우 예외처리 필요
+
         User examinee = userDao.getUserById(requser.getId());
         User examiner = userDao.getUserById(req.getExaminer());
-
         Answer answer = new Answer(correctRate,examinee, examiner);
         answerDao.save(answer);
         return new ResponseEntity<>("답변 등록 완료", HttpStatus.OK);

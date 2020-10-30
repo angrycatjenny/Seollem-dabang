@@ -20,11 +20,11 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long conversationId;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="examinee_id")
     private User examinee;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="examiner_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User examiner;

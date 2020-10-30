@@ -26,12 +26,12 @@ public class Keyword {
     @Column(name="word", nullable=false, length=20)
     private String word;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="question_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;

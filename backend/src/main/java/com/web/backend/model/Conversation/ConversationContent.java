@@ -26,7 +26,7 @@ public class ConversationContent {
     @JoinColumn(name="conversation_id")
     private Conversation conversation;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
