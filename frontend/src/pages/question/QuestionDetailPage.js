@@ -14,7 +14,9 @@ const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
     const [ isExam, setIsExam ] = useState(false);
-    const [ editId, setEditId ] = useState(-1)
+    const [ editId, setEditId ] = useState(-1);
+    const [ editQuest, setEditQuest ] = useState('');
+    const [ editAns, setEditAns ] = useState(null);
     const [cookies, setCookie] = useCookies(['accessToken']);
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
@@ -94,26 +96,38 @@ const QuestionDetailPage = () => {
     }
 
     //질문 개별 수정 및 삭제
+
+    //질문 수정
+    const EditQuestion = (e) => {
+      const {id, value} = e.target;
+      setEditQuest(e.target)
+    }
+    
+
     const updateQuest = (Id) => {
-      console.log(Id,'수정')
-      console.log(exam,'exam')
+      setEditId(Id)
+      // console.log(Id,'수정')
+      // console.log(exam,'exam')
       {exam.filter((question) => {
         if( question.questionId == Id){
-          const ExamData = {
-            "content": '수정됨???',
-            "correctAnswer": false
-          }
-          console.log(ExamData,'보낼거')
-          axios.put(`/question/update/${Id}`, ExamData, config)
-            .then(() => {
-                history.push('/question/detail')
-                history.go();
-            })
-            .catch((error) => console.log(error))
+          console.log(question.content,'수정할거')
+          
+          // const ExamData = {
+          //   "content": ,
+          //   "correctAnswer": 
+          // }
+          // console.log(ExamData,'보낼거')
+          // axios.put(`/question/update/${Id}`, ExamData, config)
+          //   .then(() => {
+          //       history.push('/question/detail')
+          //       history.go();
+          //   })
+          //   .catch((error) => console.log(error))
         }
       })};
     }
 
+    //삭제
     const deleteQuest = (Id) => {
       if(exam.length>5){
         axios.delete(`/question/delete/${Id}`, config)
@@ -133,7 +147,14 @@ const QuestionDetailPage = () => {
           <React.Fragment>
             <div>
             {editId==item.questionId ? (
-                  <h6>같음</h6>
+              <div>
+                <input 
+                type="text"
+                id={item.questionId}
+                value={item.content}
+                onChange={EditQuestion}/>
+                
+                </div>
                 ) : (
                   <div style={{display:"flex", flexDirection:"row"}}>
                     <h6 key={item.questionId} item={item}>
