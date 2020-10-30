@@ -85,6 +85,8 @@ const MyProfileUpdatePage = () => {
   const [ voice, setVoice ] = useState('');
   const [ voicePush, setVoicePush] = useState(false)
   const [ voiceurl, setVoiceurl ] = useState('');
+  const [ objectURL, setObjectURL ] = useState('');
+  // const [ currentUrl, setCurrentUrl ] = useState('');
 
   React.useEffect(() => {
     axios.get(`/my-profile`, axiosConfig)
@@ -92,9 +94,9 @@ const MyProfileUpdatePage = () => {
             console.log(response.data)
             setNickname(response.data.nickname)
             setLocation(response.data.location)
-            setImage(response.data.image)
-            setRecord(true)
-            setVoice(response.data.voice)
+            setObjectURL(response.data.imageDownloadUri)
+            setVoice(response.data.voiceDownloadUri)
+            setVoiceurl(response.data.voiceDownloadUri)
         })
         .catch((err) => {
             console.log(err)
@@ -108,8 +110,10 @@ const MyProfileUpdatePage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
+    console.log(e.target.files)
     setImagePush(true)
     setImage(e.target.files[0]);
+    setObjectURL (URL.createObjectURL(e.target.files[0]))
   };
 
   const startRecording = () => {
@@ -135,7 +139,7 @@ const MyProfileUpdatePage = () => {
       const voiceFileName = Date.now();
       UpdateData.append('nickname', nickname);
       UpdateData.append('location', location);
-      if (voicePush){
+      if (imagePush){
         UpdateData.append('image', image, 'image' + imageFileName);
       }
       if (voicePush){
@@ -186,7 +190,7 @@ const MyProfileUpdatePage = () => {
                 type="file"
                 onChange={setImageText}
               />
-
+                <img src={objectURL} alt={objectURL} className="Update-img" />
             </div>
             <div>
               <h3 className="Update-logo">목소리 변경</h3>
@@ -205,7 +209,6 @@ const MyProfileUpdatePage = () => {
                   </div>
                 </div>
               )}
-
               {voice && (
                 <div>
                   <AudioPlayer

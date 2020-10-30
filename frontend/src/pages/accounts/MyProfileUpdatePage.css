@@ -26,6 +26,11 @@
   .Update-record {
     width: 100px;
   }
+  .Update-img {
+    width: 200px;
+    height: 200px;
+
+  }
   .birth-input {
     margin-bottom: 5px;
     width: 100%;
