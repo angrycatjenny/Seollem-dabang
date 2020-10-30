@@ -100,6 +100,12 @@ const QuestionDetailPage = () => {
 
     const deleteQuest = (Id) => {
       console.log(Id,'삭제')
+      axios.delete(`/question/delete/${Id}`, config)
+        .then(() => {
+          //push하니까 안됨
+            history.go('/question/detail')
+        })
+        .catch((error) => console.log(error))
     }
             
   return (
