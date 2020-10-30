@@ -8,8 +8,8 @@ import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 
-//완료: 질문 추가, 시험지 전체 삭제
-//아직: 질문 각각 수정 및 삭제
+//완료: 질문 추가, 시험지 전체 삭제, 질문 삭제
+//아직: 질문 수정
 const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
@@ -63,10 +63,9 @@ const QuestionDetailPage = () => {
       const fetchData = async() => {
         setIsExam(true);
         try {
-          const getExam = await axios.get(`/question/list`,config);
-          
+          const getExam = await axios.get(`/question/list`,config);  
           setExam(getExam.data)
-          console.log(getExam.data,'??')
+          console.log(getExam.data,'exam')
         } catch(e) {
           console.log(e);
         } 
@@ -114,6 +113,12 @@ const QuestionDetailPage = () => {
             <div>
               <h4 key={item.questionId} item={item}>
                   {item.content}</h4>
+                  {item.correctAnswer ? (
+                      <h6>정답: 예</h6>
+                    ) : (
+                      <h6>정답: 아니요</h6>
+                    )}
+
               <button onClick={() => updateQuest(item.questionId)}>수정</button>
               <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
             </div>
