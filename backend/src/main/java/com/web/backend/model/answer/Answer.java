@@ -23,11 +23,11 @@ public class Answer {
     @Column(name="correct_rate", nullable=false)
     private double correctRate;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="examinee_id")
     private User examinee;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="examiner_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User examiner;
