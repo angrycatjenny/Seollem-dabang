@@ -101,6 +101,8 @@ const SignupPage = () => {
   const [ record, setRecord ] = useState(false);
   const [ voice, setVoice ] = useState('');
   const [ voiceurl, setVoiceurl ] = useState('');
+  const [ objectURL, setObjectURL ] = useState('');
+  const [ imagePush, setImagePush] = useState(false)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -156,7 +158,9 @@ const SignupPage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
+    setImagePush(true)
     setImage(e.target.files[0]);
+    setObjectURL (URL.createObjectURL(e.target.files[0]))
   };
 
   const startRecording = () => {
@@ -328,6 +332,9 @@ const SignupPage = () => {
                 type="file"
                 onChange={setImageText}
               />
+              {imagePush &&
+                <img src={objectURL} alt={objectURL} className="signup-img" />
+              }
               <div className="signup-footer">
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   뒤로

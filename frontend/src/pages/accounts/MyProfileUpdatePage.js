@@ -110,7 +110,6 @@ const MyProfileUpdatePage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
-    console.log(e.target.files)
     setImagePush(true)
     setImage(e.target.files[0]);
     setObjectURL (URL.createObjectURL(e.target.files[0]))
