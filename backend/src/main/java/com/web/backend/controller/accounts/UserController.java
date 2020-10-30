@@ -9,11 +9,15 @@ import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
 import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.ImageStorageService;
+import com.web.backend.service.KakaoVisionService;
 import com.web.backend.service.VoiceStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +28,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.*;
 
@@ -54,6 +61,9 @@ public class UserController {
     @Autowired
     VoiceStorageService voiceStorageService;
 
+    @Autowired
+    KakaoVisionService kakaoVisionService;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -69,8 +79,11 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
         }
@@ -81,10 +94,15 @@ public class UserController {
         String imageName = imageStorageService.storeFile(image);
         String voiceName = voiceStorageService.storeFile(voice);
 
+        String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/image/").path(imageName).toUriString();
+        String voiceDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/voice/").path(voiceName).toUriString();
+
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setImage(imageName);
+        user.setImageDownloadUri(imageDownloadUri);
         user.setVoice(voiceName);
+        user.setVoiceDownloadUri(voiceDownloadUri);
 
         User result = userDao.save(user);
 
@@ -93,9 +111,73 @@ public class UserController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
+    @GetMapping("/image/{imageName:.+}")
+    public ResponseEntity<Resource> downloadImage(@PathVariable String imageName, HttpServletRequest request) {
+
+        Resource resource = imageStorageService.loadFileAsResource(imageName);
+
+        String contentType = null;
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        }catch (IOException e) {
+            logger.info("Could not determine file type");
+        }
+
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType)).header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"").body(resource);
+    }
+
+    @GetMapping("/voice/{voiceName:.+}")
+    public ResponseEntity<Resource> downloadVoice(@PathVariable String voiceName, HttpServletRequest request) {
+
+        Resource resource = voiceStorageService.loadFileAsResource(voiceName);
+
+        String contentType = null;
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        }catch (IOException e) {
+            logger.info("Could not determine file type");
+        }
+
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType)).header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"").body(resource);
+    }
+
     @GetMapping("/my-profile")
     public ResponseEntity<?> getMyInfo(@CurrentUser UserPrincipal requestUser) {
         User user = userDao.getUserById(requestUser.getId());
+
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("/my-profile")
+    public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
+
+        if(!kakaoVisionService.getResponse(image)) {
+            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+        }
+        
+        User user = userDao.getUserById(requestUser.getId());
+        user.setNickname(updateRequest.getNickname());
+        user.setLocation(updateRequest.getLocation());
+
+        if(image != null) {
+            String imageName = imageStorageService.storeFile(image);
+            user.setImage(imageName);
+        }
+        if(voice != null) {
+            String voiceName = voiceStorageService.storeFile(voice);
+            user.setVoice(voiceName);
+        }
+        userDao.save(user);
 
         return ResponseEntity.ok(user);
     }

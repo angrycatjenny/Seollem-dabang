@@ -4,7 +4,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 // Router
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 // base
 import MainPage from './pages/base/MainPage';
@@ -18,8 +18,9 @@ import MyProfileUpdatePage from './pages/accounts/MyProfileUpdatePage';
 import YourProfilePage from './pages/accounts/YourProfilePage';
 
 // Question
-import QuestionListPage from './pages/question/QuestionListPage'; 
 import QuestionCreatePage from './pages/question/QuestionCreatePage';
+import QuestionListPage from './pages/question/QuestionListPage'; 
+import QuestionDetailPage from './pages/question/QuestionDetailPage'; 
 
 // Answer
 import AnswerCreatePage from './pages/answer/AnswerCreatePage';
@@ -52,13 +53,14 @@ const App = () => {
       {/* Accounts */}
       <Route component={LoginPage} path="/login" />
       <Route component={SignupPage} path="/signup" />
-      <Route component={MyProfilePage} exact path="/profile/" />
+      <Route component={MyProfilePage} exact path="/profile" />
       <Route component={MyProfileUpdatePage} path="/myprofile/update" />
       <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
       {/* Question */}
       <Route component={QuestionListPage} exact path="/question" />
       <Route component={QuestionCreatePage} path="/question/create" />
+      <Route component={QuestionDetailPage} path="/question/detail" />      
 
       {/* Answer */}
       <Route component={AnswerCreatePage} path="/answer" />
@@ -74,4 +76,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRouter(App);

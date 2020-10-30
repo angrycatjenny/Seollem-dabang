@@ -19,9 +19,9 @@ export default function FooterComp() {
     value = 0
   }else if (match.path==='/question'||match.path==='/question/create'||match.path==='/question/update'){
     value = 1
-  }else if (match.path==='/conversation'||match.path==='/conversation/detail'||match.path==='/conversation'){
+  }else if (match.path==='/conversation'||match.path==='/conversation/:conversationId'){
     value = 2
-  }else if (match.path==='/profile/:userId' || match.path==='/profile/:userId/update'){
+  }else if (match.path==='/profile' || match.path==='/myprofile/update'|| match.path==='/yourprofile/:userId'){
     value = 3
   }
 
