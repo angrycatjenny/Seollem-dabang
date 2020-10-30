@@ -130,16 +130,16 @@ const QuestionDetailPage = () => {
       console.log(Id,'수정')
       console.log(exam,'exam')
       const ExamData = {
-        "content": editQuest,
+        "content": '수정됨?',
         "correctAnswer": editAns
       }
       console.log(ExamData,'보낼거')
-      // axios.put(`/question/update/${Id}`, ExamData, config)
-      //   .then(() => {
-      //       history.push('/question/detail')
-      //       history.go();
-      //   })
-      //   .catch((error) => console.log(error))
+      axios.put(`/question/update/${Id}`, ExamData, config)
+        .then(() => {
+            history.push('/question/detail')
+            history.go();
+        })
+        .catch((error) => console.log(error))
     }
 
     //삭제
