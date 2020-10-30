@@ -25,6 +25,11 @@
 .signup-record {
   width: 100px;
 }
+.signup-img {
+  width: 200px;
+  height: 200px;
+
+}
 .birth-input {
   margin-bottom: 5px;
   width: 100%;
