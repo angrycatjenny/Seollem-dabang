@@ -16,51 +16,51 @@ const QuestionListPage = () => {
   }
   
   useEffect(() => {
-    const fetchData = async() => {
-      setIsExam(true);
-      try {
-        // const getQuestions = () => {
-        //   axios.get(`/question/list`,config)
-        //   .then((response) => {
-        //     if(response.data.length>0){
-        //       console.log("뭔가 있음");
-        //       setExam(response.data);
-        //       const exam = response.data.map((question, idx) => {
-        //         return {
-        //           id:question.questionId,
-        //           content:question.content,
-        //           answer:question.correctAnswer,
-        //           user_id:question.user.id,
-        //           user_nickname:question.user.nickname,
-        //         };
-        //       })
-        //       console.log(exam,'??')
-        //       setExam(exam)
-        //       setIsExam(true)
-        //       console.log(questions,'zzz')
-        //     }else{
-        //       console.log('시험지 없뜜')
-        //       setIsExam(false)
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     console.log(err)
-        //     })
-        // }
-        const getExam = await axios.get(`/question/list`,config);
-        if(getExam.data.length>0){
-          console.log(getExam.data,'??')
-          setExam(getExam.data)
-          setIsExam(true)
-        }else{
-          setIsExam(false)
-        }
-      } catch(e) {
-        console.log(e);
-      } 
-      setIsExam(false);
-    };
-    fetchData();
+      const fetchData = async() => {
+        setIsExam(true);
+        try {
+          // const getQuestions = () => {
+          //   axios.get(`/question/list`,config)
+          //   .then((response) => {
+          //     if(response.data.length>0){
+          //       console.log("뭔가 있음");
+          //       setExam(response.data);
+          //       const exam = response.data.map((question, idx) => {
+          //         return {
+          //           id:question.questionId,
+          //           content:question.content,
+          //           answer:question.correctAnswer,
+          //           user_id:question.user.id,
+          //           user_nickname:question.user.nickname,
+          //         };
+          //       })
+          //       console.log(exam,'??')
+          //       setExam(exam)
+          //       setIsExam(true)
+          //       console.log(questions,'zzz')
+          //     }else{
+          //       console.log('시험지 없뜜')
+          //       setIsExam(false)
+          //     }
+          //   })
+          //   .catch((err) => {
+          //     console.log(err)
+          //     })
+          // }
+          const getExam = await axios.get(`/question/list`,config);
+          if(getExam.data.length>0){
+            console.log(getExam.data,'??')
+            setExam(getExam.data)
+            setIsExam(true)
+          }else{
+            setIsExam(false)
+          }
+        } catch(e) {
+          console.log(e);
+        } 
+        setIsExam(false);
+      };
+      fetchData();
   }, []);
 
   if(isExam){

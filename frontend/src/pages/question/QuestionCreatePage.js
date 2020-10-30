@@ -117,6 +117,7 @@ const QuestionCreatePage = () => {
     axios.post('/question/create', ExamData, config)
       .then(() => {
           history.push('/question')
+          history.go();
       })
       .catch((error) => console.log(error))
   }; 

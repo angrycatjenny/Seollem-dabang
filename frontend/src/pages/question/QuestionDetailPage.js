@@ -59,10 +59,12 @@ const QuestionDetailPage = () => {
 
   //만들어둔 시험 문제 get
   useEffect(() => {
+    setTimeout(() => {
       const fetchData = async() => {
         setIsExam(true);
         try {
           const getExam = await axios.get(`/question/list`,config);
+          
           setExam(getExam.data)
           console.log(getExam.data,'??')
         } catch(e) {
@@ -71,6 +73,7 @@ const QuestionDetailPage = () => {
         setIsExam(false);
       };
       fetchData();
+    },1000);
     }, []);
 
       if(isExam){
@@ -89,16 +92,28 @@ const QuestionDetailPage = () => {
         })
         .catch((error) => console.log(error))
     }
+
+    //질문 개별 수정 및 삭제
+    const updateQuest = (Id) => {
+      console.log(Id,'수정')
+    }
+
+    const deleteQuest = (Id) => {
+      console.log(Id,'삭제')
+    }
             
   return (
     <div>
-        {exam.map(item => (
+        {exam.map((item) => (
             <div>
-            <h4 key={item.questionId} item={item}>
-                {item.content}</h4>
-        </div>
+              <h4 key={item.questionId} item={item}>
+                  {item.content}</h4>
+              <button onClick={() => updateQuest(item.questionId)}>수정</button>
+              <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+            </div>
         ))}
 
+        {/* 질문 추가 부분 */}
         <div className="new-quest-box">
           <TextField
             id="outlined-full-width"
@@ -132,6 +147,8 @@ const QuestionDetailPage = () => {
         </div>
         <button onClick={addNewQuest}>추가</button>
         <br />
+        
+        {/* 목록으로 돌아가기 & 시험지 통째로 삭제 */}
         <Link to="/question">
             <button className="exam-update-btn">취소</button>
         </Link>
