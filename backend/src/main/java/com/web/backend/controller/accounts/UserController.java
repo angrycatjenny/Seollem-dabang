@@ -170,11 +170,15 @@ public class UserController {
 
         if(image != null) {
             String imageName = imageStorageService.storeFile(image);
+            String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/image/").path(imageName).toUriString();
             user.setImage(imageName);
+            user.setImageDownloadUri(imageDownloadUri);
         }
         if(voice != null) {
             String voiceName = voiceStorageService.storeFile(voice);
+            String voiceDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/voice/").path(voiceName).toUriString();
             user.setVoice(voiceName);
+            user.setVoiceDownloadUri(voiceDownloadUri);
         }
         userDao.save(user);
 
