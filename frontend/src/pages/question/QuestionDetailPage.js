@@ -108,11 +108,11 @@ const QuestionDetailPage = () => {
     // });
     }
     //질문 수정
-    const EditQuestion = (editedContent) => {
-      // const {id, value} = e.target;
+    const EditQuestion = e => {
+      let edited = e.target.value
       setExam(exam.map((item) =>
-      item.questionId === editId ? {...item, content:editedContent} : item))
-      // setEditQuest(value)
+      item.questionId === editId ? {...item, content:edited} : item))
+      setEditQuest(edited)
     }
     //정답 수정
     const EditAnswerYes = (Id) => {
@@ -134,12 +134,12 @@ const QuestionDetailPage = () => {
         "correctAnswer": editAns
       }
       console.log(ExamData,'보낼거')
-      // axios.put(`/question/update/${Id}`, ExamData, config)
-      //   .then(() => {
-      //       history.push('/question/detail')
-      //       history.go();
-      //   })
-      //   .catch((error) => console.log(error))
+      axios.put(`/question/update/${Id}`, ExamData, config)
+        .then(() => {
+            history.push('/question/detail')
+            history.go();
+        })
+        .catch((error) => console.log(error))
     }
 
     //삭제
@@ -159,15 +159,14 @@ const QuestionDetailPage = () => {
   return (
     <div>
         {exam.map((item) => (
-          <React.Fragment>
-            <div>
+          <React.Fragment key={item.questionId}>
             {editId==item.questionId ? (
               <div key={item.questionId}>
                 <input 
                 type="text"
                 id={item.questionId}
                 value={item.content}
-                onChange={() => EditQuestion(item.content)}/>
+                onChange={EditQuestion}/>
                 <div>
                   <Radio
                     checked={item.correctAnswer}
@@ -191,20 +190,21 @@ const QuestionDetailPage = () => {
                 </div>
                 ) : (
                   <div style={{display:"flex", flexDirection:"row"}}>
-                    <h6 key={item.questionId} item={item}>
-                      {item.content}
-                    </h6>
-                    {item.correctAnswer ? (
-                      <h6>정답: 예</h6>
-                    ) : (
-                      <h6>정답: 아니오</h6>
-                    )}
-                    <button onClick={() => sendEditId(item.questionId)}>수정</button>
-                    <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                    <React.Fragment key={item.questionId}>
+                      <h6 key={item.questionId} item={item}>
+                        {item.content}
+                      </h6>
+                      {item.correctAnswer ? (
+                        <h6>정답: 예</h6>
+                      ) : (
+                        <h6>정답: 아니오</h6>
+                      )}
+                      <button onClick={() => sendEditId(item.questionId)}>수정</button>
+                      <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                    </React.Fragment>
                   </div>
                   
                 )}
-            </div>
           </React.Fragment>
         ))}
 
