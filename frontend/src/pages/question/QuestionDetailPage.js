@@ -51,7 +51,7 @@ const QuestionDetailPage = () => {
             .then(() => {
               setNewQuest('')
               setNewAns(-1)
-                history.push('/question')
+                history.go('/question/detail')
             })
             .catch((error) => console.log(error))
       }
@@ -99,7 +99,6 @@ const QuestionDetailPage = () => {
     }
 
     const deleteQuest = (Id) => {
-      console.log(Id,'삭제')
       axios.delete(`/question/delete/${Id}`, config)
         .then(() => {
           //push하니까 안됨
@@ -111,12 +110,14 @@ const QuestionDetailPage = () => {
   return (
     <div>
         {exam.map((item) => (
+          <React.Fragment>
             <div>
               <h4 key={item.questionId} item={item}>
                   {item.content}</h4>
               <button onClick={() => updateQuest(item.questionId)}>수정</button>
               <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
             </div>
+          </React.Fragment>
         ))}
 
         {/* 질문 추가 부분 */}
