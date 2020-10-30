@@ -153,7 +153,24 @@ const QuestionDetailPage = () => {
                 id={item.questionId}
                 value={item.content}
                 onChange={EditQuestion}/>
-                
+                <div>
+                  <Radio
+                    checked={item.correctAnswer}
+                    onChange={EditAnswerYes}
+                    id={item.questionId}
+                    value="true"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': '예' }}
+                  />예
+                  <Radio
+                    checked={!item.correctAnswer}
+                    onChange={EditAnswerNo}
+                    id={item.questionId}
+                    value="false"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': '아니오' }}
+                  />아니오
+                  </div>
                 </div>
                 ) : (
                   <div style={{display:"flex", flexDirection:"row"}}>
