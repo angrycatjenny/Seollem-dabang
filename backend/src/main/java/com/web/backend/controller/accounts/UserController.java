@@ -154,7 +154,6 @@ public class UserController {
     @GetMapping("/my-profile")
     public ResponseEntity<?> getMyInfo(@CurrentUser UserPrincipal requestUser) {
         User user = userDao.getUserById(requestUser.getId());
-
         return ResponseEntity.ok(user);
     }
 
@@ -199,7 +198,8 @@ public class UserController {
             gender=1;
         }
         String address = user.getLocation();
-        List<User> recommendedUserList = userDao.getUserByAgeAndGenderAndLocation(age,gender,address);
+        List<User> recommendedUserList = userDao.findUserByProfile(age-3,age+3,address,gender);
+
         recommendedUserList.remove(user);
         return recommendedUserList;
     }
