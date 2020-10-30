@@ -29,7 +29,7 @@ const AnswerCreatePage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/question/list', config
+          '/question/list/2', config
         );
         setQuestions(response.data);
       } catch (error) {
