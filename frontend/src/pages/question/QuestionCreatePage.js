@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+  button:{
+    
+  },
   backButton: {
     marginRight: theme.spacing(1),
   },
@@ -231,7 +234,7 @@ const QuestionCreatePage = () => {
         <div>
           {activeStep === 0 && (
             <div className="stepper-box">
-              <h4>5개 ~ 20개로 질문 개수를 정해주세요!</h4>
+              <h5>5개 ~ 20개로 질문 개수를 정해주세요!</h5>
               <div className="set-quest-box">
                 <Input type="number" value={cnt} 
                 onChange={onChangeCnt} />개

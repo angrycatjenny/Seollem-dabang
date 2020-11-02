@@ -1,10 +1,11 @@
 .exam-create-btn {
-  border: 3px solid rgb(238, 37, 161);
+  border: 3px solid rgb(255, 99, 173);
   border-radius: 4px;
   outline: none;
   color: black;
-  background-color: transparent;
-  padding: 1.5px 2px;
+  font-weight: bold;
+  background-color: rgb(255, 99, 173);
+  padding: 2px 3px;
 }
 .exam-update-btn {
   border: 2px solid rgb(238, 37, 161);
