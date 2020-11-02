@@ -164,7 +164,7 @@ public class UserController {
     public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
 
         if(image != null && !kakaoVisionService.getResponse(image)) {
-            return ResponseEntity(new ApiResponse(false, "This picture has no face!"));
+            return ResponseEntity.ok(new ApiResponse(false, "This picture has no face!"));
         }
         
         User user = userDao.getUserById(requestUser.getId());
