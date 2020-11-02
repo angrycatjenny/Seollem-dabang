@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-h5-audio-player": "^3.4.1",
     "react-mic": "^12.4.6",
+    "react-modular-audio-player": "^1.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "styled-components": "^5.2.0"

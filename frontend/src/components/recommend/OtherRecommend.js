@@ -71,6 +71,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import Button from '@material-ui/core/Button';
 import './OtherRecommend.css';
+import AudioPlayer from 'react-modular-audio-player';
 
 import menImage1 from '../../assets/mainImg/png/남성1.png';
 import menImage2 from '../../assets/mainImg/png/남성2.png';
@@ -97,15 +98,15 @@ const OtherRecommend = () => {
   const [cookies] = useCookies(['accessToken']);
 
   const axiosConfig = {
-    headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
+    headers: { 'Authorization': 'Bearer ' + cookies.accessToken }
   }
 
   const getData = () => {
     axios.get(`/recommend-user-by-profile`, axiosConfig)
       .then((response) => {
-        console.log('other',response)
+        console.log('other', response)
         setTileData(response.data)
-        setGender(response.data.gender)
+        setGender(response.data[0].gender)
         setLoading(true)
       })
       .catch((err) => {
@@ -114,28 +115,43 @@ const OtherRecommend = () => {
   }
   React.useEffect(() => {
     getData()
-  },[])
+  }, [])
 
-  if (loading){
+  if (loading) {
     if (gender === 0) {
-        for (let i = 0; i < tileData.length; i++) {
-            tileData[i].img = menImgData[i]
-        }
+      for (let i = 0; i < tileData.length; i++) {
+        tileData[i].img = menImgData[i]
+      }
     } else {
-        for (let i = 0; i < tileData.length; i++) {
-            tileData[i].img = womenImgData[i]
-        }
+      for (let i = 0; i < tileData.length; i++) {
+        tileData[i].img = womenImgData[i]
+      }
     }
-}else{
-    return(
-        <h1>대기 중...</h1>
+  } else {
+    return (
+      <h1>대기 중...</h1>
     )
-}
+  }
 
-if(!tileData){
+  if (!tileData) {
     return null
-}
-
+  }
+  let rearrangedPlayer = [
+    {
+      className: "adele",
+      innerComponents: [
+        {
+          type: "play",
+          style: {
+            width: "100%",
+            justifyContent: "center",
+            filter: "invert(100%)",
+            opacity: "0.4"
+          }
+        }
+      ]
+    }
+  ];
 
   return (
     <div className="other-root">
@@ -150,8 +166,19 @@ if(!tileData){
               subtitle={<span>{tile.location}, {tile.age}세</span>}
               actionIcon={
                 <IconButton className="other-icon">
-                  <RecordVoiceOverIcon color="secondary" />
-                </IconButton>
+                  <AudioPlayer
+                    audioFiles={[
+                      {
+                        src: `${tile.voiceDownloadUri}`,
+                        title: "Rolling In The Deep",
+                        artist: "Adele"
+                      }
+                    ]}
+                    rearrange={rearrangedPlayer}
+                    playerWidth="50px"
+                    iconSize="50px"
+                  />                
+                  </IconButton>
               }
             />
           </GridListTile>

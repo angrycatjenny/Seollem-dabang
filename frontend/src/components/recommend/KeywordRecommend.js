@@ -123,8 +123,13 @@ const KeywordRecommend = () => {
             .then((response) => {
                 console.log('keyword', response)
                 setTileData(response.data)
-                setGender(response.data[0].gender)
-                setExam(response.data[0].is_exam)
+                if(response.data.length > 1){
+                    setGender(response.data[0].gender)
+                    setExam(response.data[0].is_exam)
+                }else{
+                    setGender(response.data.gender)
+                    setExam(response.data.is_exam)
+                }
             })
             .catch((err) => {
                 console.log(err)
