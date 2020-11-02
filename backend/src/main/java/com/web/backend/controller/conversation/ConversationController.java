@@ -37,6 +37,6 @@ public class ConversationController {
 
         Conversation conversation = new Conversation(examinee,examiner);
         conversationDao.save(conversation);
-        return new ResponseEntity<>("대화창 생성 완료", HttpStatus.OK);
+        return conversation.getConversationId();
     }
 }
