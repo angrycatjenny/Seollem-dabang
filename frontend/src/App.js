@@ -63,7 +63,7 @@ const App = () => {
       <Route component={QuestionDetailPage} path="/question/detail" />      
 
       {/* Answer */}
-      <Route component={AnswerCreatePage} path="/answer" />
+      <Route component={AnswerCreatePage} path="/answer/:userId" />
       <Route component={AnswerResultPage} path="/result" />
 
       {/* Conversation */}
