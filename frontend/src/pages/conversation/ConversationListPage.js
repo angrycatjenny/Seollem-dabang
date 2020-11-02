@@ -29,9 +29,10 @@ const useStyles = makeStyles((theme) => ({
 const ConversationListPage = () => {
   const classes = useStyles();
 
-  const [ conversations, setConversations ] = useState([]);
+  const [ conversations, setConversations ] = useState(null);
 
   const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ loading, setLoading ] = useState(false);
 
   const config = {
     headers: {
@@ -39,37 +40,55 @@ const ConversationListPage = () => {
     }
   }
   useEffect(() => {
-    axios.get('/conversation/list', config)
-    .then((response) => {
-      console.log(response.data)
-      setConversations(response.data)
-    })
-  }, [])
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          '/conversation/list', config
+        );
+        setConversations(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <h1>대기 중...</h1>;
+  };
+  if (!conversations) {
+    return null;
+  };
 
   return (
     <div>
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="사람이름"
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    대화내용
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
+          {conversations.map((conversation, index) => (
+            <ListItem button key={index}>
+              <ListItemAvatar>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary={'상대이름: ' + conversation.examiner.nickname}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      내 이름: {conversation.examinee.nickname}
+                    </Typography>
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          ))}
         </List>
       </div>
     </div>
