@@ -39,7 +39,7 @@ const ConversationListPage = () => {
     }
   }
   useEffect(() => {
-    axios.get('/conversation', config)
+    axios.get('/conversation/list', config)
     .then((response) => {
       console.log(response.data)
       setConversations(response.data)
