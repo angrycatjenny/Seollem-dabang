@@ -33,8 +33,7 @@ public class ConversationController {
     @PostMapping("/conversation")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody ConversationRequest req) {
         User examinee = userDao.getUserById(requser.getId());
-        Question question = questionDao.getQuestionByQuestionId(req.getQuestionId());
-        User examiner = question.getUser();
+        User examiner = userDao.getUserById(req.getUserId());
 
         Conversation conversation = new Conversation(examinee,examiner);
         conversationDao.save(conversation);
