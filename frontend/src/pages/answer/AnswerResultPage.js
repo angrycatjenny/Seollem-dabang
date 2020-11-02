@@ -51,7 +51,7 @@ const AnswerResultPage = () => {
     axios.post('/conversation', {examiner}, config)
       .then((response) => {
         console.log(response)
-        history.push('/conversation/')
+        history.push('/conversation/'+`${response.data}`)
       })
       .catch((error) => {
         console.log(error);
