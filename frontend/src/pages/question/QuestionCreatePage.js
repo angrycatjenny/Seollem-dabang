@@ -257,18 +257,19 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 1 && (
             <div className="stepper-box">
-              <div style={{display:'flex',flexDirection:'column'}}>
+              <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
                 {exam.map((item) => (
-                  <div>
-                    <React.Fragment key={item.key}>
-                      <label>{item.key}번 
-                        <input 
+                  <React.Fragment key={item.key}>
+                    <div key={item.key} className="quest-box">
+                      <label>{item.key}번
+                        <textarea 
+                        className="quest-create-input"
                         type="text"
                         id={item.key}
                         value={item.value}
                         onChange={onChangeQuest}/>
                       </label>
-                    </React.Fragment>
+                    </div>
                     <div className="radio-box">
                       <Radio
                         checked={item.ans===1}
@@ -287,7 +288,7 @@ const QuestionCreatePage = () => {
                         inputProps={{ 'aria-label': '아니오' }}
                       /><div>아니오</div>
                     </div>
-                  </div>
+                  </React.Fragment>
 
                 ))}
                 {/* <button onClick={() => console.log(exam)}>콘솔</button> */}

@@ -19,12 +19,19 @@
 }
 
 .set-quest-box {
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.quest-box {
 }
 
 .radio-box {
-  /* border: 2px solid green; */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
+}
+
+.quest-create-input {
+  width: 100%;
 }
