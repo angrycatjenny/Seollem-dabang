@@ -156,7 +156,7 @@ const KeywordRecommend = () => {
             renderCenterRightControls={({ nextSlide }) => (
                 <ChevronRightRoundedIcon onClick={nextSlide} />
             )}
-            classname="carusel-outline"
+            className="carusel-outline"
         >
             {tileData.map((tile) => (
                 <div className="keyword-root">

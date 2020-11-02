@@ -50,7 +50,7 @@ const HeaderComp = () => {
   return (
     <div className="navbar">
       <div>
-        <i class="fas fa-chevron-left back-button" onClick={goBack}></i>
+        <i className="fas fa-chevron-left back-button" onClick={goBack}></i>
         <img className="profile-image" src={ProfileImage} />
         <small>{nickname}</small>
       </div>
