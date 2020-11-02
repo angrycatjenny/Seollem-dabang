@@ -19,6 +19,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 // CSS
@@ -43,19 +44,6 @@ function getSteps() {
   return ['질문 개수', '시험지 작성', '확인'];
 }
 
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return `5개~20개`;
-    case 1:
-      return '';
-    case 2:
-      return ``;
-    default:
-      return '';
-  }
-}
-
 //로그인 여부에 따른 시험지 작성 허용
 //데이터 변수 하나 설정하고 조건부 렌더링
 //null이면 질문 개수 설정, !null이면 질문create
@@ -71,6 +59,7 @@ const QuestionCreatePage = () => {
   const config = {
     headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
+  const [ isLoaded, setIsLoaded ] = useState(false)
   //백에 보낼 데이터
   //1.질문 리스트
   const contentList = [];
@@ -116,8 +105,11 @@ const QuestionCreatePage = () => {
     console.log(ExamData,'보낼거')
     axios.post('/question/create', ExamData, config)
       .then(() => {
-          history.push('/question')
+        setIsLoaded(true);
+        setTimeout(() => {
+          history.push('/question');
           history.go();
+        },7000)
       })
       .catch((error) => console.log(error))
   }; 
@@ -314,25 +306,32 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 2 && (
             <div className="stepper-box">
-              <div className="stepper-btn">
-              <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleReset}
-                  className={classes.button}
-                >
-                  새로 만들기
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={sendExamData}
-                  className={classes.button}
-                >
-                  완료
-                </Button>
+              {isLoaded ? 
+              <div className="stepper-loading">
+                <CircularProgress />
+                <h6>로딩중</h6>
               </div>
-            </div>
+              :
+              <div className="stepper-btn">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleReset}
+                    className={classes.button}
+                  >
+                    새로 만들기
+                  </Button>
+                <Button
+                variant="contained"
+                color="primary"
+                onClick={sendExamData}
+                className={classes.button}
+              >
+                완료
+              </Button>
+              </div>
+              }
+            </div> 
           )}
         </div>
       </div>
