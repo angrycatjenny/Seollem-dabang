@@ -12,10 +12,9 @@ import com.web.backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -38,5 +37,11 @@ public class ConversationController {
         Conversation conversation = new Conversation(examinee,examiner);
         conversationDao.save(conversation);
         return conversation.getConversationId();
+    }
+
+    @GetMapping("/conversation/list")
+    public Object getList(@CurrentUser UserPrincipal requser){
+        ArrayList<Conversation> conversationList =conversationDao.getConversationByExaminerId(requser.getId());
+        return conversationList;
     }
 }
