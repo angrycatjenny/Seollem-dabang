@@ -18,6 +18,8 @@ import { useCookies } from 'react-cookie';
 // CSS
 import './ConversationListPage.css';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -68,6 +70,7 @@ const ConversationListPage = () => {
       <div className={classes.root}>
         <List component="nav" aria-label="main mailbox folders">
           {conversations.map((conversation, index) => (
+            <Link to={'/conversation/' + conversation.conversationId}>
             <ListItem button key={index}>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -88,6 +91,7 @@ const ConversationListPage = () => {
                 }
               />
             </ListItem>
+            </Link>
           ))}
         </List>
       </div>
