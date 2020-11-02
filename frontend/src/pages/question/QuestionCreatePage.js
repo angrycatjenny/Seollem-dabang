@@ -261,7 +261,7 @@ const QuestionCreatePage = () => {
                 {exam.map((item) => (
                   <div>
                     <React.Fragment key={item.key}>
-                      <label>{item.key}번 문제
+                      <label>{item.key}번 
                         <input 
                         type="text"
                         id={item.key}
@@ -269,7 +269,7 @@ const QuestionCreatePage = () => {
                         onChange={onChangeQuest}/>
                       </label>
                     </React.Fragment>
-                    <div>
+                    <div className="radio-box">
                       <Radio
                         checked={item.ans===1}
                         onChange={onChangeAnsYes}
@@ -277,7 +277,7 @@ const QuestionCreatePage = () => {
                         value="1"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '예' }}
-                      />예
+                      /><div>예</div>
                       <Radio
                         checked={item.ans===0}
                         onChange={onChangeAnsNo}
@@ -285,7 +285,7 @@ const QuestionCreatePage = () => {
                         value="0"
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '아니오' }}
-                      />아니오
+                      /><div>아니오</div>
                     </div>
                   </div>
 
