@@ -23,6 +23,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 // CSS
+import '../../App.css';
 import './QuestionCreatePage.css';
 import { ContactsOutlined } from '../../../node_modules/@material-ui/icons/index';
 
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+  mainFont: {
+    fontFamily:"GmarketSansBold",
   },
 }));
 
@@ -227,17 +231,17 @@ const QuestionCreatePage = () => {
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel classes={{label:classes.mainFont}}>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
         <div>
           {activeStep === 0 && (
             <div className="stepper-box">
-              <h5>5개 ~ 20개로 질문 개수를 정해주세요!</h5>
+              <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
               <div className="set-quest-box">
                 <Input type="number" value={cnt} 
-                onChange={onChangeCnt} />개
+                onChange={onChangeCnt} classes={classes.mainFont}/>개
               </div>
               <div className="stepper-btn">
                 <Button
@@ -253,22 +257,6 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 1 && (
             <div className="stepper-box">
-              <div className="stepper-btn">
-                <Button
-                  onClick={handleBack}
-                  className={classes.backButton}
-                >
-                  이전
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
-              </div>
               <div style={{display:'flex',flexDirection:'column'}}>
                 {exam.map((item) => (
                   <div>
@@ -302,9 +290,24 @@ const QuestionCreatePage = () => {
                   </div>
 
                 ))}
-                <button onClick={() => console.log(exam)}>콘솔</button>
+                {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
               </div>
-              
+              <div className="stepper-btn">
+                <Button
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  이전
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  다음
+                </Button>
+              </div>
             </div>
           )}
           {activeStep === 2 && (
