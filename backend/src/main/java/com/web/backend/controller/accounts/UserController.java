@@ -81,14 +81,17 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
+        if(image == null) {
+            return ResponseEntity.ok(new ApiResponse(false, "Picture could not found"));
+        }
         if(!kakaoVisionService.getResponse(image)) {
-            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "This picture has no face!"));
         }
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "Email is already exist!"));
         }
         if(userDao.existsByNickname(signUpRequest.getNickname())) {
-            return new ResponseEntity(new ApiResponse(false, "Nickname is already exist!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "Nickname is already exist!"));
         }
 
         String imageName = imageStorageService.storeFile(image);
@@ -161,7 +164,7 @@ public class UserController {
     public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
 
         if(image != null && !kakaoVisionService.getResponse(image)) {
-            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity(new ApiResponse(false, "This picture has no face!"));
         }
         
         User user = userDao.getUserById(requestUser.getId());
