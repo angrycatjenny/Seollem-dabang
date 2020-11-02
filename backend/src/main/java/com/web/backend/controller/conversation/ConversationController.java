@@ -41,7 +41,8 @@ public class ConversationController {
 
     @GetMapping("/conversation/list")
     public Object getList(@CurrentUser UserPrincipal requser){
-        ArrayList<Conversation> conversationList =conversationDao.getConversationByExaminerId(requser.getId());
+        ArrayList<Conversation> conversationList = conversationDao.getConversationByExaminerId(requser.getId());
+        conversationList.addAll(conversationDao.getConversationByExamineeId(requser.getId()));
         return conversationList;
     }
 }

@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface ConversationDao extends JpaRepository<Conversation, String> {
     Conversation getConversationByConversationId(Long conversationId);
     ArrayList<Conversation> getConversationByExaminerId(Long examinerId);
+    ArrayList<Conversation> getConversationByExamineeId(Long examineeId);
 }
