@@ -23,6 +23,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 // CSS
+import '../../App.css';
 import './QuestionCreatePage.css';
 import { ContactsOutlined } from '../../../node_modules/@material-ui/icons/index';
 
@@ -31,12 +32,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+  button:{
+    
+  },
   backButton: {
     marginRight: theme.spacing(1),
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+  mainFont: {
+    fontFamily:"GmarketSansBold",
   },
 }));
 
@@ -224,17 +231,17 @@ const QuestionCreatePage = () => {
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel classes={{label:classes.mainFont}}>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
         <div>
           {activeStep === 0 && (
             <div className="stepper-box">
-              <h4>5개 ~ 20개로 질문 개수를 정해주세요!</h4>
+              <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
               <div className="set-quest-box">
                 <Input type="number" value={cnt} 
-                onChange={onChangeCnt} />개
+                onChange={onChangeCnt} classes={classes.mainFont}/>개
               </div>
               <div className="stepper-btn">
                 <Button
@@ -250,6 +257,41 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 1 && (
             <div className="stepper-box">
+              <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                {exam.map((item) => (
+                  <React.Fragment key={item.key}>
+                    <div key={item.key} className="quest-box">
+                      <label>{item.key}번
+                        <textarea 
+                        className="quest-create-input"
+                        type="text"
+                        id={item.key}
+                        value={item.value}
+                        onChange={onChangeQuest}/>
+                      </label>
+                    </div>
+                    <div className="radio-box">
+                      <Radio
+                        checked={item.ans===1}
+                        onChange={onChangeAnsYes}
+                        id={item.key}
+                        value="1"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': '예' }}
+                      /><div>예</div>
+                      <Radio
+                        checked={item.ans===0}
+                        onChange={onChangeAnsNo}
+                        id={item.key}
+                        value="0"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': '아니오' }}
+                      /><div>아니오</div>
+                    </div>
+                  </React.Fragment>
+                ))}
+                {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
+              </div>
               <div className="stepper-btn">
                 <Button
                   onClick={handleBack}
@@ -266,70 +308,58 @@ const QuestionCreatePage = () => {
                   다음
                 </Button>
               </div>
-              <div style={{display:'flex',flexDirection:'column'}}>
-                {exam.map((item) => (
-                  <div>
-                    <React.Fragment key={item.key}>
-                      <label>{item.key}번 문제
-                        <input 
-                        type="text"
-                        id={item.key}
-                        value={item.value}
-                        onChange={onChangeQuest}/>
-                      </label>
-                    </React.Fragment>
-                    <div>
-                      <Radio
-                        checked={item.ans===1}
-                        onChange={onChangeAnsYes}
-                        id={item.key}
-                        value="1"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '예' }}
-                      />예
-                      <Radio
-                        checked={item.ans===0}
-                        onChange={onChangeAnsNo}
-                        id={item.key}
-                        value="0"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '아니오' }}
-                      />아니오
-                    </div>
-                  </div>
-
-                ))}
-                <button onClick={() => console.log(exam)}>콘솔</button>
-              </div>
-              
             </div>
           )}
           {activeStep === 2 && (
             <div className="stepper-box">
-              {isLoaded ? 
-              <div className="stepper-loading">
-                <CircularProgress />
-                <h6>로딩중</h6>
-              </div>
+              {isLoaded 
+              ? 
+                <div className="stepper-loading">
+                  <CircularProgress />
+                  <h6>로딩중</h6>
+                </div>
               :
-              <div className="stepper-btn">
-                <Button
+              <React.Fragment>
+                <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                {exam.map((item) => (
+                  <React.Fragment key={item.key}>
+                    <div key={item.key} className="quest-box">
+                      <label>{item.key}번</label>
+                      <div>{item.quest}</div>
+                    </div>
+                    <div className="radio-box">
+                      {item.ans 
+                      ?
+                      <div>
+                        예
+                      </div> 
+                      :
+                      <div>
+                        아니오
+                      </div>}
+                    </div>
+                  </React.Fragment>
+                ))}
+                </div>
+                <div className="stepper-btn">
+                  <Button
                     variant="contained"
                     color="primary"
                     onClick={handleReset}
                     className={classes.button}
-                  >
+                    >
                     새로 만들기
                   </Button>
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={sendExamData}
-                className={classes.button}
-              >
-                완료
-              </Button>
-              </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={sendExamData}
+                    className={classes.button}
+                  >
+                    완료
+                  </Button>
+                </div>
+              </React.Fragment>
               }
             </div> 
           )}

@@ -1,7 +1,8 @@
 import React from 'react';
 
 // Bootstrap
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
 // Router
 import { Route, withRouter } from 'react-router-dom';

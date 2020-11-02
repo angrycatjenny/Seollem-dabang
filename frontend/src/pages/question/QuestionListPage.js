@@ -68,17 +68,15 @@ const QuestionListPage = () => {
   }
 
   if(!exam){
-    return <Link to="/question/create"><button>시험지+</button></Link>;
+    return (
+      <div style={{display:"flex", justifyContent:"center", 
+      margin:"230px 0"}}>
+        <Link to="/question/create"
+          className="exam-create-btn">시험지+</Link>
+      </div>
+    )
   }
-  // //시험지 전체 삭제
-  // const delExam = () => {
-  //   axios.delete('/question/delete', config)
-  //     .then(() => {
-  //         history.push('/question')
-  //     })
-  //     .catch((error) => console.log(error))
-  // }
-  
+
   return (
     <div>
       {exam.map(item => (
