@@ -15,7 +15,6 @@ const LoginPage = ({ history }) => {
   const sendLoginData = e => {
     e.preventDefault()
     const loginData = { email, password }
-    console.log(loginData, '로그인 정보')
     axios.post('/login', loginData)
       .then((response) => {
         setCookie('accessToken', response.data.accessToken)

@@ -11,16 +11,18 @@ import './MyProfilePage.css';
 // Cookie
 import { useCookies } from 'react-cookie';
 
-const MyProfilePage = () => {
-  const [ cookies, setCookie ] = useCookies(['accessToken']);
+// Audio Player
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
-  const [ email, setEmail ] = useState('');
-  const [ gender, setGender ] = useState('');
-  const [ image, setImage ] = useState('');
-  const [ nickname, setNickname ] = useState('');
-  const [ voice, setVoice ] = useState('');
-  const [ location, setLocation ] = useState('');
-  const [ age, setAge ] = useState('');
+const MyProfilePage = () => {
+  const [cookies, setCookie] = useCookies(['accessToken']);
+  const [email, setEmail] = useState('');
+  const [objectURL, setObjectURL] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [voiceurl, setVoiceurl] = useState('');
+  const [location, setLocation] = useState('');
+  const [age, setAge] = useState('');
   const history = useHistory();
 
   const config = {
@@ -32,10 +34,9 @@ const MyProfilePage = () => {
     axios.get('/my-profile', config)
       .then((response) => {
         setEmail(response.data.email)
-        setGender(response.data.gender)
-        setImage(response.data.image)
+        setObjectURL(response.data.imageDownloadUri)
         setNickname(response.data.nickname)
-        setVoice(response.data.voice)
+        setVoiceurl(response.data.voiceDownloadUri)
         setLocation(response.data.location)
         setAge(response.data.age)
       })
@@ -45,15 +46,19 @@ const MyProfilePage = () => {
   }, [])
 
   return (
-    <div>
-      <p>이메일: {email}</p>
-      <p>성별: {gender}</p>
-      <p>이미지: {image}</p>
+    <div className="profile-form">
       <p>닉네임: {nickname}</p>
-      <p>목소리: {voice}</p>
+      <p>이메일: {email}</p>
       <p>지역: {location}</p>
       <p>나이: {age}</p>
-      <Button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')}>
+      <img src={objectURL} alt={objectURL} className="profile-img"/>
+      <AudioPlayer
+        src={voiceurl}
+        showJumpControls={false}
+        customVolumeControls={[]}
+        customAdditionalControls={[]}
+      />      
+      <Button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')} className="profile-button">
         개인정보수정
       </Button>
     </div>
