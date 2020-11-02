@@ -16,7 +16,11 @@ import { ReactMic } from 'react-mic';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
+// History
+import { useHistory } from "react-router-dom";
+
 const ConversationDetailPage = ({ match }) => {
+  const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
   const [ loading, setLoading ] = useState(false);
 
@@ -75,6 +79,7 @@ const ConversationDetailPage = ({ match }) => {
     .then (() => {
       setVoice('')
       console.log('성공?')
+      history.go()
       }
     )
     .catch((error) => {
