@@ -289,7 +289,6 @@ const QuestionCreatePage = () => {
                       /><div>아니오</div>
                     </div>
                   </React.Fragment>
-
                 ))}
                 {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
               </div>
@@ -313,30 +312,54 @@ const QuestionCreatePage = () => {
           )}
           {activeStep === 2 && (
             <div className="stepper-box">
-              {isLoaded ? 
-              <div className="stepper-loading">
-                <CircularProgress />
-                <h6>로딩중</h6>
-              </div>
+              {isLoaded 
+              ? 
+                <div className="stepper-loading">
+                  <CircularProgress />
+                  <h6>로딩중</h6>
+                </div>
               :
-              <div className="stepper-btn">
-                <Button
+              <React.Fragment>
+                <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                {exam.map((item) => (
+                  <React.Fragment key={item.key}>
+                    <div key={item.key} className="quest-box">
+                      <label>{item.key}번</label>
+                      <div>{item.quest}</div>
+                    </div>
+                    <div className="radio-box">
+                      {item.ans 
+                      ?
+                      <div>
+                        예
+                      </div> 
+                      :
+                      <div>
+                        아니오
+                      </div>}
+                    </div>
+                  </React.Fragment>
+                ))}
+                </div>
+                <div className="stepper-btn">
+                  <Button
                     variant="contained"
                     color="primary"
                     onClick={handleReset}
                     className={classes.button}
-                  >
+                    >
                     새로 만들기
                   </Button>
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={sendExamData}
-                className={classes.button}
-              >
-                완료
-              </Button>
-              </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={sendExamData}
+                    className={classes.button}
+                  >
+                    완료
+                  </Button>
+                </div>
+              </React.Fragment>
               }
             </div> 
           )}
