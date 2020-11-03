@@ -9123,6 +9123,11 @@ react-mic@^12.4.6:
     prop-types "^15.5.10"
     react-ga "^2.2.0"
 
+react-modular-audio-player@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-modular-audio-player/-/react-modular-audio-player-1.2.0.tgz#4829b7bf4d63a3c74c46e8f1e343ba75bdf78579"
+  integrity sha512-wE1yVgUhVm0td08EoZNzLeBZ/SCpQFznfHa6UYdHIezyFlqsaKgAjRkBa8R43pLerUS/Ud0nkioBa7j++z1FwA==
+
 react-move@^6.1.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/react-move/-/react-move-6.4.0.tgz#9163a87c62fff94bf6e6980685c713739192650e"
