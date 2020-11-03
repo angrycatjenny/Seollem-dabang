@@ -311,7 +311,7 @@ const QuestionCreatePage = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
+                  className={classes.customBtn}
                 >
                   다음
                 </Button>
