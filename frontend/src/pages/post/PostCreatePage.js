@@ -1,4 +1,12 @@
 import React from 'react';
+
+/// Axios
+import axios from 'axios';
+
+// History
+import { useHistory } from "react-router-dom";
+
+// CSS
 import './PostCreatePage.css';
 
 const PostCreatePage = () => {
