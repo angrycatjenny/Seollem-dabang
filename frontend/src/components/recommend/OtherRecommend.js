@@ -1,68 +1,3 @@
-// import React from 'react';
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import IconButton from '@material-ui/core/IconButton';
-// import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-// import Button from '@material-ui/core/Button';
-// import menImage1 from '../../assets/mainImg/png/남성1.png';
-// import menImage2 from '../../assets/mainImg/png/남성2.png';
-// import menImage3 from '../../assets/mainImg/png/남성3.png';
-// import menImage4 from '../../assets/mainImg/png/남성4.png';
-// import './OtherRecommend.css';
-
-// const OtherRecommend = () => {
-//   const imgData = [menImage1, menImage2, menImage3, menImage4]
-//   const tileData = [
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//   ]
-//   for (let i = 0; i < tileData.length; i++) {
-//     tileData[i].img = imgData[i]
-//   }
-//   return (
-//     <div className="other-root">
-//       <GridList cellHeight={200} className="other-gridlist">
-//         {tileData.map((tile) => (
-//           <GridListTile key={tile.img} className="other-gridlist-item">
-//             <Button>
-//               <img src={tile.img} alt={tile.title} className="other-imgsize" />
-//             </Button>
-//             <GridListTileBar
-//               title={tile.title}
-//               subtitle={<span>by: {tile.author}</span>}
-//               actionIcon={
-//                 <IconButton aria-label={`info about ${tile.title}`} className="other-icon">
-//                   <RecordVoiceOverIcon color="secondary" />
-//                 </IconButton>
-//               }
-//             />
-//           </GridListTile>
-//         ))}
-//       </GridList>
-//     </div>
-//   );
-// };
-
-// export default OtherRecommend;
-
-
-// 요청 생성 후 음석 재생 및 유저정보 변수에 추가해야 함..
-
 import React from 'react';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -128,7 +63,7 @@ const OtherRecommend = () => {
     }
   } else {
     return (
-      <h1>대기 중...</h1>
+      <h3>서비스 준비 중 입니다.</h3>
     )
   }
 
