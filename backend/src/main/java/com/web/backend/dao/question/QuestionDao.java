@@ -11,4 +11,5 @@ import java.util.List;
 public interface QuestionDao extends JpaRepository<Question, String> {
     Question getQuestionByQuestionId(Long questionId);
     ArrayList<Question> findQuestionByUserId(Long userId);
+    Boolean existsByUserId(Long userId);
 }

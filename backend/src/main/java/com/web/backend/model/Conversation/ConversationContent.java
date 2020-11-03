@@ -22,6 +22,9 @@ public class ConversationContent {
     @Column(name="voice")
     private String voice;
 
+    @Column(name="text")
+    private String text;
+
     @ManyToOne
     @JoinColumn(name="conversation_id")
     private Conversation conversation;
@@ -32,9 +35,10 @@ public class ConversationContent {
     private User user;
 
     @Builder
-    public ConversationContent(String voice,Conversation conversation,User user){
+    public ConversationContent(String voice,Conversation conversation,User user, String text){
         this.voice=voice;
         this.conversation = conversation;
         this.user = user;
+        this.text = text;
     }
 }
