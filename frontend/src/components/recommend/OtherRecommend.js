@@ -68,7 +68,6 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import Button from '@material-ui/core/Button';
 import './OtherRecommend.css';
 import AudioPlayer from 'react-modular-audio-player';
@@ -170,8 +169,7 @@ const OtherRecommend = () => {
                     audioFiles={[
                       {
                         src: `${tile.voiceDownloadUri}`,
-                        title: "Rolling In The Deep",
-                        artist: "Adele"
+                        title: "voiceDownloadUri",
                       }
                     ]}
                     rearrange={rearrangedPlayer}
