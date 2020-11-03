@@ -47,7 +47,7 @@
 }
 
 .stepper-final-box-comp {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-bottom: 100px;
   width: 85%;
 }
@@ -74,4 +74,18 @@
   margin-bottom: 15px;
   /* border: 2px solid purple; */
   width: 88%;
+}
+
+.stepper-exam-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border: 2px solid black;
+  padding-top: 10px;
+}
+.stepper-custom-btn {
+  color: black;
+  background-color: rgb(255, 99, 173);
+  padding: 10px;
 }
