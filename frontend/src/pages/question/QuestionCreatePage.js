@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['질문 개수', '시험지 작성', '확인'];
+  return ['질문 개수', '시험지 작성', '미리보기'];
 }
 
 //로그인 여부에 따른 시험지 작성 허용
@@ -67,6 +67,7 @@ const QuestionCreatePage = () => {
     headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
   const [ isLoaded, setIsLoaded ] = useState(false)
+  const [ nickname, setNickname ] = useState('')
   //백에 보낼 데이터
   //1.질문 리스트
   const contentList = [];
@@ -99,6 +100,7 @@ const QuestionCreatePage = () => {
     setExam(exam.map((item) =>
     item.key === id ? {...item, ans:0} : item))
   }
+  //create 요청 보내기
   const sendExamData = () => {
     {exam.map((item) => {
       contentList.push(item.quest)
@@ -212,6 +214,11 @@ const QuestionCreatePage = () => {
         value:''
       }))
       setAnswers(objAns)
+  }else if (activeStep === 2) {
+    axios.get('/my-profile', config)
+      .then((response) => {
+        setNickname(response.data.nickname)
+      })
   }
   }, [activeStep])
 
@@ -241,7 +248,7 @@ const QuestionCreatePage = () => {
               <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
               <div className="set-quest-box">
                 <Input type="number" value={cnt} 
-                onChange={onChangeCnt} classes={classes.mainFont}/>개
+                onChange={onChangeCnt} classes={{input:classes.mainFont}}/>개
               </div>
               <div className="stepper-btn">
                 <Button
@@ -311,7 +318,7 @@ const QuestionCreatePage = () => {
             </div>
           )}
           {activeStep === 2 && (
-            <div className="stepper-box">
+            <div className="stepper-final-box">
               {isLoaded 
               ? 
                 <div className="stepper-loading">
@@ -319,22 +326,28 @@ const QuestionCreatePage = () => {
                   <h6>로딩중</h6>
                 </div>
               :
-              <React.Fragment>
-                <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
-                {exam.map((item) => (
+              <div className="stepper-final-box-comp">
+                <div className style={{display:'flex',flexDirection:'column',
+                alignItems:"center", marginTop:"20px"}}>
+                  <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
+                  <h4>연애 능력 고사</h4>
+                  <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
+                  <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+                  {exam.map((item) => (
                   <React.Fragment key={item.key}>
                     <div key={item.key} className="quest-box">
-                      <label>{item.key}번</label>
-                      <div>{item.quest}</div>
+                      <label className="create-final-label">{item.key}번</label>
+                      <div className="create-final-quest">{item.quest}</div>
                     </div>
-                    <div className="radio-box">
+                    <div className="create-final-ans-box">
+                      <div className="create-final-label">정답: </div>
                       {item.ans 
                       ?
-                      <div>
+                      <div className="create-final-ans">
                         예
                       </div> 
                       :
-                      <div>
+                      <div className="create-final-ans">
                         아니오
                       </div>}
                     </div>
@@ -348,7 +361,7 @@ const QuestionCreatePage = () => {
                     onClick={handleReset}
                     className={classes.button}
                     >
-                    새로 만들기
+                    다시 만들기
                   </Button>
                   <Button
                     variant="contained"
@@ -359,7 +372,7 @@ const QuestionCreatePage = () => {
                     완료
                   </Button>
                 </div>
-              </React.Fragment>
+              </div>
               }
             </div> 
           )}
