@@ -7,7 +7,8 @@ import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
 //materialUI
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
+
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -32,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-
   backButton: {
     marginRight: theme.spacing(1),
   },
@@ -46,7 +46,38 @@ const useStyles = makeStyles((theme) => ({
   customBtn:{
     color:"black",
     backgroundColor:"rgb(255, 99, 173)"
-  }
+  },
+  icon:{
+    color:"pink !important"
+  },
+
+
+
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
+  },
+  step: {
+    "& $completed": {
+      color: "gray"
+    },
+    "& $active": {
+      color: "rgb(255, 99, 173)"
+    },
+    "& $disabled": {
+      color: "red"
+    }
+  },
+  alternativeLabel: {},
+  active: {}, //needed so that the &$active tag works
+  completed: {},
+  disabled: {},
+  labelContainer: {
+    "& $alternativeLabel": {
+      marginTop: 0
+    }
+  },
 }));
 
 function getSteps() {
@@ -237,13 +268,36 @@ const QuestionCreatePage = () => {
       </div>
       {/* stepper */}
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+
+        <Stepper activeStep={activeStep} alternativeLabel 
+          classes={{
+            root: classes.root
+          }}>
           {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel classes={{label:classes.mainFont}}>{label}</StepLabel>
+            <Step key={label} classes={{
+              root: classes.step,
+              completed: classes.completed,
+              active: classes.active
+            }}>
+              <StepLabel
+              classes={{
+                label:classes.mainFont,
+                alternativeLabel: classes.alternativeLabel,
+                labelContainer: classes.labelContainer
+              }}
+              StepIconProps={{
+                classes: {
+                  root: classes.step,
+                  completed: classes.completed,
+                  active: classes.active,
+                  disabled: classes.disabled
+                }
+              }}
+              >{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
+
         <div>
           {activeStep === 0 && (
             <div className="stepper-box">
@@ -368,7 +422,7 @@ const QuestionCreatePage = () => {
                       variant="contained"
                       color="primary"
                       onClick={sendExamData}
-                      className={classes.button}
+                      className={classes.customBtn}
                     >
                       완료
                     </Button>
