@@ -30,7 +30,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.github.shin285:KOMORAN:3.3.4'
 	implementation 'org.apache.httpcomponents:httpclient:4.5'
+	implementation platform("com.google.cloud:libraries-bom:5.3.0");
+	implementation("com.google.cloud:google-cloud-speech");
 	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.1")
+	compile 'com.google.cloud:google-cloud-speech:1.24.5'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

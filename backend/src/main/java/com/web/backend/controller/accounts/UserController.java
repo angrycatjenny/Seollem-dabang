@@ -2,6 +2,7 @@ package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.keyword.KeywordDao;
+import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
 import com.web.backend.payload.accounts.*;
@@ -48,6 +49,9 @@ public class UserController {
 
     @Autowired
     KeywordDao keywordDao;
+
+    @Autowired
+    QuestionDao questionDao;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -237,15 +241,22 @@ public class UserController {
                 break;
             }
         }
+
+        boolean examExist = questionDao.existsByUserId(curuser.getId());
+        int isExam = 0;
+        if(examExist){
+            isExam=1;
+        }
+
         HashMap<String,Integer> nullData = new HashMap<String,Integer>();
-        nullData.put("is_exam",0);
+        nullData.put("is_exam",isExam);
         nullData.put("gender",curuser.getGender());
 
         if(recommendedUserList.isEmpty()){
             return nullData;
         }
-
-        RecommendResponse userList = new RecommendResponse(1, curuser.getGender(), recommendedUserList);
+        
+        RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
         return userList;
     }
 }

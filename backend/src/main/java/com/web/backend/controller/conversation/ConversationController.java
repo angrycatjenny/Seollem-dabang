@@ -28,19 +28,19 @@ public class ConversationController {
 
     @Autowired
     ConversationDao conversationDao;
-    
+
     @PostMapping("/conversation")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody ConversationRequest req) {
         User examinee = userDao.getUserById(requser.getId());
         User examiner = userDao.getUserById(req.getExaminer());
 
-        Conversation conversation = new Conversation(examinee,examiner);
+        Conversation conversation = new Conversation(examinee, examiner);
         conversationDao.save(conversation);
         return conversation.getConversationId();
     }
 
     @GetMapping("/conversation/list")
-    public Object getList(@CurrentUser UserPrincipal requser){
+    public Object getList(@CurrentUser UserPrincipal requser) {
         ArrayList<Conversation> conversationList = conversationDao.getConversationByExaminerId(requser.getId());
         conversationList.addAll(conversationDao.getConversationByExamineeId(requser.getId()));
         return conversationList;
