@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // CSS
 import './HeaderComp.css';
+// import { Button } from 'react-bootstrap';
 
 // Cookie
 import { useCookies } from 'react-cookie';
@@ -18,11 +19,11 @@ import ProfileImage from '../../assets/profile/profile-image.png';
 const HeaderComp = () => {
   const history = useHistory();
 
-  const [ cookies, setCookie, removeCookie ] = useCookies(['accessToken']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  const [ nickname, setNickname ] = useState('');
-  const [ image, setImage ] = useState('');
-  
+  const [nickname, setNickname] = useState('');
+  const [image, setImage] = useState('');
+
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken
@@ -34,7 +35,7 @@ const HeaderComp = () => {
         setNickname(response.data.nickname)
         setImage(response.data.image)
       })
-  }, [ nickname, image ])
+  }, [nickname, image])
 
   const logout = e => {
     removeCookie('accessToken');
@@ -43,7 +44,6 @@ const HeaderComp = () => {
   }
 
   const goBack = () => {
-    console.log('뒤로')
     history.goBack(1);
   }
 
@@ -51,8 +51,8 @@ const HeaderComp = () => {
     <div className="navbar">
       <div>
         <i className="fas fa-chevron-left back-button" onClick={goBack}></i>
-        <img className="profile-image" src={ProfileImage} />
-        <small>{nickname}</small>
+          <img onClick={() => history.push('/profile')} className="profile-image" src={ProfileImage} />
+          <small onClick={() => history.push('/profile')} >{nickname}</small>
       </div>
       <small onClick={logout}>로그아웃</small>
     </div>
