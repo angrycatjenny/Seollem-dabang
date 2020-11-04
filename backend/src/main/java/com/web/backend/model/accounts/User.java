@@ -104,6 +104,10 @@ public class User extends DateAudit {
         this.gender =gender;
     }
 
+    public boolean getIsExam(){ return isExam ;}
+
+    public void setIsExam(boolean isExam){ this.isExam=isExam ;}
+
     public int getAge() {
         return age;
     }
@@ -127,4 +131,5 @@ public class User extends DateAudit {
     public String getVoiceDownloadUri() { return voiceDownloadUri; }
 
     public void setVoiceDownloadUri(String voiceDownloadUri) { this.voiceDownloadUri = voiceDownloadUri; }
+
 }
