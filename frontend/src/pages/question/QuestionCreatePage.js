@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backButton: {
     marginRight: theme.spacing(1),
+    backgroundColor:"#895BC7",
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -46,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
   customBtn:{
     color:"#0d0a0a",
     backgroundColor:"rgb(255, 99, 173)"
+  },
+  cancelBtn:{
+    color:"#FFFAFF",
+    backgroundColor:"#0D0A0A"
   },
   icon:{
     color:"pink !important"
@@ -263,7 +268,7 @@ const QuestionCreatePage = () => {
       <div className="cancel-btn">
         <Link to="/question">
           <Button variant="contained"
-          className={classes.button}
+          className={classes.cancelBtn}
           >취소</Button></Link>
       </div>
       {/* stepper */}
@@ -365,7 +370,7 @@ const QuestionCreatePage = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
+                  className={classes.customBtn}
                 >
                   다음
                 </Button>

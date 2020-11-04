@@ -7,7 +7,8 @@
 .stepper-btn {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-right: 15px;
 }
 
 .stepper-box {
@@ -40,6 +41,10 @@
 
 .quest-create-input {
   width: 100%;
+}
+
+.quest-create-input:focus {
+  outline: 1px solid rgb(255, 99, 173);
 }
 
 .stepper-final-box {
