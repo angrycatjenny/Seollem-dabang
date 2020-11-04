@@ -117,8 +117,6 @@ const QuestionCreatePage = () => {
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
   const [ noBlank, setNoBlank ] = useState(true);
-  const [ questNum, setQuestNum ] = useState(0);
-  const [ ansNum, setAnsNum ] = useState(0)
   const [exam, setExam] = useState([]);//질문 및 정답 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
   const [selectedValue, setSelectedValue] = useState(1);
@@ -131,10 +129,8 @@ const QuestionCreatePage = () => {
   //백에 보낼 데이터
   //1.질문 리스트
   const contentList = [];
-  const [one, setOne] = useState('')
   //2.정답 리스트
   const correctAnswerList = [];
-  const [two, setTwo] = useState('')
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -171,7 +167,6 @@ const QuestionCreatePage = () => {
       "contentList": contentList,
       "correctAnswerList": correctAnswerList
     }
-    console.log(ExamData,'보낼거')
     axios.post('/question/create', ExamData, config)
       .then(() => {
         setIsLoaded(true);
@@ -226,31 +221,8 @@ const QuestionCreatePage = () => {
         if(SumCnt==cnt){
           setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }else{
-          console.log(SumCnt,'모자름')
           alert('질문이나 답변을 다 채워주세요!')
         }
-        console.log(contentList,'하나')
-        console.log(correctAnswerList,'둘')
-        console.log(one,'1')
-        console.log(two,'2')
-        setOne(contentList)
-        setTwo(correctAnswerList)
-        console.log(one,'3')
-        console.log(two,'4')
-      // checkExam();
-      // console.log(noBlank,'확인')
-      // if(noBlank){
-      //   console.log('11111')
-      //   {exam.map((item) => {
-      //     contentList.push(item.quest)
-      //     correctAnswerList.push(item.ans)
-      //     }
-      //   )}
-      //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      // }else{
-      //   console.log('2222')
-      //   alert('작성되지 않은 칸이 있습니다!')
-      // }
     }
   };
 
