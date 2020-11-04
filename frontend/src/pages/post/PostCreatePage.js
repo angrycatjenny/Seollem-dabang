@@ -22,6 +22,9 @@ import 'react-h5-audio-player/lib/styles.css';
 // Cookie
 import { useCookies } from 'react-cookie';
 
+// Footer
+import FooterComp from '../../components/base/FooterComp';
+
 const PostCreatePage = () => {
   const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -118,6 +121,7 @@ const PostCreatePage = () => {
         </div>
       )}
       <button onClick={sendPostData}>등록하기</button>
+      <FooterComp/>
     </div>
   )
 }
