@@ -34,7 +34,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
-  border: 2px solid green;
+  /* border: 2px solid green; */
+  width: 90%;
 }
 
 .quest-create-input {
@@ -81,11 +82,11 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  border: 2px solid black;
+  border: 2px solid #0d0a0a;
   padding-top: 10px;
 }
 .stepper-custom-btn {
-  color: black;
+  color: #0d0a0a;
   background-color: rgb(255, 99, 173);
   padding: 10px;
 }

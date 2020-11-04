@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:"GmarketSansBold",
   },
   customBtn:{
-    color:"black",
+    color:"#0d0a0a",
     backgroundColor:"rgb(255, 99, 173)"
   },
   icon:{
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   alternativeLabel: {},
   active: {}, //needed so that the &$active tag works
   completed: {},
-  disabled: {},
+  // disabled: {},
   labelContainer: {
     "& $alternativeLabel": {
       marginTop: 0
@@ -277,7 +277,6 @@ const QuestionCreatePage = () => {
             <Step key={label} classes={{
               root: classes.step,
               completed: classes.completed,
-              active: classes.active
             }}>
               <StepLabel
               classes={{
