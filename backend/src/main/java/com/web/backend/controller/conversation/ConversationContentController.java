@@ -39,8 +39,7 @@ public class ConversationContentController {
         Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
         String voiceName = voiceStorageService.storeFile(voice);
         SpeechToText stt = new SpeechToText();
-        stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
-        String text = "AAAA";
+        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
         ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
         conversationContentDao.save(cc);
 

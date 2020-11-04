@@ -1,57 +1,51 @@
 package com.web.backend.controller.conversation;
 
-import com.google.cloud.speech.v1.RecognitionAudio;
-import com.google.cloud.speech.v1.RecognitionConfig;
-import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding;
-import com.google.cloud.speech.v1.RecognizeResponse;
-import com.google.cloud.speech.v1.SpeechClient;
-import com.google.cloud.speech.v1.SpeechRecognitionAlternative;
-import com.google.cloud.speech.v1.SpeechRecognitionResult;
+import com.google.cloud.speech.v1p1beta1.*;
 import com.google.protobuf.ByteString;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
-public class SpeechToText {
 
-    public static void recognitionSpeech(String filePath) throws Exception {
-        // Instantiates a client
+public class SpeechToText{
+
+    public static String recognitionSpeech(String localFilePath) {
         try (SpeechClient speechClient = SpeechClient.create()) {
 
-            // Reads the audio file into memory
-            Path path = Paths.get(filePath);
-            System.out.println(path);
-            System.out.println("QQQQQ");
-            byte[] data = Files.readAllBytes(path);
-            System.out.println(data);
-            System.out.println("WWWWW");
-            ByteString audioBytes = ByteString.copyFrom(data);
-            System.out.println(audioBytes);
-            System.out.println("EEEEE");
+            // The language of the supplied audio
+            String languageCode = "ko-KR";
 
-            // Builds the sync recognize request
+            // Sample rate in Hertz of the audio data sent
+            int sampleRateHertz = 48000;
+
+            // Encoding of audio data sent. This sample sets this explicitly.
+            // This field is optional for FLAC and WAV audio formats.
+            RecognitionConfig.AudioEncoding encoding = RecognitionConfig.AudioEncoding.MP3;
             RecognitionConfig config =
                     RecognitionConfig.newBuilder()
-                            .setEncoding(AudioEncoding.LINEAR16)
-                            .setSampleRateHertz(16000)
-                            .setLanguageCode("ko-KR")
+                            .setLanguageCode(languageCode)
+                            .setSampleRateHertz(sampleRateHertz)
+                            .setEncoding(encoding)
                             .build();
+            Path path = Paths.get(localFilePath);
+            byte[] data = Files.readAllBytes(path);
+            ByteString content = ByteString.copyFrom(data);
 
-            RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(audioBytes).build();
-
-            // Performs speech recognition on the audio file
-            RecognizeResponse response = speechClient.recognize(config, audio);
-            List<SpeechRecognitionResult> results = response.getResultsList();
-            System.out.println(response);
-            System.out.println(results);
-
-            for (SpeechRecognitionResult result : results) {
-                // There can be several alternative transcripts for a given chunk of speech. Just use the
-                // first (most likely) one here.
+            RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(content).build();
+            RecognizeRequest request =
+                    RecognizeRequest.newBuilder().setConfig(config).setAudio(audio).build();
+            RecognizeResponse response = speechClient.recognize(request);
+            String text = new String();
+            for (SpeechRecognitionResult result : response.getResultsList()) {
+                // First alternative is the most probable result
                 SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
-                System.out.printf("Transcription: %s%n", alternative.getTranscript());
+                System.out.printf("Transcript: %s\n", alternative.getTranscript());
+                text+=alternative.getTranscript();
             }
+            return text;
+        } catch (Exception exception) {
+            System.err.println("Failed to create the client due to: " + exception);
         }
+        return null;
     }
 }
