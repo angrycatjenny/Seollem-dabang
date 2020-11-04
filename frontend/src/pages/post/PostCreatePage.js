@@ -20,7 +20,6 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 const PostCreatePage = () => {
-  const [ tags, setTags ] = useState('');
   const [ image, setImage ] = useState('');
   const [ record, setRecord ] = useState(false);
   const [ voice, setVoice ] = useState('');
@@ -89,12 +88,6 @@ const PostCreatePage = () => {
           </button>
         </div>
       )}
-      <h3>태그</h3>
-      <div>
-        <h6>태그1</h6>
-        <Input />
-        <button>추가</button>
-      </div>
     </div>
   )
 }
