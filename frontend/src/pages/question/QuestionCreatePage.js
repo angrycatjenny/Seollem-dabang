@@ -219,7 +219,7 @@ const QuestionCreatePage = () => {
         )}
         let SumCnt = 0;
         for(let i=0; i<cnt; i++){
-          if (contentList[i].length>=1 && (correctAnswerList[i]==1 || correctAnswerList[i]==0)){
+          if (contentList[i].length>0 && correctAnswerList[i]>=0){
             SumCnt++;
           }
         }
@@ -272,7 +272,7 @@ const QuestionCreatePage = () => {
       let objArr = arr.map((_,index) => ({
         key:`${index+1}`,
         quest:'',
-        ans:''
+        ans:-1
       }))
       setExam(objArr)
       //정답 arr
@@ -282,7 +282,7 @@ const QuestionCreatePage = () => {
       }
       let objAns = ans.map((_,index) => ({
         key:`${index+1}`,
-        value:''
+        value:-1
       }))
       setAnswers(objAns)
   }else if (activeStep === 2) {
