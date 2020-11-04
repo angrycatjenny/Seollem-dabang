@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 /// Axios
 import axios from 'axios';
@@ -21,6 +21,9 @@ import 'react-h5-audio-player/lib/styles.css';
 
 // Cookie
 import { useCookies } from 'react-cookie';
+
+// Footer
+import FooterComp from '../../components/base/FooterComp';
 
 const PostCreatePage = () => {
   const history = useHistory();
@@ -118,6 +121,7 @@ const PostCreatePage = () => {
         </div>
       )}
       <button onClick={sendPostData}>등록하기</button>
+      <FooterComp/>
     </div>
   )
 }
