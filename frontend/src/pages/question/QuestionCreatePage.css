@@ -5,18 +5,87 @@
   padding-right: 30px;
 }
 .stepper-btn {
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
 
 .stepper-box {
-  /* border: 2px solid blue; */
+  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .set-quest-box {
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.quest-box {
+  display: flex;
+  justify-content: space-around;
+  /* border: 2px solid red; */
+  width: 90%;
+}
+
+.radio-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 2px solid green;
+}
+
+.quest-create-input {
+  width: 100%;
+}
+
+.stepper-final-box {
+  display: flex;
+  justify-content: center;
+}
+
+.stepper-final-box-comp {
+  /* border: 2px solid black; */
+  margin-bottom: 100px;
+  width: 85%;
+}
+
+.create-final-label {
+  /* border: 2px solid red; */
+  color: rgb(95, 91, 91);
+}
+
+.create-final-quest {
+  /* border: 2px solid blue; */
+  width: 85%;
+}
+
+.create-final-ans {
+  /* border: 2px solid orange; */
+  margin-left: 5px;
+}
+
+.create-final-ans-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+  /* border: 2px solid purple; */
+  width: 88%;
+}
+
+.stepper-exam-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border: 2px solid black;
+  padding-top: 10px;
+}
+.stepper-custom-btn {
+  color: black;
+  background-color: rgb(255, 99, 173);
+  padding: 10px;
 }

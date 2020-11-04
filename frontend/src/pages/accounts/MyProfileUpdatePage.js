@@ -91,7 +91,6 @@ const MyProfileUpdatePage = () => {
   React.useEffect(() => {
     axios.get(`/my-profile`, axiosConfig)
         .then((response) => {
-            console.log(response.data)
             setNickname(response.data.nickname)
             setLocation(response.data.location)
             setObjectURL(response.data.imageDownloadUri)
@@ -110,7 +109,6 @@ const MyProfileUpdatePage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
-    console.log(e.target.files)
     setImagePush(true)
     setImage(e.target.files[0]);
     setObjectURL (URL.createObjectURL(e.target.files[0]))
@@ -150,8 +148,10 @@ const MyProfileUpdatePage = () => {
         .then(() => {
           alert('회원정보 수정완료 되었습니다.')
         })
-        .catch((error) => console.log(error))
-  };
+        .catch(err => {
+          if(err.message==="Request failed with status code 400"){
+          alert('사진에서 얼굴을 찾을 수 없습니다.')
+          }})    };
   return (
     <div>
       <div className={classes.root}>

@@ -14,6 +14,13 @@ const QuestionDetailPage = () => {
     const history = useHistory();
     const [ exam, setExam ] = useState('');
     const [ isExam, setIsExam ] = useState(false);
+
+    //수정 담당 data
+    const [ editId, setEditId ] = useState(-1);
+    const [ editQuest, setEditQuest ] = useState('');
+    const [ editAns, setEditAns ] = useState(null);
+
+    //토큰
     const [cookies, setCookie] = useCookies(['accessToken']);
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
@@ -55,7 +62,7 @@ const QuestionDetailPage = () => {
             })
             .catch((error) => console.log(error))
       }
-  }
+    }
 
   //만들어둔 시험 문제 get
   useEffect(() => {
@@ -92,36 +99,113 @@ const QuestionDetailPage = () => {
         .catch((error) => console.log(error))
     }
 
-    //질문 개별 수정 및 삭제
-    const updateQuest = (Id) => {
-      console.log(Id,'수정')
+    ////질문 개별 수정 및 삭제
+    //수정할 질문 ID 설정
+    const sendEditId = (Id) => {
+      setEditId(Id);
+    //   const targeting = exam.filter((quest) => {
+    //     return quest.name.indexOf(exam) > -1;
+    // });
     }
-
-    const deleteQuest = (Id) => {
-      axios.delete(`/question/delete/${Id}`, config)
+    //질문 수정
+    const EditQuestion = e => {
+      let edited = e.target.value
+      setExam(exam.map((item) =>
+      item.questionId === editId ? {...item, content:edited} : item))
+      setEditQuest(edited)
+    }
+  
+    //정답 수정
+    const EditAnswerYes = (Id) => {
+      setEditAns(true)
+      setExam(exam.map((item) =>
+      item.questionId === Id ? {...item, correctAnswer:true} : item))
+    }
+    const EditAnswerNo = (Id) => {
+      setEditAns(false)
+      setExam(exam.map((item) =>
+      item.questionId === Id ? {...item, correctAnswer:false} : item))
+    }
+    //수정된 데이터 보내기
+    const updateQuest = (Id) => {
+      // console.log(Id,'수정')
+      // console.log(exam,'exam')
+      const ExamData = {
+        "content": editQuest,
+        "correctAnswer": editAns
+      }
+      // console.log(ExamData,'보낼거')
+      axios.put(`/question/update/${Id}`, ExamData, config)
         .then(() => {
-          //push하니까 안됨
-            history.go('/question/detail')
+            history.push('/question/detail')
+            history.go();
         })
         .catch((error) => console.log(error))
+    }
+
+    //삭제
+    const deleteQuest = (Id) => {
+      if(exam.length>5){
+        axios.delete(`/question/delete/${Id}`, config)
+          .then(() => {
+            //push하니까 안됨
+              history.go('/question/detail')
+          })
+          .catch((error) => console.log(error))
+      }else{
+        alert('질문은 최소 5개여야합니다!')
+      }
     }
             
   return (
     <div>
         {exam.map((item) => (
-          <React.Fragment>
-            <div>
-              <h4 key={item.questionId} item={item}>
-                  {item.content}</h4>
-                  {item.correctAnswer ? (
-                      <h6>정답: 예</h6>
-                    ) : (
-                      <h6>정답: 아니요</h6>
-                    )}
-
-              <button onClick={() => updateQuest(item.questionId)}>수정</button>
-              <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
-            </div>
+          <React.Fragment key={item.questionId}>
+            {editId==item.questionId ? (
+              <div key={item.questionId}>
+                <input 
+                type="text"
+                id={item.questionId}
+                value={item.content}
+                onChange={EditQuestion}/>
+                <div>
+                  <Radio
+                    checked={item.correctAnswer}
+                    onChange={() =>EditAnswerYes(item.questionId)}
+                    id={item.questionId}
+                    value="true"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': '예' }}
+                  />예
+                  <Radio
+                    checked={!item.correctAnswer}
+                    onChange={() => EditAnswerNo(item.questionId)}
+                    id={item.questionId}
+                    value="false"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': '아니오' }}
+                  />아니오
+                </div>
+                <button onClick={() => updateQuest(item.questionId)}>완료</button>
+                <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                </div>
+                ) : (
+                  <div style={{display:"flex", flexDirection:"row"}}>
+                    <React.Fragment key={item.questionId}>
+                      <h6 key={item.questionId} item={item}>
+                        {item.content}
+                      </h6>
+                      {item.correctAnswer ? (
+                        <h6>정답: 예</h6>
+                      ) : (
+                        <h6>정답: 아니오</h6>
+                      )}
+                      <button onClick={() => sendEditId(item.questionId)}>수정</button>
+                      <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                    </React.Fragment>
+                  </div>
+                  
+                )}
           </React.Fragment>
         ))}
 

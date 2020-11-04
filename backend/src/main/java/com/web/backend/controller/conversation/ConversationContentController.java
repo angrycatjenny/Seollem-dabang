@@ -34,12 +34,16 @@ public class ConversationContentController {
     UserDao userDao;
 
     @PostMapping("/conversation/create/{conversationId}")
-    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice) {
+    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice) throws Exception {
         User curuser = userDao.getUserById(requser.getId());
         Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
         String voiceName = voiceStorageService.storeFile(voice);
-        ConversationContent cc = new ConversationContent(voiceName,conversation,curuser);
+        SpeechToText stt = new SpeechToText();
+        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
+        ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
         conversationContentDao.save(cc);
+
+
         return new ResponseEntity<>("대화 생성 완료", HttpStatus.OK);
     }
 

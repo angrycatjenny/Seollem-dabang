@@ -9,11 +9,19 @@ import axios from 'axios';
 // Cookie
 import { useCookies } from 'react-cookie';
 
+// React router dom
+import { Link } from 'react-router-dom';
+
+// History
+import { useHistory } from "react-router-dom";
+
 const AnswerResultPage = () => {
+  const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
   const [ loading, setLoading ] = useState(false);
 
-  const [ answer, setAnswer ] = useState('');
+  const [ examiner, setExaminer ] = useState('');
+  const [ score, setScore ] = useState('');
 
   const config = {
     headers: {
@@ -25,9 +33,11 @@ const AnswerResultPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/result', config
+          '/answer/list', config
         );
-        setAnswer(response.data);
+        setExaminer(response.data[0].examiner.id)
+        setScore(response.data[0].correctRate);
+        console.log(response.data)
       } catch (error) {
         console.log(error);
       }
@@ -36,18 +46,35 @@ const AnswerResultPage = () => {
     fetchData();
   }, []);
 
+  const createChatRoom = () => {
+    console.log(examiner)
+    axios.post('/conversation', {examiner}, config)
+      .then((response) => {
+        console.log(response)
+        history.push('/conversation/'+`${response.data}`)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <div>
       <h1>답변 결과</h1>
-      <div>
-        <h1>합격입니다.</h1>
-        <button>채팅하기</button>
-        <button>나가기</button>
-      </div>
-      <div>
-        <h1>불합격입니다.</h1>
-        <button>나가기</button>
-      </div>   
+      <h1>{score * 100}점</h1>
+      {score >= 0.7 && (
+        <div>
+          <h1>합격입니다.</h1>
+          <button onClick={createChatRoom}>채팅하기</button>
+          <Link className="btn btn-light" to="/main">나가기</Link>
+        </div>
+      )}
+      {score < 0.7 && (
+        <div>
+          <h1>불합격입니다.</h1>
+          <Link className="btn btn-light" to="/main">나가기</Link>
+        </div>
+      )}
     </div>
   )
 };

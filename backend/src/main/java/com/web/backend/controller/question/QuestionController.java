@@ -81,8 +81,8 @@ public class QuestionController {
         Question question = questionDao.getQuestionByQuestionId(questionId);
         User curuser = userDao.getUserById(question.getUser().getId());
 
-        answerDao.deleteAll(answerDao.findAnswerByExaminerId(question.getUser().getId()));
         keywordDao.deleteAll(keywordDao.findKeywordByQuestion_questionId(questionId));
+        answerDao.deleteAll(answerDao.findAnswerByExaminerId(question.getUser().getId()));
 
         MorphologicalAnalysis ma = new MorphologicalAnalysis();
         ArrayList<String> words = ma.MorAnalysis(req.getContent());

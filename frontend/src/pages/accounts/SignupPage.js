@@ -101,6 +101,8 @@ const SignupPage = () => {
   const [ record, setRecord ] = useState(false);
   const [ voice, setVoice ] = useState('');
   const [ voiceurl, setVoiceurl ] = useState('');
+  const [ objectURL, setObjectURL ] = useState('');
+  const [ imagePush, setImagePush] = useState(false)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -120,6 +122,25 @@ const SignupPage = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
+  const checkHandle = (k) =>{
+    if(k===1){
+      if(nickname && email && password && passwordconfirm && location && gender && age){
+        if(password === passwordconfirm){
+          handleNext()
+        }else {
+          alert('비밀번호가 일치 하지 않습니다.')
+        }
+      } else{
+        alert('기본 정보를 입력해주세요.')
+      }
+    }else if(k===2){
+      if(image){
+        handleNext()
+      }else {
+        alert('사진을 등록 해 주세요.')
+      }
+    }
+  }
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -156,7 +177,9 @@ const SignupPage = () => {
     setLocation(e.target.value);
   };
   const setImageText = e => {
+    setImagePush(true)
     setImage(e.target.files[0]);
+    setObjectURL (URL.createObjectURL(e.target.files[0]))
   };
 
   const startRecording = () => {
@@ -166,7 +189,6 @@ const SignupPage = () => {
     setRecord(false)
   };
   const onStop = (recordedBlob) => {
-    console.log(recordedBlob);
     setVoice(recordedBlob.blob);
     setVoiceurl(recordedBlob.blobURL);
   };
@@ -177,7 +199,7 @@ const SignupPage = () => {
 
   const sendSignupData = e => {
     e.preventDefault();
-    if (password === passwordconfirm) {
+    if (voice) {
 
       const signupData = new FormData();
       
@@ -194,13 +216,21 @@ const SignupPage = () => {
 
       console.log(signupData, '회원가입 정보')
       axios.post('/signup', signupData)
-        .then(() => {
-          alert('회원가입이 완료되었습니다.')
-          history.push('/login')
+        .then((res) => {
+          if(res.data.message === "This picture has no face!"){
+            alert("사진에서 얼굴을 찾을 수 없습니다.")
+          }else if(res.data.message === "Email is already exist!"){
+            alert("이미 가입 정보가 있는 이메일 입니다.")
+          }else if(res.data.message === "User registered successfully"){
+            alert('회원가입이 완료되었습니다.')
+            history.push('/login')
+          }
         })
-        .catch((error) => console.log(error))
-    } else {
-      alert('비밀번호를 확인하세요.')
+        .catch(err => {
+          console.log(err)
+        })    
+        } else {
+      alert('목소리 녹음을 해주세요.')
     }
   };
 
@@ -311,7 +341,7 @@ const SignupPage = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={()=>checkHandle(1)}
                   className={classes.button}
                 >
                   다음
@@ -328,6 +358,9 @@ const SignupPage = () => {
                 type="file"
                 onChange={setImageText}
               />
+              {imagePush &&
+                <img src={objectURL} alt={objectURL} className="signup-img" />
+              }
               <div className="signup-footer">
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   뒤로
@@ -335,7 +368,7 @@ const SignupPage = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={()=>checkHandle(2)}
                   className={classes.button}
                 >
                   다음

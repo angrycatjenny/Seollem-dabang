@@ -12,10 +12,9 @@ import com.web.backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -29,15 +28,21 @@ public class ConversationController {
 
     @Autowired
     ConversationDao conversationDao;
-    
+
     @PostMapping("/conversation")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody ConversationRequest req) {
         User examinee = userDao.getUserById(requser.getId());
-        Question question = questionDao.getQuestionByQuestionId(req.getQuestionId());
-        User examiner = question.getUser();
+        User examiner = userDao.getUserById(req.getExaminer());
 
-        Conversation conversation = new Conversation(examinee,examiner);
+        Conversation conversation = new Conversation(examinee, examiner);
         conversationDao.save(conversation);
-        return new ResponseEntity<>("대화창 생성 완료", HttpStatus.OK);
+        return conversation.getConversationId();
+    }
+
+    @GetMapping("/conversation/list")
+    public Object getList(@CurrentUser UserPrincipal requser) {
+        ArrayList<Conversation> conversationList = conversationDao.getConversationByExaminerId(requser.getId());
+        conversationList.addAll(conversationDao.getConversationByExamineeId(requser.getId()));
+        return conversationList;
     }
 }

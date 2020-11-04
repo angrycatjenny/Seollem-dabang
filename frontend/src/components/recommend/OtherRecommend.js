@@ -1,76 +1,11 @@
-// import React from 'react';
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import IconButton from '@material-ui/core/IconButton';
-// import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-// import Button from '@material-ui/core/Button';
-// import menImage1 from '../../assets/mainImg/png/남성1.png';
-// import menImage2 from '../../assets/mainImg/png/남성2.png';
-// import menImage3 from '../../assets/mainImg/png/남성3.png';
-// import menImage4 from '../../assets/mainImg/png/남성4.png';
-// import './OtherRecommend.css';
-
-// const OtherRecommend = () => {
-//   const imgData = [menImage1, menImage2, menImage3, menImage4]
-//   const tileData = [
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//     {
-//       title: 'Image',
-//       author: 'author'
-//     },
-//   ]
-//   for (let i = 0; i < tileData.length; i++) {
-//     tileData[i].img = imgData[i]
-//   }
-//   return (
-//     <div className="other-root">
-//       <GridList cellHeight={200} className="other-gridlist">
-//         {tileData.map((tile) => (
-//           <GridListTile key={tile.img} className="other-gridlist-item">
-//             <Button>
-//               <img src={tile.img} alt={tile.title} className="other-imgsize" />
-//             </Button>
-//             <GridListTileBar
-//               title={tile.title}
-//               subtitle={<span>by: {tile.author}</span>}
-//               actionIcon={
-//                 <IconButton aria-label={`info about ${tile.title}`} className="other-icon">
-//                   <RecordVoiceOverIcon color="secondary" />
-//                 </IconButton>
-//               }
-//             />
-//           </GridListTile>
-//         ))}
-//       </GridList>
-//     </div>
-//   );
-// };
-
-// export default OtherRecommend;
-
-
-// 요청 생성 후 음석 재생 및 유저정보 변수에 추가해야 함..
-
 import React from 'react';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import Button from '@material-ui/core/Button';
 import './OtherRecommend.css';
+import AudioPlayer from 'react-modular-audio-player';
 
 import menImage1 from '../../assets/mainImg/png/남성1.png';
 import menImage2 from '../../assets/mainImg/png/남성2.png';
@@ -97,15 +32,15 @@ const OtherRecommend = () => {
   const [cookies] = useCookies(['accessToken']);
 
   const axiosConfig = {
-    headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
+    headers: { 'Authorization': 'Bearer ' + cookies.accessToken }
   }
 
   const getData = () => {
     axios.get(`/recommend-user-by-profile`, axiosConfig)
       .then((response) => {
-        console.log('other',response)
+        console.log('other', response)
         setTileData(response.data)
-        setGender(response.data.gender)
+        setGender(response.data[0].gender)
         setLoading(true)
       })
       .catch((err) => {
@@ -114,28 +49,43 @@ const OtherRecommend = () => {
   }
   React.useEffect(() => {
     getData()
-  },[])
+  }, [])
 
-  if (loading){
+  if (loading) {
     if (gender === 0) {
-        for (let i = 0; i < tileData.length; i++) {
-            tileData[i].img = menImgData[i]
-        }
+      for (let i = 0; i < tileData.length; i++) {
+        tileData[i].img = menImgData[i]
+      }
     } else {
-        for (let i = 0; i < tileData.length; i++) {
-            tileData[i].img = womenImgData[i]
-        }
+      for (let i = 0; i < tileData.length; i++) {
+        tileData[i].img = womenImgData[i]
+      }
     }
-}else{
-    return(
-        <h1>대기 중...</h1>
+  } else {
+    return (
+      <h3>서비스 준비 중 입니다.</h3>
     )
-}
+  }
 
-if(!tileData){
+  if (!tileData) {
     return null
-}
-
+  }
+  let rearrangedPlayer = [
+    {
+      className: "adele",
+      innerComponents: [
+        {
+          type: "play",
+          style: {
+            width: "100%",
+            justifyContent: "center",
+            filter: "invert(100%)",
+            opacity: "0.4"
+          }
+        }
+      ]
+    }
+  ];
 
   return (
     <div className="other-root">
@@ -150,8 +100,18 @@ if(!tileData){
               subtitle={<span>{tile.location}, {tile.age}세</span>}
               actionIcon={
                 <IconButton className="other-icon">
-                  <RecordVoiceOverIcon color="secondary" />
-                </IconButton>
+                  <AudioPlayer
+                    audioFiles={[
+                      {
+                        src: `${tile.voiceDownloadUri}`,
+                        title: "voiceDownloadUri",
+                      }
+                    ]}
+                    rearrange={rearrangedPlayer}
+                    playerWidth="50px"
+                    iconSize="50px"
+                  />                
+                  </IconButton>
               }
             />
           </GridListTile>

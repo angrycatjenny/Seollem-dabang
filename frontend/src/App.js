@@ -1,12 +1,13 @@
 import React from 'react';
 
 // Bootstrap
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
 // Router
 import { Route, withRouter } from 'react-router-dom';
 
-// base
+// Base
 import MainPage from './pages/base/MainPage';
 import HomePage from './pages/base/HomePage';
 
@@ -36,6 +37,11 @@ import HeaderComp from './components/base/HeaderComp';
 // Footer
 import FooterComp from './components/base/FooterComp';
 
+// Post
+import PostCreatePage from './pages/post/PostCreatePage';
+import PostListPage from './pages/post/PostListPage';
+import PostUpdatePage from './pages/post/PostUpdatePage';
+
 import { useCookies } from 'react-cookie';
 
 const App = () => {
@@ -63,12 +69,17 @@ const App = () => {
       <Route component={QuestionDetailPage} path="/question/detail" />      
 
       {/* Answer */}
-      <Route component={AnswerCreatePage} path="/answer" />
+      <Route component={AnswerCreatePage} path="/answer/:userId" />
       <Route component={AnswerResultPage} path="/result" />
 
       {/* Conversation */}
       <Route component={ConversationListPage} exact path="/conversation" /> 
       <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+
+      {/* Conversation */}
+      <Route component={PostCreatePage} exact path="/post/create" /> 
+      <Route component={PostListPage} path="/post/list" />
+      <Route component={PostUpdatePage} path="/post/update/:postId" />
       
       {/* Footer */}
       {cookies.accessToken && <FooterComp />}

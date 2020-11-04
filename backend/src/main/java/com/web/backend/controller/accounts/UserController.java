@@ -2,6 +2,7 @@ package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.keyword.KeywordDao;
+import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
 import com.web.backend.payload.accounts.*;
@@ -50,6 +51,9 @@ public class UserController {
     KeywordDao keywordDao;
 
     @Autowired
+    QuestionDao questionDao;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -81,14 +85,17 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
+        if(image == null) {
+            return ResponseEntity.ok(new ApiResponse(false, "Picture could not found"));
+        }
         if(!kakaoVisionService.getResponse(image)) {
-            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "This picture has no face!"));
         }
         if(userDao.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email is already exist!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "Email is already exist!"));
         }
         if(userDao.existsByNickname(signUpRequest.getNickname())) {
-            return new ResponseEntity(new ApiResponse(false, "Nickname is already exist!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "Nickname is already exist!"));
         }
 
         String imageName = imageStorageService.storeFile(image);
@@ -161,7 +168,7 @@ public class UserController {
     public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
 
         if(image != null && !kakaoVisionService.getResponse(image)) {
-            return new ResponseEntity(new ApiResponse(false, "This picture has no face!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(new ApiResponse(false, "This picture has no face!"));
         }
         
         User user = userDao.getUserById(requestUser.getId());
@@ -234,15 +241,22 @@ public class UserController {
                 break;
             }
         }
+
+        boolean examExist = questionDao.existsByUserId(curuser.getId());
+        int isExam = 0;
+        if(examExist){
+            isExam=1;
+        }
+
         HashMap<String,Integer> nullData = new HashMap<String,Integer>();
-        nullData.put("is_exam",0);
+        nullData.put("is_exam",isExam);
         nullData.put("gender",curuser.getGender());
 
         if(recommendedUserList.isEmpty()){
             return nullData;
         }
-
-        RecommendResponse userList = new RecommendResponse(1, curuser.getGender(), recommendedUserList);
+        
+        RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
         return userList;
     }
 }
