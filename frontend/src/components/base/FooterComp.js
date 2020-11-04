@@ -33,10 +33,10 @@ export default function FooterComp() {
       showLabels
       className="navbar-footer"
     >
-      <BottomNavigationAction onClick={() => history.push('/main')} label=""  icon={<HomeRoundedIcon />} />
-      <BottomNavigationAction onClick={() => history.push('/question')} label="" icon={<AssignmentRoundedIcon />} />
-      <BottomNavigationAction onClick={() => history.push('/conversation')} label=""  icon={<SmsIcon />} />
-      <BottomNavigationAction onClick={() => history.push(`/post/list`)} label=""  icon={<RecordVoiceOverIcon />} />
+      <BottomNavigationAction onClick={() => history.push('/main')} label="홈"  icon={<HomeRoundedIcon />} />
+      <BottomNavigationAction onClick={() => history.push('/question')} label="시험지" icon={<AssignmentRoundedIcon />} />
+      <BottomNavigationAction onClick={() => history.push('/conversation')} label="채팅"  icon={<SmsIcon />} />
+      <BottomNavigationAction onClick={() => history.push(`/post/list`)} label="피드"  icon={<RecordVoiceOverIcon />} />
     </BottomNavigation>
   );
 }
