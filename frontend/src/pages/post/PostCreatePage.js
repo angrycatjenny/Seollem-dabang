@@ -19,7 +19,12 @@ import { ReactMic } from 'react-mic';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
+// Cookie
+import { useCookies } from 'react-cookie';
+
 const PostCreatePage = () => {
+  const history = useHistory();
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
   const [ url, setUrl ] = useState('');
   const [ image, setImage ] = useState('');
   const [ record, setRecord ] = useState(false);
@@ -44,12 +49,33 @@ const PostCreatePage = () => {
     setVoice('');
     setVoiceurl('');
   };
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + cookies.accessToken
+    }
+  }
+  const sendPostData = () => {
+    const postData = new FormData();
+
+    const imageFileName = Date.now();
+    const voiceFileName = Date.now();
+
+    postData.append('voice', voice, 'voice'+ voiceFileName);
+    postData.append('image', image, 'image' + imageFileName);
+    axios.post('/post', postData, config)
+      .then(() => {
+        console.log(postData)
+        history.push('/post/list')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <div>
       <h1>게시물 등록 페이지</h1>
 
-      {/* 사진 */}
       <h3>사진</h3>
       <img src={url} />
       <Input
@@ -58,13 +84,13 @@ const PostCreatePage = () => {
         onChange={setImageText}
       />
 
-      {/* 음성 */}
       <h3>음성</h3>
       {!voice && (
         <div>
           <ReactMic
             record={record}
             className="sound-wave w-100"
+            mimeType="audio/mp3"
             onStop={onStop}
             strokeColor="black"
             backgroundColor="lightgray" />
@@ -91,6 +117,7 @@ const PostCreatePage = () => {
           </button>
         </div>
       )}
+      <button onClick={sendPostData}>등록하기</button>
     </div>
   )
 }
