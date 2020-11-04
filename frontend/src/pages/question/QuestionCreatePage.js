@@ -22,7 +22,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 // CSS
 import '../../App.css';
 import './QuestionCreatePage.css';
@@ -36,8 +35,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  backButton: {
+  backBtn: {
     marginRight: theme.spacing(1),
+    backgroundColor:"#895BC7",
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -47,14 +47,16 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:"GmarketSansBold",
   },
   customBtn:{
-    color:"black",
+    color:"#0d0a0a",
     backgroundColor:"rgb(255, 99, 173)"
+  },
+  cancelBtn:{
+    color:"#FFFAFF",
+    backgroundColor:"#0D0A0A"
   },
   icon:{
     color:"pink !important"
   },
-
-
 
   labelContainer: {
     "& $alternativeLabel": {
@@ -75,13 +77,33 @@ const useStyles = makeStyles((theme) => ({
   alternativeLabel: {},
   active: {}, //needed so that the &$active tag works
   completed: {},
-  disabled: {},
+  // disabled: {},
   labelContainer: {
     "& $alternativeLabel": {
       marginTop: 0
     }
   },
 }));
+
+const YesRadio = withStyles({
+  root: {
+    color: "#FF63AD",
+    '&$checked': {
+      color: "#FF63AD",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
+
+const NoRadio = withStyles({
+  root: {
+    color: "#895BC7",
+    '&$checked': {
+      color: "#895BC7",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 function getSteps() {
   return ['질문 개수', '시험지 작성', '미리보기'];
@@ -94,7 +116,9 @@ const QuestionCreatePage = () => {
   const history = useHistory();
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [ noBlank, setNoBlank ] = useState(true)
+  const [ noBlank, setNoBlank ] = useState(true);
+  const [ questNum, setQuestNum ] = useState(0);
+  const [ ansNum, setAnsNum ] = useState(0)
   const [exam, setExam] = useState([]);//질문 및 정답 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
   const [selectedValue, setSelectedValue] = useState(1);
@@ -193,6 +217,18 @@ const QuestionCreatePage = () => {
           correctAnswerList.push(item.ans)
           }
         )}
+        let SumCnt = 0;
+        for(let i=0; i<cnt; i++){
+          if (contentList[i].length>=1 && (correctAnswerList[i]==1 || correctAnswerList[i]==0)){
+            SumCnt++;
+          }
+        }
+        if(SumCnt==cnt){
+          setActiveStep((prevActiveStep) => prevActiveStep + 1)
+        }else{
+          console.log(SumCnt,'모자름')
+          alert('질문이나 답변을 다 채워주세요!')
+        }
         console.log(contentList,'하나')
         console.log(correctAnswerList,'둘')
         console.log(one,'1')
@@ -201,7 +237,6 @@ const QuestionCreatePage = () => {
         setTwo(correctAnswerList)
         console.log(one,'3')
         console.log(two,'4')
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       // checkExam();
       // console.log(noBlank,'확인')
       // if(noBlank){
@@ -266,7 +301,7 @@ const QuestionCreatePage = () => {
       <div className="cancel-btn">
         <Link to="/question">
           <Button variant="contained"
-          className={classes.button}
+          className={classes.cancelBtn}
           >취소</Button></Link>
       </div>
       {/* stepper */}
@@ -280,7 +315,6 @@ const QuestionCreatePage = () => {
             <Step key={label} classes={{
               root: classes.step,
               completed: classes.completed,
-              active: classes.active
             }}>
               <StepLabel
               classes={{
@@ -337,7 +371,7 @@ const QuestionCreatePage = () => {
                       </label>
                     </div>
                     <div className="radio-box">
-                      <Radio
+                      <YesRadio
                         checked={item.ans===1}
                         onChange={onChangeAnsYes}
                         id={item.key}
@@ -345,7 +379,7 @@ const QuestionCreatePage = () => {
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '예' }}
                       /><div>예</div>
-                      <Radio
+                      <NoRadio
                         checked={item.ans===0}
                         onChange={onChangeAnsNo}
                         id={item.key}
@@ -361,7 +395,7 @@ const QuestionCreatePage = () => {
               <div className="stepper-btn">
                 <Button
                   onClick={handleBack}
-                  className={classes.backButton}
+                  className={classes.backBtn}
                 >
                   이전
                 </Button>
@@ -369,7 +403,7 @@ const QuestionCreatePage = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
+                  className={classes.customBtn}
                 >
                   다음
                 </Button>
@@ -417,7 +451,7 @@ const QuestionCreatePage = () => {
                     <Button
                       variant="contained"
                       onClick={handleReset}
-                      className={classes.customBtn}
+                      className={classes.backBtn}
                       >
                       다시 만들기
                     </Button>
