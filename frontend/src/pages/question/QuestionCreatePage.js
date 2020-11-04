@@ -22,7 +22,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 // CSS
 import '../../App.css';
 import './QuestionCreatePage.css';
@@ -56,8 +55,6 @@ const useStyles = makeStyles((theme) => ({
     color:"pink !important"
   },
 
-
-
   labelContainer: {
     "& $alternativeLabel": {
       marginTop: 0
@@ -84,6 +81,16 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 }));
+
+const YesRadio = withStyles({
+  root: {
+    color: "#FF63AD",
+    '&$checked': {
+      color: "#FF63AD",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 function getSteps() {
   return ['질문 개수', '시험지 작성', '미리보기'];
@@ -338,7 +345,7 @@ const QuestionCreatePage = () => {
                       </label>
                     </div>
                     <div className="radio-box">
-                      <Radio
+                      <YesRadio
                         checked={item.ans===1}
                         onChange={onChangeAnsYes}
                         id={item.key}
