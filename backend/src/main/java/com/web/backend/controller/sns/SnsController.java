@@ -88,6 +88,8 @@ public class SnsController {
 
         String voiceName = voiceStorageService.storeFile(voice);
         String imageName = imageStorageService.storeFile(image);
+        SpeechToText stt = new SpeechToText();
+        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
 
         //-----------------태그----------------------
 //        ArrayList<Tag> tags = new ArrayList<>();
@@ -103,6 +105,7 @@ public class SnsController {
 
         sns.setVoice(voiceName);
         sns.setImage(imageName);
+        sns.setText(text);
         snsDao.save(sns);
 
         return sns;
