@@ -7,8 +7,9 @@
 .stepper-btn {
   margin-top: 20px;
   display: flex;
-  justify-content: flex-start;
-  margin-right: 15px;
+  justify-content: center;
+  margin-right: 17px;
+  /* border: 2px solid red; */
 }
 
 .stepper-box {
@@ -53,7 +54,10 @@
 }
 
 .stepper-final-box-comp {
-  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 2px solid blue; */
   margin-bottom: 100px;
   width: 85%;
 }
@@ -83,6 +87,7 @@
 }
 
 .stepper-exam-preview {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

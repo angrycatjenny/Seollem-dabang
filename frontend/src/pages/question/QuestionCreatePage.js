@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  backButton: {
+  backBtn: {
     marginRight: theme.spacing(1),
     backgroundColor:"#895BC7",
   },
@@ -87,6 +87,16 @@ const YesRadio = withStyles({
     color: "#FF63AD",
     '&$checked': {
       color: "#FF63AD",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
+
+const NoRadio = withStyles({
+  root: {
+    color: "#895BC7",
+    '&$checked': {
+      color: "#895BC7",
     },
   },
   checked: {},
@@ -353,7 +363,7 @@ const QuestionCreatePage = () => {
                         name="radio-button-demo"
                         inputProps={{ 'aria-label': '예' }}
                       /><div>예</div>
-                      <Radio
+                      <NoRadio
                         checked={item.ans===0}
                         onChange={onChangeAnsNo}
                         id={item.key}
@@ -369,7 +379,7 @@ const QuestionCreatePage = () => {
               <div className="stepper-btn">
                 <Button
                   onClick={handleBack}
-                  className={classes.backButton}
+                  className={classes.backBtn}
                 >
                   이전
                 </Button>
@@ -425,7 +435,7 @@ const QuestionCreatePage = () => {
                     <Button
                       variant="contained"
                       onClick={handleReset}
-                      className={classes.customBtn}
+                      className={classes.backBtn}
                       >
                       다시 만들기
                     </Button>
