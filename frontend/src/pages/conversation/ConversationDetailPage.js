@@ -111,6 +111,7 @@ const ConversationDetailPage = ({ match }) => {
         <div>
           <ReactMic
             record={record}
+            mimeType="audio/mp3"
             className="sound-wave w-100"
             onStop={onStop}
             strokeColor="black"
