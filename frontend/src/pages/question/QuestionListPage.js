@@ -5,7 +5,8 @@ import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
 import './QuestionListPage.css';
-
+//Footer
+import FooterComp from '../../components/base/FooterComp';
 const QuestionListPage = () => {
   const history = useHistory();
   const [ exam, setExam ] = useState(null);
@@ -107,6 +108,7 @@ const QuestionListPage = () => {
         ) : (
           <Link to="/question/create"><button>시험지+</button></Link>
         )} */}
+      <FooterComp/>
     </div>
   );
   };

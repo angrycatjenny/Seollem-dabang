@@ -19,6 +19,8 @@ import 'react-h5-audio-player/lib/styles.css';
 // History
 import { useHistory } from "react-router-dom";
 
+import FooterComp from '../../components/base/FooterComp';
+
 const ConversationDetailPage = ({ match }) => {
   const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -140,6 +142,7 @@ const ConversationDetailPage = ({ match }) => {
         </div>
       )}
       <button onClick={sendMessage}>등록</button>
+      <FooterComp/>
     </div>
   )
 };
