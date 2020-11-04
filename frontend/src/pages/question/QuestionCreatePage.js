@@ -113,7 +113,9 @@ const QuestionCreatePage = () => {
   const history = useHistory();
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [ noBlank, setNoBlank ] = useState(true)
+  const [ noBlank, setNoBlank ] = useState(true);
+  const [ questNum, setQuestNum ] = useState(0);
+  const [ ansNum, setAnsNum ] = useState(0)
   const [exam, setExam] = useState([]);//질문 및 정답 모음
   const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
   const [selectedValue, setSelectedValue] = useState(1);
@@ -212,6 +214,18 @@ const QuestionCreatePage = () => {
           correctAnswerList.push(item.ans)
           }
         )}
+        let SumCnt = 0;
+        for(let i=0; i<cnt; i++){
+          if (contentList[i].length>=1 && (correctAnswerList[i]==1 || correctAnswerList[i]==0)){
+            SumCnt++;
+          }
+        }
+        if(SumCnt==cnt){
+          setActiveStep((prevActiveStep) => prevActiveStep + 1)
+        }else{
+          console.log(SumCnt,'모자름')
+          alert('질문이나 답변을 다 채워주세요!')
+        }
         console.log(contentList,'하나')
         console.log(correctAnswerList,'둘')
         console.log(one,'1')
@@ -220,7 +234,6 @@ const QuestionCreatePage = () => {
         setTwo(correctAnswerList)
         console.log(one,'3')
         console.log(two,'4')
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       // checkExam();
       // console.log(noBlank,'확인')
       // if(noBlank){
