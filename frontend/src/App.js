@@ -35,7 +35,7 @@ import ConversationDetailPage from './pages/conversation/ConversationDetailPage'
 import HeaderComp from './components/base/HeaderComp';
 
 // Footer
-import FooterComp from './components/base/FooterComp';
+// import FooterComp from './components/base/FooterComp';
 
 // Post
 import PostCreatePage from './pages/post/PostCreatePage';
@@ -82,7 +82,6 @@ const App = () => {
       <Route component={PostUpdatePage} path="/post/update/:postId" />
       
       {/* Footer */}
-      {cookies.accessToken && <FooterComp />}
     </>
   );
 };
