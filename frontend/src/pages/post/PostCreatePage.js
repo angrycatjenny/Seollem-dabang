@@ -20,6 +20,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 const PostCreatePage = () => {
+  const [ url, setUrl ] = useState('');
   const [ image, setImage ] = useState('');
   const [ record, setRecord ] = useState(false);
   const [ voice, setVoice ] = useState('');
@@ -27,6 +28,7 @@ const PostCreatePage = () => {
 
   const setImageText = e => {
     setImage(e.target.files[0]);
+    setUrl(URL.createObjectURL(e.target.files[0]))
   };
   const startRecording = () => {
     setRecord(true);
@@ -49,6 +51,7 @@ const PostCreatePage = () => {
 
       {/* 사진 */}
       <h3>사진</h3>
+      <img src={url} />
       <Input
         className="signup-input"
         type="file"
