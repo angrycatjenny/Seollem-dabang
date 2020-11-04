@@ -59,7 +59,7 @@ public class QuestionController {
             }
         }
 
-        return new ResponseEntity<>("게시글 등록 완료",HttpStatus.OK);
+        return new ResponseEntity<>("질문 등록 완료",HttpStatus.OK);
     }
 
     @GetMapping("/list")
