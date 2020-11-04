@@ -206,6 +206,7 @@ public class UserController {
     public Object recUserByProfile(@CurrentUser UserPrincipal requser){
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
+
         int gender = user.getGender();
         if(gender==1){
             gender=0;
@@ -228,13 +229,9 @@ public class UserController {
         if(curuser.getGender()==0){
             gender=1;
         }
-        System.out.println(curuser.getGender());
-        System.out.println(gender);
         
         List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
         List<User> solvedUsers = answerDao.getUserByExamineeId(curuser.getId());
-        System.out.println(allUsers);
-        System.out.println("AAAAA");
 
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(User user:allUsers){
