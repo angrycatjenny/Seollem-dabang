@@ -7,7 +7,8 @@ import { useHistory } from "react-router-dom";
 import './QuestionDetailPage.css';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
-
+//Footer
+import FooterComp from '../../components/base/FooterComp';
 //완료: 질문 추가, 시험지 전체 삭제, 질문 삭제
 //아직: 질문 수정
 const QuestionDetailPage = () => {
@@ -250,6 +251,7 @@ const QuestionDetailPage = () => {
         </Link>
         <button className="exam-delete-btn"
         onClick={delExam}>시험지 삭제</button>
+        <FooterComp/>
     </div>
   );
   };

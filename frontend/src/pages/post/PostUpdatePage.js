@@ -12,10 +12,14 @@ import { useHistory } from "react-router-dom";
 // CSS
 import './PostUpdatePage.css';
 
+// Footer
+import FooterComp from '../../components/base/FooterComp';
+
 const PostUpdatePage = () => {
   return (
     <div>
       <h1>게시물 수정 페이지</h1>
+      <FooterComp/>
     </div>
   )
 }

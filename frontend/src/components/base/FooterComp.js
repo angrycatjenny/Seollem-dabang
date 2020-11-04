@@ -14,7 +14,6 @@ export default function FooterComp() {
   let [value, setValue] = React.useState();
   const history = useHistory();
   const match = useRouteMatch();
-  console.log(match)
   if (match.path ==='/main'){
     value = 0
   }else if (match.path==='/question'||match.path==='/question/create'||match.path==='/question/update'){

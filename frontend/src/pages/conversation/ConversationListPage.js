@@ -20,6 +20,9 @@ import './ConversationListPage.css';
 
 import { Link } from 'react-router-dom';
 
+//Footer
+import FooterComp from '../../components/base/FooterComp';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -95,6 +98,7 @@ const ConversationListPage = () => {
           ))}
         </List>
       </div>
+      <FooterComp/>
     </div>
   )
 };

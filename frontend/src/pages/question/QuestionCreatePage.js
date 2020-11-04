@@ -28,6 +28,9 @@ import '../../App.css';
 import './QuestionCreatePage.css';
 import { ContactsOutlined, SignalWifi1BarLock } from '../../../node_modules/@material-ui/icons/index';
 
+//Footer
+import FooterComp from '../../components/base/FooterComp';
+
 //style
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -433,6 +436,7 @@ const QuestionCreatePage = () => {
           )}
         </div>
       </div>
+      <FooterComp/>
     </>
   );
   };
