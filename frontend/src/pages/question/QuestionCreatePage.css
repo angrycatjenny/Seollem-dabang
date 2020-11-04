@@ -44,7 +44,7 @@
 }
 
 .quest-create-input:focus {
-  outline: 1px solid rgb(255, 99, 173);
+  outline-color: rgb(255, 99, 173);
 }
 
 .stepper-final-box {
