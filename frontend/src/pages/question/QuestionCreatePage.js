@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
     color:"#0d0a0a",
     backgroundColor:"rgb(255, 99, 173)"
   },
+  customBtn:{
+
+  },
   cancelBtn:{
     color:"#FFFAFF",
     backgroundColor:"#0D0A0A"
