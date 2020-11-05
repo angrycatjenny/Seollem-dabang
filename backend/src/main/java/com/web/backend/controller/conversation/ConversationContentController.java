@@ -43,7 +43,6 @@ public class ConversationContentController {
         ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
         conversationContentDao.save(cc);
 
-
         return new ResponseEntity<>("대화 생성 완료", HttpStatus.OK);
     }
 

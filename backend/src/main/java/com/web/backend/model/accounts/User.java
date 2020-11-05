@@ -42,6 +42,8 @@ public class User extends DateAudit {
 
     private String voiceDownloadUri;
 
+    private boolean isExam;
+
     public User() { }
 
     public User(String email, String password, String nickname, String location, int gender, int age) {
@@ -51,6 +53,7 @@ public class User extends DateAudit {
         this.location = location;
         this.gender = gender;
         this.age = age;
+        this.isExam=false;
     }
 
     public Long getId() {
@@ -101,6 +104,10 @@ public class User extends DateAudit {
         this.gender =gender;
     }
 
+    public boolean getIsExam(){ return isExam ;}
+
+    public void setIsExam(boolean isExam){ this.isExam=isExam ;}
+
     public int getAge() {
         return age;
     }
@@ -124,4 +131,5 @@ public class User extends DateAudit {
     public String getVoiceDownloadUri() { return voiceDownloadUri; }
 
     public void setVoiceDownloadUri(String voiceDownloadUri) { this.voiceDownloadUri = voiceDownloadUri; }
+
 }

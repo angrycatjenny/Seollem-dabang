@@ -1,6 +1,7 @@
 package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
+import com.web.backend.dao.answer.AnswerDao;
 import com.web.backend.dao.keyword.KeywordDao;
 import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.Keyword.Keyword;
@@ -52,6 +53,9 @@ public class UserController {
 
     @Autowired
     QuestionDao questionDao;
+
+    @Autowired
+    AnswerDao answerDao;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -202,6 +206,7 @@ public class UserController {
     public Object recUserByProfile(@CurrentUser UserPrincipal requser){
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
+
         int gender = user.getGender();
         if(gender==1){
             gender=0;
@@ -220,13 +225,14 @@ public class UserController {
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
 
-        int gender = 0;
+        int gender = curuser.getGender();
         if(curuser.getGender()==0){
             gender=1;
         }
         
-        List<User> allUsers = userDao.getUserByGender(gender);
-        allUsers.remove(curuser);
+        List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
+        List<User> solvedUsers = answerDao.getUserByExamineeId(curuser.getId());
+
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(User user:allUsers){
             List<String> othersKeywords = keywordDao.findWordByUserId(user.getId());

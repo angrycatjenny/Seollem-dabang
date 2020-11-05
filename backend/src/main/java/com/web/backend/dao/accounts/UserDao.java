@@ -25,8 +25,8 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     List<User> getUserByAgeAndGenderAndLocation(int age, int gender, String Location);
 
-    List<User> getUserByGender(int gender);
+    List<User> getUserByGenderAndIsExam(int gender,Boolean isExam);
 
-    @Query(value = "SELECT * FROM user u WHERE u.age >= :low AND u.age <= :high AND u.location = :location AND u.gender = :gender",nativeQuery = true)
+    @Query(value = "SELECT * FROM user u WHERE u.age >= :low AND u.age <= :high AND u.location = :location AND u.gender = :gender AND u.isExam = true",nativeQuery = true)
     List<User> findUserByProfile(@Param("low") int low, @Param("high") int high, @Param("location") String location, @Param("gender") int gender);
 }
