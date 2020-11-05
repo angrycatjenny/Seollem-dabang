@@ -21,11 +21,12 @@ const QuestionDetailPage = () => {
     const [ editQuest, setEditQuest ] = useState('');
     const [ editAns, setEditAns ] = useState(null);
 
-    //토큰
+    //유저 정보
     const [cookies, setCookie] = useCookies(['accessToken']);
     const config = {
       headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
     }
+    const [ nickname, setNickname ] = useState('')
 
     //새로운 질문 추가
     const [ newQuest, setNewQuest  ] = useState('')
@@ -81,6 +82,11 @@ const QuestionDetailPage = () => {
       };
       fetchData();
     },1000);
+    //유저 정보 가져오기  
+    axios.get('/my-profile', config)
+    .then((response) => {
+      setNickname(response.data.nickname)
+    })
     }, []);
 
       if(isExam){
@@ -159,8 +165,15 @@ const QuestionDetailPage = () => {
     }
             
   return (
-    <div>
-        {exam.map((item) => (
+    <React.Fragment>
+      <div className="stepper-final-box-comp">
+          <div className="stepper-exam-preview">
+            <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
+            <h4>연애 능력 고사</h4>
+            <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
+            <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+            
+            {exam.map((item) => (
           <React.Fragment key={item.questionId}>
             {editId==item.questionId ? (
               <div key={item.questionId}>
@@ -191,25 +204,42 @@ const QuestionDetailPage = () => {
                 <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
                 </div>
                 ) : (
-                  <div style={{display:"flex", flexDirection:"row"}}>
-                    <React.Fragment key={item.questionId}>
-                      <h6 key={item.questionId} item={item}>
-                        {item.content}
-                      </h6>
-                      {item.correctAnswer ? (
-                        <h6>정답: 예</h6>
-                      ) : (
-                        <h6>정답: 아니오</h6>
-                      )}
-                      <button onClick={() => sendEditId(item.questionId)}>수정</button>
-                      <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
-                    </React.Fragment>
+              <div style={{border:"2px solid red", width:"100%",}}>
+                <React.Fragment key={item.questionId}>
+                  <div key={item.questionId} className="quest-box">
+                    <label className="create-final-label">{exam.indexOf(item)+1}번</label>
+                    <div className="create-final-quest">{item.content}</div>
                   </div>
-                  
+                  <div className="create-final-ans-box">
+                    <div className="create-final-label">정답: </div>
+                    {item.correctAnswer 
+                    ?
+                    <div className="create-final-ans">
+                      예
+                    </div> 
+                    :
+                    <div className="create-final-ans">
+                      아니오
+                    </div>}
+                  </div>
+                    <button onClick={() => sendEditId(item.questionId)}>수정</button>
+                    <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
+                </React.Fragment>
+              </div>
                 )}
           </React.Fragment>
         ))}
-
+          </div>
+        
+          <div className="stepper-btn">
+            {/* 목록으로 돌아가기 & 시험지 통째로 삭제 */}
+        <Link to="/question">
+            <button className="exam-update-btn">취소</button>
+        </Link>
+        <button className="exam-delete-btn"
+        onClick={delExam}>시험지 삭제</button>
+          </div>
+          <div className="quest-detail-box">
         {/* 질문 추가 부분 */}
         <div className="new-quest-box">
           <TextField
@@ -244,15 +274,10 @@ const QuestionDetailPage = () => {
         </div>
         <button onClick={addNewQuest}>추가</button>
         <br />
-        
-        {/* 목록으로 돌아가기 & 시험지 통째로 삭제 */}
-        <Link to="/question">
-            <button className="exam-update-btn">취소</button>
-        </Link>
-        <button className="exam-delete-btn"
-        onClick={delExam}>시험지 삭제</button>
-        <FooterComp/>
     </div>
+        </div>
+      <FooterComp/>
+    </React.Fragment>
   );
   };
   
