@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
@@ -42,25 +42,13 @@ import PostCreatePage from './pages/post/PostCreatePage';
 import PostListPage from './pages/post/PostListPage';
 import PostUpdatePage from './pages/post/PostUpdatePage';
 
-import { UserMediaError, useUserMediaFromContext } from "@vardius/react-user-media";
-import Video from "./pages/call/Video";
-import UserMediaActions from "./pages/call/UserMediaActions";
-import Room from "./pages/call/Room";
-import RoomForm from "./pages/call/RoomForm";
+// Call
+import CallPage from './pages/call/CallPage';
 
 import { useCookies } from 'react-cookie';
 
 const App = () => {
   const [cookies, setCookie] = useCookies(['accessToken']);
-
-  const [room, setRoom] = useState(null);
-  const [username, setUsername] = useState(null);
-  const { stream, error } = useUserMediaFromContext();
-
-  const handleJoin = values => {
-    setRoom(values.room);
-    setUsername(values.username);
-  };
 
   return (
     <>
@@ -95,35 +83,14 @@ const App = () => {
         <Route component={PostCreatePage} exact path="/post/create" />
         <Route component={PostListPage} path="/post/list" />
         <Route component={PostUpdatePage} path="/post/update/:postId" />
+        
+        {/* Call */}
+        <Route component={CallPage} path="/call" />
 
         {/* PageNotFound */}
         <Route component={PageNotFound} path='*' />
 
       </Switch>
-      <div className="container-fluid">
-      {room && username ? (
-        <Room name={room} username={username} stream={stream} />
-      ) : (
-        <Fragment>
-          {error && (
-            <div className="row justify-content-center mt-2">
-              <UserMediaError error={error} />
-            </div>
-          )}
-          <div className="row justify-content-center mt-2">
-            <RoomForm onJoin={handleJoin} />
-          </div>
-          <div className="row justify-content-center mt-2">
-            <UserMediaActions stream={stream} />
-          </div>
-          {stream && (
-            <div className="row justify-content-center mt-2">
-              <Video stream={stream} autoPlay muted />
-            </div>
-          )}
-        </Fragment>
-      )}
-    </div>
     </>
   );
 };
