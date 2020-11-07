@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { EventDispatcher } from "peer-data";
 import { PeerDataProvider } from "react-peer-data";
 import { UserMediaProvider } from "@vardius/react-user-media";
-import "theme/scss/styles.scss";
+import "./theme/scss/styles.scss";
 
 const dispatcher = new EventDispatcher();
 const iceServers = [

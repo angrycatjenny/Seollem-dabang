@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Participant from "call/Participant";
+import Participant from "./Participant";
 
-import styles from "call/ParticipantList.module.scss";
+import styles from "./ParticipantList.module.scss";
 
 function ParticipantList({ participants, streams }) {
   return (

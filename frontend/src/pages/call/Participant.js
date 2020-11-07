@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Video from "call/Video";
+import Video from "./Video";
 
 function Participant({ stream, ...props }) {
   if (!stream) {

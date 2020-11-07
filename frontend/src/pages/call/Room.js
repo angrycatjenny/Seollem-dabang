@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { usePeerData } from "react-peer-data";
-import SidebarActions from "call/SidebarActions";
-import UserMediaActions from "call/UserMediaActions";
-import MessageForm from "call/MessageForm";
-import MessageList from "call/MessageList";
-import ParticipantList from "call/ParticipantList";
-import Video from "call/Video";
+import SidebarActions from "./SidebarActions";
+import UserMediaActions from "./UserMediaActions";
+import MessageForm from "./MessageForm";
+import MessageList from "./MessageList";
+import ParticipantList from "./ParticipantList";
+import Video from "./Video";
 
-import styles from "call/Room.module.scss";
+import styles from "./Room.module.scss";
 
 const initialState = { participants: {}, streams: {} };
 
