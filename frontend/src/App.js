@@ -42,6 +42,9 @@ import PostCreatePage from './pages/post/PostCreatePage';
 import PostListPage from './pages/post/PostListPage';
 import PostUpdatePage from './pages/post/PostUpdatePage';
 
+// Call
+import CallPage from './pages/call/CallPage';
+
 import { useCookies } from 'react-cookie';
 
 const App = () => {
@@ -80,6 +83,9 @@ const App = () => {
         <Route component={PostCreatePage} exact path="/post/create" />
         <Route component={PostListPage} path="/post/list" />
         <Route component={PostUpdatePage} path="/post/update/:postId" />
+        
+        {/* Call */}
+        <Route component={CallPage} path="/call" />
 
         {/* PageNotFound */}
         <Route component={PageNotFound} path='*' />
