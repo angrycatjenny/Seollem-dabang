@@ -166,11 +166,11 @@ const SignupPage = () => {
   };
   const setAgeText = e => {
     setAge(
-      (e.target.value[0]
+      (year.getFullYear()
+      - (e.target.value[0]
       + e.target.value[1]
       + e.target.value[2]
-      + e.target.value[3]
-      - year.getFullYear()
+      + e.target.value[3])
       + 1).toString());
   };
   const setLocationText = e => {
@@ -200,7 +200,6 @@ const SignupPage = () => {
   const sendSignupData = e => {
     e.preventDefault();
     if (voice) {
-
       const signupData = new FormData();
       
       const imageFileName = Date.now();
@@ -210,6 +209,7 @@ const SignupPage = () => {
       signupData.append('password', password);
       signupData.append('nickname', nickname);
       signupData.append('gender', gender);
+      signupData.append('age', age);
       signupData.append('location', location);
       signupData.append('image', image, 'image' + imageFileName);
       signupData.append('voice', voice, 'voice'+ voiceFileName);
