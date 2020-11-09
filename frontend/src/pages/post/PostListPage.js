@@ -12,10 +12,6 @@ import './PostListPage.css';
 // Cookie
 import { useCookies } from 'react-cookie';
 
-// Audio Player
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-
 const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -49,7 +45,6 @@ const PostListPage = () => {
   if (!posts) {
     return (
       <div>
-        <h1>게시물 목록 페이지</h1>
         <Link to="/post/create">글쓰기</Link>
       </div>
     );
@@ -57,31 +52,20 @@ const PostListPage = () => {
 
   return (
     <div>
-      <h1>게시물 목록 페이지</h1>
-      <Link to="/post/create">글쓰기</Link>
+      <Link className="post-create-button btn btn-secondary" to="/post/create">글쓰기</Link>
       {posts.map((post, index) => (
         <div key={index}>
           <div class='music-card playing'>
-            
             <img className="post-list-image image" src={'http://localhost:8080/image/' + post.image} />
-            
-            <div class='wave'></div>
-            <div class='wave'></div>
-            <div class='wave'></div>
-            
-            <div class='info'>
-              <h2 class='title'>{post.user.nickname}</h2>
-              <div class='artist'>#{post.user.location} #{post.user.age}세</div>
+            <div className='wave'></div>
+            <div className='wave'></div>
+            <div className='wave'></div>
+            <div className='info'>
+              <h2 className='title'>{post.user.nickname}</h2>
+              <div className='artist'>#{post.user.location} #{post.user.age}세</div>
             </div>
+            <audio className='post-list-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
           </div>
-          <AudioPlayer
-            key={index}
-            src={'http://localhost:8080/voice/' + post.voice}
-            showJumpControls={false}
-            customVolumeControls={[]}
-            customAdditionalControls={[]}
-          />
-
         </div>
       ))}
     </div>

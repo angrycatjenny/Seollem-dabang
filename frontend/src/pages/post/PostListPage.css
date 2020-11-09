@@ -1,13 +1,15 @@
+.post-create-button {
+  
+}
+
 .post-list-image {
   width: 300px;
 }
 
-@import 'https://fonts.googleapis.com/css?family=Reem+Kufi';
-
-body {
-  background: #fff;
+.post-list-audio {
+  position: absolute;
+  bottom: 0%;
 }
-
 
 @keyframes wave {
   0%   { transform: rotate(0deg); }
@@ -21,7 +23,7 @@ body {
   overflow: hidden;
   position: relative;
   width: 300px;
-  height: 500px;
+  height: 540px;
   border-radius: 6px;
 }
 
@@ -29,7 +31,8 @@ body {
   background-size: cover;  
   position: absolute;
   z-index: 1;
-  height: 300px;
+  opacity: 0.9;
+  height: 330px;
   width: 300px;
 }
 
@@ -52,7 +55,7 @@ body {
   top: 0;
   margin-left: -70%;
   margin-top: -130%;
-  background: radial-gradient(#353535, #383737);
+  background: radial-gradient(lightgray, #383737);
 }
 
 .wave:nth-child(2),
@@ -88,7 +91,7 @@ body {
 
 .info {
   position: absolute;
-  bottom: 20px;
+  bottom: 60px;
   left: 0;
   right: 0;
   text-align: center;
@@ -108,18 +111,4 @@ body {
   font-size: 1.2em;
   letter-spacing: 0.08em;
   font-family: 'Reem Kufi', sans-serif;
-  margin-top: -10px;
-}
-
-.fa {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  color: #555;
-}
-
-.fa-play {
-  display: none;
 }
