@@ -61,7 +61,19 @@ const PostListPage = () => {
       <Link to="/post/create">글쓰기</Link>
       {posts.map((post, index) => (
         <div key={index}>
-          <img className="post-list-image" src={'http://localhost:8080/image/' + post.image} />
+          <div class='music-card playing'>
+            
+            <img className="post-list-image image" src={'http://localhost:8080/image/' + post.image} />
+            
+            <div class='wave'></div>
+            <div class='wave'></div>
+            <div class='wave'></div>
+            
+            <div class='info'>
+              <h2 class='title'>{post.user.nickname}</h2>
+              <div class='artist'>#{post.user.location} #{post.user.age}세</div>
+            </div>
+          </div>
           <AudioPlayer
             key={index}
             src={'http://localhost:8080/voice/' + post.voice}
@@ -69,6 +81,7 @@ const PostListPage = () => {
             customVolumeControls={[]}
             customAdditionalControls={[]}
           />
+
         </div>
       ))}
     </div>
