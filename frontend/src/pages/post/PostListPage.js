@@ -60,6 +60,7 @@ const PostListPage = () => {
       <Link to="/post/create">글쓰기</Link>
       {posts.map((post, index) => (
         <div key={index}>
+          <img className="post-list-image" src={'http://localhost:8080/image/' + post.image} />
         </div>
       ))} 
       <FooterComp/>
