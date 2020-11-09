@@ -22,10 +22,11 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     Boolean existsByNickname(String nickname);
 
-    List<User> getUserByAgeAndGenderAndLocation(int age, int gender, String Location);
-
     List<User> getUserByGenderAndIsExam(int gender,Boolean isExam);
 
-    @Query(value = "SELECT * FROM user u WHERE u.age >= :low AND u.age <= :high AND u.location = :location AND u.gender = :gender AND u.isExam = true",nativeQuery = true)
+    @Query(value = "SELECT * FROM user u where u.id in :id_list",nativeQuery = true)
+    List<User> getUserByIdList(@Param("id_list") List<Long> id_list);
+
+    @Query(value = "SELECT * FROM user u WHERE u.age >= :low AND u.age <= :high AND u.location = :location AND u.gender = :gender AND u.is_exam = true",nativeQuery = true)
     List<User> findUserByProfile(@Param("low") int low, @Param("high") int high, @Param("location") String location, @Param("gender") int gender);
 }
