@@ -9,11 +9,12 @@ import { Link } from 'react-router-dom';
 // CSS
 import './PostListPage.css';
 
-// Footer
-import FooterComp from '../../components/base/FooterComp';
-
 // Cookie
 import { useCookies } from 'react-cookie';
+
+// Audio Player
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
@@ -61,9 +62,15 @@ const PostListPage = () => {
       {posts.map((post, index) => (
         <div key={index}>
           <img className="post-list-image" src={'http://localhost:8080/image/' + post.image} />
+          <AudioPlayer
+            key={index}
+            src={'http://localhost:8080/voice/' + post.voice}
+            showJumpControls={false}
+            customVolumeControls={[]}
+            customAdditionalControls={[]}
+          />
         </div>
-      ))} 
-      <FooterComp/>
+      ))}
     </div>
   )
 }
