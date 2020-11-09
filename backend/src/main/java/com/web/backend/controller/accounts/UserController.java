@@ -213,9 +213,6 @@ public class UserController {
         }
         String address = user.getLocation();
         List<User> recommendedUserList = userDao.findUserByProfile(age-3,age+3,address,gender);
-        System.out.println(answerDao.findexaminerIdByexamineeId(user.getId()));
-        System.out.println("AAAAAA");
-        System.out.println(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         recommendedUserList.remove(user);
         recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         return recommendedUserList;
@@ -262,6 +259,7 @@ public class UserController {
             return nullData;
         }
         
+        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(curuser.getId())));
         RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
         return userList;
     }
