@@ -59,6 +59,7 @@ public class QuestionController {
             }
         }
         curuser.setIsExam(true);
+        userDao.save(curuser);
 
         return new ResponseEntity<>("질문 등록 완료",HttpStatus.OK);
     }

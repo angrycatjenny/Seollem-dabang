@@ -213,8 +213,11 @@ public class UserController {
         }
         String address = user.getLocation();
         List<User> recommendedUserList = userDao.findUserByProfile(age-3,age+3,address,gender);
-
+        System.out.println(answerDao.findexaminerIdByexamineeId(user.getId()));
+        System.out.println("AAAAAA");
+        System.out.println(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         recommendedUserList.remove(user);
+        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         return recommendedUserList;
     }
 
@@ -223,13 +226,12 @@ public class UserController {
         User curuser = userDao.getUserById(requser.getId());
         List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
 
-        int gender = curuser.getGender();
+        int gender = 0;
         if(curuser.getGender()==0){
             gender=1;
         }
         
         List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
-        List<User> solvedUsers = answerDao.getUserByExamineeId(curuser.getId());
 
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(User user:allUsers){
