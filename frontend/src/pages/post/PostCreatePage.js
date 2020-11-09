@@ -80,7 +80,7 @@ const PostCreatePage = () => {
       <h1>게시물 등록 페이지</h1>
 
       <h3>사진</h3>
-      <img src={url} />
+      <img className="post-image" src={url} />
       <Input
         className="signup-input"
         type="file"
