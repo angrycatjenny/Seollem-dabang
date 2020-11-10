@@ -43,6 +43,11 @@ public class QuestionController {
     @Async("threadPoolTaskExecutor")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody QuestionListRequest req){
         User curuser = userDao.getUserById(requser.getId());
+        ArrayList<Question> questionList = questionDao.findQuestionByUserId(curuser.getId());
+        if(questionList.toArray().length>=20){
+            return false;
+        }
+
         String [] contentList = req.getContentList();
         Boolean[] correctAnswerList = req.getCorrectAnswerList();
 
