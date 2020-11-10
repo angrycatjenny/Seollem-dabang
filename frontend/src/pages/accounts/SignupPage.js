@@ -393,8 +393,12 @@ const SignupPage = () => {
                     strokeColor="black"
                     backgroundColor="lightgray" />
                   <div>
-                    <button onClick={startRecording} type="button">녹음시작</button>
-                    <button onClick={stopRecording} type="button">녹음종료</button>
+                    {!record && (
+                      <button className="voice-button-start" onClick={startRecording} type="button"><i class="fas fa-circle"></i></button>
+                    )}
+                    {record && (
+                      <button className="voice-button-end" onClick={stopRecording} type="button"><i class="far fa-stop-circle"></i></button>
+                    )}
                   </div>
                 </div>
               )}
@@ -411,7 +415,7 @@ const SignupPage = () => {
                     onClick={removeRecord}
                     type="button"
                   >
-                    다시녹음
+                    <i class="fas fa-times-circle"></i>
                   </button>
                 </div>
               )}

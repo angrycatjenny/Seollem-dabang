@@ -42,3 +42,17 @@
   margin-bottom: 5px;
   width: 100%;
 }
+.voice-button-start {
+  margin-top: 20px;
+  color: red;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
+}
+.voice-button-end {
+  margin-top: 20px;
+  color: black;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
+}
