@@ -49,25 +49,25 @@ const HeaderComp = () => {
 
   return (
     <React.Fragment>
-      <div className="navbar">
+      {/* <div className="navbar">
         <div>
           <i className="fas fa-chevron-left back-button" onClick={goBack}></i>
             <img onClick={() => history.push('/profile')} className="profile-image" src={ProfileImage} />
             <small onClick={() => history.push('/profile')} >{nickname}</small>
         </div>
         <small onClick={logout}>로그아웃</small>
-      </div>
+      </div> */}
 
 
       <div style={{display:"flex", justifyContent:"center"}}>
         <div class='box'>
 
-          <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
+          <div className="light-box" style={{display:'flex', flexDirection:'column', alignItems:"center",}}>
             <div class='bulb-wire bulb-one'>
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <div style={{marginTop:"25px"}}>시험지</div>
+            <div style={{marginTop:"25px"}} className="hide-menu">시험지</div>
           </div>
             
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
