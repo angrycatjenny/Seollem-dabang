@@ -59,7 +59,7 @@ const HeaderComp = () => {
         <small onClick={logout}>로그아웃</small>
       </div> */}
 
-
+      <div className="header-top">로고 내려올 공간</div>
       <div style={{display:"flex", justifyContent:"center"}}>
         <div class='box'>
 
