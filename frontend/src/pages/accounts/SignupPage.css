@@ -2,11 +2,18 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  font-family: 'Single Day', cursive;
+  font-weight: bold;
 }
 .signup-form {
+  opacity: 0.9;
+  padding-top: 80px;
+  background-image: url('../../assets//temp/temp1.jpg');
+  background-size: 500px 600px;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 500px;
+  height: 600px;
   margin: auto;
 }
 .signup-footer {
@@ -14,9 +21,10 @@
   display: flex;
   justify-content: center;
 }
-.signup-input {
-  margin-bottom: 5px;
-  width: 100%;
+.signup-font {
+  font-family: 'Single Day', cursive;
+  font-size: medium;
+  font-weight: bold;
 }
 .signup-button {
   margin-top: 5px;
@@ -33,4 +41,18 @@
 .birth-input {
   margin-bottom: 5px;
   width: 100%;
+}
+.voice-button-start {
+  margin-top: 15px;
+  color: red;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
+}
+.voice-button-end {
+  margin-top: 15px;
+  color: black;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
 }
