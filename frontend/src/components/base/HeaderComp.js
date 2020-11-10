@@ -86,7 +86,9 @@ const HeaderComp = () => {
             </div>
           </div>
 
-          <div className="center-logo">로고</div>  
+          <div className="center-logo">
+            <Link to="/main" style={{color:"black", textDecoration:"none"}}>로고</Link>
+          </div>  
 
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
             <div class='bulb-wire bulb-two'>
