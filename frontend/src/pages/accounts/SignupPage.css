@@ -4,9 +4,14 @@
   text-align: center;
 }
 .signup-form {
+  opacity: 0.9;
+  padding-top: 80px;
+  background-image: url('../../assets//temp/temp1.jpg');
+  background-size: 500px 600px;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 500px;
+  height: 600px;
   margin: auto;
 }
 .signup-footer {
@@ -16,7 +21,7 @@
 }
 .signup-input {
   margin-bottom: 5px;
-  width: 100%;
+  width: 60%;
 }
 .signup-button {
   margin-top: 5px;

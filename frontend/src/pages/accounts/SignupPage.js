@@ -235,9 +235,9 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className={classes.root}>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={activeStep} className="w-50 m-auto">
           {steps.map((label) => {
             const stepProps = {};
             const labelProps = {};
@@ -258,36 +258,38 @@ const SignupPage = () => {
 
         <div className="signup-form">
           {activeStep === 0 && (
-            <div>
+            <div className="d-flex flex-column align-items-center">
               <h3 className="signup-logo">기본정보</h3>
               <Input
-                className="signup-input"
+                className="w-50"
                 placeholder="닉네임"
                 nickname={nickname}
                 onChange={setNicknameText}
               />
               <Input
-                className="signup-input"
+                className="w-50"
                 placeholder="이메일"
                 email={email}
                 onChange={setEmailText}
               />
               <Input
-                className="signup-input"
+                className="w-50"
                 type="password"
                 placeholder="비밀번호"
                 password={password}
                 onChange={setPasswordText}
               />
               <Input
-                className="signup-input"
+                className="w-50"
                 type="password"
                 placeholder="비밀번호 확인"
                 passwordconfirm={passwordconfirm}
                 onChange={setPasswordconfirmText}
               />
             
-              <FormControl className="signup-input">
+              <FormControl 
+                className="w-50"
+              >
                 <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
                 <Select
                   labelId="demo-mutiple-name-label"
@@ -305,14 +307,16 @@ const SignupPage = () => {
                 </Select>
               </FormControl>
 
-              <FormControl className="signup-input">
+              <FormControl 
+                className="w-50"
+              >
                 <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
                 <Select
-                labelId="demo-mutiple-name-label1"
-                id="demo-mutiple-name1"
-                value={gender === '1' ? '여자' : gender === '0' && "남자"}
-                onChange={setGenderText}
-                input={<Input />}
+                  labelId="demo-mutiple-name-label1"
+                  id="demo-mutiple-name1"
+                  value={gender === '1' ? '여자' : gender === '0' && "남자"}
+                  onChange={setGenderText}
+                  input={<Input />}
                 >
                 {genders.map((gender) => (
                   <MenuItem key={gender} value={gender}>
@@ -322,7 +326,9 @@ const SignupPage = () => {
                 </Select>
               </FormControl>
 
-              <FormControl className="birth-input mt-3">
+              <FormControl 
+                className="w-50 mt-3"
+              >
                 <TextField
                   id="date"
                   type="date"
