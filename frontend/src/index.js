@@ -16,8 +16,8 @@ import "./theme/scss/styles.scss";
 const dispatcher = new EventDispatcher();
 const iceServers = [
   {
-    // url: "stun:stun.1.google.com:19302",
-    url: "stun:74.125.142.127:19302",
+    url: "stun:stun.1.google.com:19302",
+    // url: "stun:74.125.142.127:19302",
   },
   {
     urls: "turn:turn.bistri.com:80",
