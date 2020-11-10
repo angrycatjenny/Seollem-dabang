@@ -235,7 +235,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className={classes.root}>
         <Stepper activeStep={activeStep}>
           {steps.map((label) => {
