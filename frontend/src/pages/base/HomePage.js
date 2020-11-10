@@ -18,7 +18,7 @@ const HomePage = () => (
             <div className="home-template">
               <div>
                 <div className="neon">설레임</div>
-                <div className="flux">방정식</div>
+                <div className="flux">다항식</div>
               </div>
               <div className="buttons">
                 <Link className="btn btn-light home-login-button" to="/login">로그인</Link>
