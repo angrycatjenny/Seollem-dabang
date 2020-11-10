@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // CSS
 import './HeaderComp.css';
@@ -67,7 +68,12 @@ const HeaderComp = () => {
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <div style={{marginTop:"25px"}} className="hide-menu">시험지</div>
+            <Link to="/question" style={{color:"black", textDecoration:"none"}}> 
+              <div style={{marginTop:"25px",}} className="hide-menu">
+                시험지
+              </div>
+            </Link>
+           
           </div>
             
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
@@ -75,7 +81,9 @@ const HeaderComp = () => {
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <div style={{marginTop:"25px"}}>채팅</div>
+            <div style={{marginTop:"25px"}} >
+              <Link to="/conversation" style={{color:"black", textDecoration:"none"}}>채팅</Link>
+            </div>
           </div>
 
           <div className="center-logo">로고</div>  
@@ -85,7 +93,9 @@ const HeaderComp = () => {
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <div style={{marginTop:"25px"}}>피드</div>
+            <div style={{marginTop:"25px"}}>
+              <Link to="/post/list" style={{color:"black", textDecoration:"none"}}>피드</Link>
+            </div>
           </div>
 
           <div style={{display:'flex', flexDirection:'column', alignItems:"center"}}>
@@ -93,7 +103,9 @@ const HeaderComp = () => {
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <div style={{marginTop:"25px"}}>프로필</div>
+            <div style={{marginTop:"25px"}}>
+              <Link to="/profile" style={{color:"black", textDecoration:"none"}}>프로필</Link>
+            </div>
           </div>
 
           </div>        
