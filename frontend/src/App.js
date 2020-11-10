@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 // Router
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
 // Base
 import MainPage from './pages/base/MainPage';
@@ -20,8 +20,8 @@ import YourProfilePage from './pages/accounts/YourProfilePage';
 
 // Question
 import QuestionCreatePage from './pages/question/QuestionCreatePage';
-import QuestionListPage from './pages/question/QuestionListPage'; 
-import QuestionDetailPage from './pages/question/QuestionDetailPage'; 
+import QuestionListPage from './pages/question/QuestionListPage';
+import QuestionDetailPage from './pages/question/QuestionDetailPage';
 
 // Answer
 import AnswerCreatePage from './pages/answer/AnswerCreatePage';
@@ -34,13 +34,16 @@ import ConversationDetailPage from './pages/conversation/ConversationDetailPage'
 // Header
 import HeaderComp from './components/base/HeaderComp';
 
-// Footer
-// import FooterComp from './components/base/FooterComp';
+// PageNotFound
+import PageNotFound from './pages/base/PageNotFound';
 
 // Post
 import PostCreatePage from './pages/post/PostCreatePage';
 import PostListPage from './pages/post/PostListPage';
 import PostUpdatePage from './pages/post/PostUpdatePage';
+
+// Call
+import CallPage from './pages/call/CallPage';
 
 import { useCookies } from 'react-cookie';
 
@@ -51,37 +54,43 @@ const App = () => {
     <>
       {/* Header */}
       {cookies.accessToken && <HeaderComp />}
-      
-      {/* Base */}
-      <Route component={HomePage} exact path="/" />
-      <Route component={MainPage} path="/main" />
+      <Switch>
+        {/* Base */}
+        <Route component={HomePage} exact path="/" />
+        <Route component={MainPage} path="/main" />
 
-      {/* Accounts */}
-      <Route component={LoginPage} path="/login" />
-      <Route component={SignupPage} path="/signup" />
-      <Route component={MyProfilePage} exact path="/profile" />
-      <Route component={MyProfileUpdatePage} path="/myprofile/update" />
-      <Route component={YourProfilePage} path="/yourprofile/:userId" />
+        {/* Accounts */}
+        <Route component={LoginPage} path="/login" />
+        <Route component={SignupPage} path="/signup" />
+        <Route component={MyProfilePage} exact path="/profile" />
+        <Route component={MyProfileUpdatePage} path="/myprofile/update" />
+        <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
-      {/* Question */}
-      <Route component={QuestionListPage} exact path="/question" />
-      <Route component={QuestionCreatePage} path="/question/create" />
-      <Route component={QuestionDetailPage} path="/question/detail" />      
+        {/* Question */}
+        <Route component={QuestionListPage} exact path="/question" />
+        <Route component={QuestionCreatePage} path="/question/create" />
+        <Route component={QuestionDetailPage} path="/question/detail" />
 
-      {/* Answer */}
-      <Route component={AnswerCreatePage} path="/answer/:userId" />
-      <Route component={AnswerResultPage} path="/result" />
+        {/* Answer */}
+        <Route component={AnswerCreatePage} path="/answer/:userId" />
+        <Route component={AnswerResultPage} path="/result" />
 
-      {/* Conversation */}
-      <Route component={ConversationListPage} exact path="/conversation" /> 
-      <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+        {/* Conversation */}
+        <Route component={ConversationListPage} exact path="/conversation" />
+        <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
 
-      {/* Conversation */}
-      <Route component={PostCreatePage} exact path="/post/create" /> 
-      <Route component={PostListPage} path="/post/list" />
-      <Route component={PostUpdatePage} path="/post/update/:postId" />
-      
-      {/* Footer */}
+        {/* Conversation */}
+        <Route component={PostCreatePage} exact path="/post/create" />
+        <Route component={PostListPage} path="/post/list" />
+        <Route component={PostUpdatePage} path="/post/update/:postId" />
+        
+        {/* Call */}
+        <Route component={CallPage} path="/call" />
+
+        {/* PageNotFound */}
+        <Route component={PageNotFound} path='*' />
+
+      </Switch>
     </>
   );
 };

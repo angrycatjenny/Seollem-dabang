@@ -5,7 +5,8 @@ import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
 import './QuestionListPage.css';
-
+//Footer
+import FooterComp from '../../components/base/FooterComp';
 const QuestionListPage = () => {
   const history = useHistory();
   const [ exam, setExam ] = useState(null);
@@ -14,7 +15,7 @@ const QuestionListPage = () => {
   const config = {
     headers: { 'Authorization':'Bearer '+ cookies.accessToken } 
   }
-  
+  const [ nickname, setNickname ] = useState('')
   useEffect(() => {
       const fetchData = async() => {
         setIsExam(true);
@@ -61,6 +62,11 @@ const QuestionListPage = () => {
         setIsExam(false);
       };
       fetchData();
+      //유저 정보 가져오기  
+      axios.get('/my-profile', config)
+      .then((response) => {
+        setNickname(response.data.nickname)
+      })
   }, []);
 
   if(isExam){
@@ -78,36 +84,46 @@ const QuestionListPage = () => {
   }
 
   return (
-    <div>
-      {exam.map(item => (
-        <h4 key={item.questionId} item={item}>{item.content}</h4>
-      ))}
-      <Link to="/question/detail">
-        <button className="exam-update-btn">편집</button>
-      </Link>
-      {/* <button className="exam-delete-btn"
-      onClick={delExam}>시험지 삭제</button> */}
-        {/* {isExam ? (
-          <>
-            {questions.map((question) => {
-              return (
-                <div>
-                
-                <React.Fragment key={question.id}>
-                  <h2>{question.id}번 문제</h2>
-                  <h4>{question.content}</h4>
-                </React.Fragment>
-                    
-                <button>시험지 수정</button>
-                <button>시험지 삭제</button>
-                </div>
-                )
-              })}
-          </>
-        ) : (
-          <Link to="/question/create"><button>시험지+</button></Link>
-        )} */}
-    </div>
+    <React.Fragment>
+      <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+        <div className="stepper-final-box-comp">
+          <div className="stepper-exam-preview">
+            <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
+            <h4>연애 능력 고사</h4>
+            <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
+            <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+            
+            {exam.map((item) => (
+            <React.Fragment key={item.questionId}>
+              <div key={item.questionId} className="quest-box">
+                <label className="create-final-label">{exam.indexOf(item)+1}번</label>
+                <div className="create-final-quest">{item.content}</div>
+              </div>
+              <div className="create-final-ans-box">
+                <div className="create-final-label">정답: </div>
+                {item.correctAnswer 
+                ?
+                <div className="create-final-ans">
+                  예
+                </div> 
+                :
+                <div className="create-final-ans">
+                  아니오
+                </div>}
+              </div>
+            </React.Fragment>
+          ))}
+          </div>
+        
+          <div className="stepper-btn">
+            <Link to="/question/detail">
+              <button className="exam-update-btn">편집</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <FooterComp/>
+    </React.Fragment>
   );
   };
   

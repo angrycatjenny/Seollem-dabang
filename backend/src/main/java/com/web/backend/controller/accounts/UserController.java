@@ -1,6 +1,7 @@
 package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
+import com.web.backend.dao.answer.AnswerDao;
 import com.web.backend.dao.keyword.KeywordDao;
 import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.Keyword.Keyword;
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +32,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.*;
 
@@ -52,6 +51,9 @@ public class UserController {
 
     @Autowired
     QuestionDao questionDao;
+
+    @Autowired
+    AnswerDao answerDao;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -202,6 +204,7 @@ public class UserController {
     public Object recUserByProfile(@CurrentUser UserPrincipal requser){
         User user = userDao.getUserById(requser.getId());
         int age = user.getAge();
+
         int gender = user.getGender();
         if(gender==1){
             gender=0;
@@ -210,8 +213,8 @@ public class UserController {
         }
         String address = user.getLocation();
         List<User> recommendedUserList = userDao.findUserByProfile(age-3,age+3,address,gender);
-
         recommendedUserList.remove(user);
+        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         return recommendedUserList;
     }
 
@@ -225,8 +228,8 @@ public class UserController {
             gender=1;
         }
         
-        List<User> allUsers = userDao.getUserByGender(gender);
-        allUsers.remove(curuser);
+        List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
+
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(User user:allUsers){
             List<String> othersKeywords = keywordDao.findWordByUserId(user.getId());
@@ -256,6 +259,7 @@ public class UserController {
             return nullData;
         }
         
+        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(curuser.getId())));
         RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
         return userList;
     }

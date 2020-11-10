@@ -58,8 +58,10 @@ public class QuestionController {
                 }
             }
         }
+        curuser.setIsExam(true);
+        userDao.save(curuser);
 
-        return new ResponseEntity<>("게시글 등록 완료",HttpStatus.OK);
+        return new ResponseEntity<>("질문 등록 완료",HttpStatus.OK);
     }
 
     @GetMapping("/list")
@@ -109,6 +111,7 @@ public class QuestionController {
     public Object deleteAll(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
         questionDao.deleteAll(questionDao.findQuestionByUserId(curuser.getId()));
+        curuser.setIsExam(false);
         return new ResponseEntity<>("게시글 전체 삭제 완료",HttpStatus.OK);
     }
 }
