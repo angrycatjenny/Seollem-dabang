@@ -356,11 +356,10 @@ const SignupPage = () => {
             </div>
           )}
           {activeStep === 1 && (
-            <div>
+            <div className="d-flex flex-column align-items-center">
               <h3 className="signup-logo">사진 입력</h3>
-              <InputLabel className="mt-3">프로필 사진</InputLabel>
               <Input
-                className="signup-input"
+                className="w-50 mb-3"
                 type="file"
                 onChange={setImageText}
               />
@@ -383,14 +382,13 @@ const SignupPage = () => {
             </div>
           )}
           {activeStep === 2 && (
-            <div>
+            <div className="d-flex flex-column align-items-center">
               <h3 className="signup-logo">목소리 녹음</h3>
               {!voice && (
-                <div>
-                  <InputLabel className="mt-3">음성 녹음</InputLabel>
+                  <div className="d-flex flex-column align-items-center">
                   <ReactMic
                     record={record}
-                    className="sound-wave w-100"
+                    className="sound-wave w-50"
                     onStop={onStop}
                     strokeColor="black"
                     backgroundColor="lightgray" />
