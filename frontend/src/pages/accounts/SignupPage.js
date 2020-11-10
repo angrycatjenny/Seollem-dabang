@@ -249,7 +249,7 @@ const SignupPage = () => {
                 <StepLabel
                  {...labelProps}
                 >
-                  <small>{label}</small>
+                  <small className="signup-font">{label}</small>
                 </StepLabel>
               </Step>
             );

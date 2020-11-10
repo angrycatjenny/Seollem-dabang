@@ -2,6 +2,8 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  font-family: 'Single Day', cursive;
+  font-weight: bold;
 }
 .signup-form {
   opacity: 0.9;
@@ -19,9 +21,10 @@
   display: flex;
   justify-content: center;
 }
-.signup-input {
-  margin-bottom: 5px;
-  width: 60%;
+.signup-font {
+  font-family: 'Single Day', cursive;
+  font-size: medium;
+  font-weight: bold;
 }
 .signup-button {
   margin-top: 5px;
