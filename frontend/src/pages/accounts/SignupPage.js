@@ -404,16 +404,20 @@ const SignupPage = () => {
               )}
 
               {voice && (
-                <div>
+                  <div className="d-flex flex-column align-items-center">
                   <AudioPlayer
                     src={voiceurl}
                     showJumpControls={false}
                     customVolumeControls={[]}
                     customAdditionalControls={[]}
+                    style={{
+                      width: '300px'
+                    }}
                   />
                   <button 
                     onClick={removeRecord}
                     type="button"
+                    className="voice-button-end"
                   >
                     <i class="fas fa-times-circle"></i>
                   </button>

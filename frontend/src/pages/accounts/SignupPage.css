@@ -43,14 +43,14 @@
   width: 100%;
 }
 .voice-button-start {
-  margin-top: 20px;
+  margin-top: 15px;
   color: red;
   font-size: 30px;
   background: transparent;
   border: 0;
 }
 .voice-button-end {
-  margin-top: 20px;
+  margin-top: 15px;
   color: black;
   font-size: 30px;
   background: transparent;
