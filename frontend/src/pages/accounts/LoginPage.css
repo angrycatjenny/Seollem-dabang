@@ -5,6 +5,7 @@
   width: 270px;
 }
 .login-footer {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
@@ -12,20 +13,23 @@
   margin-bottom: 5px;
 }
 .login-button {
-  margin-top: 5px;
+  margin-top: 7px;
   margin-bottom: 5px;
   height: 35px;
-  background-color: #77332c;
-  border: #77332c;
+  background-color: #77AAAD;
+  border: #77AAAD;
   color: white;
 }
-.login-image {
-  width: 350px;
-  margin-top: 8.5%;
-}
-:root {
-  background-color: #f1efe7;
-}
 .login-template {
-  background-color: #f1efe7;
+  background-color: #D9D4CF;
+}
+.login-box {
+  margin: auto;
+  margin-top: 190px;
+  padding: 50px;
+  background-color: white;
+}
+.login-name {
+  margin-bottom: 40px;
+  color: #5E1E17;
 }

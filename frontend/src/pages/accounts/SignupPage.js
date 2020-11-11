@@ -240,14 +240,14 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="signup-template d-flex flex-column align-items-center">
       <div className={classes.root}>
         <Stepper activeStep={activeStep} className="w-50 m-auto">
           {steps.map((label) => {
             const stepProps = {};
             const labelProps = {};
             return (
-              <Step 
+              <Step
                 key={label}
                 {...stepProps} 
               >
