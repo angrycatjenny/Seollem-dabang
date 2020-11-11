@@ -31,3 +31,7 @@
   left: 3%;
   bottom: 19%;
 }
+
+.logout-button:hover {
+  cursor: pointer;
+}

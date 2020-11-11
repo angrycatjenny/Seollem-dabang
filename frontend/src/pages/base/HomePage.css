@@ -143,18 +143,49 @@
   }
 }
 
-/* Buttons */
-.buttons {
+@font-face {
+  font-family: 'BMEULJIRO';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.home-section1 {
+  background-color: #E6E3D4;
   display: flex;
-  flex-direction: column;
 }
-.home-login-button {
-  margin-top: 200px;
-  width: 250px;
-  height: 40px;
+.home-section2 {
+  background-color: #E6E3D4;
+  display: flex;
 }
-.home-signup-button {
-  margin-top: 7px;
-  width: 250px;
-  height: 40px;
+.home-section3 {
+  background-color: #E6E3D4;
+  display: flex;
+}
+.home-section4 {
+  background-color: #E6E3D4;
+  display: flex;
+}
+.home-section1-image {
+  width: 22%;
+  margin-left: 37%;
+  margin-bottom: 20px;
+}
+.home-section2-image {
+  width: 20%;
+  margin-left: 15%;
+}
+.home-section3-image {
+  width: 20%;
+  margin-left: 15%;
+}
+.home-section4-image {
+  width: 20%;
+  margin-left: 15%;
+}
+.home-link {
+  margin-left: 47%;
+  font-size: 25px;
+  font-family: 'BMEULJIRO';
+  color: #5E1E17;
 }
