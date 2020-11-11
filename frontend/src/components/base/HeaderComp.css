@@ -417,7 +417,7 @@
 }
 
 .center-logo {
-  width: 40px;
+  width: 150px;
   height: 50px;
   /* border: 2px solid green; */
 }
@@ -441,6 +441,17 @@
 }
 
 .header-top {
-  height: 20px;
-  border: 1px solid blue;
+  height: 30px;
+  background-color: #F0E5DE;
+}
+
+.header-logo {
+  margin-top: 10px;
+  width: 170px;
+}
+
+.header-top-upper {
+  height: 5px;
+  background-color: #7C7877;
+  opacity: 0.8;
 }

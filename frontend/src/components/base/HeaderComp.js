@@ -17,6 +17,8 @@ import axios from 'axios';
 // Profile(임시)
 import ProfileImage from '../../assets/profile/profile-image.png';
 
+import HeaderLogo from '../../assets/logos/HeaderLogo.png';
+
 const HeaderComp = () => {
   const history = useHistory();
 
@@ -58,8 +60,10 @@ const HeaderComp = () => {
         </div>
         <small onClick={logout}>로그아웃</small>
       </div> */}
-
-      <div className="header-top">로고 내려올 공간</div>
+      <div className="container">
+      
+      <div className="header-top"></div>
+      <div className="header-top-upper"></div>
       <div style={{display:"flex", justifyContent:"center"}}>
         <div class='box'>
 
@@ -87,7 +91,9 @@ const HeaderComp = () => {
           </div>
 
           <div className="center-logo">
-            <Link to="/main" style={{color:"black", textDecoration:"none"}}>로고</Link>
+            <Link to="/main" style={{color:"black", textDecoration:"none"}}>
+              <img className="header-logo" src={HeaderLogo} />
+            </Link>
           </div>  
 
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
@@ -169,6 +175,7 @@ const HeaderComp = () => {
         <div class="header-three">피드</div>
         <div class="header-four">마이페이지</div>
         <div class="header-side"></div> */}
+        </div>
     </React.Fragment>
   );
 }

@@ -1,7 +1,33 @@
-.navbar-footer {
-  border-top: 1px solid lightgray;
-  height: 50px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.footer-inner {
+  height: 30px;
+  background-color: #a79c8e;
+}
+
+.footer-post {
+  width: 70px;
+}
+
+.footer-logout {
+  position: relative;
+  left: 89%;
+}
+
+.footer-flower1 {
+  width: 50px;
+  position: absolute;
+  left: 9%;
+  bottom: 19%;
+}
+
+.footer-flower2 {
+  padding-top: 55px;
+  width: 50px;
+  margin-left: 10px;
+}
+
+.footer-lamp {
+  width: 100px;
+  position: absolute;
+  left: 3%;
+  bottom: 19%;
 }
