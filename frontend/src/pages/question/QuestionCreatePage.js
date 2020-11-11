@@ -37,6 +37,7 @@ import FooterComp from '../../components/base/FooterComp';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    backgroundColor: "transparent",
   },
   backBtn: {
     marginRight: theme.spacing(1),
