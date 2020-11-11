@@ -1,35 +1,44 @@
-.footer-inner {
-  height: 30px;
+.footer-left {
+  height: 10px;
   background-color: #a79c8e;
+  width: 12.5%;
+  position: absolute;
+  bottom: 0;
 }
-
-.footer-post {
-  width: 70px;
+.footer-right {
+  height: 10px;
+  background-color: #a79c8e;
+  width: 12.5%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
-
-.footer-logout {
-  position: relative;
-  left: 89%;
+.footer-lamp {
+  width: 100px;
+  position: absolute;
+  left: 3%;
+  bottom: 8%;
 }
-
 .footer-flower1 {
   width: 50px;
   position: absolute;
   left: 9%;
-  bottom: 19%;
+  bottom: 8%;
+}
+
+
+.footer-post {
+  width: 70px;
+}
+.footer-logout {
+  position: relative;
+  left: 89%;
 }
 
 .footer-flower2 {
   padding-top: 55px;
   width: 50px;
   margin-left: 10px;
-}
-
-.footer-lamp {
-  width: 100px;
-  position: absolute;
-  left: 3%;
-  bottom: 19%;
 }
 
 .logout-button:hover {
