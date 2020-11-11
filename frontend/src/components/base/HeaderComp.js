@@ -4,7 +4,7 @@ import './HeaderComp.css';
 
 const HeaderComp = () => {
   return (
-    <div className="container">
+    <div>
       <div className="header-top">
         <Link to="/main" style={{color:"black", textDecoration:"none"}}>
           <h4 className="text-center pt-2">설 렘 다 방</h4>

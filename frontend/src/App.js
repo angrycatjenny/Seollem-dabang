@@ -51,7 +51,7 @@ const App = () => {
   const [cookies, setCookie] = useCookies(['accessToken']);
 
   return (
-    <>
+    <div className="container app-template">
       {/* Header */}
       {cookies.accessToken && <HeaderComp />}
       <Switch>
@@ -91,7 +91,7 @@ const App = () => {
         <Route component={PageNotFound} path='*' />
 
       </Switch>
-    </>
+    </div>
   );
 };
 
