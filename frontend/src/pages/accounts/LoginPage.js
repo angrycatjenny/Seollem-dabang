@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import LoginImage from '../../assets/login/LoginImage.png';
 import './LoginPage.css';
 
 const LoginPage = ({ history }) => {
@@ -26,9 +27,9 @@ const LoginPage = ({ history }) => {
   };
 
   return (
-    <div>
-      <h1 className="login-header">로그인</h1>
-      <form onSubmit={sendLoginData} className="login-form">
+    <div className="container d-flex flex-column align-items-center">
+      <img className="login-image" src={LoginImage} />
+      <form onSubmit={sendLoginData} className="login-form w-25">
         <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
         <input type="password" className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <div className="login-footer">
