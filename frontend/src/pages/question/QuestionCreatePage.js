@@ -457,7 +457,7 @@ const QuestionCreatePage = () => {
         </div>
       </div>
       </div>
-      {/* <FooterComp/> */}
+      <FooterComp/>
     </>
   );
   };
