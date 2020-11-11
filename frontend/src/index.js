@@ -32,7 +32,7 @@ ReactDOM.render(
     constraints={{ ordered: true }}
     signaling={{
       dispatcher: dispatcher,
-      url: "https://k3b103.p.ssafy.io"
+      url: "https://k3b103.p.ssafy.io:8080"
     }}
   >
     <UserMediaProvider constraints={{ audio: true, video: true }}>
