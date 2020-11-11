@@ -3,6 +3,9 @@ import './HomePage.css';
 import { Link } from 'react-router-dom';
 import ReactFullpage from '@fullpage/react-fullpage';
 import HomeSection1 from '../../assets/home/HomeSection1.JPG';
+import HomeSection2 from '../../assets/home/HomeSection2.JPG';
+import HomeSection3 from '../../assets/home/HomeSection3.JPG';
+import HomeSection4 from '../../assets/home/HomeSection4.JPG';
 
 const HomePage = () => (
   <ReactFullpage
@@ -20,13 +23,13 @@ const HomePage = () => (
             <div><Link to="/login" className="home-link text-decoration-none">시작하기</Link></div>
           </div>
           <div className="section home-section2">
-            <p>Section 2</p>
+            <img className="home-section2-image" src={HomeSection2} />
           </div>
           <div className="section home-section3">
-            <p>Section 3</p>
+           <img className="home-section3-image" src={HomeSection3} />
           </div>
           <div className="section home-section4">
-            <p>Section 4</p>
+            <img className="home-section4-image" src={HomeSection4} />  
           </div>
         </ReactFullpage.Wrapper>
       );
