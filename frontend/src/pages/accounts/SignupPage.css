@@ -6,9 +6,8 @@
   font-weight: bold;
 }
 .signup-form {
-  opacity: 0.9;
+  background-color: white;
   padding-top: 80px;
-  background-image: url('../../assets//temp/temp1.jpg');
   background-size: 500px 600px;
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@
   margin: auto;
 }
 .signup-footer {
-  margin-top: 30px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
 }
@@ -27,16 +26,14 @@
   font-weight: bold;
 }
 .signup-button {
-  margin-top: 5px;
   margin-bottom: 5px;
+  height: 35px;
+  background-color: #77AAAD;
+  border: #77AAAD;
+  color: white;
 }
 .signup-record {
   width: 100px;
-}
-.signup-img {
-  width: 200px;
-  height: 200px;
-
 }
 .birth-input {
   margin-bottom: 5px;
@@ -49,4 +46,25 @@
 }
 .record-img {
   width: 30px;
+}
+.signup-template {
+  background-color: #D9D4CF;
+}
+.signup-box {
+  margin: auto;
+  width: 1100px;
+  margin-top: 70px;
+  padding: 50px 100px 100px;
+  background-color: white;
+}
+.signup-name {
+  margin-bottom: 70px;
+  color: #5E1E17;
+}
+.signup-page1 {
+  width: 500px;
+  margin-right: 140px;
+}
+.signup-page2 {
+  width: 500px;
 }
