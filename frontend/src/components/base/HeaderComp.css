@@ -441,17 +441,11 @@
 }
 
 .header-top {
-  height: 30px;
-  background-color: #F0E5DE;
+  height: 40px;
+  border: solid black 1px;
 }
 
 .header-logo {
   margin-top: 10px;
   width: 170px;
-}
-
-.header-top-upper {
-  height: 5px;
-  background-color: #7C7877;
-  opacity: 0.8;
 }
