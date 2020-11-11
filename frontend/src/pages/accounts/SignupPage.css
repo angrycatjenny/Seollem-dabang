@@ -16,7 +16,7 @@
   margin: auto;
 }
 .signup-footer {
-  margin-top: 30px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
 }
@@ -26,16 +26,14 @@
   font-weight: bold;
 }
 .signup-button {
-  margin-top: 5px;
   margin-bottom: 5px;
+  height: 35px;
+  background-color: #77AAAD;
+  border: #77AAAD;
+  color: white;
 }
 .signup-record {
   width: 100px;
-}
-.signup-img {
-  width: 200px;
-  height: 200px;
-
 }
 .birth-input {
   margin-bottom: 5px;
@@ -55,12 +53,12 @@
 .signup-box {
   margin: auto;
   width: 1100px;
-  margin-top: 10px;
-  padding: 70px;
+  margin-top: 70px;
+  padding: 50px 100px 100px;
   background-color: white;
 }
 .signup-name {
-  margin-bottom: 40px;
+  margin-bottom: 70px;
   color: #5E1E17;
 }
 .signup-page1 {

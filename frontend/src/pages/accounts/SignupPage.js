@@ -33,6 +33,7 @@ import RecordDelete from '../../assets/signup/RecordDelete.png';
 
 // History
 import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -242,7 +243,7 @@ const SignupPage = () => {
   return (
     <div className="signup-template d-flex flex-column align-items-center">
       <div className="signup-box">
-        <h5 className="text-center login-name">설 렘 다 방</h5>
+        <h5 className="text-center signup-name">설 렘 다 방</h5>
         <div className="d-flex justify-content-between">
           <div className="signup-page1 d-flex flex-column">
             <small>기본정보</small>
@@ -338,7 +339,7 @@ const SignupPage = () => {
                     className="sound-wave w-75"
                     onStop={onStop}
                     strokeColor="white"
-                    backgroundColor="lightpink" />
+                    backgroundColor="#9B8281" />
                   <div>
                     {!record && (
                       <button className="record-button" onClick={startRecording} type="button"><img className="record-img mr-2" src={RecordStart} />녹음시작</button>
@@ -370,13 +371,17 @@ const SignupPage = () => {
                 </button>
               </div>
             )}
+          <div className="signup-footer d-flex justify-content-between">
+            <small>아직 회원이 아니신가요?</small>
+            <Link to="/login" className="text-decoration-none">로그인</Link>
+          </div>
             <button
               variant="contained"
               color="primary"
               onClick={sendSignupData}
-              className={classes.button}
+              className="signup-button"
             >
-              완료
+              회원가입
             </button>
           </div>
         </div>
