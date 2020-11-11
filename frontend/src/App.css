@@ -98,3 +98,6 @@
 :root {
   background-color: #D9D4CF;
 }
+.app-template {
+  border: solid black 2px;
+}

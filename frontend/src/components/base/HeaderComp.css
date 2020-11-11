@@ -2,10 +2,6 @@
   border-bottom: 1px solid lightgray;
   height: 50px;
 }
-.profile-image {
-  width: 30px;
-  margin-right: 7px;
-}
 .back-button {
   margin-right: 10px;
   color: gray;
@@ -436,22 +432,23 @@
 }
 
 .header-link {
-  color: black;
+  color: #5E1E17;
   text-decoration: none;
 }
 
 .header-top {
-  height: 30px;
-  background-color: #F0E5DE;
+  margin-top: 10px;
+  height: 70px;
+  border: solid black 2px;
+  background-color: #FADAD8;
+}
+.header-top-under {
+  margin-top: 7px;
+  border: solid black 2px;
+  background-color: #FADAD8;
 }
 
 .header-logo {
   margin-top: 10px;
   width: 170px;
-}
-
-.header-top-upper {
-  height: 5px;
-  background-color: #7C7877;
-  opacity: 0.8;
 }
