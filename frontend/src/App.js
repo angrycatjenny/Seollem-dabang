@@ -51,47 +51,50 @@ const App = () => {
   const [cookies, setCookie] = useCookies(['accessToken']);
 
   return (
-    <div className="container app-template">
-      {/* Header */}
-      {cookies.accessToken && <HeaderComp />}
+    <>
       <Switch>
-        {/* Base */}
         <Route component={HomePage} exact path="/" />
-        <Route component={MainPage} path="/main" />
-
-        {/* Accounts */}
         <Route component={LoginPage} path="/login" />
         <Route component={SignupPage} path="/signup" />
-        <Route component={MyProfilePage} exact path="/profile" />
-        <Route component={MyProfileUpdatePage} path="/myprofile/update" />
-        <Route component={YourProfilePage} path="/yourprofile/:userId" />
-
-        {/* Question */}
-        <Route component={QuestionListPage} exact path="/question" />
-        <Route component={QuestionCreatePage} path="/question/create" />
-        <Route component={QuestionDetailPage} path="/question/detail" />
-
-        {/* Answer */}
-        <Route component={AnswerCreatePage} path="/answer/:userId" />
-        <Route component={AnswerResultPage} path="/result" />
-
-        {/* Conversation */}
-        <Route component={ConversationListPage} exact path="/conversation" />
-        <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
-
-        {/* Conversation */}
-        <Route component={PostCreatePage} exact path="/post/create" />
-        <Route component={PostListPage} path="/post/list" />
-        <Route component={PostUpdatePage} path="/post/update/:postId" />
+  
+      <div className="container app-template">
+        {/* Header */}
+        {cookies.accessToken && <HeaderComp />}
         
-        {/* Call */}
-        <Route component={CallPage} path="/call" />
+          {/* Base */}
+          <Route component={MainPage} path="/main" />
+          {/* Accounts */}
 
-        {/* PageNotFound */}
-        <Route component={PageNotFound} path='*' />
+          <Route component={MyProfilePage} exact path="/profile" />
+          <Route component={MyProfileUpdatePage} path="/myprofile/update" />
+          <Route component={YourProfilePage} path="/yourprofile/:userId" />
 
+          {/* Question */}
+          <Route component={QuestionListPage} exact path="/question" />
+          <Route component={QuestionCreatePage} path="/question/create" />
+          <Route component={QuestionDetailPage} path="/question/detail" />
+
+          {/* Answer */}
+          <Route component={AnswerCreatePage} path="/answer/:userId" />
+          <Route component={AnswerResultPage} path="/result" />
+
+          {/* Conversation */}
+          <Route component={ConversationListPage} exact path="/conversation" />
+          <Route component={ConversationDetailPage} path="/conversation/:conversationId" />
+
+          {/* Conversation */}
+          <Route component={PostCreatePage} exact path="/post/create" />
+          <Route component={PostListPage} path="/post/list" />
+          <Route component={PostUpdatePage} path="/post/update/:postId" />
+          
+          {/* Call */}
+          <Route component={CallPage} path="/call" />
+
+          {/* PageNotFound */}
+          <Route component={PageNotFound} path='*' />
+        </div>
       </Switch>
-    </div>
+    </>
   );
 };
 
