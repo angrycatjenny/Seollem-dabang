@@ -14,10 +14,13 @@
 
 .footer-flower1 {
   width: 50px;
+  position: absolute;
+  left: 9%;
+  bottom: 18%;
 }
 
 .footer-flower2 {
-  padding-top: 17px;
+  padding-top: 45px;
   width: 50px;
   margin-left: 10px;
 }

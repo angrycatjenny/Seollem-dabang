@@ -8,7 +8,6 @@ export default function FooterComp() {
   return (
     <div className="fixed-bottom">
       <img className="footer-flower1" src={FooterFlower1} />
-      
       <div className="footer-logout d-flex flex-column">
         <small className="ml-2">로그아웃</small>
         <div className="d-flex">
