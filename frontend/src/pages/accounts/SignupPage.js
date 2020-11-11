@@ -29,6 +29,7 @@ import Button from '@material-ui/core/Button';
 // Images
 import RecordStart from '../../assets/signup/RecordStart.png';
 import RecordStop from '../../assets/signup/RecordStop.png';
+import RecordDelete from '../../assets/signup/RecordDelete.png';
 
 // History
 import { useHistory } from "react-router-dom";
@@ -421,9 +422,9 @@ const SignupPage = () => {
                   <button 
                     onClick={removeRecord}
                     type="button"
-                    className="voice-button-end"
+                    className="record-button"
                   >
-                    <i class="fas fa-times-circle"></i>
+                    <img className="record-img mr-2" src={RecordDelete} />다시녹음
                   </button>
                 </div>
               )}
