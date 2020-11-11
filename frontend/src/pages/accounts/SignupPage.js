@@ -269,7 +269,7 @@ const SignupPage = () => {
               passwordconfirm={passwordconfirm}
               onChange={setPasswordconfirmText}
             />
-            <small>상세정보</small>
+            <small className="mt-4">상세정보</small>
             <FormControl 
             >
             <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
@@ -323,20 +323,24 @@ const SignupPage = () => {
           </div>
           <div className="signup-page2 d-flex flex-column">
               <small>사진입력</small>
-              <Input
-                className="mb-3"
-                type="file"
-                onChange={setImageText}
-              />
-              {imagePush &&
-                <img src={objectURL} alt={objectURL} className="signup-img" />
-              }
-              <small>음성녹음</small>
+              <div className="d-flex justify-content-center">
+                {!imagePush && (
+                  <Input
+                    className="mb-3"
+                    type="file"
+                    onChange={setImageText}
+                  />
+                )}
+                {imagePush && (
+                  <img src={objectURL} alt={objectURL} className="signup-img" />
+                )}
+              </div>
+              <small className="mt-4">음성녹음</small>
               {!voice && (
                 <div className="d-flex flex-column align-items-center">
                   <ReactMic
                     record={record}
-                    className="sound-wave w-75"
+                    className="sound-wave w-100"
                     onStop={onStop}
                     strokeColor="white"
                     backgroundColor="#9B8281" />
@@ -359,7 +363,7 @@ const SignupPage = () => {
                   customVolumeControls={[]}
                   customAdditionalControls={[]}
                   style={{
-                    width: '300px'
+                    width: '350px'
                   }}
                 />
                 <button 

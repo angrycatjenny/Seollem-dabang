@@ -16,7 +16,7 @@
   margin: auto;
 }
 .signup-footer {
-  margin-top: 80px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -67,4 +67,7 @@
 }
 .signup-page2 {
   width: 500px;
+}
+.signup-img {
+  width: 100px;
 }
