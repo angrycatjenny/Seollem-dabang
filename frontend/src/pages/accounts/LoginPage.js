@@ -22,8 +22,10 @@ const LoginPage = ({ history }) => {
         history.push('/main')
         alert('로그인이 되었습니다.')
       })
-      .catch((error) => console.log(error))
-      alert('로그인 정보를 확인해주세요.')
+      .catch((error) => {
+        console.log(error)
+        alert('로그인 정보를 확인해주세요.')
+      })
   };
 
   return (
