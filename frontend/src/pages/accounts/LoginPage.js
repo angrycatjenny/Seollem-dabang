@@ -26,9 +26,9 @@ const LoginPage = ({ history }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1 className="login-header">로그인</h1>
-      <form onSubmit={sendLoginData} className="login-form">
+      <form onSubmit={sendLoginData} className="login-form w-25">
         <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
         <input type="password" className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
         <div className="login-footer">
