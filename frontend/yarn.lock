@@ -8764,6 +8764,11 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
+page-flip@latest:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/page-flip/-/page-flip-2.0.0.tgz#d2355a6fe5a497cc712d4e7bb3585ab80047b61e"
+  integrity sha512-un3ukWlmKf8V6JkvNnDzOahubPbJy9DvE4UZgDG4fcbzPFuOhVLMlOUTLhTdlYoSMJBSAWfh06sazm3rqfVwkQ==
+
 pako@~1.0.5:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
@@ -10157,6 +10162,15 @@ react-overlays@^4.1.0:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-pageflip@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-pageflip/-/react-pageflip-1.0.0.tgz#e9d7647041e45362777916cece5b9f6926f1e7e2"
+  integrity sha512-u7F7QlE7qi401vQHGn01SsV1ToC39j2B5BsmCekDubM9uUGINdHL+vH1z9ZcsQ5tB1yP08sNPraGj9J4S+z+Jw==
+  dependencies:
+    page-flip latest
+    react "^16.13.1"
+    rollup "^2.26.0"
+
 react-peer-data@^1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-peer-data/-/react-peer-data-1.1.4.tgz#a43f4721692ebd46b993620adc6aab6111f2266e"
@@ -10263,7 +10277,7 @@ react-transition-group@^4.4.0, react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.8.6:
+react@^16.13.1, react@^16.8.6:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
@@ -10681,6 +10695,13 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rollup@^2.26.0:
+  version "2.33.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.33.1.tgz#802795164164ee63cd47769d8879c33ec8ae0c40"
+  integrity sha512-uY4O/IoL9oNW8MMcbA5hcOaz6tZTMIh7qJHx/tzIJm+n1wLoY38BLn6fuy7DhR57oNFLMbDQtDeJoFURt5933w==
+  optionalDependencies:
+    fsevents "~2.1.2"
 
 rsvp@^4.8.4:
   version "4.8.5"
