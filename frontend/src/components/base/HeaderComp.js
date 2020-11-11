@@ -18,9 +18,9 @@ const HeaderComp = () => {
               <div className="bulb-light"><i class="far fa-lightbulb"></i></div>
               <div class='bulb-glow'></div>
             </div>
-            <Link to="/question" style={{color:"black", textDecoration:"none"}}> 
+            <Link to="/profile" style={{color:"black", textDecoration:"none"}}> 
               <div style={{marginTop:"25px",}} className="hide-menu">
-                시험지
+                내 정보
               </div>
             </Link>
           </div> 
@@ -30,7 +30,7 @@ const HeaderComp = () => {
               <div class='bulb-glow'></div>
             </div>
             <div style={{marginTop:"25px"}} >
-              <Link to="/conversation" style={{color:"black", textDecoration:"none"}}>채팅</Link>
+              <Link to="/question" style={{color:"black", textDecoration:"none"}}>나만의 레시피</Link>
             </div>
           </div>
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
@@ -39,7 +39,7 @@ const HeaderComp = () => {
               <div class='bulb-glow'></div>
             </div>
             <div style={{marginTop:"25px"}}>
-              <Link to="/post/list" style={{color:"black", textDecoration:"none"}}>피드</Link>
+              <Link to="/conversation" style={{color:"black", textDecoration:"none"}}>대화 목록</Link>
             </div>
           </div>
           <div style={{display:'flex', flexDirection:'column', alignItems:"center"}}>
@@ -48,7 +48,7 @@ const HeaderComp = () => {
               <div class='bulb-glow'></div>
             </div>
             <div style={{marginTop:"25px"}}>
-              <Link to="/profile" style={{color:"black", textDecoration:"none"}}>프로필</Link>
+              <Link to="/post/list" style={{color:"black", textDecoration:"none"}}>피드</Link>
             </div>
           </div>
         </div>        
