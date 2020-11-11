@@ -1,0 +1,37 @@
+.book {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+    line-height: 1.5em;
+  }
+  
+  .bookpage1{
+      border-style: groove;
+      background-color: blue;
+  }
+  .bookpage2{
+      border-style: groove;
+      background-color: antiquewhite;
+  }
+  .bookpage3{
+      border-style: groove;
+      background-color: antiquewhite;
+  }
+  .bookpage4{
+      border-style: groove;
+      background-color: antiquewhite;
+  }
+  .bookpage5{
+      border-style: groove;
+      background-color: antiquewhite;
+      background-color: antiquewhite;
+  }
+  .bookpage6{
+      border-style: groove;
+      background-color: blue;
+  }
+  
+  
+  
