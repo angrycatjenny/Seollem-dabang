@@ -10,6 +10,7 @@ const HeaderComp = () => {
           <h2 className="text-center pt-3">설 렘 다 방</h2>
         </Link>
       </div>
+      <div className="header-top-under"></div>
       <div style={{display:"flex", justifyContent:"center"}}>
         <div class='box'>
           <div className="light-box" style={{display:'flex', flexDirection:'column', alignItems:"center",}}>

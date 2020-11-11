@@ -432,14 +432,20 @@
 }
 
 .header-link {
-  color: black;
+  color: #5E1E17;
   text-decoration: none;
 }
 
 .header-top {
   margin-top: 10px;
   height: 70px;
-  border: solid black 1px;
+  border: solid black 2px;
+  background-color: #FADAD8;
+}
+.header-top-under {
+  margin-top: 7px;
+  border: solid black 2px;
+  background-color: #FADAD8;
 }
 
 .header-logo {
