@@ -5,6 +5,7 @@ import FooterPost from '../../assets/footer/FooterPost.png';
 import FooterFlower1 from '../../assets/footer/FooterFlower1.png';
 import FooterFlower2 from '../../assets/footer/FooterFlower2.png';
 import FooterLamp from '../../assets/footer/FooterLamp.png';
+import FooterPic1 from '../../assets/footer/FooterPic1.png';
 import './FooterComp.css';
 
 const FooterComp = () => {
@@ -24,6 +25,7 @@ const FooterComp = () => {
       <img className="footer-flower1" src={FooterFlower1} />
       <div className="footer-left"></div>
       <div className="footer-right"></div>
+      <img className="footer-pick1" src={FooterPic1} />
 
 
 

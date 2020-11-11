@@ -16,14 +16,20 @@
 .footer-lamp {
   width: 100px;
   position: absolute;
-  left: 3%;
+  left: 1%;
   bottom: 8%;
 }
 .footer-flower1 {
   width: 50px;
   position: absolute;
-  left: 9%;
+  left: 8%;
   bottom: 8%;
+}
+.footer-pick1 {
+  width: 50px;
+  position: absolute;
+  left: 7%;
+  bottom: 80%;
 }
 
 
