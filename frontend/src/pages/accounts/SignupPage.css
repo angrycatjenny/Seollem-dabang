@@ -44,8 +44,6 @@
 }
 .voice-button-start {
   margin-top: 15px;
-  color: red;
-  font-size: 30px;
   background: transparent;
   border: 0;
 }
@@ -55,4 +53,7 @@
   font-size: 30px;
   background: transparent;
   border: 0;
+}
+.signup-record-start {
+  width: 30px;
 }

@@ -26,6 +26,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 
+// Images
+import Startbutton from '../../assets/signup/record-start.png';
+
 // History
 import { useHistory } from "react-router-dom";
 
@@ -390,11 +393,11 @@ const SignupPage = () => {
                     record={record}
                     className="sound-wave w-50"
                     onStop={onStop}
-                    strokeColor="black"
-                    backgroundColor="lightgray" />
+                    strokeColor="white"
+                    backgroundColor="pink" />
                   <div>
                     {!record && (
-                      <button className="voice-button-start" onClick={startRecording} type="button"><i class="fas fa-circle"></i></button>
+                      <button className="voice-button-start" onClick={startRecording} type="button"><img className="signup-record-start mr-2" src={Startbutton} />녹음시작</button>
                     )}
                     {record && (
                       <button className="voice-button-end" onClick={stopRecording} type="button"><i class="far fa-stop-circle"></i></button>
