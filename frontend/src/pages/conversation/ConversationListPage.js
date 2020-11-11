@@ -98,7 +98,6 @@ const ConversationListPage = () => {
           ))}
         </List>
       </div>
-      <FooterComp/>
     </div>
   )
 };

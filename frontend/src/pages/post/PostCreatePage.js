@@ -121,7 +121,6 @@ const PostCreatePage = () => {
         </div>
       )}
       <button onClick={sendPostData}>등록하기</button>
-      <FooterComp/>
     </div>
   )
 }
