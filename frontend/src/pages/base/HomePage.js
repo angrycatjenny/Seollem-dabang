@@ -8,7 +8,6 @@ import HomeSection3 from '../../assets/home/HomeSection3.JPG';
 import HomeSection4 from '../../assets/home/HomeSection4.JPG';
 import ScrollDown from '../../assets/home/ScrollDown.png';
 import ScrollStop from '../../assets/home/ScrollStop.png';
-import ScrollUp from '../../assets/home/ScrollUp.png';
 
 const HomePage = () => (
   <ReactFullpage
@@ -38,7 +37,6 @@ const HomePage = () => (
             <img className="home-section4-image" src={HomeSection4} />
             <img className="home-scroll-down" src={ScrollStop} />
           </div>
-          <img className="home-scroll-up" src={ScrollUp} />
         </ReactFullpage.Wrapper>
       );
     }}
