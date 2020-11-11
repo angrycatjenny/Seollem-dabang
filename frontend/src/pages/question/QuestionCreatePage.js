@@ -279,13 +279,6 @@ const QuestionCreatePage = () => {
     <>
       <div style={{display:"flex", justifyContent:"center"}}>
         <div className="test-box">
-        {/* 취소버튼 */}
-        <div className="cancel-btn">
-          <Link to="/question">
-            <Button variant="contained"
-            className={classes.cancelBtn}
-            >취소</Button></Link>
-        </div>
         {/* stepper */}
         <div className="create-box" style={{}}>
           {/* <div style={{border:"2px solid green", padding:"0", margin:"0", display:"flex", justifyContent:"center"}}>
@@ -344,7 +337,7 @@ const QuestionCreatePage = () => {
                 <div className="stepper-box">
                   <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
                     {exam.map((item) => (
-                      <React.Fragment key={item.key}>
+                      <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
                         <div key={item.key} className="quest-box">
                           <label>{item.key}번
                             <textarea 
@@ -373,7 +366,7 @@ const QuestionCreatePage = () => {
                             inputProps={{ 'aria-label': '아니오' }}
                           /><div>아니오</div>
                         </div>
-                      </React.Fragment>
+                      </div>
                     ))}
                     {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
                   </div>
@@ -456,7 +449,15 @@ const QuestionCreatePage = () => {
             </div>
           </div>
         </div>
-      </div>
+        
+        {/* 취소버튼 */}
+        <div className="cancel-btn">
+          <Link to="/question">
+            <Button variant="contained"
+            className={classes.cancelBtn}
+            >취소</Button></Link>
+        </div>
+        </div>
       </div>
       <FooterComp/>
     </>
