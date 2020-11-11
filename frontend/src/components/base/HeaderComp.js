@@ -7,7 +7,7 @@ const HeaderComp = () => {
     <div>
       <div className="header-top">
         <Link to="/main" style={{color:"black", textDecoration:"none"}}>
-          <h4 className="text-center pt-2">설 렘 다 방</h4>
+          <h2 className="text-center pt-3">설 렘 다 방</h2>
         </Link>
       </div>
       <div style={{display:"flex", justifyContent:"center"}}>

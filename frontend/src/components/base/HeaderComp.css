@@ -2,10 +2,6 @@
   border-bottom: 1px solid lightgray;
   height: 50px;
 }
-.profile-image {
-  width: 30px;
-  margin-right: 7px;
-}
 .back-button {
   margin-right: 10px;
   color: gray;
@@ -441,7 +437,8 @@
 }
 
 .header-top {
-  height: 40px;
+  margin-top: 10px;
+  height: 70px;
   border: solid black 1px;
 }
 
