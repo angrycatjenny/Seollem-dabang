@@ -16,7 +16,7 @@ import AnswerResultPage from './pages/answer/AnswerResultPage';
 import ConversationListPage from './pages/conversation/ConversationListPage';
 import ConversationDetailPage from './pages/conversation/ConversationDetailPage';
 import HeaderComp from './components/base/HeaderComp';
-import PageNotFound from './pages/base/PageNotFound';
+import FooterComp from './components/base/FooterComp';
 import PostCreatePage from './pages/post/PostCreatePage';
 import PostListPage from './pages/post/PostListPage';
 import PostUpdatePage from './pages/post/PostUpdatePage';
@@ -51,6 +51,7 @@ const App = () => {
           <Route component={PostListPage} path="/post/list" />
           <Route component={PostUpdatePage} path="/post/update/:postId" />
           <Route component={CallPage} path="/call" />
+          {cookies.accessToken && <FooterComp />}
         </div>
       </Switch>
     </>
