@@ -2,6 +2,7 @@ import React from 'react';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
 import ReactFullpage from '@fullpage/react-fullpage';
+import HomeSection1 from '../../assets/home/HomeSection1.JPG';
 
 const HomePage = () => (
   <ReactFullpage
@@ -14,20 +15,9 @@ const HomePage = () => (
     render={({ state, fullpageApi }) => {
       return (
         <ReactFullpage.Wrapper>
-          <div className="section">
-            <div className="home-template">
-              <div>
-                <div className="neon">설레임</div>
-                <div className="flux">방정식</div>
-              </div>
-              <div className="buttons">
-                <Link className="btn btn-light home-login-button" to="/login">로그인</Link>
-                <Link className="btn btn-light home-signup-button" to="/signup">회원가입</Link>
-              </div>
-            </div>
-            {/* <button onClick={() => fullpageApi.moveSectionDown()}>
-              Click me to move down
-          </button> */}
+          <div className="section home-section1">
+            <img className="home-section1-image" src={HomeSection1} />
+            <div><Link to="/login" className="home-link text-decoration-none">시작하기</Link></div>
           </div>
           <div className="section">
             <p>Section 2</p>
