@@ -396,7 +396,7 @@ const SignupPage = () => {
                     className="sound-wave w-50"
                     onStop={onStop}
                     strokeColor="white"
-                    backgroundColor="pink" />
+                    backgroundColor="lightpink" />
                   <div>
                     {!record && (
                       <button className="record-button" onClick={startRecording} type="button"><img className="record-img mr-2" src={RecordStart} />녹음시작</button>
