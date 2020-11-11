@@ -168,8 +168,8 @@
 }
 .home-section1-image {
   width: 22%;
-  margin-left: 37%;
-  margin-bottom: 20px;
+  margin-left: 38%;
+  margin-bottom: 18px;
 }
 .home-section2-image {
   width: 20%;
@@ -188,4 +188,16 @@
   font-size: 25px;
   font-family: 'BMEULJIRO';
   color: #5E1E17;
+}
+.home-scroll-down {
+  width: 15px;
+  position: absolute;
+  right: 50%;
+  bottom: 4%;
+}
+.home-scroll-up {
+  width: 25px;
+  position: absolute;
+  right: 10%;
+  bottom: 4%;
 }
