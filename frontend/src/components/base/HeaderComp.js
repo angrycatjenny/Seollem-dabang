@@ -17,6 +17,8 @@ import axios from 'axios';
 // Profile(임시)
 import ProfileImage from '../../assets/profile/profile-image.png';
 
+import HeaderLogo from '../../assets/logos/HeaderLogo.png';
+
 const HeaderComp = () => {
   const history = useHistory();
 
@@ -59,10 +61,9 @@ const HeaderComp = () => {
         <small onClick={logout}>로그아웃</small>
       </div> */}
       <div className="container">
-      <div className="header-top"></div>
-
       
-
+      <div className="header-top"></div>
+      <div className="header-top-upper"></div>
       <div style={{display:"flex", justifyContent:"center"}}>
         <div class='box'>
 
@@ -91,7 +92,7 @@ const HeaderComp = () => {
 
           <div className="center-logo">
             <Link to="/main" style={{color:"black", textDecoration:"none"}}>
-              <div className="header-logo text-center" contenteditable spellcheck="false">설렘다방</div>
+              <img className="header-logo" src={HeaderLogo} />
             </Link>
           </div>  
 
