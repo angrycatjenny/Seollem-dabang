@@ -2,7 +2,8 @@
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
-  padding-right: 30px;
+  /* padding-right: 10px; */
+  /* border: 2px solid red; */
 }
 .stepper-btn {
   margin-top: 20px;
@@ -17,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
 }
 
 .set-quest-box {
@@ -28,16 +29,13 @@
   display: flex;
   justify-content: space-around;
   /* border: 2px solid red; */
-  width: 90%;
+  width: 60%;
 }
 
 .radio-box {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
   /* border: 2px solid green; */
-  width: 90%;
 }
 
 .quest-create-input {
@@ -99,4 +97,55 @@
   color: #0d0a0a;
   background-color: rgb(255, 99, 173);
   padding: 10px;
+}
+
+.create-box {
+  /* border: 2px solid blue; */
+  padding: 10px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 330px;
+  overflow: auto;
+}
+.board-img {
+  transform: rotate(270deg);
+  border: 2px solid red;
+  width: 100px;
+  height: 200px;
+  /* margin-left: 100px; */
+}
+
+/* .create-box {
+  position: relative;
+  text-align: center;
+  color: black;
+  height: 300px;
+  border: 2px solid red;
+}
+.board-img {
+  transform: rotate(270deg);
+  position: relative;
+}
+.in-board {
+  width: 650px;
+  height: 400px;
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: scroll;
+} */
+
+.test-box {
+  height: 500px;
+  width: 65%;
+  /* border: 2px solid purple; */
+  background-image: url('../../assets//question/board1.png');
+  background-size: 950px 500px;
+  background-repeat: no-repeat;
+  margin: 30px 0 10px 0;
+  padding: 75px 150px 0px 200px;
+  display: flex;
+  flex-direction: column;
 }
