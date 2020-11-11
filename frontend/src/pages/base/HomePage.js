@@ -19,13 +19,13 @@ const HomePage = () => (
             <img className="home-section1-image" src={HomeSection1} />
             <div><Link to="/login" className="home-link text-decoration-none">시작하기</Link></div>
           </div>
-          <div className="section">
+          <div className="section home-section2">
             <p>Section 2</p>
           </div>
-          <div className="section">
+          <div className="section home-section3">
             <p>Section 3</p>
           </div>
-          <div className="section">
+          <div className="section home-section4">
             <p>Section 4</p>
           </div>
         </ReactFullpage.Wrapper>
