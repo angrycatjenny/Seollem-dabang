@@ -28,8 +28,8 @@ import RecordDelete from '../../assets/signup/RecordDelete.png';
 
 const ConversationDetailPage = ({ match }) => {
   const history = useHistory();
-  const [ cookies1, setCookie1 ] = useCookies(['accessToken']);
-  const [ cookies2, setCookie2 ] = useCookies(['user']);
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ ucookies, setUcookie ] = useCookies(['user']);
 
   const [ loading, setLoading ] = useState(false);
 
@@ -56,7 +56,7 @@ const ConversationDetailPage = ({ match }) => {
 
   const config = {
     headers: {
-      'Authorization': 'Bearer ' + cookies1.accessToken
+      'Authorization': 'Bearer ' + cookies.accessToken
     }
   }
 
@@ -103,27 +103,34 @@ const ConversationDetailPage = ({ match }) => {
     return null;
   };
 
+  const startCall = () => {
+    history.push(`/call/${match.params.conversationId}`)
+  }
+
   return (
     <div className="conversation-template d-flex flex-column align-items-center">
       <img className="conversation-image" src={ConversationPic2} />
-      <h4 className="">{cookies2.user}님과의 대화</h4>
       <div className="conversation-inner">
         {messages.map((message, index) => (
           <div className="d-flex flex-column">
-            {cookies2.user == message.user.id ? 
+            {ucookies.user == message.user.id ? 
+              <div className="align-self-end m-1">
+                <h5>{message.user.nickname} 님</h5>
+                <AudioPlayer
+                  key={index}
+                  src={'http://localhost:8080/voice/' + message.voice}
+                  showJumpControls={false}
+                  customVolumeControls={[]}
+                  customAdditionalControls={[]}
+                  style={{
+                    width: '300px'
+                  }}
+                />
+              </div>
+            : 
+            <div className="align-self-start m-1">
+              <h5>{message.user.nickname} 님</h5>
               <AudioPlayer
-                className="align-self-end m-1"
-                key={index}
-                src={'http://localhost:8080/voice/' + message.voice}
-                showJumpControls={false}
-                customVolumeControls={[]}
-                customAdditionalControls={[]}
-                style={{
-                  width: '300px'
-                }}
-              /> : 
-              <AudioPlayer
-                className="align-self-start m-1"
                 key={index}
                 src={'http://localhost:8080/voice/' + message.voice}
                 showJumpControls={false}
@@ -133,8 +140,8 @@ const ConversationDetailPage = ({ match }) => {
                   width: '300px'
                 }}
               />
+            </div>
             }
-
           </div>
           )
         )}
@@ -143,7 +150,7 @@ const ConversationDetailPage = ({ match }) => {
         <div className="d-flex flex-column align-items-center mt-3">
           <ReactMic
             record={record}
-            className="sound-wave w-100"
+            className="sound-wave w-75"
             onStop={onStop}
             strokeColor="white"
             backgroundColor="#9B8281" />
@@ -158,7 +165,7 @@ const ConversationDetailPage = ({ match }) => {
         </div>
       )}
       {voice && (
-        <div>
+        <div className="d-flex flex-column align-items-center mt-3">
           <AudioPlayer
             src={voiceurl}
             showJumpControls={false}
@@ -178,6 +185,7 @@ const ConversationDetailPage = ({ match }) => {
         </div>
       )}
       <button className="conversation-button" onClick={sendMessage}>보내기</button>
+      <button onClick={startCall}>화상채팅 신청</button>
     </div>
   )
 };

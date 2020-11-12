@@ -50,7 +50,7 @@ const App = () => {
           <Route component={PostCreatePage} exact path="/post/create" />
           <Route component={PostListPage} path="/post/list" />
           <Route component={PostUpdatePage} path="/post/update/:postId" />
-          <Route component={CallPage} path="/call" />
+          <Route component={CallPage} path="/call/:conversationId" />
           {cookies.accessToken && <FooterComp />}
           <div className="footer-footer"></div>
         </div>
