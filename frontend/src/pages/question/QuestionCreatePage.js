@@ -41,21 +41,19 @@ const useStyles = makeStyles((theme) => ({
   },
   backBtn: {
     marginRight: theme.spacing(1),
-    backgroundColor:"#895BC7",
+    backgroundColor:"#9B8481",
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
   mainFont: {
-    fontFamily:"GmarketSansBold",
+    fontFamily:"BMEULJIRO",
+    fontSize:"20px"
   },
   customBtn:{
-    color:"#0d0a0a",
-    backgroundColor:"rgb(255, 99, 173)"
-  },
-  customBtn:{
-
+    color:"white",
+    backgroundColor:"#5e1e27"
   },
   cancelBtn:{
     color:"#FFFAFF",
@@ -75,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
       color: "gray"
     },
     "& $active": {
-      color: "rgb(255, 99, 173)"
+      color: "#5E1E27"
     },
     "& $disabled": {
       color: "red"
@@ -94,9 +92,9 @@ const useStyles = makeStyles((theme) => ({
 
 const YesRadio = withStyles({
   root: {
-    color: "#FF63AD",
+    color: "#D08892",
     '&$checked': {
-      color: "#FF63AD",
+      color: "#D08892",
     },
   },
   checked: {},
@@ -104,16 +102,16 @@ const YesRadio = withStyles({
 
 const NoRadio = withStyles({
   root: {
-    color: "#895BC7",
+    color: "#9B8481",
     '&$checked': {
-      color: "#895BC7",
+      color: "#9B8481",
     },
   },
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
 function getSteps() {
-  return ['질문 개수', '시험지 작성', '미리보기'];
+  return ['질문 개수', '레시피 작성', '미리보기'];
 }
 
 //로그인 여부에 따른 시험지 작성 허용
@@ -277,7 +275,7 @@ const QuestionCreatePage = () => {
 
   return (
     <>
-      <div style={{display:"flex", justifyContent:"center"}}>
+      <div style={{display:"flex", justifyContent:"center",}}>
         <div className="test-box">
         {/* stepper */}
         <div className="create-box" style={{}}>
@@ -316,7 +314,7 @@ const QuestionCreatePage = () => {
             <div>
               {activeStep === 0 && (
                 <div className="stepper-box">
-                  <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
+                  <div style={{fontSize:"20px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
                   <div className="set-quest-box">
                     <Input type="number" value={cnt} 
                     onChange={onChangeCnt} classes={{input:classes.mainFont}}/>개
@@ -335,7 +333,7 @@ const QuestionCreatePage = () => {
               )}
               {activeStep === 1 && (
                 <div className="stepper-box">
-                  <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                  <div style={{display:'flex',flexDirection:'column', marginTop:"0px"}}>
                     {exam.map((item) => (
                       <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
                         <div key={item.key} className="quest-box">
@@ -400,11 +398,13 @@ const QuestionCreatePage = () => {
                     <div className="stepper-final-box-comp">
                       <div className="stepper-exam-preview">
                         <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
-                        <h4>연애 능력 고사</h4>
-                        <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
-                        <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+                        <h4>이상형 레시피</h4>
+                        <div style={{height:"7.5px", width:"96%", 
+                        backgroundColor:"#5e1e27"}}></div>
+                        <hr style={{height:"0.6px", width:"96%", 
+                        backgroundColor:"#5e1e27", marginTop:"2px",}}></hr>
                         {exam.map((item) => (
-                        <React.Fragment key={item.key}>
+                        <div className="create-final-box" key={item.key}>
                           <div key={item.key} className="quest-box">
                             <label className="create-final-label">{item.key}번</label>
                             <div className="create-final-quest">{item.quest}</div>
@@ -421,7 +421,7 @@ const QuestionCreatePage = () => {
                               아니오
                             </div>}
                           </div>
-                        </React.Fragment>
+                        </div>
                       ))}
                       </div>
                     

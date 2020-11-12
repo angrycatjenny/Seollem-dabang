@@ -1,5 +1,5 @@
 .cancel-btn {
-  margin-top: 20px;
+  margin: 20px 50px 0 0;
   display: flex;
   justify-content: flex-end;
   /* padding-right: 10px; */
@@ -10,11 +10,12 @@
   display: flex;
   justify-content: center;
   margin-right: 17px;
-  /* border: 2px solid red; */
+  border: 2px solid red;
 }
 
 .stepper-box {
   /* border: 2px solid green; */
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +30,10 @@
   display: flex;
   justify-content: space-around;
   /* border: 2px solid red; */
-  width: 60%;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .radio-box {
@@ -43,7 +47,7 @@
 }
 
 .quest-create-input:focus {
-  outline-color: rgb(255, 99, 173);
+  outline-color: #5e1e27;
 }
 
 .stepper-final-box {
@@ -55,9 +59,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 2px solid blue; */
+  border: 2px solid blue;
   margin-bottom: 100px;
-  width: 85%;
+  width: 60%;
 }
 
 .create-final-label {
@@ -80,18 +84,19 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 15px;
-  /* border: 2px solid purple; */
-  width: 88%;
+  width: 30%;
 }
 
 .stepper-exam-preview {
   width: 100%;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  border: 2px solid #0d0a0a;
+  border: 2px solid #5e1e27;
   padding-top: 10px;
+  overflow: auto;
 }
 .stepper-custom-btn {
   color: #0d0a0a;
@@ -139,13 +144,20 @@
 
 .test-box {
   height: 500px;
-  width: 65%;
+  width: 81.8%;
   /* border: 2px solid purple; */
-  background-image: url('../../assets//question/board1.png');
-  background-size: 950px 500px;
+  background-image: url('../../assets//question/board8.png');
+  background-size: 900px 500px;
   background-repeat: no-repeat;
-  margin: 30px 0 10px 0;
-  padding: 75px 150px 0px 200px;
+  margin: 20px 0 10px 50px;
+  padding: 75px 0px 0px 0px;
   display: flex;
   flex-direction: column;
+}
+
+.create-final-box {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }

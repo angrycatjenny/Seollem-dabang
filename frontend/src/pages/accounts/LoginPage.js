@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
+import { setUseProxies } from '../../../node_modules/immer/dist/immer';
 
 const LoginPage = ({ history }) => {
   const [ email, setEmail ] = useState('');

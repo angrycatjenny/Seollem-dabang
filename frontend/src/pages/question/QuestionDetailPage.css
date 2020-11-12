@@ -1,9 +1,91 @@
 .new-quest-box {
-  border: 2px solid blue;
+  display: flex;
+  margin-right: 15px;
+  margin-top: 10px;
 }
 .quest-detail-box {
-  border: 2px solid red;
+  display: flex;
+  margin-top: 10px;
+}
+.quest-detail {
+  height: 500px;
+  width: 81.8%;
+  /* border: 2px solid purple; */
+  background-image: url('../../assets//question/board8.png');
+  background-size: 900px 500px;
+  background-repeat: no-repeat;
+  margin: 10px 0 10px 50px;
+  padding: 40px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.in-quest-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 2px solid yellow; */
+  margin-bottom: 0;
+  width: 90%;
+  height: 400px;
+  overflow: auto;
+}
+.detail-btn {
+  display: flex;
+}
+.detail-btn-box {
+  width: 800px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+.detail-ans-box {
+  display: flex;
+  justify-content: flex-start;
+  width: 13%;
+  /* border: 2px solid orange; */
+  margin-right: 10px;
+}
+.detail-update-box {
+  width: 700px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+  /* border: 2px solid red; */
+}
+.detail-update-btn,
+.detail-delete-btn,
+.quest-add-btn {
+  width: 53px;
+  background-color: transparent;
+  outline: none;
+  border-radius: 4px;
+}
+.detail-delete-btn {
+  margin-left: 5px;
+  border: 2px solid rgb(219, 63, 63);
+}
+.detail-update-btn {
+  border: 2px solid #5e1e27;
+}
+.quest-add-btn {
+  width: 45px;
+  height: 30px;
+  align-self: center;
+  border: 2px solid #84304a;
+}
+
+.detail-exam-preview {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  border: 2px solid #5e1e27;
+  padding-top: 10px;
+  overflow: auto;
 }
