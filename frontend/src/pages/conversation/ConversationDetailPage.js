@@ -23,7 +23,9 @@ import ConversationPic2 from '../../assets/conversation/ConversationPic2.png';
 
 const ConversationDetailPage = ({ match }) => {
   const history = useHistory();
-  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ cookies1, setCookie1 ] = useCookies(['accessToken']);
+  const [ cookies2, setCookie2 ] = useCookies(['user']);
+
   const [ loading, setLoading ] = useState(false);
 
   const [ messages, setMessages ] = useState('');
@@ -49,7 +51,7 @@ const ConversationDetailPage = ({ match }) => {
 
   const config = {
     headers: {
-      'Authorization': 'Bearer ' + cookies.accessToken
+      'Authorization': 'Bearer ' + cookies1.accessToken
     }
   }
 
@@ -98,20 +100,38 @@ const ConversationDetailPage = ({ match }) => {
 
   return (
     <div className="conversation-template">
-      <h1>님과의 대화</h1>
+      <h1>{cookies2.user}님과의 대화</h1>
       <div className="conversation-inner">
         {messages.map((message, index) => (
-            <AudioPlayer
-              key={index}
-              src={'http://localhost:8080/voice/' + message.voice}
-              showJumpControls={false}
-              customVolumeControls={[]}
-              customAdditionalControls={[]}
-              style={{
-                width: '300px'
-              }}
-            />
-        ))}
+          <div className="d-flex flex-column">
+            {cookies2.user == message.user.id ? 
+              <AudioPlayer
+              className="align-self-end"
+                key={index}
+                src={'http://localhost:8080/voice/' + message.voice}
+                showJumpControls={false}
+                customVolumeControls={[]}
+                customAdditionalControls={[]}
+                style={{
+                  width: '300px'
+                }}
+              /> : 
+              <AudioPlayer
+                className="align-self-start"
+                key={index}
+                src={'http://localhost:8080/voice/' + message.voice}
+                showJumpControls={false}
+                customVolumeControls={[]}
+                customAdditionalControls={[]}
+                style={{
+                  width: '300px'
+                }}
+              />
+            }
+
+          </div>
+          )
+        )}
       </div>
       <img className="conversation-image" src={ConversationPic2} />
 
