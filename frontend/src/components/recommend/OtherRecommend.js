@@ -29,6 +29,7 @@ const OtherRecommend = () => {
   const [loading, setLoading] = React.useState(false)
 
   const [tileData, setTileData] = React.useState()
+  const [tileData2, setTileData2] = React.useState([])
   const [cookies] = useCookies(['accessToken']);
 
   const axiosConfig = {
@@ -51,7 +52,13 @@ const OtherRecommend = () => {
     getData()
   }, [])
 
+let tileData3 = []
+
   if (loading) {
+  for (let i = 0; i<2; i++){
+    tileData3.push(tileData[i])
+  }
+  console.log('push네여ㅕㅕ',tileData3)
     if (gender === 0) {
       for (let i = 0; i < tileData.length; i++) {
         tileData[i].img = menImgData[i]
@@ -67,9 +74,6 @@ const OtherRecommend = () => {
     )
   }
 
-  if (!tileData) {
-    return null
-  }
   let rearrangedPlayer = [
     {
       className: "adele",
@@ -86,11 +90,11 @@ const OtherRecommend = () => {
       ]
     }
   ];
-
+console.log(456789)
   return (
     <div className="other-root">
       <GridList cellHeight={200} className="other-gridlist">
-        {tileData.map((tile) => (
+        {tileData3.map((tile) => (
           <GridListTile key={tile.img} className="other-gridlist-item">
             <Button onClick={() => history.push(`/answer/${tile.id}`)}>
               <img src={tile.img} alt={tile.nickname} className="other-imgsize" />
