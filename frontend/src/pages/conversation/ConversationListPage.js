@@ -19,6 +19,7 @@ const ConversationListPage = () => {
   const [ conversations, setConversations ] = useState(null);
 
   const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ ucookies, setUcookie ] = useCookies(['user']);
   const [ loading, setLoading ] = useState(false);
 
   const config = {
@@ -54,13 +55,24 @@ const ConversationListPage = () => {
     <div className="container conversation-template">
       <div className="row">
         {conversations.map((conversation, index) => (
-          <Link className="text-decoration-none col-4" to={'/conversation/' + conversation.conversationId}>
-            <div button key={index} className="d-flex flex-column align-items-center">
-              <img className="conversation-img text-decoration-none" src={ConversationPic1} />
-              <h5 className="text-decoration-none text-dark">{conversation.examiner.nickname}님과의 대화</h5>
-              <h6 className="text-decoration-none text-dark">#{conversation.examiner.location} #{conversation.examiner.age}세</h6>
-            </div>
-          </Link>
+          <div className="col-4">
+            {ucookies.user == conversation.examiner.id ? 
+              <Link className="text-decoration-none" to={'/conversation/' + conversation.conversationId}>
+              <div button key={index} className="d-flex flex-column align-items-center">
+                <img className="conversation-img text-decoration-none" src={ConversationPic1} />
+                <h5 className="text-decoration-none text-dark">{conversation.examinee.nickname}님과의 대화</h5>
+                <h6 className="text-decoration-none text-dark">#{conversation.examinee.location} #{conversation.examinee.age}세</h6>
+              </div>
+            </Link> : null}
+            {ucookies.user == conversation.examinee.id ? 
+              <Link className="text-decoration-none" to={'/conversation/' + conversation.conversationId}>
+              <div button key={index} className="d-flex flex-column align-items-center">
+                <img className="conversation-img text-decoration-none" src={ConversationPic1} />
+                <h5 className="text-decoration-none text-dark">{conversation.examiner.nickname}님과의 대화</h5>
+                <h6 className="text-decoration-none text-dark">#{conversation.examiner.location} #{conversation.examiner.age}세</h6>
+              </div>
+            </Link> : null}
+          </div>
         ))}
       </div>
     </div>
