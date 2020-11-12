@@ -44,11 +44,11 @@ def cal_sim(user_id):
   #추후 수정######
   user_id=user_id
   ################
-  # print(item_based_collabor)
 
-  similar_user=item_based_collabor.drop(user_id,axis=1).loc[user_id]
+  all_user=item_based_collabor.drop(user_id,axis=1).loc[user_id]
 
-  return similar_user.sort_values(ascending=False).index
+  simliar_user = all_user.sort_values(ascending=False)[all_user.sort_values(ascending=False).values>0]
+  return simliar_user.index
 
 def main(argv):
   result = cal_sim(int(argv[1]))
