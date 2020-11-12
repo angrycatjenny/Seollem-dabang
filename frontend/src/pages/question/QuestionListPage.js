@@ -84,8 +84,10 @@ const QuestionListPage = () => {
   }
 
   return (
-    <React.Fragment>
-      <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+    <div style={{display:"flex", justifyContent:"center"}}>
+    <div className="quest-list-box">
+      <div style={{display:"flex", flexDirection:"column", 
+      alignItems:"center"}}>
         <div className="stepper-final-box-comp">
           <div className="stepper-exam-preview">
             <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
@@ -125,7 +127,8 @@ const QuestionListPage = () => {
         </div>
       </div>
       <FooterComp/>
-    </React.Fragment>
+    </div>
+    </div>
   );
   };
   
