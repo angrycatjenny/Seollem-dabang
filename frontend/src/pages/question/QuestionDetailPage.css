@@ -13,7 +13,7 @@
   background-image: url('../../assets//question/board8.png');
   background-size: 900px 500px;
   background-repeat: no-repeat;
-  margin: 20px 0 10px 50px;
+  margin: 10px 0 10px 50px;
   padding: 40px 0px 0px 0px;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
   margin-bottom: 0;
   width: 90%;
   height: 400px;
@@ -37,4 +37,34 @@
   width: 800px;
   display: flex;
   justify-content: flex-end;
+}
+.detail-ans-box {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  /* border: 2px solid orange; */
+  margin-right: 10px;
+}
+.detail-update-box {
+  width: 700px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+  /* border: 2px solid red; */
+}
+.detail-update-btn,
+.detail-delete-btn {
+  width: 55px;
+  background-color: transparent;
+  outline: none;
+  border-radius: 4px;
+}
+.detail-delete-btn {
+  margin-left: 5px;
+  border: 2px solid rgb(219, 63, 63);
+}
+.detail-update-btn {
+  border: 2px solid #5e1e27;
 }

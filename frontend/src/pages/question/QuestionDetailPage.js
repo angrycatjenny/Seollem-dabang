@@ -182,8 +182,8 @@ const QuestionDetailPage = () => {
             <div className="stepper-exam-preview">
               <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
               <h4>연애 능력 고사</h4>
-              <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
-              <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+              <div style={{height:"7.5px", width:"96%", backgroundColor:"black"}}></div>
+              <hr style={{height:"1px", width:"96%", backgroundColor:"#5e1e27", marginTop:"2px",}}></hr>
               
               {exam.map((item) => (
             <React.Fragment key={item.questionId}>
@@ -216,13 +216,13 @@ const QuestionDetailPage = () => {
                   <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
                   </div>
                   ) : (
-                <div style={{border:"2px solid red", width:"100%",}}>
-                  <React.Fragment key={item.questionId}>
+                <div >
+                  <div className="detail-update-box" key={item.questionId}>
                     <div key={item.questionId} className="quest-box">
                       <label className="create-final-label">{exam.indexOf(item)+1}번</label>
                       <div className="create-final-quest">{item.content}</div>
                     </div>
-                    <div className="create-final-ans-box">
+                    <div className="detail-ans-box">
                       <div className="create-final-label">정답: </div>
                       {item.correctAnswer 
                       ?
@@ -234,9 +234,14 @@ const QuestionDetailPage = () => {
                         아니오
                       </div>}
                     </div>
-                      <button onClick={() => sendEditId(item.questionId)}>수정</button>
-                      <button onClick={() => deleteQuest(item.questionId)}>삭제</button>
-                  </React.Fragment>
+                      
+                    <button onClick={() => sendEditId(item.questionId)}
+                    className="detail-update-btn">
+                      수정</button>
+                    <button onClick={() => deleteQuest(item.questionId)}
+                    className="detail-delete-btn">
+                      삭제</button>
+                  </div>
                 </div>
                   )}
             </React.Fragment>
