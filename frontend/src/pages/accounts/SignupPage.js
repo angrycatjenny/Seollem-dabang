@@ -227,6 +227,8 @@ const SignupPage = () => {
             alert("사진에서 얼굴을 찾을 수 없습니다.")
           }else if(res.data.message === "Email is already exist!"){
             alert("이미 가입 정보가 있는 이메일 입니다.")
+          }else if(res.data.message === "Nickname is already exist!"){
+            alert("이미 존재하는 닉네임 입니다.")
           }else if(res.data.message === "User registered successfully"){
             alert('회원가입이 완료되었습니다.')
             history.push('/login')
