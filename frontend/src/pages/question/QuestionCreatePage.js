@@ -398,7 +398,7 @@ const QuestionCreatePage = () => {
                     <div className="stepper-final-box-comp">
                       <div className="stepper-exam-preview">
                         <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
-                        <h4>연애 능력 고사</h4>
+                        <h4>이상형 레시피</h4>
                         <div style={{height:"7.5px", width:"96%", 
                         backgroundColor:"#5e1e27"}}></div>
                         <hr style={{height:"0.6px", width:"96%", 

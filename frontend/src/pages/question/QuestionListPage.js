@@ -89,12 +89,14 @@ const QuestionListPage = () => {
         <div className="stepper-final-box-comp">
           <div className="stepper-exam-preview">
             <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
-            <h4>연애 능력 고사</h4>
-            <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
-            <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+            <h4>이상형 레시피</h4>
+            <div style={{height:"7.5px", width:"96%", 
+            backgroundColor:"#5e1e27"}}></div>
+            <hr style={{height:"0.6px", width:"96%", 
+            backgroundColor:"#5e1e27", marginTop:"2px",}}></hr>
             
             {exam.map((item) => (
-            <React.Fragment key={item.questionId}>
+            <div className="create-final-box" key={item.questionId}>
               <div key={item.questionId} className="quest-box">
                 <label className="create-final-label">{exam.indexOf(item)+1}번</label>
                 <div className="create-final-quest">{item.content}</div>
@@ -111,7 +113,7 @@ const QuestionListPage = () => {
                   아니오
                 </div>}
               </div>
-            </React.Fragment>
+            </div>
           ))}
           </div>
         
