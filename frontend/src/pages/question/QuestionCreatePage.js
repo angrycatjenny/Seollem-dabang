@@ -51,11 +51,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:"GmarketSansBold",
   },
   customBtn:{
-    color:"#0d0a0a",
-    backgroundColor:"rgb(255, 99, 173)"
-  },
-  customBtn:{
-
+    color:"white",
+    backgroundColor:"#5e1e27"
   },
   cancelBtn:{
     color:"#FFFAFF",
@@ -75,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       color: "gray"
     },
     "& $active": {
-      color: "rgb(255, 99, 173)"
+      color: "#5E1E27"
     },
     "& $disabled": {
       color: "red"
@@ -277,7 +274,7 @@ const QuestionCreatePage = () => {
 
   return (
     <>
-      <div style={{display:"flex", justifyContent:"center"}}>
+      <div style={{display:"flex", justifyContent:"center",}}>
         <div className="test-box">
         {/* stepper */}
         <div className="create-box" style={{}}>
