@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import Tape1 from '../../assets/profile/Tape1.png';
-import Tape2 from '../../assets/profile/Tape2.png';
-
-// Axios
 import axios from 'axios';
-
-// CSS
 import './MyProfilePage.css';
-
-// Cookie
 import { useCookies } from 'react-cookie';
-
-// Audio Player
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 

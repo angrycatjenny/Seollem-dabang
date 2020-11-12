@@ -11,10 +11,12 @@ import './FooterComp.css';
 const FooterComp = () => {
   const history = useHistory();
 
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [ cookies, setCookie, removeCookie ] = useCookies(['accessToken']);
+  const [ ucookies, setUcookie, removeUcookie ] = useCookies(['user']);
 
   const logout = e => {
     removeCookie('accessToken');
+    removeUcookie('user');
     history.push('/')
     alert('로그아웃 되었습니다.')
   }

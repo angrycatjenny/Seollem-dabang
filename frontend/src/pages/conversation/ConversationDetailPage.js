@@ -19,11 +19,18 @@ import 'react-h5-audio-player/lib/styles.css';
 // History
 import { useHistory } from "react-router-dom";
 
-import FooterComp from '../../components/base/FooterComp';
+import ConversationPic2 from '../../assets/conversation/ConversationPic2.png';
+
+// Images
+import RecordStart from '../../assets/signup/RecordStart.png';
+import RecordStop from '../../assets/signup/RecordStop.png';
+import RecordDelete from '../../assets/signup/RecordDelete.png';
 
 const ConversationDetailPage = ({ match }) => {
   const history = useHistory();
-  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ cookies1, setCookie1 ] = useCookies(['accessToken']);
+  const [ cookies2, setCookie2 ] = useCookies(['user']);
+
   const [ loading, setLoading ] = useState(false);
 
   const [ messages, setMessages ] = useState('');
@@ -49,7 +56,7 @@ const ConversationDetailPage = ({ match }) => {
 
   const config = {
     headers: {
-      'Authorization': 'Bearer ' + cookies.accessToken
+      'Authorization': 'Bearer ' + cookies1.accessToken
     }
   }
 
@@ -97,34 +104,59 @@ const ConversationDetailPage = ({ match }) => {
   };
 
   return (
-    <div>
-      <h1>대화 목록</h1>
-      {messages.map((message, index) => (
-        <AudioPlayer
-          key={index}
-          src={'http://localhost:8080/voice/' + message.voice}
-          showJumpControls={false}
-          customVolumeControls={[]}
-          customAdditionalControls={[]}
-        />
-      ))}
-      <h1>녹음 하기</h1>
+    <div className="conversation-template d-flex flex-column align-items-center">
+      <img className="conversation-image" src={ConversationPic2} />
+      <h4 className="">{cookies2.user}님과의 대화</h4>
+      <div className="conversation-inner">
+        {messages.map((message, index) => (
+          <div className="d-flex flex-column">
+            {cookies2.user == message.user.id ? 
+              <AudioPlayer
+                className="align-self-end m-1"
+                key={index}
+                src={'http://localhost:8080/voice/' + message.voice}
+                showJumpControls={false}
+                customVolumeControls={[]}
+                customAdditionalControls={[]}
+                style={{
+                  width: '300px'
+                }}
+              /> : 
+              <AudioPlayer
+                className="align-self-start m-1"
+                key={index}
+                src={'http://localhost:8080/voice/' + message.voice}
+                showJumpControls={false}
+                customVolumeControls={[]}
+                customAdditionalControls={[]}
+                style={{
+                  width: '300px'
+                }}
+              />
+            }
+
+          </div>
+          )
+        )}
+      </div>
       {!voice && (
-        <div>
+        <div className="d-flex flex-column align-items-center mt-3">
           <ReactMic
             record={record}
-            mimeType="audio/mp3"
             className="sound-wave w-100"
             onStop={onStop}
-            strokeColor="black"
-            backgroundColor="lightgray" />
+            strokeColor="white"
+            backgroundColor="#9B8281" />
           <div>
-            <button onClick={startRecording} type="button">녹음시작</button>
-            <button onClick={stopRecording} type="button">녹음종료</button>
+            {!record && (
+              <button className="record-button" onClick={startRecording} type="button"><img className="record-img mr-2" src={RecordStart} />녹음시작</button>
+            )}
+            {record && (
+              <button className="record-button" onClick={stopRecording} type="button"><img className="record-img mr-2" src={RecordStop} />녹음종료</button>
+            )}
           </div>
         </div>
       )}
-
       {voice && (
         <div>
           <AudioPlayer
@@ -132,16 +164,20 @@ const ConversationDetailPage = ({ match }) => {
             showJumpControls={false}
             customVolumeControls={[]}
             customAdditionalControls={[]}
+            style={{
+              width: '500px'
+            }}
           />
           <button 
             onClick={removeRecord}
             type="button"
+            className="record-button"
           >
-            다시녹음
+            <img className="record-img mr-2" src={RecordDelete} />다시녹음
           </button>
         </div>
       )}
-      <button onClick={sendMessage}>등록</button>
+      <button className="conversation-button" onClick={sendMessage}>보내기</button>
     </div>
   )
 };
