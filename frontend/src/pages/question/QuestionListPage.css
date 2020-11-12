@@ -5,7 +5,11 @@
   color: black;
   font-weight: bold;
   background-color: rgb(255, 99, 173);
-  padding: 3px 2.5px;
+  padding: 3px 5px;
+}
+.exam-create-btn:hover {
+  text-decoration: none;
+  color: white;
 }
 .exam-update-btn {
   border: 2px solid rgb(255, 99, 173);

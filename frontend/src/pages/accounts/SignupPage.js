@@ -26,8 +26,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 
+// Images
+import RecordStart from '../../assets/signup/RecordStart.png';
+import RecordStop from '../../assets/signup/RecordStop.png';
+import RecordDelete from '../../assets/signup/RecordDelete.png';
+
 // History
 import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -235,197 +241,153 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label) => {
-            const stepProps = {};
-            const labelProps = {};
-            return (
-              <Step 
-                key={label}
-                {...stepProps} 
+    <div className="signup-template d-flex flex-column align-items-center">
+      <div className="signup-box">
+        <h5 className="text-center signup-name">설 렘 다 방</h5>
+        <div className="d-flex justify-content-between">
+          <div className="signup-page1 d-flex flex-column">
+            <small>기본정보</small>
+            <Input
+              placeholder="닉네임"
+              nickname={nickname}
+              onChange={setNicknameText}
+            />
+            <Input
+              placeholder="이메일"
+              email={email}
+              onChange={setEmailText}
+            />
+            <Input
+              type="password"
+              placeholder="비밀번호"
+              password={password}
+              onChange={setPasswordText}
+            />
+            <Input
+              type="password"
+              placeholder="비밀번호 확인"
+              passwordconfirm={passwordconfirm}
+              onChange={setPasswordconfirmText}
+            />
+            <small className="mt-4">상세정보</small>
+            <FormControl 
+            >
+            <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
+              <Select
+                labelId="demo-mutiple-name-label"
+                id="demo-mutiple-name"
+                value={location}
+                onChange={setLocationText}
+                input={<Input />}
+                MenuProps={MenuProps}
               >
-                <StepLabel
-                 {...labelProps}
-                >
-                  <small>{label}</small>
-                </StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
+                {locations.map((location) => (
+                  <MenuItem key={location} value={location}>
+                    {location}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-        <div className="signup-form">
-          {activeStep === 0 && (
-            <div>
-              <h3 className="signup-logo">기본정보</h3>
-              <Input
-                className="signup-input"
-                placeholder="닉네임"
-                nickname={nickname}
-                onChange={setNicknameText}
-              />
-              <Input
-                className="signup-input"
-                placeholder="이메일"
-                email={email}
-                onChange={setEmailText}
-              />
-              <Input
-                className="signup-input"
-                type="password"
-                placeholder="비밀번호"
-                password={password}
-                onChange={setPasswordText}
-              />
-              <Input
-                className="signup-input"
-                type="password"
-                placeholder="비밀번호 확인"
-                passwordconfirm={passwordconfirm}
-                onChange={setPasswordconfirmText}
-              />
-            
-              <FormControl className="signup-input">
-                <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
-                <Select
-                  labelId="demo-mutiple-name-label"
-                  id="demo-mutiple-name"
-                  value={location}
-                  onChange={setLocationText}
-                  input={<Input />}
-                  MenuProps={MenuProps}
-                >
-                  {locations.map((location) => (
-                    <MenuItem key={location} value={location}>
-                      {location}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <FormControl className="signup-input">
-                <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
-                <Select
+            <FormControl 
+            >
+              <InputLabel id="demo-mutiple-name-label1">성별</InputLabel>
+              <Select
                 labelId="demo-mutiple-name-label1"
                 id="demo-mutiple-name1"
                 value={gender === '1' ? '여자' : gender === '0' && "남자"}
                 onChange={setGenderText}
                 input={<Input />}
-                >
-                {genders.map((gender) => (
-                  <MenuItem key={gender} value={gender}>
-                    {gender}
-                  </MenuItem>
-                ))}
-                </Select>
-              </FormControl>
+              >
+              {genders.map((gender) => (
+                <MenuItem key={gender} value={gender}>
+                  {gender}
+                </MenuItem>
+              ))}
+              </Select>
+            </FormControl>
 
-              <FormControl className="birth-input mt-3">
-                <TextField
-                  id="date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  age={age}
-                  onChange={setAgeText}
-                />
-              </FormControl>
-
-              <div className="signup-footer">
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  뒤로
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={()=>checkHandle(1)}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-          {activeStep === 1 && (
-            <div>
-              <h3 className="signup-logo">사진 입력</h3>
-              <InputLabel className="mt-3">프로필 사진</InputLabel>
-              <Input
-                className="signup-input"
-                type="file"
-                onChange={setImageText}
+            <FormControl 
+              className="mt-3"
+            >
+              <TextField
+                id="date"
+                type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                age={age}
+                onChange={setAgeText}
               />
-              {imagePush &&
-                <img src={objectURL} alt={objectURL} className="signup-img" />
-              }
-              <div className="signup-footer">
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  뒤로
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={()=>checkHandle(2)}
-                  className={classes.button}
-                >
-                  다음
-                </Button>
+            </FormControl>
+          </div>
+          <div className="signup-page2 d-flex flex-column">
+              <small>사진입력</small>
+              <div className="d-flex justify-content-center">
+                {!imagePush && (
+                  <Input
+                    className="mb-3"
+                    type="file"
+                    onChange={setImageText}
+                  />
+                )}
+                {imagePush && (
+                  <img src={objectURL} alt={objectURL} className="signup-img" />
+                )}
               </div>
-            </div>
-          )}
-          {activeStep === 2 && (
-            <div>
-              <h3 className="signup-logo">목소리 녹음</h3>
+              <small className="mt-4">음성녹음</small>
               {!voice && (
-                <div>
-                  <InputLabel className="mt-3">음성 녹음</InputLabel>
+                <div className="d-flex flex-column align-items-center">
                   <ReactMic
                     record={record}
                     className="sound-wave w-100"
                     onStop={onStop}
-                    strokeColor="black"
-                    backgroundColor="lightgray" />
+                    strokeColor="white"
+                    backgroundColor="#9B8281" />
                   <div>
-                    <button onClick={startRecording} type="button">녹음시작</button>
-                    <button onClick={stopRecording} type="button">녹음종료</button>
+                    {!record && (
+                      <button className="record-button" onClick={startRecording} type="button"><img className="record-img mr-2" src={RecordStart} />녹음시작</button>
+                    )}
+                    {record && (
+                      <button className="record-button" onClick={stopRecording} type="button"><img className="record-img mr-2" src={RecordStop} />녹음종료</button>
+                    )}
                   </div>
                 </div>
               )}
 
               {voice && (
-                <div>
-                  <AudioPlayer
-                    src={voiceurl}
-                    showJumpControls={false}
-                    customVolumeControls={[]}
-                    customAdditionalControls={[]}
-                  />
-                  <button 
-                    onClick={removeRecord}
-                    type="button"
-                  >
-                    다시녹음
-                  </button>
-                </div>
-              )}
-              <div className="signup-footer">
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  뒤로
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={sendSignupData}
-                  className={classes.button}
+                <div className="d-flex flex-column align-items-center">
+                <AudioPlayer
+                  src={voiceurl}
+                  showJumpControls={false}
+                  customVolumeControls={[]}
+                  customAdditionalControls={[]}
+                  style={{
+                    width: '350px'
+                  }}
+                />
+                <button 
+                  onClick={removeRecord}
+                  type="button"
+                  className="record-button"
                 >
-                  완료
-                </Button>
+                  <img className="record-img mr-2" src={RecordDelete} />다시녹음
+                </button>
               </div>
-            </div>
-          )}
+            )}
+          <div className="signup-footer d-flex justify-content-between">
+            <small>아직 회원이 아니신가요?</small>
+            <Link to="/login" className="text-decoration-none">로그인</Link>
+          </div>
+            <button
+              variant="contained"
+              color="primary"
+              onClick={sendSignupData}
+              className="signup-button"
+            >
+              회원가입
+            </button>
+          </div>
         </div>
       </div>
     </div>

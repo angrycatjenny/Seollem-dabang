@@ -76,7 +76,7 @@ const QuestionListPage = () => {
   if(!exam){
     return (
       <div style={{display:"flex", justifyContent:"center", 
-      margin:"230px 0"}}>
+      margin:"250px auto"}}>
         <Link to="/question/create"
           className="exam-create-btn">시험지+</Link>
       </div>

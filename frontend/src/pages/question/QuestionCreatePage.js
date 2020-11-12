@@ -27,6 +27,9 @@ import '../../App.css';
 import './QuestionCreatePage.css';
 import { ContactsOutlined, SignalWifi1BarLock } from '../../../node_modules/@material-ui/icons/index';
 
+//Images
+import ExamBoard from '../../assets/question/board1.png' 
+
 //Footer
 import FooterComp from '../../components/base/FooterComp';
 
@@ -34,6 +37,7 @@ import FooterComp from '../../components/base/FooterComp';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    backgroundColor: "transparent",
   },
   backBtn: {
     marginRight: theme.spacing(1),
@@ -273,176 +277,186 @@ const QuestionCreatePage = () => {
 
   return (
     <>
-      <div className="cancel-btn">
-        <Link to="/question">
-          <Button variant="contained"
-          className={classes.cancelBtn}
-          >취소</Button></Link>
-      </div>
-      {/* stepper */}
-      <div className={classes.root}>
-
-        <Stepper activeStep={activeStep} alternativeLabel 
-          classes={{
-            root: classes.root
-          }}>
-          {steps.map((label) => (
-            <Step key={label} classes={{
-              root: classes.step,
-              completed: classes.completed,
-            }}>
-              <StepLabel
+      <div style={{display:"flex", justifyContent:"center"}}>
+        <div className="test-box">
+        {/* stepper */}
+        <div className="create-box" style={{}}>
+          {/* <div style={{border:"2px solid green", padding:"0", margin:"0", display:"flex", justifyContent:"center"}}>
+            <img className="board-img" src={ExamBoard} />
+          </div> */}
+          {/* <div className="in-board">하이하이</div> */}
+          <div className="in-board">
+            <Stepper activeStep={activeStep} alternativeLabel 
               classes={{
-                label:classes.mainFont,
-                alternativeLabel: classes.alternativeLabel,
-                labelContainer: classes.labelContainer
-              }}
-              StepIconProps={{
-                classes: {
+                root: classes.root
+              }}>
+              {steps.map((label) => (
+                <Step key={label} classes={{
                   root: classes.step,
                   completed: classes.completed,
-                  active: classes.active,
-                  disabled: classes.disabled
-                }
-              }}
-              >{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-
-        <div>
-          {activeStep === 0 && (
-            <div className="stepper-box">
-              <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
-              <div className="set-quest-box">
-                <Input type="number" value={cnt} 
-                onChange={onChangeCnt} classes={{input:classes.mainFont}}/>개
-              </div>
-              <div className="stepper-btn">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.customBtn}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-          {activeStep === 1 && (
-            <div className="stepper-box">
-              <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
-                {exam.map((item) => (
-                  <React.Fragment key={item.key}>
-                    <div key={item.key} className="quest-box">
-                      <label>{item.key}번
-                        <textarea 
-                        className="quest-create-input"
-                        type="text"
-                        id={item.key}
-                        value={item.value}
-                        onChange={onChangeQuest}/>
-                      </label>
-                    </div>
-                    <div className="radio-box">
-                      <YesRadio
-                        checked={item.ans===1}
-                        onChange={onChangeAnsYes}
-                        id={item.key}
-                        value="1"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '예' }}
-                      /><div>예</div>
-                      <NoRadio
-                        checked={item.ans===0}
-                        onChange={onChangeAnsNo}
-                        id={item.key}
-                        value="0"
-                        name="radio-button-demo"
-                        inputProps={{ 'aria-label': '아니오' }}
-                      /><div>아니오</div>
-                    </div>
-                  </React.Fragment>
-                ))}
-                {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
-              </div>
-              <div className="stepper-btn">
-                <Button
-                  onClick={handleBack}
-                  className={classes.backBtn}
-                >
-                  이전
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.customBtn}
-                >
-                  다음
-                </Button>
-              </div>
-            </div>
-          )}
-          {activeStep === 2 && (
-            <div className="stepper-final-box">
-              {isLoaded 
-              ? 
-                <div className="stepper-loading">
-                  <CircularProgress />
-                  <h6>로딩중</h6>
-                </div>
-              :
-                <div className="stepper-final-box-comp">
-                  <div className="stepper-exam-preview">
-                    <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
-                    <h4>연애 능력 고사</h4>
-                    <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
-                    <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
-                    {exam.map((item) => (
-                    <React.Fragment key={item.key}>
-                      <div key={item.key} className="quest-box">
-                        <label className="create-final-label">{item.key}번</label>
-                        <div className="create-final-quest">{item.quest}</div>
-                      </div>
-                      <div className="create-final-ans-box">
-                        <div className="create-final-label">정답: </div>
-                        {item.ans 
-                        ?
-                        <div className="create-final-ans">
-                          예
-                        </div> 
-                        :
-                        <div className="create-final-ans">
-                          아니오
-                        </div>}
-                      </div>
-                    </React.Fragment>
-                  ))}
+                }}>
+                  <StepLabel
+                  classes={{
+                    label:classes.mainFont,
+                    alternativeLabel: classes.alternativeLabel,
+                    labelContainer: classes.labelContainer
+                  }}
+                  StepIconProps={{
+                    classes: {
+                      root: classes.step,
+                      completed: classes.completed,
+                      active: classes.active,
+                      disabled: classes.disabled
+                    }
+                  }}
+                  >{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            <div>
+              {activeStep === 0 && (
+                <div className="stepper-box">
+                  <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
+                  <div className="set-quest-box">
+                    <Input type="number" value={cnt} 
+                    onChange={onChangeCnt} classes={{input:classes.mainFont}}/>개
                   </div>
-                
                   <div className="stepper-btn">
                     <Button
                       variant="contained"
-                      onClick={handleReset}
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.customBtn}
+                    >
+                      다음
+                    </Button>
+                  </div>                
+                </div>
+              )}
+              {activeStep === 1 && (
+                <div className="stepper-box">
+                  <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                    {exam.map((item) => (
+                      <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
+                        <div key={item.key} className="quest-box">
+                          <label>{item.key}번
+                            <textarea 
+                            className="quest-create-input"
+                            type="text"
+                            id={item.key}
+                            value={item.value}
+                            onChange={onChangeQuest}/>
+                          </label>
+                        </div>
+                        <div className="radio-box">
+                          <YesRadio
+                            checked={item.ans===1}
+                            onChange={onChangeAnsYes}
+                            id={item.key}
+                            value="1"
+                            name="radio-button-demo"
+                            inputProps={{ 'aria-label': '예' }}
+                          /><div>예</div>
+                          <NoRadio
+                            checked={item.ans===0}
+                            onChange={onChangeAnsNo}
+                            id={item.key}
+                            value="0"
+                            name="radio-button-demo"
+                            inputProps={{ 'aria-label': '아니오' }}
+                          /><div>아니오</div>
+                        </div>
+                      </div>
+                    ))}
+                    {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
+                  </div>
+                  <div className="stepper-btn">
+                    <Button
+                      onClick={handleBack}
                       className={classes.backBtn}
-                      >
-                      다시 만들기
+                    >
+                      이전
                     </Button>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={sendExamData}
+                      onClick={handleNext}
                       className={classes.customBtn}
                     >
-                      완료
+                      다음
                     </Button>
                   </div>
                 </div>
-              }
-            </div> 
-          )}
+              )}
+              {activeStep === 2 && (
+                <div className="stepper-final-box">
+                  {isLoaded 
+                  ? 
+                    <div className="stepper-loading">
+                      <CircularProgress />
+                      <h6>로딩중</h6>
+                    </div>
+                  :
+                    <div className="stepper-final-box-comp">
+                      <div className="stepper-exam-preview">
+                        <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
+                        <h4>연애 능력 고사</h4>
+                        <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
+                        <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+                        {exam.map((item) => (
+                        <React.Fragment key={item.key}>
+                          <div key={item.key} className="quest-box">
+                            <label className="create-final-label">{item.key}번</label>
+                            <div className="create-final-quest">{item.quest}</div>
+                          </div>
+                          <div className="create-final-ans-box">
+                            <div className="create-final-label">정답: </div>
+                            {item.ans 
+                            ?
+                            <div className="create-final-ans">
+                              예
+                            </div> 
+                            :
+                            <div className="create-final-ans">
+                              아니오
+                            </div>}
+                          </div>
+                        </React.Fragment>
+                      ))}
+                      </div>
+                    
+                      <div className="stepper-btn">
+                        <Button
+                          variant="contained"
+                          onClick={handleReset}
+                          className={classes.backBtn}
+                          >
+                          다시 만들기
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={sendExamData}
+                          className={classes.customBtn}
+                        >
+                          완료
+                        </Button>
+                      </div>
+                    </div>
+                  }
+                </div> 
+              )}
+            </div>
+          </div>
+        </div>
+        
+        {/* 취소버튼 */}
+        <div className="cancel-btn">
+          <Link to="/question">
+            <Button variant="contained"
+            className={classes.cancelBtn}
+            >취소</Button></Link>
+        </div>
         </div>
       </div>
       <FooterComp/>

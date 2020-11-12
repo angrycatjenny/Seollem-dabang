@@ -142,7 +142,6 @@ const ConversationDetailPage = ({ match }) => {
         </div>
       )}
       <button onClick={sendMessage}>등록</button>
-      <FooterComp/>
     </div>
   )
 };
