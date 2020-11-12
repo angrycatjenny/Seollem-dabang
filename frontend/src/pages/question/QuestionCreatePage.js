@@ -333,7 +333,7 @@ const QuestionCreatePage = () => {
               )}
               {activeStep === 1 && (
                 <div className="stepper-box">
-                  <div style={{display:'flex',flexDirection:'column', marginTop:"20px"}}>
+                  <div style={{display:'flex',flexDirection:'column', marginTop:"0px"}}>
                     {exam.map((item) => (
                       <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
                         <div key={item.key} className="quest-box">
