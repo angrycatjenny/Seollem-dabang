@@ -103,6 +103,10 @@ const ConversationDetailPage = ({ match }) => {
     return null;
   };
 
+  const startCall = () => {
+    history.push(`/call/${match.params.conversationId}`)
+  }
+
   return (
     <div className="conversation-template d-flex flex-column align-items-center">
       <img className="conversation-image" src={ConversationPic2} />
@@ -138,7 +142,6 @@ const ConversationDetailPage = ({ match }) => {
               />
             </div>
             }
-
           </div>
           )
         )}
@@ -182,6 +185,7 @@ const ConversationDetailPage = ({ match }) => {
         </div>
       )}
       <button className="conversation-button" onClick={sendMessage}>보내기</button>
+      <button onClick={startCall}>화상채팅 신청</button>
     </div>
   )
 };

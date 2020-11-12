@@ -1,45 +1,33 @@
-import React, { Fragment, useState } from 'react';
-import { UserMediaError, useUserMediaFromContext } from "@vardius/react-user-media";
-import Video from "./Video";
-import UserMediaActions from "./UserMediaActions";
+import React, { useEffect, useState } from 'react';
+import { useUserMediaFromContext } from "@vardius/react-user-media";
 import Room from "./Room";
-import RoomForm from "./RoomForm";
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
-const CallPage = () => {
-  const [room, setRoom] = useState(null);
-  const [username, setUsername] = useState(null);
+const CallPage = ({ match }) => {
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
   const { stream, error } = useUserMediaFromContext();
+  const [ user, setUser ] = useState('');
 
-  const handleJoin = values => {
-    setRoom(values.room);
-    setUsername(values.username);
-  };
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + cookies.accessToken
+    }
+  }
+  useEffect(() => {
+    axios.get('/my-profile', config)
+      .then((response) => {
+        setUser(response.data.nickname);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
 
   return (
-    <div className="container-fluid">
-    {room && username ? (
-      <Room name={room} username={username} stream={stream} />
-    ) : (
-      <Fragment>
-        {error && (
-          <div className="row justify-content-center mt-2">
-            <UserMediaError error={error} />
-          </div>
-        )}
-        <div className="row justify-content-center mt-2">
-          <RoomForm onJoin={handleJoin} />
-        </div>
-        <div className="row justify-content-center mt-2">
-          <UserMediaActions stream={stream} />
-        </div>
-        {stream && (
-          <div className="row justify-content-center mt-2">
-            <Video stream={stream} autoPlay muted />
-          </div>
-        )}
-      </Fragment>
-    )}
-  </div>
+    <div className="container-fluid container">
+      <Room name={match.params.conversationId} username={user} stream={stream} />
+    </div>
   )
 }
 
