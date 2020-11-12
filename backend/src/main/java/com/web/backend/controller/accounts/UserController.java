@@ -6,6 +6,7 @@ import com.web.backend.dao.keyword.KeywordDao;
 import com.web.backend.dao.question.QuestionDao;
 import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
+import com.web.backend.model.emotion.Emotion;
 import com.web.backend.payload.accounts.*;
 import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
@@ -13,6 +14,9 @@ import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.ImageStorageService;
 import com.web.backend.service.KakaoVisionService;
 import com.web.backend.service.VoiceStorageService;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
@@ -221,46 +226,111 @@ public class UserController {
     @GetMapping("/recommend-user-by-keyword")
     public Object recUserByKeyword(@CurrentUser UserPrincipal requser){
         User curuser = userDao.getUserById(requser.getId());
-        List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
 
         int gender = 0;
         if(curuser.getGender()==0){
             gender=1;
         }
-        
-        List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
 
-        ArrayList<User> recommendedUserList = new ArrayList<>();
-        for(User user:allUsers){
-            List<String> othersKeywords = keywordDao.findWordByUserId(user.getId());
-            System.out.println(othersKeywords);
-            for(Keyword keyword:keywords){
-                if(othersKeywords.contains(keyword.getWord())){
-                    recommendedUserList.add(user);
-                    break;
-                }
-            }
-            if(recommendedUserList.toArray().length==4){
-                break;
-            }
-        }
-
-        boolean examExist = questionDao.existsByUserId(curuser.getId());
-        int isExam = 0;
-        if(examExist){
-            isExam=1;
-        }
-
-        HashMap<String,Integer> nullData = new HashMap<String,Integer>();
-        nullData.put("is_exam",isExam);
-        nullData.put("gender",curuser.getGender());
-
-        if(recommendedUserList.isEmpty()){
+        if(!curuser.getIsExam()){
+            HashMap<String,Integer> nullData = new HashMap<String,Integer>();
+            nullData.put("is_exam",0);
+            nullData.put("gender",gender);
             return nullData;
         }
-        
-        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(curuser.getId())));
-        RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
+
+
+        //키워드 유사도 분석 시작
+        System.out.println("Python Call");
+        String[] command = new String[3];
+        command[0] = "python";
+        command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/keyword_similarity.py";
+        command[2] = "1";
+        ArrayList<Integer> simUserIdList = new ArrayList<>();
+
+        try {
+            CommandLine commandLine = CommandLine.parse(command[0]);
+            for (int i = 1, n = command.length; i < n; i++) {
+                commandLine.addArgument(command[i]);
+            }
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setStreamHandler(pumpStreamHandler);
+            int result = executor.execute(commandLine);
+            System.out.println("result: " + result);
+
+
+            String[] array_word=outputStream.toString().split("");
+            boolean flag = false;
+            for(int i = 0; i < array_word.length; i++){
+                if(array_word[i].equals(",")||array_word[i].equals(" ")){
+                    continue;
+                }
+                if(array_word[i].equals("]")){
+                    break;
+                }
+                if(flag){
+                    int userId = Integer.parseInt(array_word[i]);
+                    simUserIdList.add(userId);
+                }
+                if(array_word[i].equals("[")){
+                    flag = true;
+                }
+            }
+            System.out.println(simUserIdList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //키워드 유사도 분석 종료
+
+
+        ArrayList<User> userList = new ArrayList<>();
+        for(int i:simUserIdList){
+            Long id = new Long(i);
+            User recUser = userDao.getUserById(id);
+            if(recUser.getGender()==gender){
+                userList.add(recUser);
+            }
+        }
         return userList;
+
+        //기존 코드
+//        List<Keyword> keywords = keywordDao.findKeywordByUser(curuser);
+//        List<User> allUsers = userDao.getUserByGenderAndIsExam(gender,true);
+//        ArrayList<User> recommendedUserList = new ArrayList<>();
+//        for(User user:allUsers){
+//            List<String> othersKeywords = keywordDao.findWordByUserId(user.getId());
+//            for(Keyword keyword:keywords){
+//                if(othersKeywords.contains(keyword.getWord())){
+//                    recommendedUserList.add(user);
+//                    break;
+//                }
+//            }
+//            if(recommendedUserList.toArray().length==4){
+//                break;
+//            }
+//        }
+//
+//        boolean examExist = questionDao.existsByUserId(curuser.getId());
+//        int isExam = 0;
+//        if(examExist){
+//            isExam=1;
+//        }
+//
+//        HashMap<String,Integer> nullData = new HashMap<String,Integer>();
+//        nullData.put("is_exam",isExam);
+//        nullData.put("gender",curuser.getGender());
+//
+//        if(recommendedUserList.isEmpty()){
+//            return nullData;
+//        }
+//
+//        recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(curuser.getId())));
+//        RecommendResponse userList = new RecommendResponse(curuser.getGender(), isExam, recommendedUserList);
+//        return userList;
+        //기존 코드
     }
 }

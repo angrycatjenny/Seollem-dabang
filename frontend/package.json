@@ -55,5 +55,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://k3b103.p.ssafy.io/"
+  "proxy": "http://127.0.0.1:8080/"
 }

@@ -11,27 +11,13 @@ import com.web.backend.security.CurrentUser;
 import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.ImageStorageService;
 import com.web.backend.service.VoiceStorageService;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-
-
-
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
 
 
 @CrossOrigin(origins = {"*"})
@@ -87,78 +73,6 @@ public class SnsController {
     @GetMapping("")
     public Object getList(){
         ArrayList<Sns> snsList = (ArrayList<Sns>) snsDao.findAll();
-
-        System.out.println("Python Call");
-        String[] command = new String[4];
-        command[0] = "python";
-        command[1] = "/Users/multicampus/Desktop/PJT/PJT3/sub2/backend/emotion_recognition/test.py";
-        command[2] = "1601631973679";  //파일명
-
-        try {
-            CommandLine commandLine = CommandLine.parse(command[0]);
-            for (int i = 1, n = command.length; i < n; i++) {
-                commandLine.addArgument(command[i]);
-            }
-
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
-            DefaultExecutor executor = new DefaultExecutor();
-            executor.setStreamHandler(pumpStreamHandler);
-            int result = executor.execute(commandLine);
-            System.out.println("result: " + result);
-
-            String output = outputStream.toString().substring(outputStream.toString().indexOf("{"));
-            HashMap<String, String> emotion = new HashMap<String, String>();
-
-            String key = "";
-            String value = "";
-            boolean keyFlag = false;
-            boolean valueFlag = false;
-
-            for(char w:output.toCharArray()){
-                if(w==' '){
-                    continue;
-                }
-                if(w==','){
-                    emotion.put(key,value);
-                    key="";
-                    value="";
-                    valueFlag=false;
-                }
-
-                if(keyFlag && w!='\''){
-                    key+=w;
-                }
-                if(valueFlag){
-                    value+=w;
-                }
-
-                if(w=='\''){
-                    keyFlag=!keyFlag;
-                    valueFlag=false;
-                }
-                if(w==':'){
-                    valueFlag = true;
-                    keyFlag=false;
-                }
-            }
-            
-            System.out.println(emotion);
-
-            //k는 감정, emotion.get(k)는 점수가 담겨 있다.
-            for(String k:emotion.keySet()){
-                System.out.println(emotion.get(k));
-                if(!emotion.get(k).equals("0")){
-                    System.out.println("여기서 db에 넣는 코드를 작성");
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
 
         return snsList;
     }
