@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import HTMLFlipBook from "react-pageflip";
+import AudioPlayer from 'react-modular-audio-player';
 import './MainPage.css';
 
 const MainPage = () => {
@@ -72,7 +73,7 @@ const MainPage = () => {
         setkeywordBreak(false)
         if (keywordData.length < 3) {
           setPage1(true)
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < keywordData.length; i++) {
             keywordDataPage1.push(keywordData[i])
           }
           setpagedata1(keywordDataPage1)
@@ -83,7 +84,7 @@ const MainPage = () => {
           }
           setpagedata1(keywordDataPage1)
           setPage2(true)
-          for (let i = 2; i < 4; i++) {
+          for (let i = 2; i < keywordData.length; i++) {
             keywordDataPage2.push(keywordData[i])
           }
           setpagedata2(keywordDataPage2)
@@ -93,11 +94,11 @@ const MainPage = () => {
 
     // 성별,지역 추천
     if (otherBreak) {
-      if (otherData) {
+      if (otherData.length > 0) {
         setotherBreak(false)
         if (otherData.length < 3) {
           setPage3(true)
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < otherData.length; i++) {
             otherDataPage3.push(otherData[i])
           }
           setpagedata3(otherDataPage3)
@@ -108,19 +109,37 @@ const MainPage = () => {
           }
           setpagedata3(otherDataPage3)
           setPage4(true)
-          for (let i = 2; i < 4; i++) {
+          for (let i = 2; i < otherData.length; i++) {
             otherDataPage4.push(otherData[i])
           }
           setpagedata4(otherDataPage4)
         }
       }
     }
-  } 
+  }
   else {
     return (
       <h2>서비스 준비 중 입니다.</h2>
     )
   }
+
+  let rearrangedPlayer = [
+    {
+      className: "adele",
+      innerComponents: [
+        {
+          type: "play",
+          style: {
+            width: "100%",
+            justifyContent: "center",
+            filter: "invert(100%)",
+            opacity: "0.4"
+          }
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="book">
       <HTMLFlipBook
@@ -130,64 +149,79 @@ const MainPage = () => {
         {/* 표지 앞 */}
         <div className="bookpage1">표지 앞</div>
         {/* keyword page1 */}
-        {!Page1 ? (
-        <div className="bookpage2">
-          <div>
-            {pagedata1.map((data) => (
-              <div key={data.nickname}>
-                <img src={data.imageDownloadUri} alt={data.nickname} />
-              </div>
-            ))}
+        {Page1 ? (
+          <div className="bookpage2">
+            <div>
+              {pagedata1.map((data) => (
+                <div key={data.nickname}>
+                  <img src={data.imageDownloadUri} alt={data.nickname} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        ):(
-          <div className="bookpage2">시험지를 만들어 주세요.</div>
-        )}
+        ) : (
+            <div className="bookpage2">시험지를 만들어 주세요.</div>
+          )}
 
         {/* keyword page2 */}
-        {!Page2 ? (
-        <div className="bookpage3">
-          <div>
-            {pagedata2.map((data) => (
-              <div key={data.nickname}>
-                <img src={data.imageDownloadUri} alt={data.nickname} />
-              </div>
-            ))}
+        {Page2 ? (
+          <div className="bookpage3">
+            <div>
+              {pagedata2.map((data) => (
+                <div key={data.nickname}>
+                  <img src={data.imageDownloadUri} alt={data.nickname} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        ):(
-          <div className="bookpage3">없어유2</div>
-        )}
+        ) : (
+            <div className="bookpage3">없어유2</div>
+          )}
 
         {/* other page1 */}
-        {!Page3 ? (
-        <div className="bookpage4">
-          <div>
-            {pagedata3.map((data) => (
-              <div key={data.nickname}>
-                <img src={data.imageDownloadUri} alt={data.nickname} />
-              </div>
-            ))}
+        {Page3 ? (
+          <div className="bookpage4">
+            <div className="user-table">
+              {pagedata3.map((data) => (
+                <div key={data.nickname}>
+                  <div>
+                    <img src={data.imageDownloadUri} alt={data.nickname} className="user-image" />
+                    <button>
+                      <AudioPlayer
+                        audioFiles={[
+                          {
+                            src: `${data.voiceDownloadUri}`,
+                            title: "voiceDownloadUri",
+                          }
+                        ]}
+                        rearrange={rearrangedPlayer}
+                        playerWidth="50px"
+                        iconSize="50px"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        ):(
-          <div className="bookpage4">없어유3</div>
-        )}       
+        ) : (
+            <div className="bookpage4">없어유3</div>
+          )}
 
         {/* other page2 */}
-        {!Page4 ? (
-        <div className="bookpage5">
-          <div>
-            {pagedata4.map((data) => (
-              <div key={data.nickname}>
-                <img src={data.imageDownloadUri} alt={data.nickname} />
-              </div>
-            ))}
+        {Page4 ? (
+          <div className="bookpage5">
+            <div>
+              {pagedata4.map((data) => (
+                <div key={data.nickname}>
+                  <img src={data.imageDownloadUri} alt={data.nickname} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        ):(
-          <div className="bookpage5">없어유4</div>
-        )}   
+        ) : (
+            <div className="bookpage5">없어유4</div>
+          )}
         {/* 표지 뒤 */}
         <div className="bookpage6">표지 뒤</div>
 
