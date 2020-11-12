@@ -145,97 +145,118 @@ const MyProfileUpdatePage = () => {
       }
       console.log(UpdateData, '회원수정 정보')
       axios.put('/my-profile', UpdateData, axiosConfig)
-        .then(() => {
-          alert('회원정보 수정완료 되었습니다.')
+        .then((res) => {
+          if(res.data.message === "Nickname is already exist!"){
+            alert("이미 존재하는 닉네임입니다.")
+          }else{
+            alert('회원정보 수정완료 되었습니다.')
+          }
         })
         .catch(err => {
           if(err.message==="Request failed with status code 400"){
           alert('사진에서 얼굴을 찾을 수 없습니다.')
           }})    };
   return (
-    <div>
-      <div className={classes.root}>
-        <div className="Update-form">
+    <div className="my-profile-template">
+      <div className="d-flex">
+        <div>
+          <h4 className="Update-logo">프로필 사진 변경</h4>
+          <img src={objectURL} alt={objectURL} className="Update-img" />
+          <InputLabel className="mt-3">프로필 사진</InputLabel>
+          <Input
+            className="Update-input"
+            type="file"
+            onChange={setImageText}
+          />
+        </div>
+        <div className="mt-4 ml-5">      
+          <h5>기본정보</h5>
+          <h6>닉네임: </h6>
+          <Input
+            className="Update-input"
+            placeholder="닉네임"
+            value={nickname}
+            onChange={setNicknameText}
+          />
+          <h6>지역: {location}</h6>
+          <FormControl className="Update-input">
+            <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
+            <Select
+              labelId="demo-mutiple-name-label"
+              id="demo-mutiple-name"
+              value={location}
+              onChange={setLocationText}
+              input={<Input />}
+              MenuProps={MenuProps}
+            >
+              {locations.map((location) => (
+                <MenuItem key={location} value={location}>
+                  {location}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="Update-logo">목소리 변경</h3>
+        {!voice && (
+          <div>
+            <InputLabel className="mt-3">음성 녹음</InputLabel>
+            <ReactMic
+              record={record}
+              className="sound-wave w-100"
+              onStop={onStop}
+              strokeColor="black"
+              backgroundColor="lightgray" />
             <div>
-              <h3 className="Update-logo">기본정보 수정</h3>
-              <Input
-                className="Update-input"
-                placeholder="닉네임"
-                value={nickname}
-                onChange={setNicknameText}
-              />
-              <FormControl className="Update-input">
-                <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
-                <Select
-                  labelId="demo-mutiple-name-label"
-                  id="demo-mutiple-name"
-                  value={location}
-                  onChange={setLocationText}
-                  input={<Input />}
-                  MenuProps={MenuProps}
-                >
-                  {locations.map((location) => (
-                    <MenuItem key={location} value={location}>
-                      {location}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <Button 
+                onClick={startRecording} 
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                녹음시작
+              </Button>
+              <Button 
+                onClick={stopRecording} 
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                녹음종료
+              </Button>
             </div>
-            <div>
-              <h3 className="Update-logo">프로필 사진 변경</h3>
-              <InputLabel className="mt-3">프로필 사진</InputLabel>
-              <Input
-                className="Update-input"
-                type="file"
-                onChange={setImageText}
-              />
-                <img src={objectURL} alt={objectURL} className="Update-img" />
-            </div>
-            <div>
-              <h3 className="Update-logo">목소리 변경</h3>
-              {!voice && (
-                <div>
-                  <InputLabel className="mt-3">음성 녹음</InputLabel>
-                  <ReactMic
-                    record={record}
-                    className="sound-wave w-100"
-                    onStop={onStop}
-                    strokeColor="black"
-                    backgroundColor="lightgray" />
-                  <div>
-                    <button onClick={startRecording} type="button">녹음시작</button>
-                    <button onClick={stopRecording} type="button">녹음종료</button>
-                  </div>
-                </div>
-              )}
-              {voice && (
-                <div>
-                  <AudioPlayer
-                    src={voiceurl}
-                    showJumpControls={false}
-                    customVolumeControls={[]}
-                    customAdditionalControls={[]}
-                  />
-                  <button 
-                    onClick={removeRecord}
-                    type="button"
-                  >
-                    다시녹음
-                  </button>
-                </div>
-              )}
-              <div className="Update-footer">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={sendUpdateData}
-                  className={classes.button}
-                >
-                  완료
-                </Button>
-              </div>
-            </div>
+          </div>
+        )}
+        {voice && (
+          <div>
+            <AudioPlayer
+              src={voiceurl}
+              showJumpControls={false}
+              customVolumeControls={[]}
+              customAdditionalControls={[]}
+            />
+            <Button 
+              onClick={removeRecord}
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              다시녹음
+            </Button>
+          </div>
+        )}
+        <div className="Update-footer">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={sendUpdateData}
+            className={classes.button}
+          >
+            완료
+          </Button>
         </div>
       </div>
     </div>

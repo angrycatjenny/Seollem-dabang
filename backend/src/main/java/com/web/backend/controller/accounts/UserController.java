@@ -173,6 +173,9 @@ public class UserController {
 
     @PutMapping("/my-profile")
     public ResponseEntity<?> updateMyInfo(@CurrentUser UserPrincipal requestUser, UpdateRequest updateRequest, @RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice) {
+        if(userDao.existsByNickname(updateRequest.getNickname())){
+            return ResponseEntity.ok(new ApiResponse(false, "Nickname is already exist!"));
+        }
 
         if(image != null && !kakaoVisionService.getResponse(image)) {
             return ResponseEntity.ok(new ApiResponse(false, "This picture has no face!"));
@@ -287,14 +290,15 @@ public class UserController {
         //키워드 유사도 분석 종료
 
 
-        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<User> recommendedUserList = new ArrayList<>();
         for(int i:simUserIdList){
             Long id = new Long(i);
             User recUser = userDao.getUserById(id);
             if(recUser.getGender()==gender){
-                userList.add(recUser);
+                recommendedUserList.add(recUser);
             }
         }
+        RecommendResponse userList = new RecommendResponse(curuser.getGender(), 1, recommendedUserList);
         return userList;
 
         //기존 코드
