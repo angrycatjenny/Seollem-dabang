@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backBtn: {
     marginRight: theme.spacing(1),
-    backgroundColor:"#895BC7",
+    backgroundColor:"#9B8481",
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -92,9 +92,9 @@ const useStyles = makeStyles((theme) => ({
 
 const YesRadio = withStyles({
   root: {
-    color: "#FF63AD",
+    color: "#D08892",
     '&$checked': {
-      color: "#FF63AD",
+      color: "#D08892",
     },
   },
   checked: {},
@@ -102,9 +102,9 @@ const YesRadio = withStyles({
 
 const NoRadio = withStyles({
   root: {
-    color: "#895BC7",
+    color: "#9B8481",
     '&$checked': {
-      color: "#895BC7",
+      color: "#9B8481",
     },
   },
   checked: {},
