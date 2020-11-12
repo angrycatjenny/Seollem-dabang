@@ -33,7 +33,7 @@
   background-image: url('../../assets//question/board8.png');
   background-size: 900px 500px;
   background-repeat: no-repeat;
-  margin: 20px 0 10px 50px;
+  margin: 20px 0 20px 50px;
   padding: 45px 0px 0px 0px;
   display: flex;
   flex-direction: column;
