@@ -73,7 +73,7 @@ const MainPage = () => {
         setkeywordBreak(false)
         if (keywordData.length < 3) {
           setPage1(true)
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < keywordData.length; i++) {
             keywordDataPage1.push(keywordData[i])
           }
           setpagedata1(keywordDataPage1)
@@ -84,7 +84,7 @@ const MainPage = () => {
           }
           setpagedata1(keywordDataPage1)
           setPage2(true)
-          for (let i = 2; i < 4; i++) {
+          for (let i = 2; i < keywordData.length; i++) {
             keywordDataPage2.push(keywordData[i])
           }
           setpagedata2(keywordDataPage2)
@@ -98,7 +98,7 @@ const MainPage = () => {
         setotherBreak(false)
         if (otherData.length < 3) {
           setPage3(true)
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < otherData.length; i++) {
             otherDataPage3.push(otherData[i])
           }
           setpagedata3(otherDataPage3)
@@ -109,7 +109,7 @@ const MainPage = () => {
           }
           setpagedata3(otherDataPage3)
           setPage4(true)
-          for (let i = 2; i < 4; i++) {
+          for (let i = 2; i < otherData.length; i++) {
             otherDataPage4.push(otherData[i])
           }
           setpagedata4(otherDataPage4)
