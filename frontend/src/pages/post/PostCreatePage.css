@@ -1,3 +1,38 @@
 .post-image {
   width: 100px;
+  height: 110px;
+}
+.post-create-box {
+  /* border: 2px solid red; */
+  width: 80%;
+  height: 515px;
+  padding: 10px 40px 75px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.post-photo-box {
+}
+.post-audio-box {
+}
+.post-audio-btn {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.post-audio-start,
+.post-audio-stop,
+.post-create-btn {
+  outline: none;
+  background-color: transparent;
+  border-radius: 4px;
+}
+.post-audio-stop {
+  margin-left: 5px;
+}
+.post-create-btn {
+  font-size: large;
+  border: 2px solid #5e1e27;
+  color: white;
+  background-color: #5e1e27;
 }

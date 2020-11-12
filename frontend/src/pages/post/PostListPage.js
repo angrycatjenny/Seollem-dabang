@@ -51,23 +51,43 @@ const PostListPage = () => {
   };
 
   return (
-    <div>
-      <Link className="post-create-button btn btn-secondary" to="/post/create">글쓰기</Link>
-      {posts.map((post, index) => (
-        <div key={index}>
-          <div class='music-card playing'>
-            <img className="post-list-image image" src={'http://localhost:8080/image/' + post.image} />
-            <div className='wave'></div>
-            <div className='wave'></div>
-            <div className='wave'></div>
-            <div className='info'>
-              <h2 className='title'>{post.user.nickname}</h2>
-              <div className='artist'>#{post.user.location} #{post.user.age}세</div>
+    <div style={{marginTop:"25px", display:"flex",flexDirection:"column", alignItems:"center"}}>
+      <div style={{ alignSelf:"flex-end", marginRight:"130px" }}>
+          <Link className="post-create-button 
+          btn btn-secondary" to="/post/create">
+            글쓰기</Link>
+      </div>
+
+      <div className="post-list-box">
+        {posts.map((post, index) => (
+        <div className="post-box" key={index}>
+
+            <img className="post-image" 
+            src={'http://localhost:8080/image/' + post.image} />
+
+            <div className='post-info'>
+              <h2 className='post-writer'>{post.user.nickname}</h2>
+              <div className='post-tag'>#{post.user.location} #{post.user.age}세</div>
             </div>
-            <audio className='post-list-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
-          </div>
+
+            <audio className='post-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
         </div>
-      ))}
+          // <div key={index}>
+          //   <div class='music-card playing'>
+          //     <img className="post-list-image image" 
+          //     src={'http://localhost:8080/image/' + post.image} />
+          //     {/* <div className='wave'></div>
+          //     <div className='wave'></div>
+          //     <div className='wave'></div> */}
+          //     <div className='info'>
+          //       <h2 className='title'>{post.user.nickname}</h2>
+          //       <div className='artist'>#{post.user.location} #{post.user.age}세</div>
+          //     </div>
+          //     <audio className='post-list-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
+          //   </div>
+          // </div>
+        ))}
+      </div>
     </div>
   )
 }
