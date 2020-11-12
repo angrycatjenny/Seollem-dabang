@@ -51,9 +51,10 @@ const ConversationListPage = () => {
   };
 
   return (
-    <div>
+    <div className="container conversation-template">
+      <div className="row">
         {conversations.map((conversation, index) => (
-          <Link className="text-decoration-none" to={'/conversation/' + conversation.conversationId}>
+          <Link className="text-decoration-none col-4" to={'/conversation/' + conversation.conversationId}>
             <div button key={index} className="d-flex flex-column align-items-center">
               <img className="conversation-img text-decoration-none" src={ConversationPic1} />
               <h5 className="text-decoration-none text-dark">{conversation.examiner.nickname}님과의 대화</h5>
@@ -61,6 +62,7 @@ const ConversationListPage = () => {
             </div>
           </Link>
         ))}
+      </div>
     </div>
   )
 };
