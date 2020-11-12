@@ -16,8 +16,8 @@ import "./theme/scss/styles.scss";
 const dispatcher = new EventDispatcher();
 const iceServers = [
   {
-    // url: "stun:stun.1.google.com:19302",
-    url: "stun:74.125.142.127:19302",
+    url: "stun:stun.1.google.com:19302",
+    // url: "stun:74.125.142.127:19302",
   },
   {
     urls: "turn:turn.bistri.com:80",
@@ -32,8 +32,7 @@ ReactDOM.render(
     constraints={{ ordered: true }}
     signaling={{
       dispatcher: dispatcher,
-      url:
-        process.env.NODE_ENV !== "production" ? "http://localhost:3001" : null,
+      url: "https://k3b103.p.ssafy.io"
     }}
   >
     <UserMediaProvider constraints={{ audio: true, video: true }}>
