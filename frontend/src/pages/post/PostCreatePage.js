@@ -76,51 +76,59 @@ const PostCreatePage = () => {
   }
 
   return (
-    <div>
-      <h1>게시물 등록 페이지</h1>
-
-      <h3>사진</h3>
-      <img className="post-image" src={url} />
-      <Input
-        className="signup-input"
-        type="file"
-        onChange={setImageText}
-      />
-
-      <h3>음성</h3>
-      {!voice && (
-        <div>
-          <ReactMic
-            record={record}
-            className="sound-wave w-100"
-            mimeType="audio/mp3"
-            onStop={onStop}
-            strokeColor="black"
-            backgroundColor="lightgray" />
-          <div>
-            <button onClick={startRecording} type="button">녹음시작</button>
-            <button onClick={stopRecording} type="button">녹음종료</button>
-          </div>
-        </div>
-      )}
-
-      {voice && (
-        <div>
-          <AudioPlayer
-            src={voiceurl}
-            showJumpControls={false}
-            customVolumeControls={[]}
-            customAdditionalControls={[]}
+    <div style={{display:"flex", justifyContent:"center", marginTop:"25px"}}>
+      <div className="post-create-box">
+        <div className="post-photo-box">
+          <h3>사진</h3>
+          <img className="post-image" src={url} />
+          <Input
+            className="signup-input"
+            type="file"
+            onChange={setImageText}
           />
-          <button 
-            onClick={removeRecord}
-            type="button"
-          >
-            다시녹음
-          </button>
         </div>
-      )}
-      <button onClick={sendPostData}>등록하기</button>
+        
+        <div className="post-audio-box">
+          <h3>음성</h3>
+          {!voice && (
+            <div>
+              <ReactMic
+                record={record}
+                className="sound-wave w-100"
+                mimeType="audio/mp3"
+                onStop={onStop}
+                strokeColor="black"
+                backgroundColor="lightgray" />
+              <div className="post-audio-btn">
+                <button className="post-audio-start" onClick={startRecording}
+                 type="button">녹음시작</button>
+                <button className="post-audio-stop" onClick={stopRecording} 
+                type="button">녹음종료</button>
+              </div>
+            </div>
+          )}
+
+          {voice && (
+            <div>
+              <AudioPlayer
+                src={voiceurl}
+                showJumpControls={false}
+                customVolumeControls={[]}
+                customAdditionalControls={[]}
+              />
+              <button 
+                onClick={removeRecord}
+                type="button"
+              >
+                다시녹음
+              </button>
+            </div>
+          )}
+        </div>
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <button className="post-create-btn" onClick={sendPostData}>등록하기</button>
+        </div>
+      </div>
     </div>
   )
 }
