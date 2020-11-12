@@ -2,8 +2,39 @@
   border: 2px solid blue;
 }
 .quest-detail-box {
-  border: 2px solid red;
+  border: 2px solid green;
+  display: flex;
+  margin-top: 10px;
+}
+.quest-detail {
+  height: 500px;
+  width: 81.8%;
+  /* border: 2px solid purple; */
+  background-image: url('../../assets//question/board8.png');
+  background-size: 900px 500px;
+  background-repeat: no-repeat;
+  margin: 20px 0 10px 50px;
+  padding: 40px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.in-quest-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid yellow;
+  margin-bottom: 0;
+  width: 90%;
+  height: 400px;
+  overflow: auto;
+}
+.detail-btn {
+  display: flex;
+}
+.detail-btn-box {
+  width: 800px;
+  display: flex;
+  justify-content: flex-end;
 }
