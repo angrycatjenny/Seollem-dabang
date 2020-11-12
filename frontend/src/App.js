@@ -52,6 +52,7 @@ const App = () => {
           <Route component={PostUpdatePage} path="/post/update/:postId" />
           <Route component={CallPage} path="/call" />
           {cookies.accessToken && <FooterComp />}
+          <div className="footer-footer"></div>
         </div>
       </Switch>
     </>
