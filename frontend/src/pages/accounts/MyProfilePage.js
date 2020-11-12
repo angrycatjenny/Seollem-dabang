@@ -17,7 +17,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 const MyProfilePage = () => {
-  const [cookies, setCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie] = useCookies(['accessToken', 'user']);
   const [email, setEmail] = useState('');
   const [objectURL, setObjectURL] = useState('');
   const [nickname, setNickname] = useState('');
@@ -40,6 +40,7 @@ const MyProfilePage = () => {
         setVoiceurl(response.data.voiceDownloadUri)
         setLocation(response.data.location)
         setAge(response.data.age)
+        setCookie('user', response.data.id)
       })
       .catch((error) => {
         console.log(error);
