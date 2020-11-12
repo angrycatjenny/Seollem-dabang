@@ -30,7 +30,10 @@
   display: flex;
   justify-content: space-around;
   /* border: 2px solid red; */
-  width: 60%;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .radio-box {
@@ -44,7 +47,7 @@
 }
 
 .quest-create-input:focus {
-  outline-color: rgb(255, 99, 173);
+  outline-color: #5e1e27;
 }
 
 .stepper-final-box {
@@ -81,8 +84,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 15px;
-  /* border: 2px solid purple; */
-  width: 88%;
+  width: 15%;
 }
 
 .stepper-exam-preview {
@@ -149,4 +151,11 @@
   padding: 75px 0px 0px 0px;
   display: flex;
   flex-direction: column;
+}
+
+.create-final-box {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }

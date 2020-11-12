@@ -111,7 +111,7 @@ const NoRadio = withStyles({
 })((props) => <Radio color="default" {...props} />);
 
 function getSteps() {
-  return ['질문 개수', '시험지 작성', '미리보기'];
+  return ['질문 개수', '레시피 작성', '미리보기'];
 }
 
 //로그인 여부에 따른 시험지 작성 허용
@@ -399,10 +399,12 @@ const QuestionCreatePage = () => {
                       <div className="stepper-exam-preview">
                         <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
                         <h4>연애 능력 고사</h4>
-                        <div style={{height:"7.5px", width:"96%", backgroundColor:"rgb(255, 99, 173)"}}></div>
-                        <hr style={{height:"0.6px", width:"96%", backgroundColor:"rgb(255, 99, 173)", marginTop:"2px",}}></hr>
+                        <div style={{height:"7.5px", width:"96%", 
+                        backgroundColor:"#5e1e27"}}></div>
+                        <hr style={{height:"0.6px", width:"96%", 
+                        backgroundColor:"#5e1e27", marginTop:"2px",}}></hr>
                         {exam.map((item) => (
-                        <React.Fragment key={item.key}>
+                        <div className="create-final-box" key={item.key}>
                           <div key={item.key} className="quest-box">
                             <label className="create-final-label">{item.key}번</label>
                             <div className="create-final-quest">{item.quest}</div>
@@ -419,7 +421,7 @@ const QuestionCreatePage = () => {
                               아니오
                             </div>}
                           </div>
-                        </React.Fragment>
+                        </div>
                       ))}
                       </div>
                     
