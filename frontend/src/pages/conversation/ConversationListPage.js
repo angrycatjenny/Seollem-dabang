@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import ConversationPic1 from '../../assets/conversation/ConversationPic1.png';
+
 // Axios
 import axios from 'axios';
-
-// Material-UI
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 
 // Cookie
 import { useCookies } from 'react-cookie';
@@ -20,19 +13,8 @@ import './ConversationListPage.css';
 
 import { Link } from 'react-router-dom';
 
-//Footer
-import FooterComp from '../../components/base/FooterComp';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 const ConversationListPage = () => {
-  const classes = useStyles();
 
   const [ conversations, setConversations ] = useState(null);
 
@@ -70,26 +52,13 @@ const ConversationListPage = () => {
 
   return (
     <div>
-      <div>
-
-      </div>
-
-
-
-
-
-
-
         {conversations.map((conversation, index) => (
-
-
-          <Link to={'/conversation/' + conversation.conversationId}>
-          <div button key={index}>
-              <h1>상대이름: {conversation.examiner.nickname}</h1>
-                  <h1>
-                    내 이름: {conversation.examinee.nickname}
-                  </h1>
-          </div>
+          <Link className="text-decoration-none" to={'/conversation/' + conversation.conversationId}>
+            <div button key={index} className="d-flex flex-column align-items-center">
+              <img className="conversation-img text-decoration-none" src={ConversationPic1} />
+              <h5 className="text-decoration-none text-dark">{conversation.examiner.nickname}님과의 대화</h5>
+              <h6 className="text-decoration-none text-dark">#{conversation.examiner.location} #{conversation.examiner.age}세</h6>
+            </div>
           </Link>
         ))}
     </div>
