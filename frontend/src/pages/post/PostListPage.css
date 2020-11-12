@@ -1,9 +1,19 @@
 .post-create-button {
-  
+}
+
+.post-list-box {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .post-list-image {
-  width: 300px;
+  width: 100px;
+  height: 50px;
+  width: 100px;
+  height: 100px;
+  border: 5px solid blue;
 }
 
 .post-list-audio {
@@ -12,27 +22,32 @@
 }
 
 @keyframes wave {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .music-card {
   margin: 100px auto;
   background: #fff;
-  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+  box-shadow: 0px 8px 28px -9px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   position: relative;
-  width: 300px;
-  height: 540px;
+  width: 100px;
+  height: 450px;
   border-radius: 6px;
+  border: 2px solid red;
 }
 
 .image {
-  background-size: cover;  
+  background-size: cover;
   position: absolute;
   z-index: 1;
   opacity: 0.9;
-  height: 330px;
+  height: 250px;
   width: 300px;
 }
 
@@ -111,4 +126,36 @@
   font-size: 1.2em;
   letter-spacing: 0.08em;
   font-family: 'Reem Kufi', sans-serif;
+}
+
+.post-list-box {
+  /* border: 2px solid blue; */
+  margin-top: 15px;
+}
+
+.post-box {
+  margin: 20px auto;
+  box-shadow: 0px 8px 28px -9px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  position: relative;
+  width: 280px;
+  height: 380px;
+  border-radius: 6px;
+  border: 2px solid #5e1e27;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post-image {
+  /* border: 2px solid red; */
+  width: 280px;
+  height: 220px;
+}
+.post-info {
+  /* border: 2px solid blue; */
+}
+.post-audio {
+  /* border: 2px solid green; */
+  width: 280px;
 }
