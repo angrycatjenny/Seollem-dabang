@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   mainFont: {
-    fontFamily:"GmarketSansBold",
+    fontFamily:"BMEULJIRO",
+    fontSize:"20px"
   },
   customBtn:{
     color:"white",
@@ -313,7 +314,7 @@ const QuestionCreatePage = () => {
             <div>
               {activeStep === 0 && (
                 <div className="stepper-box">
-                  <div style={{fontSize:"16px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
+                  <div style={{fontSize:"20px"}}>5개 ~ 20개로 질문 개수를 정해주세요!</div>
                   <div className="set-quest-box">
                     <Input type="number" value={cnt} 
                     onChange={onChangeCnt} classes={{input:classes.mainFont}}/>개
