@@ -12,3 +12,20 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.record-button {
+  margin-top: 15px;
+  background: transparent;
+  border: 0;
+}
+.record-img {
+  width: 30px;
+}
+.conversation-button {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 35px;
+  background-color: #77AAAD;
+  border: #77AAAD;
+  color: white;
+}
