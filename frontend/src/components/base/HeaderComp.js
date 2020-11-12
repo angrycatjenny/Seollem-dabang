@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import './HeaderComp.css';
 
 const HeaderComp = () => {
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ ucookies, setUcookie ] = useCookies(['user']);
+
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + cookies.accessToken
+    }
+  }
+  useEffect(() => {
+    axios.get('/my-profile', config)
+      .then((response) => {
+        setUcookie('user', response.data.id)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
+
   return (
     <div>
       <div className="header-top">
