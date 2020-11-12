@@ -30,7 +30,7 @@ const HeaderComp = () => {
               <div class='bulb-glow'></div>
             </div>
             <div style={{marginTop:"25px"}} >
-              <Link to="/question" style={{color:"black", textDecoration:"none"}}>나만의 레시피</Link>
+              <Link to="/question" style={{color:"black", textDecoration:"none"}}>이상형 레시피</Link>
             </div>
           </div>
           <div style={{display:'flex', flexDirection:'column', alignItems:"center", }}>
