@@ -1,3 +1,30 @@
+.my-profile-template{
+  padding: 40px;
+  width: 40%;
+  border: solid black 2px;
+  margin: auto;
+  margin-top: 7%;
+  margin-bottom: 7%;
+}
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+.profile-button {
+  margin-top: 7px;
+  margin-bottom: 5px;
+  height: 35px;
+  background-color: #77AAAD;
+  border: #77AAAD;
+  color: white;
+  width: 360px;
+}
+
+
+
+
+
 .profile-logo {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -25,11 +52,6 @@
   }
   .profile-record {
     width: 100px;
-  }
-  .profile-img {
-    width: 200px;
-    height: 200px;
-
   }
   .birth-input {
     margin-bottom: 5px;
