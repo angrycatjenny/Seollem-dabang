@@ -116,12 +116,16 @@ const PostCreatePage = () => {
                 customVolumeControls={[]}
                 customAdditionalControls={[]}
               />
-              <button 
-                onClick={removeRecord}
-                type="button"
-              >
-                다시녹음
-              </button>
+              <div style={{display:"flex", justifyContent:"center"}}>
+                <button
+                className="post-audio-start" 
+                style={{marginTop:"10px"}}
+                  onClick={removeRecord}
+                  type="button"
+                >
+                  다시녹음
+                </button>
+              </div>
             </div>
           )}
         </div>
