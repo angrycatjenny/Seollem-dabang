@@ -179,7 +179,7 @@ const QuestionDetailPage = () => {
         </div>
 
         <div className="in-quest-detail">
-            <div className="stepper-exam-preview">
+            <div className="detail-exam-preview">
               <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
               <h4>연애 능력 고사</h4>
               <div style={{height:"7.5px", width:"96%", backgroundColor:"black"}}></div>
@@ -255,7 +255,7 @@ const QuestionDetailPage = () => {
                 <TextField
                   id="outlined-full-width"
                   label="문제"
-                  style={{ margin: 8 }}
+                  style={{ margin:"0", width:"400px", }}
                   placeholder="추가 문제를 써주세요!"
                   margin="normal"
                   InputLabelProps={{
@@ -265,7 +265,7 @@ const QuestionDetailPage = () => {
                   value={newQuest}
                   onChange={onChangeNewQuest}
                 />
-                <div>
+                <div style={{alignSelf:"center"}}>
                   <Radio
                     checked={newAns===1}
                     onChange={onChangeNewAnsYes}
@@ -283,7 +283,7 @@ const QuestionDetailPage = () => {
                 </div>
               </div>
               <button onClick={addNewQuest}
-              style={{height:"30px",alignSelf:"center"}}>추가</button>
+              className="quest-add-btn">추가</button>
             </div>
 
         </div>
