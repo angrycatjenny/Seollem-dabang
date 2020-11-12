@@ -70,34 +70,28 @@ const ConversationListPage = () => {
 
   return (
     <div>
-      <div className={classes.root}>
-        <List component="nav" aria-label="main mailbox folders">
-          {conversations.map((conversation, index) => (
-            <Link to={'/conversation/' + conversation.conversationId}>
-            <ListItem button key={index}>
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary={'상대이름: ' + conversation.examiner.nickname}
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      내 이름: {conversation.examinee.nickname}
-                    </Typography>
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-            </Link>
-          ))}
-        </List>
+      <div>
+
       </div>
+
+
+
+
+
+
+
+        {conversations.map((conversation, index) => (
+
+
+          <Link to={'/conversation/' + conversation.conversationId}>
+          <div button key={index}>
+              <h1>상대이름: {conversation.examiner.nickname}</h1>
+                  <h1>
+                    내 이름: {conversation.examinee.nickname}
+                  </h1>
+          </div>
+          </Link>
+        ))}
     </div>
   )
 };
