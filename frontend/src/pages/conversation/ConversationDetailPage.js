@@ -19,7 +19,7 @@ import 'react-h5-audio-player/lib/styles.css';
 // History
 import { useHistory } from "react-router-dom";
 
-import FooterComp from '../../components/base/FooterComp';
+import ConversationPic2 from '../../assets/conversation/ConversationPic2.png';
 
 const ConversationDetailPage = ({ match }) => {
   const history = useHistory();
@@ -97,17 +97,29 @@ const ConversationDetailPage = ({ match }) => {
   };
 
   return (
-    <div>
-      <h1>대화 목록</h1>
-      {messages.map((message, index) => (
-        <AudioPlayer
-          key={index}
-          src={'http://localhost:8080/voice/' + message.voice}
-          showJumpControls={false}
-          customVolumeControls={[]}
-          customAdditionalControls={[]}
-        />
-      ))}
+    <div className="conversation-template">
+      <h1>님과의 대화</h1>
+      <div className="conversation-inner">
+        {messages.map((message, index) => (
+            <AudioPlayer
+              key={index}
+              src={'http://localhost:8080/voice/' + message.voice}
+              showJumpControls={false}
+              customVolumeControls={[]}
+              customAdditionalControls={[]}
+              style={{
+                width: '300px'
+              }}
+            />
+        ))}
+      </div>
+      <img className="conversation-image" src={ConversationPic2} />
+
+
+
+
+
+
       <h1>녹음 하기</h1>
       {!voice && (
         <div>

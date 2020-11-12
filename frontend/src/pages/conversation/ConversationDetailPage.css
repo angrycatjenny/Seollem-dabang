@@ -1,0 +1,14 @@
+.conversation-template {
+
+}
+.conversation-inner {
+  margin: auto;
+  padding: 50px;
+  width: 900px;
+  border: solid black 1px;
+}
+.conversation-image {
+  width: 70px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
