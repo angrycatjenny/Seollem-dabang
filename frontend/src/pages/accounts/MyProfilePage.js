@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import Tape1 from '../../assets/profile/Tape1.png';
+import Tape2 from '../../assets/profile/Tape2.png';
 
 // Axios
 import axios from 'axios';
@@ -47,6 +48,7 @@ const MyProfilePage = () => {
 
   return (
     <div className="my-profile-template">
+      <img className="profile-tape" src={Tape1} />
       <div className="d-flex">
         <img src={objectURL} alt={objectURL} className="profile-img"/>
         <div className="mt-4 ml-5">      

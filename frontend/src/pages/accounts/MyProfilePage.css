@@ -5,6 +5,7 @@
   margin: auto;
   margin-top: 7%;
   margin-bottom: 7%;
+  box-shadow: 2px 2px 2px 2px;
 }
 .profile-img {
   width: 200px;
@@ -19,6 +20,12 @@
   border: #77AAAD;
   color: white;
   width: 360px;
+}
+.profile-tape {
+  width: 180px;
+  position: absolute;
+  top: 35%;
+  left: 44%;
 }
 
 
