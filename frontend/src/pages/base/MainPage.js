@@ -5,6 +5,7 @@ import axios from 'axios';
 import HTMLFlipBook from "react-pageflip";
 import AudioPlayer from 'react-modular-audio-player';
 import './MainPage.css';
+import Button from '@material-ui/core/Button';
 
 const MainPage = () => {
   const [cookies] = useCookies(['accessToken']);
@@ -142,6 +143,21 @@ const MainPage = () => {
 
   return (
     <div className="book">
+      {Page1 ? (
+        <div className="bookpage2">
+          <div>
+            {pagedata1.map((data) => (
+              <div key={data.nickname}>
+                <Button onClick={() => history.push(`/answer/${data.id}`)}>
+                  <img src={data.imageDownloadUri} alt={data.nickname} />
+
+                </Button>                </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+          <div className="bookpage2">시험지를 만들어 주세요.</div>
+        )}
       <HTMLFlipBook
         width={380} height={480}
         showCover={true}
