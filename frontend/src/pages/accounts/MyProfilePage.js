@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import Tape1 from '../../assets/profile/Tape1.png';
+import Tape2 from '../../assets/profile/Tape2.png';
 
 // Axios
 import axios from 'axios';
@@ -46,21 +47,29 @@ const MyProfilePage = () => {
   }, [])
 
   return (
-    <div className="profile-form">
-      <p>닉네임: {nickname}</p>
-      <p>이메일: {email}</p>
-      <p>지역: {location}</p>
-      <p>나이: {age}</p>
-      <img src={objectURL} alt={objectURL} className="profile-img"/>
+    <div className="my-profile-template">
+      <img className="profile-tape" src={Tape1} />
+      <div className="d-flex">
+        <img src={objectURL} alt={objectURL} className="profile-img"/>
+        <div className="mt-4 ml-5">      
+          <h5>기본정보</h5>
+          <h6>닉네임: {nickname}</h6>
+          <h6>이메일: {email}</h6>
+          <h6>지역: {location}</h6>
+          <h6>나이: {age}</h6>
+        </div>
+      </div>
+
+      <h5 className="mt-5">음성소개</h5>
       <AudioPlayer
         src={voiceurl}
         showJumpControls={false}
         customVolumeControls={[]}
         customAdditionalControls={[]}
       />      
-      <Button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')} className="profile-button">
+      <button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')} className="profile-button">
         개인정보수정
-      </Button>
+      </button>
     </div>
   )
 };
