@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // CSS
 import './AnswerCreatePage.css';
+import { makeStyles } from '@material-ui/core/styles';
 
 // History
 import { useHistory } from "react-router-dom";
@@ -14,8 +15,25 @@ import { useCookies } from 'react-cookie';
 
 import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles((theme) => ({
+  ansYes:{
+    backgroundColor:"#D08892",
+    color:"white",
+    border:"none",
+    outline:"none"
+  },
+  ansNo:{
+    backgroundColor:"#9B8481",
+    color:"white",
+    border:"none",
+    outline:"none",
+    marginLeft:"10px"
+  }
+}));
+
 const AnswerCreatePage = ({ match }) => {
   const history = useHistory();
+  const classes = useStyles();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
 
   const [ questions, setQuestions ] = useState(null);
@@ -83,23 +101,25 @@ const AnswerCreatePage = ({ match }) => {
 
   return (
     <div style={{padding:"25px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
-      <h2>답변 등록</h2>
+      <h2>레시피 답안지</h2>
 
       <div className="centerBox">
         {questions.map((question, index) => (
-          <div key={index}>
-            <h5>{index+1}번. {question.content}</h5>
-            <div>
+          <div className="answer-box" key={index}>
+            <div className="answer-quest">
+              <h4>{index+1}번. {question.content}</h4>
+            </div>
+            <div className="answer-btn">
               <Button
+                className={classes.ansYes}
                 variant="contained"
-                color="primary"
                 onClick={() => selectedYes(index)}
               >
                 예
               </Button>
               <Button
+                className={classes.ansNo}
                 variant="contained"
-                color="primary"
                 onClick={() => selectedNo(index)}
               >
                 아니오

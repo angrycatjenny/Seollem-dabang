@@ -1,8 +1,22 @@
 .centerBox {
-  margin: auto;
+  width: 50%;
+  padding: 20px 5px;
+}
+.answer-box {
+  margin-bottom: 15px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 460px;
-  border: 4px solid orange;
+  justify-content: space-between;
+  align-content: center;
+}
+.answer-quest {
+  width: 73%;
+}
+.answer-btn {
+  width: 28%;
+}
+.answer-yes,
+.answer-no {
+  border: none;
+  outline: none;
+  color: white;
 }
