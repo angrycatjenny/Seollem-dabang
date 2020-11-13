@@ -36,8 +36,6 @@ public class AnswerController {
         boolean [] answerList = req.getAnswerList();
         ArrayList<Question> questionList = questionDao.findQuestionByUserId(req.getExaminer());
         System.out.println(questionList);
-        for(int j=0;j<1;j++){
-        }
 
         double n = questionList.toArray().length;
         int rightAnswer=0;
