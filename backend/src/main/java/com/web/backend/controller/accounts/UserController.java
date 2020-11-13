@@ -2,11 +2,7 @@ package com.web.backend.controller.accounts;
 
 import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.answer.AnswerDao;
-import com.web.backend.dao.keyword.KeywordDao;
-import com.web.backend.dao.question.QuestionDao;
-import com.web.backend.model.Keyword.Keyword;
 import com.web.backend.model.accounts.User;
-import com.web.backend.model.emotion.Emotion;
 import com.web.backend.payload.accounts.*;
 import com.web.backend.security.CurrentUser;
 import com.web.backend.security.JwtTokenProvider;
@@ -50,12 +46,6 @@ public class UserController {
 
     @Autowired
     UserDao userDao;
-
-    @Autowired
-    KeywordDao keywordDao;
-
-    @Autowired
-    QuestionDao questionDao;
 
     @Autowired
     AnswerDao answerDao;
@@ -245,10 +235,11 @@ public class UserController {
 
         //키워드 유사도 분석 시작
         System.out.println("Python Call");
+        String stringId = String.valueOf(curuser.getId());
         String[] command = new String[3];
         command[0] = "python";
         command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/keyword_similarity.py";
-        command[2] = "1";
+        command[2] = stringId;
         ArrayList<Integer> simUserIdList = new ArrayList<>();
 
         try {
