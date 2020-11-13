@@ -20,7 +20,6 @@ import FooterComp from './components/base/FooterComp';
 import PostCreatePage from './pages/post/PostCreatePage';
 import PostListPage from './pages/post/PostListPage';
 import PostUpdatePage from './pages/post/PostUpdatePage';
-import CallPage from './pages/call/CallPage';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
@@ -50,7 +49,6 @@ const App = () => {
           <Route component={PostCreatePage} exact path="/post/create" />
           <Route component={PostListPage} path="/post/list" />
           <Route component={PostUpdatePage} path="/post/update/:postId" />
-          <Route component={CallPage} path="/call" />
           {cookies.accessToken && <FooterComp />}
           <div className="footer-footer"></div>
         </div>
