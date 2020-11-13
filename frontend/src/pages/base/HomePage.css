@@ -6,7 +6,6 @@
 }
 .home-section1 {
   background-color: #E6E3D4;
-  display: flex;
 }
 .home-section2 {
   background-color: #E6E3D4;
@@ -20,21 +19,29 @@
   background-color: #E6E3D4;
   display: flex;
 }
+.home-section5 {
+  background-color: #E6E3D4;
+  display: flex;
+}
 .home-section1-image {
   width: 22%;
   margin-left: 38%;
   margin-bottom: 18px;
 }
 .home-section2-image {
-  width: 20%;
+  width: 65%;
   margin-left: 15%;
 }
 .home-section3-image {
-  width: 20%;
+  width: 65%;
   margin-left: 15%;
 }
 .home-section4-image {
-  width: 20%;
+  width: 65%;
+  margin-left: 15%;
+}
+.home-section5-image {
+  width: 65%;
   margin-left: 15%;
 }
 .home-link {
@@ -48,4 +55,14 @@
   position: absolute;
   right: 50%;
   bottom: 4%;
+}
+.home-h1 {
+  font-size: 60px;
+  color: #5E1E17;
+}
+.home-padding {
+  width: 70%;
+}
+.home-margin {
+  margin-top: 30%;
 }
