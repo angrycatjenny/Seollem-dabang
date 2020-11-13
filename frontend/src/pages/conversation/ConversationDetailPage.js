@@ -19,8 +19,6 @@ import 'react-h5-audio-player/lib/styles.css';
 // History
 import { useHistory } from "react-router-dom";
 
-import ConversationPic2 from '../../assets/conversation/ConversationPic2.png';
-
 // Images
 import RecordStart from '../../assets/signup/RecordStart.png';
 import RecordStop from '../../assets/signup/RecordStop.png';
@@ -78,23 +76,24 @@ const ConversationDetailPage = ({ match }) => {
   }, []);
 
   const sendMessage = () => {
-    const conversationFile = new FormData();
-      
-    const conversationName = Date.now();
-
-    conversationFile.append('voice', voice, 'voice'+ conversationName);
-    conversationFile.append('propose', 0)
-
-    axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
-    .then (() => {
-      setVoice('')
-      console.log('성공?')
-      history.go()
-      }
-    )
-    .catch((error) => {
-      console.log(error);
-    })
+    if (voice) {
+      const conversationFile = new FormData();
+      const conversationName = Date.now();
+      conversationFile.append('voice', voice, 'voice'+ conversationName);
+      conversationFile.append('propose', 0)
+      axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+      .then (() => {
+        setVoice('')
+        console.log('성공?')
+        history.go()
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+      })
+    } else {
+      alert('음성을 입력해주세요.')
+    }
   }
   const sendPropose = () => {
     const conversationFile = new FormData();
@@ -103,8 +102,6 @@ const ConversationDetailPage = ({ match }) => {
 
     axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
     .then (() => {
-      setVoice('')
-      console.log('성공?')
       history.go()
       }
     )
@@ -126,7 +123,6 @@ const ConversationDetailPage = ({ match }) => {
 
   return (
     <div className="conversation-template d-flex flex-column align-items-center">
-      <img className="conversation-image" src={ConversationPic2} />
       <div className="conversation-inner">
         {messages.map((message, index) => (
           <div className="d-flex flex-column">
