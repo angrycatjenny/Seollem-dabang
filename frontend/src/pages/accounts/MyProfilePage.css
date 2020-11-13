@@ -1,4 +1,4 @@
-.my-profile-template{
+.my-profile-template {
   padding: 40px;
   width: 50%;
   border: solid black 2px;
@@ -16,8 +16,8 @@
   margin-top: 7px;
   margin-bottom: 5px;
   height: 35px;
-  background-color: #77AAAD;
-  border: #77AAAD;
+  background-color: #77aaad;
+  border: #77aaad;
   color: white;
   width: 470px;
 }
