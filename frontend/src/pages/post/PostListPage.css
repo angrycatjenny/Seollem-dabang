@@ -159,3 +159,11 @@
   /* border: 2px solid green; */
   width: 280px;
 }
+
+.post-writer {
+  transition: 0.2s;
+}
+.post-writer:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+}
