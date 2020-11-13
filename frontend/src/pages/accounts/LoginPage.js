@@ -16,7 +16,7 @@ const LoginPage = ({ history }) => {
   const sendLoginData = e => {
     e.preventDefault()
     const loginData = { email, password }
-    axios.post('https://k3b103.p.ssafy.io:8080/login', loginData, {
+    axios.post('/login', loginData, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true
