@@ -78,23 +78,24 @@ const ConversationDetailPage = ({ match }) => {
   }, []);
 
   const sendMessage = () => {
-    const conversationFile = new FormData();
-      
-    const conversationName = Date.now();
-
-    conversationFile.append('voice', voice, 'voice'+ conversationName);
-    conversationFile.append('propose', 0)
-
-    axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
-    .then (() => {
-      setVoice('')
-      console.log('성공?')
-      history.go()
-      }
-    )
-    .catch((error) => {
-      console.log(error);
-    })
+    if (voice) {
+      const conversationFile = new FormData();
+      const conversationName = Date.now();
+      conversationFile.append('voice', voice, 'voice'+ conversationName);
+      conversationFile.append('propose', 0)
+      axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+      .then (() => {
+        setVoice('')
+        console.log('성공?')
+        history.go()
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+      })
+    } else {
+      alert('음성을 입력해주세요.')
+    }
   }
   const sendPropose = () => {
     const conversationFile = new FormData();
@@ -103,8 +104,6 @@ const ConversationDetailPage = ({ match }) => {
 
     axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
     .then (() => {
-      setVoice('')
-      console.log('성공?')
       history.go()
       }
     )
