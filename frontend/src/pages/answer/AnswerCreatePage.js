@@ -82,40 +82,44 @@ const AnswerCreatePage = ({ match }) => {
   };
 
   return (
-    <div>
-      <h1 className="titleMargin">답변 등록</h1>
+    <div style={{padding:"25px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
+      <h2>답변 등록</h2>
+
       <div className="centerBox">
-      {questions.map((question, index) => (
-        <div key={index}>
-          <h2>{question.content}</h2>
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => selectedYes(index)}
-            >
-              YES
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => selectedNo(index)}
-            >
-              NO
-            </Button>
+        {questions.map((question, index) => (
+          <div key={index}>
+            <h5>{index+1}번. {question.content}</h5>
+            <div>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => selectedYes(index)}
+              >
+                예
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => selectedNo(index)}
+              >
+                아니오
+              </Button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
-      <div className="submitButton">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={sendAnswers}
+
+      <Button
+        variant="contained"
+        onClick={sendAnswers}
+        style={{border:"none", outline:"none", 
+        color:"white", marginTop:"30px", 
+        fontSize:"17px",
+        backgroundColor:"#5e1e27"}}
         >
-          제출하기
-        </Button>
-        </div>
+        제출하기
+      </Button>
+
     </div>
   )
 };
