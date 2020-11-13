@@ -12,8 +12,17 @@
     filter: blur(8px);
     cursor: pointer;
   }
+  .wrapper-img2 {
+    max-width: 100%;
+    filter: blur(20px);
+    cursor: pointer;
+  }
+  .modal-img1{
+    max-width: 100%;
+  }
   .wrapper {
     display: flex;
+    justify-content: center;
     width: 100%;
     padding: 0 2rem;
     text-align: center;
@@ -105,4 +114,9 @@
     box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
     transition: all 0.35s;
   }
-  
+  .modal-button{
+    background-color: pink;
+    border-radius: 10%;
+    color: aliceblue;
+    border: #fff;
+  }
