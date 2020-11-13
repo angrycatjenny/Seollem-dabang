@@ -14,12 +14,15 @@ const LoginPage = ({ history }) => {
   const setPasswordText = e => {setPassword(e.target.value)};
 
   const sendLoginData = e => {
-    // e.preventDefault()
+    e.preventDefault()
     const loginData = { email, password }
     axios.post('/login', loginData)
       .then((response) => {
+        console.log('11111')
         setCookie('accessToken', response.data.accessToken)
+        console.log('22222')
         history.push('/main')
+        console.log('33333')
         alert('로그인이 되었습니다.')
       })
       .catch((error) => {
