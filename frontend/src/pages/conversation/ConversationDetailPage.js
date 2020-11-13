@@ -83,6 +83,23 @@ const ConversationDetailPage = ({ match }) => {
     const conversationName = Date.now();
 
     conversationFile.append('voice', voice, 'voice'+ conversationName);
+    conversationFile.append('propose', 0)
+
+    axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+    .then (() => {
+      setVoice('')
+      console.log('성공?')
+      history.go()
+      }
+    )
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+  const sendPropose = () => {
+    const conversationFile = new FormData();
+
+    conversationFile.append('propose', 1)
 
     axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
     .then (() => {
@@ -184,8 +201,10 @@ const ConversationDetailPage = ({ match }) => {
           </button>
         </div>
       )}
+      <div>
       <button className="conversation-button" onClick={sendMessage}>보내기</button>
-      <button onClick={startCall}>화상채팅 신청</button>
+      <button className="conversation-button-call" onClick={sendPropose}>미팅신청</button>
+      </div>
     </div>
   )
 };

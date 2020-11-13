@@ -28,3 +28,12 @@
   border: #77AAAD;
   color: white;
 }
+.conversation-button-call {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 35px;
+  background-color: #ef9e9f;
+  border: #ef9e9f;
+  color: white;
+}
