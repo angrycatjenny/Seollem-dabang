@@ -19,8 +19,6 @@ import 'react-h5-audio-player/lib/styles.css';
 // History
 import { useHistory } from "react-router-dom";
 
-import ConversationPic2 from '../../assets/conversation/ConversationPic2.png';
-
 // Images
 import RecordStart from '../../assets/signup/RecordStart.png';
 import RecordStop from '../../assets/signup/RecordStop.png';
@@ -125,7 +123,6 @@ const ConversationDetailPage = ({ match }) => {
 
   return (
     <div className="conversation-template d-flex flex-column align-items-center">
-      <img className="conversation-image" src={ConversationPic2} />
       <div className="conversation-inner">
         {messages.map((message, index) => (
           <div className="d-flex flex-column">
