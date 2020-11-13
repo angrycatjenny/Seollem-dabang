@@ -54,8 +54,8 @@ const PostListPage = () => {
   return (
     <div style={{marginTop:"25px", display:"flex",flexDirection:"column", alignItems:"center"}}>
       <div style={{ alignSelf:"flex-end", marginRight:"130px" }}>
-          <Link className="post-create-button 
-          btn btn-secondary" to="/post/create">
+          <Link className="post-create-button" 
+          to="/post/create">
             글쓰기</Link>
       </div>
 

@@ -1,4 +1,8 @@
 .post-create-button {
+  color: white;
+  background-color: #5e1e27;
+  padding: 7px 7px;
+  border-radius: 4px;
 }
 
 .post-list-box {
