@@ -73,7 +73,7 @@ const HomePage = () => (
             <div className="home-padding d-flex justify-content-between m-auto">
               <div className="">
                 <img className="home-section5-image" src={HomeSection5} />
-                <img className="home-scroll-down" src={ScrollDown} />
+                <img className="home-scroll-down" src={ScrollStop} />
               </div>
               <div className="home-margin">
                 <h1 className="home-h1">호감</h1>
