@@ -67,9 +67,9 @@ const PostListPage = () => {
             src={'http://localhost:8080/image/' + post.image} />
 
             <div className='post-info'>
-              <h2 onClick={() => history.push(`/answer/${post.user.id}`)}
-               className='post-writer'>{post.user.nickname}</h2>
-              <div className='post-tag'>#{post.user.location} #{post.user.age}세</div>
+              <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
+               className='post-writer'>{post.user.nickname}</h3>
+              <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
 
             <audio className='post-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
