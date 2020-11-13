@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // React Router Dom
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 // CSS
 import './PostListPage.css';
@@ -16,7 +17,7 @@ const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
   const [ cookies, setCookie ] = useCookies(['accessToken']);
   const [ loading, setLoading ] = useState(false);
-  
+  const history = useHistory();
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken
@@ -66,7 +67,8 @@ const PostListPage = () => {
             src={'http://localhost:8080/image/' + post.image} />
 
             <div className='post-info'>
-              <h2 className='post-writer'>{post.user.nickname}</h2>
+              <h2 onClick={() => history.push(`/answer/${post.user.id}`)}
+               className='post-writer'>{post.user.nickname}</h2>
               <div className='post-tag'>#{post.user.location} #{post.user.age}세</div>
             </div>
 
