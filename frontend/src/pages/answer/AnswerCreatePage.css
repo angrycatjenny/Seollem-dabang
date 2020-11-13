@@ -2,5 +2,21 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 270px;
+  width: 460px;
+}
+
+.titleMargin{
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+}
+
+.submitButton{
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
 }
