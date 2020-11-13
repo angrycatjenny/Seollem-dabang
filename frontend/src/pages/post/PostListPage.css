@@ -1,4 +1,8 @@
 .post-create-button {
+  color: white;
+  background-color: #5e1e27;
+  padding: 7px 7px;
+  border-radius: 4px;
 }
 
 .post-list-box {
@@ -158,4 +162,12 @@
 .post-audio {
   /* border: 2px solid green; */
   width: 280px;
+}
+
+.post-writer {
+  transition: 0.2s;
+}
+.post-writer:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
 }

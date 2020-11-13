@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // React Router Dom
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 // CSS
 import './PostListPage.css';
@@ -16,7 +17,7 @@ const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
   const [ cookies, setCookie ] = useCookies(['accessToken']);
   const [ loading, setLoading ] = useState(false);
-  
+  const history = useHistory();
   const config = {
     headers: {
       'Authorization': 'Bearer ' + cookies.accessToken
@@ -53,8 +54,8 @@ const PostListPage = () => {
   return (
     <div style={{marginTop:"25px", display:"flex",flexDirection:"column", alignItems:"center"}}>
       <div style={{ alignSelf:"flex-end", marginRight:"130px" }}>
-          <Link className="post-create-button 
-          btn btn-secondary" to="/post/create">
+          <Link className="post-create-button" 
+          to="/post/create">
             글쓰기</Link>
       </div>
 
@@ -66,8 +67,9 @@ const PostListPage = () => {
             src={'http://localhost:8080/image/' + post.image} />
 
             <div className='post-info'>
-              <h2 className='post-writer'>{post.user.nickname}</h2>
-              <div className='post-tag'>#{post.user.location} #{post.user.age}세</div>
+              <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
+               className='post-writer'>{post.user.nickname}</h3>
+              <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
 
             <audio className='post-audio' controls src={'http://localhost:8080/voice/' + post.voice} />

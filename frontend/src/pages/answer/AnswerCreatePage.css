@@ -1,22 +1,22 @@
 .centerBox {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  width: 460px;
+  width: 50%;
+  padding: 20px 5px;
 }
-
-.titleMargin{
-  margin-bottom: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 150px;
-}
-
-.submitButton{
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
+.answer-box {
+  margin-bottom: 15px;
   display: flex;
-  flex-direction: column;
-  width: 100px;
+  justify-content: space-between;
+  align-content: center;
+}
+.answer-quest {
+  width: 73%;
+}
+.answer-btn {
+  width: 28%;
+}
+.answer-yes,
+.answer-no {
+  border: none;
+  outline: none;
+  color: white;
 }
