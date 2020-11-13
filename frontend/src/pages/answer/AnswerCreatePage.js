@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 // Cookie
 import { useCookies } from 'react-cookie';
 
+import Button from '@material-ui/core/Button';
+
 const AnswerCreatePage = ({ match }) => {
   const history = useHistory();
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -81,15 +83,39 @@ const AnswerCreatePage = ({ match }) => {
 
   return (
     <div>
-      <h1>답변 등록</h1>
+      <h1 className="titleMargin">답변 등록</h1>
+      <div className="centerBox">
       {questions.map((question, index) => (
         <div key={index}>
-          <h1>{question.content}</h1>
-          <button onClick={() => selectedYes(index)}>YES</button>
-          <button onClick={() => selectedNo(index)}>NO</button>
+          <h2>{question.content}</h2>
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => selectedYes(index)}
+            >
+              YES
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => selectedNo(index)}
+            >
+              NO
+            </Button>
+          </div>
         </div>
       ))}
-      <button onClick={sendAnswers}>제출하기</button>
+      </div>
+      <div className="submitButton">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={sendAnswers}
+        >
+          제출하기
+        </Button>
+        </div>
     </div>
   )
 };
