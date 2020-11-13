@@ -14,7 +14,7 @@ const LoginPage = ({ history }) => {
   const setPasswordText = e => {setPassword(e.target.value)};
 
   const sendLoginData = e => {
-    e.preventDefault()
+    // e.preventDefault()
     const loginData = { email, password }
     axios.post('/login', loginData)
       .then((response) => {
