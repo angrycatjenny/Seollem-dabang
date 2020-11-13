@@ -16,7 +16,7 @@ const LoginPage = ({ history }) => {
   const sendLoginData = e => {
     e.preventDefault()
     const loginData = { email, password }
-    axios.post('/login', loginData)
+    axios.post('https://k3b103.p.ssafy.io:8080/login', loginData)
       .then((response) => {
         console.log('11111')
         setCookie('accessToken', response.data.accessToken)
