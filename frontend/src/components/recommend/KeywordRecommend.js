@@ -1,63 +1,41 @@
 import React from 'react';
 import './KeywordRecommend.css';
 import { Modal } from 'react-bootstrap';
-import { Button } from 'react-bootstrap'; import
-AudioPlayer from 'react-modular-audio-player';
+import { Button } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import defaltimg from "../../assets/mainImg/png/heartback.png"
 import exam from "../../assets/mainImg/png/exam.png"
+import handheart from "../../assets/mainImg/png/pngegg.png"
 import { Link } from 'react-router-dom';
 
-let rearrangedPlayer = [
-    {
-        className: "adele",
-        innerComponents: [
-            {
-                type: "play",
-                style: {
-                    width: "100%",
-                    justifyContent: "center",
-                    filter: "invert(100%)",
-                    opacity: "0.4"
-                }
-            }
-        ]
-    }
-];
 
 function MyVerticallyCenteredModal(props) {
     const history = useHistory();
     return (
         <Modal
+            key={props.data.id}
             {...props}
             size="sm"
-            aria-labelledby="contained-modal-title-vcenter"
+            aria-labelledby={props.data.id}
             centered
+            className={props.data.id}
         >
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    {props.data.nickname}
+                <Modal.Title id={props.data.id}>
+                    <div>
+                        <Link onClick={() => history.push(`/answer/${props.data.id}`)}>'{props.data.nickname}'님 레시피 보기</Link>
+                    </div>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>거주 지역:{props.data.location}</h4>
-                <h4>나이:{props.data.age}</h4>
+                <h4>지역 : {props.data.location}</h4>
+                <h4>나이 : {props.data.age} 세</h4>
+                <img src={handheart} alt="exam" className="modal-img1" />
+                <audio src={props.data.voiceDownloadUri} controls className="modal-img1" />
             </Modal.Body>
             <Modal.Footer>
-                <AudioPlayer
-                    audioFiles={[
-                        {
-                            src: `${props.data.voiceDownloadUri}`,
-                            title: "voiceDownloadUri",
-                        }
-                    ]}
-                    rearrange={rearrangedPlayer}
-                    playerWidth="50px"
-                    iconSize="50px"
-                />
-                <Button onClick={() => history.push(`/answer/${props.data.id}`)}>레시피 풀기</Button>
                 <button onClick={props.onHide} className="modal-button">닫기</button>
             </Modal.Footer>
         </Modal>
@@ -73,11 +51,17 @@ function MyVerticallyCenteredModal2(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    <div>
+                        <Link onClick={() => history.push('/question/create')} className="text-decoration-none" >이상형 레시피 만들기</Link>
+                    </div>
+                </Modal.Title>
+            </Modal.Header>
             <Modal.Body>
                 <h5> 이상형 레시피를 만들어</h5>
                 <h5> 같은 성향의 이성을 추천 받으세요</h5>
-                <img src={exam} alt="exam" className="modal-img1"/>
-                <Link onClick={() => history.push('/question/create')} className="text-decoration-none" >이상형 레시피 만들기</Link>
+                <img src={exam} alt="exam" className="modal-img1" />
             </Modal.Body>
             <Modal.Footer>
                 <button onClick={props.onHide} className="modal-button">close</button>
@@ -116,44 +100,40 @@ const KeywordRecommend = () => {
         }
     } else {
         return (
-            <div className="item">
-                <div className="polaroid">
-                    <div className="caption">레시피 기반 추천</div>
-                    <div onClick={() => setModalShow(true)}>
-                        <Button>
-                            <img src={defaltimg} alt='img' className="wrapper-img"/>
-                        </Button>
-                        <div className="caption">
-                        <Button>
-                            <div class="back"></div>
-                            <div class="heart"></div>
-                        </Button>
+            <div className="nonkeyword">
+                <div className="item">
+                    <div className="polaroid">
+                        <div className="caption">레시피 기반 추천</div>
+                        <div onClick={() => setModalShow(true)}>
+                            <Button>
+                                <img src={defaltimg} alt='img' className="wrapper-img2" />
+                            </Button>
+                            <div className="caption">
+                                <div className="back"></div>
+                                <div className="heart"></div>
+                            </div>
                         </div>
                     </div>
-                    <MyVerticallyCenteredModal2
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
                 </div>
+                <MyVerticallyCenteredModal2
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
             </div>
         )
     }
     return (
         <div>
-            {tileData.map((data) => (
-                <div className="item" key={data.nickname}>
+            {tileData.map((userdata) => (
+                <div className="item" key={userdata.id}>
                     <div className="polaroid">
                         <div className="caption">레시피 기반 추천</div>
-                        <Button onClick={() => setModalShow(true)}>
-                            <img src={data.imageDownloadUri} alt={data.nickname} className="wrapper-img" />
+                        <Button onClick={() => history.push(`/answer/${userdata.id}`)}>
+                            <img src={userdata.imageDownloadUri} alt={userdata.nickname} className="wrapper-img" />
                         </Button>
-                        <div className="caption">{data.nickname}</div>
+                        <div className="caption">{userdata.nickname}/{userdata.location}/{userdata.age}세 </div>
+                        <audio src={userdata.voiceDownloadUri} controls className="modal-img1" />
                     </div>
-                    <MyVerticallyCenteredModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                        data={data}
-                    />
                 </div>
             ))}
         </div>
