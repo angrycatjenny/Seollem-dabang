@@ -6,6 +6,7 @@ import com.web.backend.dao.conversation.ConversationDao;
 import com.web.backend.model.Conversation.Conversation;
 import com.web.backend.model.Conversation.ConversationContent;
 import com.web.backend.model.accounts.User;
+import com.web.backend.payload.conversation.ConversationContentRequest;
 import com.web.backend.security.CurrentUser;
 import com.web.backend.security.UserPrincipal;
 import com.web.backend.service.VoiceStorageService;
@@ -34,14 +35,22 @@ public class ConversationContentController {
     UserDao userDao;
 
     @PostMapping("/conversation/create/{conversationId}")
-    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice) throws Exception {
+    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice, @RequestBody ConversationContentRequest req) throws Exception {
         User curuser = userDao.getUserById(requser.getId());
         Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
-        String voiceName = voiceStorageService.storeFile(voice);
-        SpeechToText stt = new SpeechToText();
-        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
-        ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
-        conversationContentDao.save(cc);
+
+        if(req.getPropose()==0){
+            String voiceName = voiceStorageService.storeFile(voice);
+            SpeechToText stt = new SpeechToText();
+            String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
+            ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
+            conversationContentDao.save(cc);
+        }else{
+            String voiceName = "화상채팅 신청";
+            String text = "화상채팅 신청";
+            ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
+            conversationContentDao.save(cc);
+        }
 
         return new ResponseEntity<>("대화 생성 완료", HttpStatus.OK);
     }

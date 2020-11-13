@@ -96,9 +96,9 @@ const ConversationDetailPage = ({ match }) => {
     }
   }
   const sendPropose = () => {
-    const conversationFile = new FormData();
-
-    conversationFile.append('propose', 1)
+    const conversationFile = {
+      "propose": 1,
+    }
 
     axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
     .then (() => {
