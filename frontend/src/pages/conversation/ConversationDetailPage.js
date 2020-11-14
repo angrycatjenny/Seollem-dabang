@@ -80,7 +80,6 @@ const ConversationDetailPage = ({ match }) => {
       const conversationFile = new FormData();
       const conversationName = Date.now();
       conversationFile.append('voice', voice, 'voice'+ conversationName);
-      conversationFile.append('propose', 0)
       axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
       .then (() => {
         setVoice('')
@@ -100,7 +99,7 @@ const ConversationDetailPage = ({ match }) => {
       "propose": 1,
     }
 
-    axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+    axios.post(`/conversation/propose/${match.params.conversationId}`, null, config)
     .then (() => {
       history.go()
       }
