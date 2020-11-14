@@ -30,7 +30,7 @@ const App = () => {
     <>
       <Switch>
         <Route component={HomePage} exact path="/" />
-        <Route component={LoginPage} path="/login" />
+        <Route component={LoginPage} path="/api/login" />
         <Route component={SignupPage} path="/signup" />
 
         <div className="container app-template">
