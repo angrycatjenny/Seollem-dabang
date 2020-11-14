@@ -3,7 +3,6 @@ import { useUserMediaFromContext } from "@vardius/react-user-media";
 import Room from "./Room";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-// import { useReactMediaRecorder } from "react-media-recorder";
 import { useHistory } from "react-router-dom";
 import useMediaRecorder from '@wmik/use-media-recorder';
 
@@ -11,6 +10,7 @@ const CallPage = ({ match }) => {
   const [ cookies, setCookie ] = useCookies(['accessToken']);
   const { stream, error } = useUserMediaFromContext();
   const [ user, setUser ] = useState('');
+  const [ feedback, setFeedback ] = useState('');
   const history = useHistory();
 
   const config = {
@@ -40,13 +40,19 @@ const CallPage = ({ match }) => {
 
   const goResult = () => {
     console.log(mediaBlob)
-    // axios.post('/', config)
-    //   .then((response) => {
+    const callFile = new FormData();
+    const videoName = Date.now();
 
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
+    callFile.append('video', mediaBlob, 'voice'+ videoName);
+    
+    axios.post(`/feedback/${match.params.conversationId}`, callFile, config)
+      .then((response) => {
+        console.log(response)
+        setFeedback(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   return (
