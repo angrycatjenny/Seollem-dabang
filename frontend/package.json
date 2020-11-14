@@ -55,5 +55,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://k3b103.p.ssafy.io"
+  "proxy": "https://k3b103.p.ssafy.io:8080"
 }
