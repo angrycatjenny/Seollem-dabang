@@ -21,7 +21,7 @@ const HomePage = () => (
         <ReactFullpage.Wrapper>
           <div className="section home-section1">
             <img className="home-section1-image" src={HomeSection1} />
-            <div><Link to="/api/login" className="home-link text-decoration-none">시작하기</Link></div>
+            <div><Link to="/login" className="home-link text-decoration-none">시작하기</Link></div>
             <img className="home-scroll-down" src={ScrollDown} />
           </div>
           <div className="section home-section2">

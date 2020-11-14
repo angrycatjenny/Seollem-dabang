@@ -16,12 +16,7 @@ const LoginPage = ({ history }) => {
   const sendLoginData = e => {
     e.preventDefault()
     const loginData = { email, password }
-    axios.post('/api/login', loginData, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
-      }
-    })
+    axios.post('/api/login', loginData)
       .then((response) => {
         setCookie('accessToken', response.data.accessToken)
         history.push('/main')
