@@ -69,7 +69,7 @@ def get_emotion(File_Name):
 
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
     emotion_dict_result = {"Angry": 0, "Disgusted": 0, "Fearful": 0, "Happy": 0, "Neutral": 0, "Sad": 0, "Surprised": 0}
-    os.chdir('C:/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition')
+    os.chdir('C:/Users/multicampus/Desktop/Final/s03p31b103/backend/src/main/resources/video')
     cap = cv2.VideoCapture(File_Name)
     
     while True:

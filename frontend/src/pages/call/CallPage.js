@@ -45,7 +45,7 @@ const CallPage = ({ match }) => {
 
     callFile.append('video', mediaBlob, 'voice'+ videoName);
     
-    axios.post(`/feedback/${match.params.conversationId}`, callFile, config)
+    axios.post(`/conversation/end/${match.params.conversationId}`, callFile, config)
       .then((response) => {
         console.log(response)
         setFeedback(response.data)

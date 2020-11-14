@@ -4,11 +4,14 @@ import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.conversation.ConversationDao;
 import com.web.backend.dao.emotion.EmotionDao;
 import com.web.backend.model.Conversation.Conversation;
+import com.web.backend.model.Conversation.ConversationContent;
 import com.web.backend.model.accounts.User;
 import com.web.backend.model.emotion.Emotion;
 import com.web.backend.payload.conversation.ConversationRequest;
 import com.web.backend.security.CurrentUser;
 import com.web.backend.security.UserPrincipal;
+import com.web.backend.service.VideoStorageService;
+import com.web.backend.service.VoiceStorageService;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
@@ -35,6 +38,9 @@ public class ConversationController {
     @Autowired
     EmotionDao emotionDao;
 
+    @Autowired
+    VideoStorageService videoStorageService;
+
     @PostMapping("/conversation")
     public Object create(@CurrentUser UserPrincipal requser, @RequestBody ConversationRequest req) {
         User examinee = userDao.getUserById(requser.getId());
@@ -52,14 +58,18 @@ public class ConversationController {
         return conversationList;
     }
 
+
     @PostMapping("/conversation/end/{conversationId}")
     public Object endConversation(@CurrentUser UserPrincipal requser, @RequestPart(required = false) MultipartFile video, @PathVariable Long conversationId){
+
+        String videoName = videoStorageService.storeFile(video);
+        HashMap<String,String>emotionResult = new HashMap<>();
 
         System.out.println("Python Call");
         String[] command = new String[3];
         command[0] = "python";
         command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/emotion_detection.py";
-        command[2] = "1601631973679";
+        command[2] = "videoName";
 
         try {
             CommandLine commandLine = CommandLine.parse(command[0]);
@@ -109,7 +119,7 @@ public class ConversationController {
                     keyFlag=false;
                 }
             }
-
+            emotionResult=emotionMao;
             HashMap<String, String> emotionData = new HashMap<String, String>();
             for(String k:emotionMao.keySet()){
                 if(!emotionMao.get(k).equals("0")){
@@ -123,6 +133,6 @@ public class ConversationController {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<>("대화 종료", HttpStatus.OK);
+        return emotionResult;
     }
 }
