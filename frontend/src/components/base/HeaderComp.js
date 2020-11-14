@@ -28,7 +28,7 @@ const HeaderComp = () => {
     <div>
       <div className="header-top">
         <Link to="/main" style={{color:"black", textDecoration:"none"}}>
-          {/* <h2 className="text-center pt-3">설 렘 다 방</h2> */}
+          {/* <h2 className="text-logo text-center">설 렘 다 방</h2> */}
           <img className="logo" src={HeaderLogo} />
         </Link>
       </div>
