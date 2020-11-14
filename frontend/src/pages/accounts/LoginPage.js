@@ -32,12 +32,12 @@ const LoginPage = ({ history }) => {
   return (
     <div className="login-template d-flex flex-column align-items-center">
       <div className="login-box">
-        <h5 className="text-center login-name">설 렘 다 방</h5>
+        <h4 className="text-center login-name">설 렘 다 방</h4>
         <form onSubmit={sendLoginData} className="login-form">
           <input className="login-input" placeholder="이메일" email={email} onChange={setEmailText} />
           <input type="password" className="login-input" placeholder="비밀번호" password={password} onChange={setPasswordText} />
           <div className="login-footer">
-            <small>아직 회원이 아니신가요?</small>
+            <div style={{fontSize:"15px"}}>아직 회원이 아니신가요?</div>
             <Link to="/signup" className="text-decoration-none">회원가입</Link>
           </div>
           <button className="login-button" type="submit">로그인</button>

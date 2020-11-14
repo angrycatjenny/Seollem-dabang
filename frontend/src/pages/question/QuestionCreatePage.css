@@ -27,19 +27,18 @@
 }
 
 .quest-box {
-  display: flex;
-  justify-content: space-around;
-  /* border: 2px solid red; */
-  width: 80%;
+  width: 60%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
 }
 
 .radio-box {
   display: flex;
   align-items: center;
-  /* border: 2px solid green; */
+  padding-top: 25px;
 }
 
 .quest-create-input {
@@ -109,13 +108,13 @@
   padding: 10px 20px 0 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
   height: 330px;
   overflow: auto;
 }
 .board-img {
   transform: rotate(270deg);
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 100px;
   height: 200px;
   /* margin-left: 100px; */
@@ -145,7 +144,6 @@
 .test-box {
   height: 500px;
   width: 81.8%;
-  /* border: 2px solid purple; */
   background-image: url('../../assets//question/board8.png');
   background-size: 900px 500px;
   background-repeat: no-repeat;
@@ -153,6 +151,7 @@
   padding: 75px 0px 0px 0px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .create-final-box {

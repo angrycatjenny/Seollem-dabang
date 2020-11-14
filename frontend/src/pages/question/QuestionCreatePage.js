@@ -53,11 +53,23 @@ const useStyles = makeStyles((theme) => ({
   },
   customBtn:{
     color:"white",
-    backgroundColor:"#5e1e27"
+    backgroundColor:"#5e1e27",
+    transition:"0.2s",
+    '&:hover':{
+      transform:"translateY(-3px)",
+      backgroundColor:"#5e1e27",
+    }
   },
   cancelBtn:{
     color:"#FFFAFF",
-    backgroundColor:"#0D0A0A"
+    backgroundColor:"#0D0A0A",
+    transition:"0.2s",
+    '&:hover':{
+      color:"#0D0A0A",
+      textDecoration:"none",
+      transform:"translateX(3px)",
+      backgroundColor:"transparent"
+    }
   },
   icon:{
     color:"pink !important"
@@ -333,18 +345,19 @@ const QuestionCreatePage = () => {
               )}
               {activeStep === 1 && (
                 <div className="stepper-box">
-                  <div style={{display:'flex',flexDirection:'column', marginTop:"0px"}}>
+                  <div style={{marginTop:"0px", 
+                  width:"70%",}}>
                     {exam.map((item) => (
-                      <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
+                      <div key={item.key} style={{display:"flex",
+                      justifyContent:"space-between", marginBottom:"10px",}}>
                         <div key={item.key} className="quest-box">
-                          <label>{item.key}번
-                            <textarea 
+                          <label>{item.key}번.</label>
+                          <textarea 
                             className="quest-create-input"
                             type="text"
                             id={item.key}
                             value={item.value}
                             onChange={onChangeQuest}/>
-                          </label>
                         </div>
                         <div className="radio-box">
                           <YesRadio
@@ -452,7 +465,7 @@ const QuestionCreatePage = () => {
         
         {/* 취소버튼 */}
         <div className="cancel-btn">
-          <Link to="/question">
+          <Link to="/question" style={{textDecoration:"none",}}>
             <Button variant="contained"
             className={classes.cancelBtn}
             >취소</Button></Link>
