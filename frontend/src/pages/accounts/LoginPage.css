@@ -16,12 +16,12 @@
   margin-top: 7px;
   margin-bottom: 5px;
   height: 35px;
-  background-color: #77AAAD;
-  border: #77AAAD;
+  background-color: #77aaad;
+  border: #77aaad;
   color: white;
 }
 .login-template {
-  background-color: #D9D4CF;
+  background-color: #d9d4cf;
   height: 720px;
 }
 .login-box {
@@ -32,5 +32,5 @@
 }
 .login-name {
   margin-bottom: 40px;
-  color: #5E1E17;
+  color: #5e1e17;
 }
