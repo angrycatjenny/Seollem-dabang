@@ -129,7 +129,8 @@ const ConversationDetailPage = ({ match }) => {
             {ucookies.user == message.user.id ? 
               <div className="align-self-end m-1">
                 <h5>{message.user.nickname} 님</h5>
-                <AudioPlayer
+                {message.voice != '화상채팅 신청' ?
+                  <AudioPlayer
                   key={index}
                   src={'http://localhost:8080/voice/' + message.voice}
                   showJumpControls={false}
@@ -139,20 +140,25 @@ const ConversationDetailPage = ({ match }) => {
                     width: '300px'
                   }}
                 />
+                : <button onClick={startCall}>화상채팅해요~</button>}
+                <h6>{message.text}</h6>
               </div>
             : 
             <div className="align-self-start m-1">
               <h5>{message.user.nickname} 님</h5>
-              <AudioPlayer
-                key={index}
-                src={'http://localhost:8080/voice/' + message.voice}
-                showJumpControls={false}
-                customVolumeControls={[]}
-                customAdditionalControls={[]}
-                style={{
-                  width: '300px'
-                }}
-              />
+              {message.voice != '화상채팅 신청' ?
+                  <AudioPlayer
+                  key={index}
+                  src={'http://localhost:8080/voice/' + message.voice}
+                  showJumpControls={false}
+                  customVolumeControls={[]}
+                  customAdditionalControls={[]}
+                  style={{
+                    width: '300px'
+                  }}
+                />
+                : <button onClick={startCall}>화상채팅해요~</button>}
+              <h6>{message.text}</h6>
             </div>
             }
           </div>
