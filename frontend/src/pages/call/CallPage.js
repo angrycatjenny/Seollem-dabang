@@ -40,7 +40,6 @@ const CallPage = ({ match }) => {
 
   const goResult = () => {
     console.log(mediaBlob)
-    history.push()
     // axios.post('/', config)
     //   .then((response) => {
 
@@ -52,18 +51,26 @@ const CallPage = ({ match }) => {
 
   return (
     <div className="container-fluid container">
-      {status == 'idle' && 
-        <button onClick={startRecording}>시작하기</button>
-      }
-      {status == 'recording' && 
+      {!mediaBlob && 
         <div>
-          <button onClick={stopRecording}>종료하기</button>
-          <Room name={match.params.conversationId} username={user} stream={stream} />
+          {status == 'idle' && 
+          <button onClick={startRecording}>시작하기</button>
+          }
+          {status == 'recording' && 
+            <div>
+              <button onClick={stopRecording}>종료하기</button>
+              <Room name={match.params.conversationId} username={user} stream={stream} />
+            </div>
+          }
         </div>
       }
-      {status == 'stopped' &&
+      {mediaBlob && 
         <div>
-          <button onClick={goResult}>결과보기</button>
+          {status == 'stopped' &&
+            <div>
+              <button onClick={goResult}>결과보기</button>
+            </div>
+          }
         </div>
       }
     </div>
