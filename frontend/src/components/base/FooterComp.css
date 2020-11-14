@@ -54,14 +54,17 @@
 .logout-button {
   padding-left: 7px;
   transition: 0.2s;
-  color: white;
+  color: #5e1e27;
   font-size: 15px;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 .logout-button:hover {
   cursor: pointer;
   color: #5e1e27;
+  transform: translateY(-3.5px);
 }
-
 .button {
   position: relative;
   display: -webkit-inline-box;

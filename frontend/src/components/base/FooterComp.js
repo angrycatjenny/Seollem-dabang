@@ -30,9 +30,9 @@ const FooterComp = () => {
       <img className="footer-pic1" src={FooterPic1} />
       <div className="footer-logout d-flex flex-column">
         
-        <div className="ml-1 logout-button" 
+        <div className="ml-1" 
         onClick={logout}>
-          로그아웃          
+          <button className="logout-button" >로그아웃</button>
         </div>
 
         <div className="d-flex">
