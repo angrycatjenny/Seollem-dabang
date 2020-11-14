@@ -333,18 +333,19 @@ const QuestionCreatePage = () => {
               )}
               {activeStep === 1 && (
                 <div className="stepper-box">
-                  <div style={{display:'flex',flexDirection:'column', marginTop:"0px"}}>
+                  <div style={{marginTop:"0px", 
+                  width:"70%",}}>
                     {exam.map((item) => (
-                      <div key={item.key} style={{display:"flex", alignItems:"center", justifyContent:"space-around", marginBottom:"10px",}}>
+                      <div key={item.key} style={{display:"flex",
+                      justifyContent:"space-between", marginBottom:"10px",}}>
                         <div key={item.key} className="quest-box">
-                          <label>{item.key}번
-                            <textarea 
+                          <label>{item.key}번.</label>
+                          <textarea 
                             className="quest-create-input"
                             type="text"
                             id={item.key}
                             value={item.value}
                             onChange={onChangeQuest}/>
-                          </label>
                         </div>
                         <div className="radio-box">
                           <YesRadio
