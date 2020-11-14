@@ -229,7 +229,7 @@ const SignupPage = () => {
             alert("이미 가입 정보가 있는 이메일 입니다.")
           }else if(res.data.message === "User registered successfully"){
             alert('회원가입이 완료되었습니다.')
-            history.push('/login')
+            history.push('/api/login')
           }
         })
         .catch(err => {
