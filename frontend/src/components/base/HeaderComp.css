@@ -440,15 +440,22 @@
   margin-top: 10px;
   height: 70px;
   border: solid black 2px;
-  background-color: #fadad8;
+  background-color: #f4f7f7;
 }
 .header-top-under {
   margin-top: 7px;
   border: solid black 2px;
-  background-color: #fadad8;
+  background-color: #FFFFF3;
 }
 
 .header-logo {
   margin-top: 10px;
   width: 170px;
+}
+
+.logo {
+  position: absolute;
+  top: -1%;
+  left: 46%;
+  width: 140px;
 }
