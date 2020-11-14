@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './HeaderComp.css';
+import HeaderLogo from '../../assets/logos/HeaderLogo.png';
 
 const HeaderComp = () => {
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -27,7 +28,8 @@ const HeaderComp = () => {
     <div>
       <div className="header-top">
         <Link to="/main" style={{color:"black", textDecoration:"none"}}>
-          <h2 className="text-center pt-3">설 렘 다 방</h2>
+          {/* <h2 className="text-center pt-3">설 렘 다 방</h2> */}
+          <img className="logo" src={HeaderLogo} />
         </Link>
       </div>
       <div className="header-top-under"></div>
