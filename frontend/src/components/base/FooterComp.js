@@ -29,11 +29,12 @@ const FooterComp = () => {
       <div className="footer-right"></div>
       <img className="footer-pic1" src={FooterPic1} />
       <div className="footer-logout d-flex flex-column">
-          <small className="ml-2 logout-button" 
-          onClick={logout}>로그아웃</small>
+        <div className="ml-1 logout-button" 
+        onClick={logout}>로그아웃</div>
+
         <div className="d-flex">
-        <img className="footer-pic2" src={FooterPic2} />
-        <img className="footer-flower2" src={FooterFlower2} />
+          <img className="footer-pic2" src={FooterPic2} />
+          <img className="footer-flower2" src={FooterFlower2} />
         </div>
       </div>
       <div className="footer-inner"></div>

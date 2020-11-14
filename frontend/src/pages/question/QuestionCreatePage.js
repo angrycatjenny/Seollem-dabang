@@ -53,11 +53,23 @@ const useStyles = makeStyles((theme) => ({
   },
   customBtn:{
     color:"white",
-    backgroundColor:"#5e1e27"
+    backgroundColor:"#5e1e27",
+    transition:"0.2s",
+    '&:hover':{
+      transform:"translateY(-3px)",
+      backgroundColor:"#5e1e27",
+    }
   },
   cancelBtn:{
     color:"#FFFAFF",
-    backgroundColor:"#0D0A0A"
+    backgroundColor:"#0D0A0A",
+    transition:"0.2s",
+    '&:hover':{
+      color:"#0D0A0A",
+      textDecoration:"none",
+      transform:"translateX(3px)",
+      backgroundColor:"transparent"
+    }
   },
   icon:{
     color:"pink !important"
@@ -453,7 +465,7 @@ const QuestionCreatePage = () => {
         
         {/* 취소버튼 */}
         <div className="cancel-btn">
-          <Link to="/question">
+          <Link to="/question" style={{textDecoration:"none",}}>
             <Button variant="contained"
             className={classes.cancelBtn}
             >취소</Button></Link>

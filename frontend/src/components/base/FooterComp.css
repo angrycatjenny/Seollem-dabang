@@ -54,8 +54,9 @@
 .logout-button {
   padding-left: 7px;
   transition: 0.2s;
+  color: white;
+  font-size: 15px;
 }
 .logout-button:hover {
   cursor: pointer;
-  color: #e23128;
 }
