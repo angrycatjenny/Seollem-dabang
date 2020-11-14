@@ -35,24 +35,31 @@ public class ConversationContentController {
     UserDao userDao;
 
     @PostMapping("/conversation/create/{conversationId}")
-    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice, @RequestBody ConversationContentRequest req) throws Exception {
+    public Object create(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId, @RequestPart(required = false) MultipartFile voice) throws Exception {
         User curuser = userDao.getUserById(requser.getId());
         Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
 
-        if(req.getPropose()==0){
-            String voiceName = voiceStorageService.storeFile(voice);
-            SpeechToText stt = new SpeechToText();
-            String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
-            ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
-            conversationContentDao.save(cc);
-        }else{
-            String voiceName = "화상채팅 신청";
-            String text = "화상채팅 신청";
-            ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
-            conversationContentDao.save(cc);
-        }
+        String voiceName = voiceStorageService.storeFile(voice);
+        SpeechToText stt = new SpeechToText();
+        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
+        ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
+        conversationContentDao.save(cc);
+
 
         return new ResponseEntity<>("대화 생성 완료", HttpStatus.OK);
+    }
+    
+    @PostMapping("/conversation/propose/{conversationId}")
+    public Object propose(@CurrentUser UserPrincipal requser,@PathVariable Long conversationId) throws Exception {
+        User curuser = userDao.getUserById(requser.getId());
+        Conversation conversation=conversationDao.getConversationByConversationId(conversationId);
+
+        String voiceName = "화상채팅 신청";
+        String text = "화상채팅 신청";
+        ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
+        conversationContentDao.save(cc);
+
+        return new ResponseEntity<>("화상채팅 신청 완료", HttpStatus.OK);
     }
 
     @GetMapping("/conversation/list/{conversationId}")
