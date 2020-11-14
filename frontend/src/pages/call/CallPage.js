@@ -40,6 +40,7 @@ const CallPage = ({ match }) => {
 
   const goResult = () => {
     console.log(mediaBlob)
+    history.push()
     // axios.post('/', config)
     //   .then((response) => {
 
