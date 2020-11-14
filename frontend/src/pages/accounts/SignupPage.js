@@ -57,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  customInput:{
+    marginTop:"0",
+    padding:"0",
+    // height:"10px",
+  },
 }));
 
 function getSteps() {
@@ -245,10 +250,10 @@ const SignupPage = () => {
   return (
     <div className="signup-template d-flex flex-column align-items-center">
       <div className="signup-box">
-        <h5 className="text-center signup-name">설 렘 다 방</h5>
+        <h4 className="text-center signup-name">설 렘 다 방</h4>
         <div className="d-flex justify-content-between">
           <div className="signup-page1 d-flex flex-column">
-            <small>기본정보</small>
+            <medium>기본정보</medium>
             <Input
               placeholder="닉네임"
               nickname={nickname}
@@ -271,10 +276,12 @@ const SignupPage = () => {
               passwordconfirm={passwordconfirm}
               onChange={setPasswordconfirmText}
             />
-            <small className="mt-4">상세정보</small>
+            <medium className="mt-4">상세정보</medium>
             <FormControl 
+            className={classes.customInput}
             >
-            <InputLabel id="demo-mutiple-name-label">지역</InputLabel>
+            <InputLabel className={classes.customInput} 
+            id="demo-mutiple-name-label">지역</InputLabel>
               <Select
                 labelId="demo-mutiple-name-label"
                 id="demo-mutiple-name"
@@ -324,8 +331,8 @@ const SignupPage = () => {
             </FormControl>
           </div>
           <div className="signup-page2 d-flex flex-column">
-              <small>사진입력</small>
-              <div className="d-flex justify-content-center">
+              <medium>사진입력</medium>
+              <div className="d-flex justify-content-start">
                 {!imagePush && (
                   <Input
                     className="mb-3"
@@ -337,7 +344,7 @@ const SignupPage = () => {
                   <img src={objectURL} alt={objectURL} className="signup-img" />
                 )}
               </div>
-              <small className="mt-4">음성녹음</small>
+              <medium style={{marginTop:"50px"}}>음성녹음</medium>
               {!voice && (
                 <div className="d-flex flex-column align-items-center">
                   <ReactMic
@@ -378,7 +385,7 @@ const SignupPage = () => {
               </div>
             )}
           <div className="signup-footer d-flex justify-content-between">
-            <small>아직 회원이 아니신가요?</small>
+            <medium>이미 회원이신가요?</medium>
             <Link to="/login" className="text-decoration-none">로그인</Link>
           </div>
             <button
