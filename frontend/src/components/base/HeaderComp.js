@@ -15,7 +15,7 @@ const HeaderComp = () => {
     }
   }
   useEffect(() => {
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
       .then((response) => {
         setUcookie('user', response.data.id)
       })

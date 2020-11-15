@@ -226,7 +226,7 @@ const SignupPage = () => {
       signupData.append('voice', voice, 'voice'+ voiceFileName);
 
       console.log(signupData, '회원가입 정보')
-      axios.post('/signup', signupData)
+      axios.post('/api/signup', signupData)
         .then((res) => {
           if(res.data.message === "This picture has no face!"){
             alert("사진에서 얼굴을 찾을 수 없습니다.")

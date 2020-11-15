@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
-import { setUseProxies } from '../../../node_modules/immer/dist/immer';
 
 const LoginPage = ({ history }) => {
   const [ email, setEmail ] = useState('');
@@ -17,7 +16,7 @@ const LoginPage = ({ history }) => {
   const sendLoginData = e => {
     e.preventDefault()
     const loginData = { email, password }
-    axios.post('/login', loginData)
+    axios.post('/api/login', loginData)
       .then((response) => {
         setCookie('accessToken', response.data.accessToken)
         history.push('/main')

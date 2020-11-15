@@ -23,7 +23,7 @@ const MyProfilePage = () => {
     }
   }
   useEffect(() => {
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
       .then((response) => {
         setEmail(response.data.email)
         setObjectURL(response.data.imageDownloadUri)
