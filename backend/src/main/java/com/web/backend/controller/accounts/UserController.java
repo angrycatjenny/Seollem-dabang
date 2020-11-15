@@ -229,18 +229,6 @@ public class UserController {
         if(curuser.getGender()==0){
             gender=1;
         }
-        String[] tempList = {"a","b","c","d"};
-        String temp = "";
-        for(int i = 0; i < tempList.length; i++){
-            if(i==1 || i==3){
-                System.out.println(temp);
-                temp = "";
-            }
-            if(i>=0){
-                temp+=tempList[i];
-            }
-        }
-
 
         if(!curuser.getIsExam()){
             HashMap<String,Integer> nullData = new HashMap<String,Integer>();
