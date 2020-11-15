@@ -93,7 +93,7 @@ const KeywordRecommend = () => {
             })
     }, [])
     if (exam === 1) {
-        if (tileData.userList === 'undefine') {
+        if (tileData.length === 0) {
             return (
                 <h1> 맞춤 추천 검색 중 입니다.</h1>
             )

@@ -76,7 +76,7 @@ const CallPage = ({ match }) => {
   }
 
   return (
-    <div className="container-fluid container call-template">
+    <div className="container-fluid call-template">
       {!mediaBlob && 
         <div className="d-flex justify-content-center start-part">
           {status == 'idle' && 
