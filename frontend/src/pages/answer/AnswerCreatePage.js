@@ -91,7 +91,7 @@ const AnswerCreatePage = ({ match }) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/question/list/' + `${match.params.userId}`, config
+          '/api/question/list/' + `${match.params.userId}`, config
         );
         setQuestions(response.data);
         console.log(response.data,'하하하하ㅏㅎ하ㅏㅎ')

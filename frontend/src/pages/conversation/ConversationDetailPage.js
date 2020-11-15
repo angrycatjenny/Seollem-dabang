@@ -63,7 +63,7 @@ const ConversationDetailPage = ({ match }) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `/conversation/list/${match.params.conversationId}`, config
+          `/api/conversation/list/${match.params.conversationId}`, config
         );
         setMessages(response.data)
         console.log(response.data)
@@ -80,7 +80,7 @@ const ConversationDetailPage = ({ match }) => {
       const conversationFile = new FormData();
       const conversationName = Date.now();
       conversationFile.append('voice', voice, 'voice'+ conversationName);
-      axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+      axios.post(`/api/conversation/create/${match.params.conversationId}`, conversationFile, config)
       .then (() => {
         setVoice('')
         console.log('성공?')
@@ -99,7 +99,7 @@ const ConversationDetailPage = ({ match }) => {
       "propose": 1,
     }
 
-    axios.post(`/conversation/propose/${match.params.conversationId}`, null, config)
+    axios.post(`/api/conversation/propose/${match.params.conversationId}`, null, config)
     .then (() => {
       history.go()
       }

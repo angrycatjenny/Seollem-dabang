@@ -21,7 +21,7 @@ const QuestionListPage = () => {
         setIsExam(true);
         try {
           // const getQuestions = () => {
-          //   axios.get(`/question/list`,config)
+          //   axios.get(`/api/question/list`,config)
           //   .then((response) => {
           //     if(response.data.length>0){
           //       console.log("뭔가 있음");
@@ -48,7 +48,7 @@ const QuestionListPage = () => {
           //     console.log(err)
           //     })
           // }
-          const getExam = await axios.get(`/question/list`,config);
+          const getExam = await axios.get(`/api/question/list`,config);
           if(getExam.data.length>0){
             console.log(getExam.data,'??')
             setExam(getExam.data)
