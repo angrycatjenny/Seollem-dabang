@@ -281,6 +281,9 @@ public class UserController {
         }
         //키워드 유사도 분석 종료
 
+        if(simUserIdList.size()>=5){
+          simUserIdList = (ArrayList<Integer>) simUserIdList.subList(0,4);
+        };
 
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(int i:simUserIdList){
