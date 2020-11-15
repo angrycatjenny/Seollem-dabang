@@ -132,7 +132,7 @@ const ConversationDetailPage = ({ match }) => {
                 <div>
                   <AudioPlayer
                   key={index}
-                  src={'https://k3b103.p.ssafy.io:8080/api/image/' + message.voice}
+                  src={'https://k3b103.p.ssafy.io:8080/api/voice/' + message.voice}
                   showJumpControls={false}
                   customVolumeControls={[]}
                   customAdditionalControls={[]}
