@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Video from "./Video";
+import './CallPage.css';
 
 function Participant({ stream, ...props }) {
   if (!stream) {
