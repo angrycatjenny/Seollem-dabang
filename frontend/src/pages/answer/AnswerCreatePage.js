@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 import Button from '@material-ui/core/Button';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 const useStyles = makeStyles((theme) => ({
   ansYes:{
@@ -58,7 +59,8 @@ const AnswerCreatePage = ({ match }) => {
   const [ cookies, setCookie ] = useCookies(['accessToken']);
 
   const [ questions, setQuestions ] = useState(null);
-  const [ answers, setAnswers ] = useState([]);
+  // const [ answers, setAnswers ] = useState([]);
+  const answers = [];
   const [ loading, setLoading ] = useState(false);
 
   const config = {
@@ -78,14 +80,14 @@ const AnswerCreatePage = ({ match }) => {
         //정답 리스트
         let ans = []
         for (let j=0; j<response.data.length; j++){
-          ans = [...ans, -1]
+          ans = [...ans, 0]
         }
         console.log(ans,'테스형')
         // let objAns = ans.map((_,index) => ({
         //   key:index,
         //   value:-1
         // }))
-        setAnswers(ans)
+        answers = ans
         console.log(ans,'ans')
 
       } catch (error) {
@@ -101,53 +103,15 @@ const AnswerCreatePage = ({ match }) => {
     console.log(answers,'전')
     const {id,value} = e.target;
     answers[id] = 1
-    setAnswers(answers)
     console.log(answers,'후')
-    // setAnswers(answers.map((answer) =>
-    // answer.key === id ? {...answer, value:1} : answer))
-
-    // for (let i = 0; i <= answers.length; i++) {
-    //   if(i == id){
-    //     console.log(i, id, '하이')
-    //     console.log(answers,'호호')
-    //     answers[i] = 1
-    //     setAnswers(answers)
-    //   }
-    // }
-    // setAnswers(answers[id].value = 1)
   }
   //정답 아니오 
   const onChangeAnsNo = (e) => {
     console.log(answers,'전')
     const {id,value} = e.target;
     answers[id] = 0
-    setAnswers(answers)
     console.log(answers,'후')
-
-    // setAnswers(answers.map((answer) =>
-    // answer.key === id ? {...answer, value:0} : answer))
-
-    // for (let i = 0; i <= answers.length; i++) {
-    //   if(i == id){
-    //     console.log(i, id, 'no')
-    //     console.log(answers,'no!!')
-    //     answers[i] = 0
-    //     setAnswers(answers)
-    //   }
-    // }
-    // setAnswers(answers[id] == 0)
   }
-
-  const selectedYes = (index) => {
-    questions[index].answer = 1
-    console.log(questions);
-    setQuestions(questions);
-  };
-  const selectedNo = (index) => {
-    questions[index].answer = 0
-    console.log(questions);
-    setQuestions(questions);
-  };
 
   const sendAnswers = () => {
     console.log(answers,'???')
@@ -182,58 +146,38 @@ const AnswerCreatePage = ({ match }) => {
             <div className="answer-quest">
               <h4>{index+1}번. {question.content}</h4>
             </div>
-            {/* <div className="answer-btn">
-              <Button
-                className={classes.ansYes}
-                variant="contained"
-                onClick={() => selectedYes(index)}
-              >
-                예
-              </Button>
-              <Button
-                className={classes.ansNo}
-                variant="contained"
-                onClick={() => selectedNo(index)}
-              >
-                아니오
-              </Button>
-            </div> */}
-          </div>
-        ))}
-        {answers.map((answer, index)=>(
-          <div key={answer.key} >
-            <div className="radio-box">
-              {/* <input type="radio" 
-              name='answer' 
-              value='yes'
-              id={answer.key}
-              onChange={onChangeAnsYes}/>예
+            <div >
+            <RadioGroup>
+              <div className="d-flex">
+              <div className="d-flex">
+                <YesRadio
+                  // checked={answers[index]}
+                  onChange={onChangeAnsYes}
+                  id={index}
+                  value="1"
+                  name="radio-button-demo"
+                  inputProps={{ 'aria-label': '예' }}
+                /><div className="mt-2">예</div>
+              </div>
+              <div className="d-flex">
+                <NoRadio
+                  // checked={answers[index]}
+                  onChange={onChangeAnsNo}
+                  id={index}
+                  value="0"
+                  name="radio-button-demo"
+                  inputProps={{ 'aria-label': '아니오' }}s
+                /><div className="mt-2">아니오</div>
+              </div>
+              </div>
 
-              <input type="radio" 
-              name='answer' 
-              value='no'
-              id={answer.key}
-              onChange={onChangeAnsNo}/> 아니오 */}
-              <YesRadio
-                checked={answer==1}
-                onChange={onChangeAnsYes}
-                id={index}
-                value="1"
-                name="radio-button-demo"
-                inputProps={{ 'aria-label': '예' }}
-              /><div>예</div>
-
-              <NoRadio
-                checked={answer==0}
-                onChange={onChangeAnsNo}
-                id={index}
-                value="0"
-                name="radio-button-demo"
-                inputProps={{ 'aria-label': '아니오' }}
-              /><div>아니오</div>
+            </RadioGroup>
             </div>
+
           </div>
+
         ))}
+
       </div>
 
       <Button
