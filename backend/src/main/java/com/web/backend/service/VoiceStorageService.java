@@ -25,7 +25,7 @@ public class VoiceStorageService {
 
     @Autowired
     public VoiceStorageService(FileStorageConfig fileStorageConfig) {
-        this.voiceStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/voice").toAbsolutePath().normalize();
+        this.voiceStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/api/voice").toAbsolutePath().normalize();
 
         try {
             Files.createDirectories(this.voiceStorageLocation);

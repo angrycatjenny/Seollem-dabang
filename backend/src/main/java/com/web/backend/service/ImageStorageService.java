@@ -25,7 +25,7 @@ public class ImageStorageService {
 
     @Autowired
     public ImageStorageService(FileStorageConfig fileStorageConfig) {
-        this.imageStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/image").toAbsolutePath().normalize();
+        this.imageStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/api/image").toAbsolutePath().normalize();
 
         try {
             Files.createDirectories(this.imageStorageLocation);

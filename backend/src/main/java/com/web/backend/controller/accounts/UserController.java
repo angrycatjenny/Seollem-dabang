@@ -99,8 +99,8 @@ public class UserController {
         String imageName = imageStorageService.storeFile(image);
         String voiceName = voiceStorageService.storeFile(voice);
 
-        String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/image/").path(imageName).toUriString();
-        String voiceDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/voice/").path(voiceName).toUriString();
+        String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/image/").path(imageName).toUriString();
+        String voiceDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/voice/").path(voiceName).toUriString();
 
         User user = new User(signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getNickname(), signUpRequest.getLocation(), signUpRequest.getGender(), signUpRequest.getAge());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
