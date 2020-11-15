@@ -109,7 +109,11 @@
 
 /* 구름 */
 body {
-  background-image: url("http://www.pngmart.com/files/1/Clouds-PNG-Pic.png"), url("https://myphuket-holiday.com/wp-content/uploads/revslider/homepage/cloud.png"), url("http://pngimg.com/uploads/cloud/cloud_PNG7.png"), url("https://myphuket-holiday.com/wp-content/uploads/revslider/homepage/cloud.png"), linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  background-image: url('http://www.pngmart.com/files/1/Clouds-PNG-Pic.png'),
+    url('https://myphuket-holiday.com/wp-content/uploads/revslider/homepage/cloud.png'),
+    url('http://pngimg.com/uploads/cloud/cloud_PNG7.png'),
+    url('https://myphuket-holiday.com/wp-content/uploads/revslider/homepage/cloud.png'),
+    linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
   background-size: 100%, 40%, 50%, 20%, cover;
   /* background-image: url('./assets/mainImg/배경1.jpg'); */
   background-repeat: no-repeat;
