@@ -129,6 +129,7 @@ const ConversationDetailPage = ({ match }) => {
               <div className="align-self-end m-1">
                 <h5>{message.user.nickname} 님</h5>
                 {message.voice != '화상채팅 신청' ?
+                <div>
                   <AudioPlayer
                   key={index}
                   src={'http://localhost:8080/voice/' + message.voice}
@@ -139,8 +140,15 @@ const ConversationDetailPage = ({ match }) => {
                     width: '300px'
                   }}
                 />
-                : <button onClick={startCall}>화상채팅해요~</button>}
                 <h6>{message.text}</h6>
+                </div>
+                : 
+                <div className="d-flex flex-column align-items-center">
+                  <h6>우리 화상 미팅 해볼래요?</h6>
+                  <button className="w-50 enter-button" onClick={startCall}>입장하기</button>         
+                </div>
+                }
+                
               </div>
             : 
             <div className="align-self-start m-1">

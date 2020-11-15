@@ -39,3 +39,11 @@
   border: #ef9e9f;
   color: white;
 }
+.enter-button {
+  border: 3px solid #ef9e9f;
+  border-radius: 4px;
+  outline: none;
+  color: white;
+  background-color: #ef9e9f;
+  padding: 3px 5px;
+}
