@@ -171,3 +171,6 @@
   cursor: pointer;
   transform: translateY(-2px);
 }
+.ptemp {
+  min-height: 480px;
+}
