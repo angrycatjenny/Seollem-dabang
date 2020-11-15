@@ -65,7 +65,7 @@ const PostCreatePage = () => {
 
     postData.append('voice', voice, 'voice'+ voiceFileName);
     postData.append('image', image, 'image' + imageFileName);
-    axios.post('/api/post', postData, config)
+    axios.post('/post', postData, config)
       .then(() => {
         console.log(postData)
         history.push('/post/list')
