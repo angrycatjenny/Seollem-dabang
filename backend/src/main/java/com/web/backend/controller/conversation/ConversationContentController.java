@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@RequestMapping(value="/api")
 @CrossOrigin(origins = {"*"})
 @RestController
 public class ConversationContentController {

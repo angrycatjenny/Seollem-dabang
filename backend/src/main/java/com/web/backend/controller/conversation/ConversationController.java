@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@RequestMapping(value="/api")
 @CrossOrigin(origins = {"*"})
 @RestController
 public class ConversationController {
@@ -119,9 +120,7 @@ public class ConversationController {
                     keyFlag=false;
                 }
             }
-            System.out.println("QQQQQQQQQQQQQQQQQQQQ");
-            System.out.println(emotionMao);
-            System.out.println("AAAAAAAAAAAAAAAAAAAA");
+
             emotionResult=emotionMao;
             HashMap<String, String> emotionData = new HashMap<String, String>();
             for(String k:emotionMao.keySet()){
