@@ -69,7 +69,7 @@ public class ConversationController {
         System.out.println("Python Call");
         String[] command = new String[3];
         command[0] = "python";
-        command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/emotion_detection.py";
+        command[1] = "/var/lib/jenkins/workspace/jenkins-test/backend/emotion_recognition/emotion_detection.py";
         command[2] = videoName;
 
         try {

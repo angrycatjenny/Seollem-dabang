@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def cal_sim(user_id):
   db = pymysql.connect(
-      host='127.0.0.1',
+      host='k3b103.p.ssafy.io',
       port=3306,
       user='root',
       password='ssafy',
