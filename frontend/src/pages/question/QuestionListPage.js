@@ -84,12 +84,12 @@ const QuestionListPage = () => {
   }
 
   return (
-    <div style={{display:"flex", justifyContent:"center"}}>
+    <div className="qtemp" style={{display:"flex", justifyContent:"center"}}>
     <div className="quest-list-box">
-      <div style={{display:"flex", flexDirection:"column", 
+      <div className="p-0" style={{display:"flex", flexDirection:"column", 
       alignItems:"center"}}>
-        <div className="stepper-final-box-comp">
-          <div className="stepper-exam-preview">
+        <div className="m-0 stepper-final-box-comp p-0">
+          <div className="stepper-exam-preview p-0">
             <div style={{fontSize:"17px", marginBottom:"5px",}}>{nickname}님의 청춘을 위한</div>
             <h4>이상형 레시피</h4>
             <div style={{height:"7.5px", width:"96%", 

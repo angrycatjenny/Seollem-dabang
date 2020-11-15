@@ -38,3 +38,6 @@
   display: flex;
   flex-direction: column;
 }
+.qtemp {
+  min-height: 502px;
+}
