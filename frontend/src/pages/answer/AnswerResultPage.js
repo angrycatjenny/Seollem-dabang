@@ -60,18 +60,18 @@ const AnswerResultPage = () => {
 
   return (
     <div style={{minHeight:"531px", padding:"120px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
-      <h2>답변 결과</h2>
-      <h2>{(score * 100).toFixed(0)}점</h2>
+      <h2>레시피 조합 결과 상대방과의 유사도는</h2>
+      <h2>{(score * 100).toFixed(0)}% 입니다.</h2>
       {score >= 0.7 && (
-        <div>
-          <h2 style={{color:"#5e1e27"}}>합격입니다.</h2>
-          <button onClick={createChatRoom}>채팅하기</button>
+        <div className="centerBtn">
+          <h2 style={{color:"#5e1e27"}}>상대방의 음성을 들어보세요!</h2>
+          <button onClick={createChatRoom} className="chatBtn">음성듣기</button>
           <Link className="exitBtn" to="/main">나가기</Link>
         </div>
       )}
       {score < 0.7 && (
         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-          <h2 style={{color:"rgb(226,49,40)"}}>불합격입니다.</h2>
+          <h2 style={{color:"rgb(226,49,40)"}}>아쉽게도 취향에 맞는 상대가 아니었던 것 같네요.</h2>
           <Link className="exitBtn" style={{textDecoration:"none"}} to="/main">나가기</Link>
         </div>
       )}
