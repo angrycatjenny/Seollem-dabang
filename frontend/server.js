@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const http = require("http");
+const http = require("https");
 const PeerDataServer = require("peer-data-server");
 
 const PORT = parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === "production" ? 8080 : 3001);
