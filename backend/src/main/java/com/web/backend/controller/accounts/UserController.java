@@ -214,6 +214,10 @@ public class UserController {
         List<User> recommendedUserList = userDao.findUserByProfile(age-3,age+3,address,gender);
         recommendedUserList.remove(user);
         recommendedUserList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
+        if(recommendedUserList.size()>=5){
+            recommendedUserList=recommendedUserList.subList(0,4);
+        }
+
         return recommendedUserList;
     }
 
@@ -233,10 +237,10 @@ public class UserController {
             return nullData;
         }
 
-
         //키워드 유사도 분석 시작
         System.out.println("Python Call");
         String stringId = String.valueOf(curuser.getId());
+        System.out.println(stringId);
         String[] command = new String[3];
         command[0] = "python";
         command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/keyword_similarity.py";
@@ -256,19 +260,28 @@ public class UserController {
             int result = executor.execute(commandLine);
             System.out.println("result: " + result);
 
-
             String[] array_word=outputStream.toString().split("");
+
             boolean flag = false;
+
+            String recommendUserId = "";
             for(int i = 0; i < array_word.length; i++){
-                if(array_word[i].equals(",")||array_word[i].equals(" ")){
+                if(array_word[i].equals(" ")){
                     continue;
                 }
+
+                if(array_word[i].equals(",")){
+                    int userId = Integer.parseInt(recommendUserId);
+                    simUserIdList.add(userId);
+                    recommendUserId= new String();
+                    continue;
+                }
+
                 if(array_word[i].equals("]")){
                     break;
                 }
                 if(flag){
-                    int userId = Integer.parseInt(array_word[i]);
-                    simUserIdList.add(userId);
+                    recommendUserId+=array_word[i];
                 }
                 if(array_word[i].equals("[")){
                     flag = true;
@@ -281,6 +294,9 @@ public class UserController {
         }
         //키워드 유사도 분석 종료
 
+        if(simUserIdList.size()>=5){
+          simUserIdList = (ArrayList<Integer>) simUserIdList.subList(0,4);
+        };
 
         ArrayList<User> recommendedUserList = new ArrayList<>();
         for(int i:simUserIdList){

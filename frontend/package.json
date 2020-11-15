@@ -57,5 +57,9 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
   "proxy": "https://k3b103.p.ssafy.io"
+=======
+  "proxy": "http://localhost:8080"
+>>>>>>> 57c96955c729ce39c5c7682c3d716fbb717bc7cc
 }

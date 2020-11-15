@@ -2,6 +2,7 @@
     font-family: "Indie Flower";
     line-height: 1.618em;
     background-size: 10px 10px;
+    min-height: 497px;
   }
   .wrapper-img {
     max-width: 100%;
