@@ -243,7 +243,7 @@ public class UserController {
         System.out.println(stringId);
         String[] command = new String[3];
         command[0] = "python";
-        command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/keyword_similarity.py";
+        command[1] = "/var/lib/jenkins/workspace/jenkins-test/backend/emotion_recognition/keyword_similarity.py";
         command[2] = stringId;
         ArrayList<Integer> simUserIdList = new ArrayList<>();
 

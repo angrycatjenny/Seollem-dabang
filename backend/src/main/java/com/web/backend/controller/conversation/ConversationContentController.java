@@ -42,7 +42,7 @@ public class ConversationContentController {
 
         String voiceName = voiceStorageService.storeFile(voice);
         SpeechToText stt = new SpeechToText();
-        String text = stt.recognitionSpeech("C:\\Users\\multicampus\\Desktop\\Final\\s03p31b103\\backend\\src\\main\\resources\\voice\\"+voiceName);
+        String text = stt.recognitionSpeech("/var/lib/jenkins/workspace/jenkins-test/backend/src/main/resources/api/voice/"+voiceName);
         ConversationContent cc = new ConversationContent(voiceName,conversation,curuser,text);
         conversationContentDao.save(cc);
 
