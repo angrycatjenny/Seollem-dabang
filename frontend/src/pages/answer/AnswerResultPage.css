@@ -1,0 +1,12 @@
+.exitBtn {
+  margin-top: 20px;
+  color: white;
+  background-color: #9b8481;
+  border-radius: 4px;
+  padding: 5px 4px;
+  transition: 0.3s;
+}
+.exitBtn:hover {
+  color: white;
+  transform: translateY(-2px);
+}

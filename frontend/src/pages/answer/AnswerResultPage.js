@@ -36,7 +36,7 @@ const AnswerResultPage = () => {
           '/answer/list', config
         );
         setExaminer(response.data[0].examiner.id)
-        setScore(response.data[0].correctRate);
+        setScore((response.data[0].correctRate));
         console.log(response.data)
       } catch (error) {
         console.log(error);
@@ -59,20 +59,20 @@ const AnswerResultPage = () => {
   }
 
   return (
-    <div>
-      <h1>답변 결과</h1>
-      <h1>{score * 100}점</h1>
+    <div style={{minHeight:"531px", padding:"120px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
+      <h2>답변 결과</h2>
+      <h2>{(score * 100).toFixed(0)}점</h2>
       {score >= 0.7 && (
         <div>
-          <h1>합격입니다.</h1>
+          <h2 style={{color:"#5e1e27"}}>합격입니다.</h2>
           <button onClick={createChatRoom}>채팅하기</button>
-          <Link className="btn btn-light" to="/main">나가기</Link>
+          <Link className="exitBtn" to="/main">나가기</Link>
         </div>
       )}
       {score < 0.7 && (
-        <div>
-          <h1>불합격입니다.</h1>
-          <Link className="btn btn-light" to="/main">나가기</Link>
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+          <h2 style={{color:"rgb(226,49,40)"}}>불합격입니다.</h2>
+          <Link className="exitBtn" style={{textDecoration:"none"}} to="/main">나가기</Link>
         </div>
       )}
     </div>
