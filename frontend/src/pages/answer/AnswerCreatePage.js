@@ -29,7 +29,7 @@ const AnswerCreatePage = ({ match }) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/question/list/' + `${match.params.userId}`, config
+          '/api/question/list/' + `${match.params.userId}`, config
         );
         setQuestions(response.data);
       } catch (error) {
@@ -64,7 +64,7 @@ const AnswerCreatePage = ({ match }) => {
     }
     const examiner = match.params.userId
     const sendAnswerData = { examiner, answerList}
-    axios.post('/answer', sendAnswerData, config)
+    axios.post('/api/answer', sendAnswerData, config)
       .then(() => {
         console.log('디비보자');
         history.push('/result')

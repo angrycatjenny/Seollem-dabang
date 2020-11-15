@@ -38,7 +38,7 @@ const KeywordRecommend = () => {
     }
 
     React.useEffect(() => {
-        axios.get(`/recommend-user-by-keyword`, axiosConfig)
+        axios.get(`/api/recommend-user-by-keyword`, axiosConfig)
             .then((response) => {
                 console.log('keyword', response)
                 setTileData(response.data.userList)

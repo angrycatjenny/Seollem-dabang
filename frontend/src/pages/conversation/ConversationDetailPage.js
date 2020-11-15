@@ -58,7 +58,7 @@ const ConversationDetailPage = ({ match }) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `/conversation/list/${match.params.conversationId}`, config
+          `/api/conversation/list/${match.params.conversationId}`, config
         );
         setMessages(response.data)
         console.log(response.data)
@@ -77,7 +77,7 @@ const ConversationDetailPage = ({ match }) => {
 
     conversationFile.append('voice', voice, 'voice'+ conversationName);
 
-    axios.post(`/conversation/create/${match.params.conversationId}`, conversationFile, config)
+    axios.post(`/api/conversation/create/${match.params.conversationId}`, conversationFile, config)
     .then (() => {
       setVoice('')
       console.log('성공?')

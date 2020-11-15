@@ -32,7 +32,7 @@ const MainPage = () => {
 
   // 주소,성별 추천 데이터 가져오기
   const getOtherData = () => {
-    axios.get(`/recommend-user-by-profile`, axiosConfig)
+    axios.get(`/api/recommend-user-by-profile`, axiosConfig)
       .then((response) => {
         console.log('other', response)
         setOtherData(response.data)
@@ -44,7 +44,7 @@ const MainPage = () => {
   }
   // 키워드 추천 데이터 가져오기
   const getKeywordData = () => {
-    axios.get(`/recommend-user-by-keyword`, axiosConfig)
+    axios.get(`/api/recommend-user-by-keyword`, axiosConfig)
       .then((response) => {
         console.log('keyword', response)
         setkeywordData(response.data.userList)

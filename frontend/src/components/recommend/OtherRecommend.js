@@ -37,7 +37,7 @@ const OtherRecommend = () => {
   }
 
   const getData = () => {
-    axios.get(`/recommend-user-by-profile`, axiosConfig)
+    axios.get(`/api/recommend-user-by-profile`, axiosConfig)
       .then((response) => {
         console.log('other', response)
         setTileData(response.data)
