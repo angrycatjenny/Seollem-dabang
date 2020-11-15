@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import useMediaRecorder from '@wmik/use-media-recorder';
 import { Link } from 'react-router-dom';
+import './CallPage.css';
 
 const CallPage = ({ match }) => {
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -75,16 +76,19 @@ const CallPage = ({ match }) => {
   }
 
   return (
-    <div className="container-fluid container">
+    <div className="container-fluid container call-template">
       {!mediaBlob && 
-        <div>
+        <div className="d-flex justify-content-center start-part">
           {status == 'idle' && 
-          <button onClick={startRecording}>시작하기</button>
+          <div className="d-flex flex-column align-items-center">
+            <h3>준비 되셨나요?</h3>
+            <button className="start-button" onClick={startRecording}>시작하기</button>
+          </div>
           }
           {status == 'recording' && 
-            <div>
-              <button onClick={stopRecording}>종료하기</button>
+            <div className="container">
               <Room name={match.params.conversationId} username={user} stream={stream} />
+              <button className="end-button" onClick={stopRecording}>종료하기</button>
             </div>
           }
         </div>
