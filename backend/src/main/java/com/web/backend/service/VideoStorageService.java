@@ -24,7 +24,7 @@ public class VideoStorageService {
 
     @Autowired
     public VideoStorageService(FileStorageConfig fileStorageConfig) {
-        this.videoStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/video").toAbsolutePath().normalize();
+        this.videoStorageLocation = Paths.get(fileStorageConfig.getUploadDir()+"/api/video").toAbsolutePath().normalize();
 
         try {
             Files.createDirectories(this.videoStorageLocation);

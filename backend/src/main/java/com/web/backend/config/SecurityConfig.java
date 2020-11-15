@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-                .antMatchers("/image/*", "/voice/*").permitAll()
+                .antMatchers("/api/image/*", "/api/voice/*").permitAll()
                 .antMatchers("/api/signup", "/api/login").permitAll()
                 .antMatchers("/signup", "/login").permitAll()
                 .antMatchers("/api/user/checkNicknameAvailability", "/api/user/checkEmailAvailability").permitAll()
