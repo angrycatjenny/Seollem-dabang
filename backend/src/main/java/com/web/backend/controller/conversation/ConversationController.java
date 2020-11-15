@@ -69,7 +69,7 @@ public class ConversationController {
         String[] command = new String[3];
         command[0] = "python";
         command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/emotion_detection.py";
-        command[2] = "videoName";
+        command[2] = videoName;
 
         try {
             CommandLine commandLine = CommandLine.parse(command[0]);
@@ -119,6 +119,9 @@ public class ConversationController {
                     keyFlag=false;
                 }
             }
+            System.out.println("QQQQQQQQQQQQQQQQQQQQ");
+            System.out.println(emotionMao);
+            System.out.println("AAAAAAAAAAAAAAAAAAAA");
             emotionResult=emotionMao;
             HashMap<String, String> emotionData = new HashMap<String, String>();
             for(String k:emotionMao.keySet()){
