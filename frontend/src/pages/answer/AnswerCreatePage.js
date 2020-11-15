@@ -20,14 +20,32 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:"#D08892",
     color:"white",
     border:"none",
-    outline:"none"
+    outline:"none",
+    '&:hover':{
+      backgroundColor:"#D08892",
+    },
+    '&:focus':{
+      border:"none",
+      outline:"none",
+      backgroundColor:"#D08892",
+      color:"white",
+    }
   },
   ansNo:{
     backgroundColor:"#9B8481",
     color:"white",
     border:"none",
     outline:"none",
-    marginLeft:"10px"
+    marginLeft:"10px",
+    '&:hover':{
+      backgroundColor:"#9B8481",
+    },
+    '&:focus':{
+      border:"none",
+      outline:"none",
+      backgroundColor:"#9B8481",
+      color:"white",
+    }
   }
 }));
 
