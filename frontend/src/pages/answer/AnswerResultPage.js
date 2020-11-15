@@ -59,7 +59,7 @@ const AnswerResultPage = () => {
   }
 
   return (
-    <div style={{minHeight:"530px", padding:"25px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
+    <div style={{minHeight:"531px", padding:"120px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
       <h2>답변 결과</h2>
       <h2>{(score * 100).toFixed(0)}점</h2>
       {score >= 0.7 && (
