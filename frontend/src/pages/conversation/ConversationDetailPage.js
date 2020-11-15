@@ -154,6 +154,7 @@ const ConversationDetailPage = ({ match }) => {
             <div className="align-self-start m-1">
               <h5>{message.user.nickname} 님</h5>
               {message.voice != '화상채팅 신청' ?
+              <div>
                   <AudioPlayer
                   key={index}
                   src={'http://localhost:8080/voice/' + message.voice}
@@ -164,8 +165,15 @@ const ConversationDetailPage = ({ match }) => {
                     width: '300px'
                   }}
                 />
-                : <button onClick={startCall}>화상채팅해요~</button>}
-              <h6>{message.text}</h6>
+                <h6>{message.text}</h6>
+                </div>
+                :
+                <div className="d-flex flex-column align-items-center">
+                <h6>우리 화상 미팅 해볼래요?</h6>
+                <button className="w-50 enter-button" onClick={startCall}>입장하기</button>         
+                </div>
+                }
+              
             </div>
             }
           </div>
@@ -176,10 +184,10 @@ const ConversationDetailPage = ({ match }) => {
         <div className="d-flex flex-column align-items-center mt-3">
           <ReactMic
             record={record}
-            className="sound-wave w-75"
+            className="sound-wave w-50"
             onStop={onStop}
             strokeColor="white"
-            backgroundColor="#9B8281" />
+            backgroundColor="#c6e5d9" />
           <div>
             {!record && (
               <button className="record-button" onClick={startRecording} type="button"><img className="record-img mr-2" src={RecordStart} />녹음시작</button>
@@ -198,7 +206,7 @@ const ConversationDetailPage = ({ match }) => {
             customVolumeControls={[]}
             customAdditionalControls={[]}
             style={{
-              width: '500px'
+              width: '300px'
             }}
           />
           <button 
@@ -210,7 +218,7 @@ const ConversationDetailPage = ({ match }) => {
           </button>
         </div>
       )}
-      <div>
+      <div className="conver-footer d-flex justify-content-center">
       <button className="conversation-button" onClick={sendMessage}>보내기</button>
       <button className="conversation-button-call" onClick={sendPropose}>미팅신청</button>
       </div>

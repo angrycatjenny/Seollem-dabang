@@ -12,12 +12,12 @@
   @for $i from 1 through 100 {
     video:first-child:nth-last-child(#{$i}),
     video:first-child:nth-last-child(#{$i}) ~ video {
-      margin: 17%;
+      margin: 3%;
       padding: 0;
       font-size: 0;
       content: "#{$i}";
       width: 75%;
-      height: calc(100% / #{round(sqrt($i))});
+      height: 50%;
     }
   }
 }
