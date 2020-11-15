@@ -115,12 +115,9 @@ const AnswerCreatePage = ({ match }) => {
 
   const sendAnswers = () => {
     console.log(answers,'???')
-    const answerList = [];
-    for (var i = 0; i < answers.length; i++) {
-      answerList.push(answers[i].value)
-    }
+    const answerList = answers
     const examiner = match.params.userId
-    const sendAnswerData = { examiner, answerList}
+    const sendAnswerData = { examiner, answerList }
     axios.post('/api/answer', sendAnswerData, config)
       .then(() => {
         console.log('디비보자');
