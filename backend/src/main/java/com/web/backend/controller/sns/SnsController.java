@@ -3,7 +3,6 @@ package com.web.backend.controller.sns;
 import com.web.backend.controller.conversation.SpeechToText;
 import com.web.backend.dao.accounts.UserDao;
 import com.web.backend.dao.sns.SnsDao;
-import com.web.backend.dao.tag.TagDao;
 import com.web.backend.model.accounts.User;
 import com.web.backend.model.sns.Sns;
 import com.web.backend.payload.sns.SnsRequest;
@@ -22,14 +21,11 @@ import java.util.ArrayList;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/api/post")
 public class SnsController {
 
     @Autowired
     SnsDao snsDao;
-
-    @Autowired
-    TagDao tagDao;
 
     @Autowired
     UserDao userDao;

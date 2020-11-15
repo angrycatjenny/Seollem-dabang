@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.*;
 
+@RequestMapping(value="/api")
 @RestController
 public class UserController {
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping(value="/api")
 @CrossOrigin(origins = {"*"})
 @RestController
 public class AnswerController {
