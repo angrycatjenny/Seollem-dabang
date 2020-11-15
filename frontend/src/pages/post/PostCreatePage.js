@@ -54,7 +54,7 @@ const PostCreatePage = () => {
   };
   const config = {
     headers: {
-      'Authorization': 'Bearer ' + cookies.accessToken
+      'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNyIsImlhdCI6MTYwNTQxNjY3NywiZXhwIjoxNjA2MDIxNDc3fQ.--Yanic2Tbd1iSTuCWXqk8pB88MVadr6nchUkmxh3XXU4nRaJSqPgp4htwfROU0ltYi5r1d461EbIpkJKVi5PQ'
     }
   }
   const sendPostData = () => {
