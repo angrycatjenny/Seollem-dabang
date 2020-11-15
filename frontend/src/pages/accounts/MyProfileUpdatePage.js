@@ -89,7 +89,7 @@ const MyProfileUpdatePage = () => {
   // const [ currentUrl, setCurrentUrl ] = useState('');
 
   React.useEffect(() => {
-    axios.get(`/my-profile`, axiosConfig)
+    axios.get(`/api/my-profile`, axiosConfig)
         .then((response) => {
             setNickname(response.data.nickname)
             setLocation(response.data.location)
@@ -144,7 +144,7 @@ const MyProfileUpdatePage = () => {
         UpdateData.append('voice', voice, 'voice'+ voiceFileName);
       }
       console.log(UpdateData, '회원수정 정보')
-      axios.put('/my-profile', UpdateData, axiosConfig)
+      axios.put('/api/my-profile', UpdateData, axiosConfig)
         .then(() => {
           alert('회원정보 수정완료 되었습니다.')
         })

@@ -49,7 +49,7 @@ const ConversationListPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/conversation/list', config
+          '/api/conversation/list', config
         );
         setConversations(response.data)
         console.log(response.data)

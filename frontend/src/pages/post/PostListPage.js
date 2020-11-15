@@ -27,7 +27,7 @@ const PostListPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/post', config
+          '/api/post', config
         );
         setPosts(response.data)
         console.log(response.data)

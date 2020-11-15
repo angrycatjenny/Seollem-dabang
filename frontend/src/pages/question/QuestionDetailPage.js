@@ -56,7 +56,7 @@ const QuestionDetailPage = () => {
             "contentList": [newQuest],
             "correctAnswerList": [newAns]
           }
-          axios.post('/question/create', ExamData, config)
+          axios.post('/api/question/create', ExamData, config)
             .then(() => {
               setNewQuest('')
               setNewAns(-1)
@@ -72,7 +72,7 @@ const QuestionDetailPage = () => {
       const fetchData = async() => {
         setIsExam(true);
         try {
-          const getExam = await axios.get(`/question/list`,config);  
+          const getExam = await axios.get(`/api/question/list`,config);  
           setExam(getExam.data)
           console.log(getExam.data,'exam')
         } catch(e) {
@@ -83,7 +83,7 @@ const QuestionDetailPage = () => {
       fetchData();
     },1000);
     //유저 정보 가져오기  
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
     .then((response) => {
       setNickname(response.data.nickname)
     })
@@ -99,7 +99,7 @@ const QuestionDetailPage = () => {
 
     //시험지 전체 삭제
     const delExam = () => {
-        axios.delete('/question/delete', config)
+        axios.delete('/api/question/delete', config)
         .then(() => {
             history.push('/question')
         })
@@ -142,7 +142,7 @@ const QuestionDetailPage = () => {
         "correctAnswer": editAns
       }
       // console.log(ExamData,'보낼거')
-      axios.put(`/question/update/${Id}`, ExamData, config)
+      axios.put(`/api/question/update/${Id}`, ExamData, config)
         .then(() => {
             history.push('/question/detail')
             history.go();
@@ -153,7 +153,7 @@ const QuestionDetailPage = () => {
     //삭제
     const deleteQuest = (Id) => {
       if(exam.length>5){
-        axios.delete(`/question/delete/${Id}`, config)
+        axios.delete(`/api/question/delete/${Id}`, config)
           .then(() => {
             //push하니까 안됨
               history.go('/question/detail')
