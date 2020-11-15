@@ -1,0 +1,36 @@
+.Update-logo {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.Update-form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+.Update-footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.Update-input {
+  margin-bottom: 5px;
+  width: 100%;
+  font-family: 'BMEULJIRO';
+}
+.Update-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.Update-record {
+  width: 100px;
+}
+.Update-img {
+  width: 200px;
+  height: 200px;
+}
+.birth-input {
+  margin-bottom: 5px;
+  width: 100%;
+}

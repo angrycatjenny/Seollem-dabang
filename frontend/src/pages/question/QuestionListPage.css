@@ -1,0 +1,40 @@
+.exam-create-btn {
+  border: 3px solid #5e1e27;
+  border-radius: 4px;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  background-color: #5e1e27;
+  padding: 3px 5px;
+}
+.exam-create-btn:hover {
+  text-decoration: none;
+  color: white;
+}
+.exam-update-btn {
+  border: 2px solid #84304a;
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  background-color: transparent;
+}
+.exam-delete-btn {
+  border: 2px solid rgb(219, 63, 63);
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  background-color: transparent;
+  margin-left: 10px;
+}
+.quest-list-box {
+  height: 500px;
+  width: 81.8%;
+  /* border: 2px solid purple; */
+  background-image: url('../../assets//question/board8.png');
+  background-size: 900px 500px;
+  background-repeat: no-repeat;
+  margin: 20px 0 20px 50px;
+  padding: 45px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}

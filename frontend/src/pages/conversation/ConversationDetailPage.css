@@ -1,0 +1,52 @@
+.conversation-inner {
+  overflow: auto;
+  height: 500px;
+  margin: auto;
+  margin-top: 40px;
+  padding: 50px;
+  width: 700px;
+  background-color: #fffcf0;
+  border: solid black 1px;
+}
+.conversation-image {
+  width: 70px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.record-button {
+  margin-top: 15px;
+  background: transparent;
+  border: 0;
+}
+.record-img {
+  width: 30px;
+}
+.conversation-button {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 35px;
+  background-color: #77AAAD;
+  border: #77AAAD;
+  color: white;
+}
+.conversation-button-call {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 35px;
+  background-color: #ef9e9f;
+  border: #ef9e9f;
+  color: white;
+}
+.enter-button {
+  border: 3px solid #ef9e9f;
+  border-radius: 4px;
+  outline: none;
+  color: white;
+  background-color: #ef9e9f;
+  padding: 3px 5px;
+}
+.conver-footer {
+  width: 400px;
+}
