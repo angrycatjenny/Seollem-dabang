@@ -48,7 +48,7 @@ const AnswerResultPage = () => {
 
   const createChatRoom = () => {
     console.log(examiner)
-    axios.post('/conversation', {examiner}, config)
+    axios.post('/api/conversation', {examiner}, config)
       .then((response) => {
         console.log(response)
         history.push('/conversation/'+`${response.data}`)

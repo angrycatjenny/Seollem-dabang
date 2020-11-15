@@ -27,7 +27,7 @@ const CallPage = ({ match }) => {
     }
   }
   useEffect(() => {
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
       .then((response) => {
         setUser(response.data.nickname);
       })

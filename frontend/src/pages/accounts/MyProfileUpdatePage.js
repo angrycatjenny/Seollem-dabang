@@ -151,7 +151,7 @@ const MyProfileUpdatePage = () => {
         UpdateData.append('voice', voice, 'voice'+ voiceFileName);
       }
       console.log(UpdateData, '회원수정 정보')
-      axios.put('/my-profile', UpdateData, axiosConfig)
+      axios.put('/api/my-profile', UpdateData, axiosConfig)
         .then((res) => {
           if(res.data.message === "Nickname is already exist!"){
             alert("이미 존재하는 닉네임입니다.")
