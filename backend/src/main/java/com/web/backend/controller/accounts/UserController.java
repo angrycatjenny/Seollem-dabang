@@ -36,6 +36,7 @@ import java.net.URI;
 import java.util.*;
 
 @RestController
+@RequestMapping(value = "/api")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -70,7 +71,7 @@ public class UserController {
     @Autowired
     KakaoVisionService kakaoVisionService;
 
-    @PostMapping("/api/login")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -84,7 +85,7 @@ public class UserController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @PostMapping("/api/signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestPart(required = false) MultipartFile image, @RequestPart(required = false) MultipartFile voice, SignUpRequest signUpRequest){
 
         if(image == null) {

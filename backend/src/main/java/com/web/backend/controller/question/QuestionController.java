@@ -23,7 +23,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping(value = "/question")
+@RequestMapping(value = "/api/question")
 public class QuestionController {
 
     @Autowired

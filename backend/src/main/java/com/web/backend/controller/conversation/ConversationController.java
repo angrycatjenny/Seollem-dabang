@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 @CrossOrigin(origins = {"*"})
 @RestController
+@RequestMapping(value = "/api")
 public class ConversationController {
 
     @Autowired
