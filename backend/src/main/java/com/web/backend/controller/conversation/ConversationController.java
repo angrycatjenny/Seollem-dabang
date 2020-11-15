@@ -120,7 +120,6 @@ public class ConversationController {
                     keyFlag=false;
                 }
             }
-
             emotionResult=emotionMao;
             HashMap<String, String> emotionData = new HashMap<String, String>();
             for(String k:emotionMao.keySet()){
