@@ -287,7 +287,7 @@ const QuestionDetailPage = () => {
             </div>
 
         </div>
-        <FooterComp/>
+        {/* <FooterComp/> */}
       </div>
     </div>
   );
