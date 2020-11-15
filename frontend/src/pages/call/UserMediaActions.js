@@ -10,13 +10,7 @@ function UserMediaActions({ stream, ...props }) {
     stream ? stream.getAudioTracks().reduce(isEnabled, true) : true
   );
   const [hasVideo, setVideo] = useState(
-    stream ? stream.getVideoTracks().reduce(isEnabled, true) : true
-  );
-  const [isFullscreen, setFullscreen] = useState(
-    document.fullscreenElement ||
-      document.mozFullScreenElement ||
-      document.webkitFullscreenElement ||
-      document.msFullscreenElement
+    stream ? stream.getVideoTracks().reduce(isEnabled, false) : false
   );
 
   useEffect(() => {
@@ -39,56 +33,8 @@ function UserMediaActions({ stream, ...props }) {
     });
   }, [stream, hasVideo]);
 
-  useEffect(() => {
-    if (
-      isFullscreen &&
-      !document.fullscreenElement &&
-      !document.mozFullScreenElement &&
-      !document.webkitFullscreenElement &&
-      !document.msFullscreenElement
-    ) {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(
-          Element.ALLOW_KEYBOARD_INPUT
-        );
-      }
-    }
-
-    if (
-      !isFullscreen &&
-      (document.fullscreenElement ||
-        document.mozFullScreenElement ||
-        document.webkitFullscreenElement ||
-        document.msFullscreenElement)
-    ) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
-  }, [isFullscreen]);
-
-  const handleToggleAudio = () => {
-    setAudio(v => !v);
-  };
-
   const handleToggleVideo = () => {
     setVideo(v => !v);
-  };
-
-  const handleToggleFullScreen = () => {
-    setFullscreen(v => !v);
   };
 
   return (
@@ -101,26 +47,10 @@ function UserMediaActions({ stream, ...props }) {
             className={"btn btn-outline-" + (hasVideo ? "success" : "danger")}
             onClick={handleToggleVideo}
           >
-            <i className="fa fa-video-camera" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            title="Toggle microphone"
-            className={"btn btn-outline-" + (hasAudio ? "success" : "danger")}
-            onClick={handleToggleAudio}
-          >
-            <i className="fa fa-deaf" aria-hidden="true" />
+            얼굴공개
           </button>
         </Fragment>
       )}
-      <button
-        type="button"
-        title="Toggle fullscreen"
-        className={"btn btn-" + (isFullscreen ? "success" : "outline-success")}
-        onClick={handleToggleFullScreen}
-      >
-        <i className="fa fa-arrows-alt" aria-hidden="true" />
-      </button>
     </div>
   );
 }

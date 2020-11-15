@@ -127,14 +127,6 @@ function Room({ name, username, stream }) {
           </div>
         </div>
       </div>
-      <div>
-        <SidebarActions
-          className={`${styles.sidebarActions} mt-2 mb-2`}
-          count={newMessagesCount}
-          isOpen={showSidebar}
-          onToggleSidebar={handleToggleSidebar}
-        />
-      </div>
       {showSidebar && (
         <div className="col-md-3">
           <div className={`sticky-top mt-2 mb-2 text-center`}>
