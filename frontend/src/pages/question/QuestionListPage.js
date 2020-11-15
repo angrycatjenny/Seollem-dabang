@@ -126,7 +126,7 @@ const QuestionListPage = () => {
           </div>
         </div>
       </div>
-      <FooterComp/>
+      {/* <FooterComp/> */}
     </div>
     </div>
   );
