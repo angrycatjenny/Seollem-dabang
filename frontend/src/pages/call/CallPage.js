@@ -87,8 +87,9 @@ const CallPage = ({ match }) => {
           }
           {status == 'recording' && 
             <div className="container">
+              
               <Room name={match.params.conversationId} username={user} stream={stream} />
-              <button className="end-button" onClick={stopRecording}>종료하기</button>
+              <button className="end-button btn btn-danger" onClick={stopRecording}>종료하기</button>
             </div>
           }
         </div>
@@ -98,14 +99,15 @@ const CallPage = ({ match }) => {
           {status == 'stopped' &&
             <div>
               {!feedback &&
-                <div>
-                  <button onClick={goResult}>결과보기</button>
+                <div className=" start-part d-flex flex-column align-items-center">
+                  <h3>결과가 궁금하신가요?</h3>
+                  <button className="start-button" onClick={goResult}>결과보기</button>
                 </div>
               }
               {feedback &&
-                <div>
+                <div className="start-part d-flex flex-column align-items-center">
                   <h3>{feedback}</h3>
-                  <Link to='/main'>나가기</Link>
+                  <Link className="btn btn-secondary" to='/main'>나가기</Link>
                 </div>
               }
             </div>

@@ -5,8 +5,35 @@
   border-radius: 4px;
   padding: 5px 4px;
   transition: 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70px;
+  text-align: center;
 }
 .exitBtn:hover {
   color: white;
   transform: translateY(-2px);
 }
+
+.chatBtn {
+  margin-top: 30px;
+  color: white;
+  background-color: rgb(240, 89, 89);
+  border-radius: 4px;
+  transition: 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 35px;
+}
+
+.chatBtn:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.centerBtn{
+  
+}
+

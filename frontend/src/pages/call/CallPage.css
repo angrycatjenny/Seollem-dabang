@@ -1,8 +1,11 @@
 .call-template {
-  min-height: 364px;
+  min-height: 453px;
   border: solid black 2px;
   margin-top: 2%;
   margin-bottom: 2%;
+  background-image: url('../../assets/call/Call1.jpg');
+  background-size: 1111px 650px;
+  opacity: 0.9
 }
 .start-part {
   margin-top: 15%;
@@ -17,7 +20,6 @@
   padding: 3px 5px;
 }
 .end-button {
-  margin-bottom: 2%;
   border: 3px solid #77AAAD;
   border-radius: 4px;
   outline: none;
@@ -25,4 +27,8 @@
   background-color: #77AAAD;
   padding: 3px 5px;
   margin-left: 25%;
+  position: absolute;
+  left: 45%;
+  bottom: -3%;
+  width: 200px;
 }
