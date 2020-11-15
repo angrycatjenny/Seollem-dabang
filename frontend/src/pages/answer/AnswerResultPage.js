@@ -33,7 +33,7 @@ const AnswerResultPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          '/answer/list', config
+          '/api/answer/list', config
         );
         setExaminer(response.data[0].examiner.id)
         setScore((response.data[0].correctRate));

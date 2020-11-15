@@ -96,7 +96,7 @@ const MyProfileUpdatePage = () => {
   // const [ currentUrl, setCurrentUrl ] = useState('');
 
   React.useEffect(() => {
-    axios.get(`/my-profile`, axiosConfig)
+    axios.get(`/api/my-profile`, axiosConfig)
         .then((response) => {
             setNickname(response.data.nickname)
             setLocation(response.data.location)
