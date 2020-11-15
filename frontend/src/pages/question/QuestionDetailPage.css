@@ -1,9 +1,0 @@
-.new-quest-box {
-  border: 2px solid blue;
-}
-.quest-detail-box {
-  border: 2px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
