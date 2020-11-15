@@ -114,18 +114,26 @@ function Room({ name, username, stream }) {
   const { participants, streams } = state;
 
   return (
-    <div className="row">
-      {stream && (
-        <Video stream={stream} autoPlay muted className={styles.webcam} />
-      )}
-      <div className={showSidebar ? "col-md-9" : "col-md-12"}>
+    <div className="d-flex">
+      <div className="container">
+        <div className="row">
+          <div className="col-6">
+            <h3>나</h3>
+            <Video stream={stream} autoPlay muted className={styles.webcam} />
+          </div>
+          <div className="col-6">
+            <h3>상대방</h3>
+            <ParticipantList participants={participants} streams={streams} />
+          </div>
+        </div>
+      </div>
+      <div>
         <SidebarActions
           className={`${styles.sidebarActions} mt-2 mb-2`}
           count={newMessagesCount}
           isOpen={showSidebar}
           onToggleSidebar={handleToggleSidebar}
         />
-        <ParticipantList participants={participants} streams={streams} />
       </div>
       {showSidebar && (
         <div className="col-md-3">

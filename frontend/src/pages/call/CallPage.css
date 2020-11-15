@@ -1,5 +1,8 @@
 .call-template {
   min-height: 364px;
+  border: solid black 2px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 .start-part {
   margin-top: 15%;
@@ -14,7 +17,7 @@
   padding: 3px 5px;
 }
 .end-button {
-  margin-bottom: 20px;
+  margin-bottom: 2%;
   border: 3px solid #77AAAD;
   border-radius: 4px;
   outline: none;

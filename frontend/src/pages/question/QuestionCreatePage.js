@@ -184,7 +184,7 @@ const QuestionCreatePage = () => {
       "contentList": contentList,
       "correctAnswerList": correctAnswerList
     }
-    axios.post('/question/create', ExamData, config)
+    axios.post('/api/question/create', ExamData, config)
       .then(() => {
         setIsLoaded(true);
         setTimeout(() => {
@@ -275,7 +275,7 @@ const QuestionCreatePage = () => {
       }))
       setAnswers(objAns)
   }else if (activeStep === 2) {
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
       .then((response) => {
         setNickname(response.data.nickname)
       })

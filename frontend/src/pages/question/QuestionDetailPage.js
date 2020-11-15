@@ -56,7 +56,7 @@ const QuestionDetailPage = () => {
             "contentList": [newQuest],
             "correctAnswerList": [newAns]
           }
-          axios.post('/question/create', ExamData, config)
+          axios.post('/api/question/create', ExamData, config)
             .then(() => {
               setNewQuest('')
               setNewAns(-1)
@@ -83,7 +83,7 @@ const QuestionDetailPage = () => {
       fetchData();
     },1000);
     //유저 정보 가져오기  
-    axios.get('/my-profile', config)
+    axios.get('/api/my-profile', config)
     .then((response) => {
       setNickname(response.data.nickname)
     })
@@ -99,7 +99,7 @@ const QuestionDetailPage = () => {
 
     //시험지 전체 삭제
     const delExam = () => {
-        axios.delete('/question/delete', config)
+        axios.delete('/api/question/delete', config)
         .then(() => {
             history.push('/question')
         })

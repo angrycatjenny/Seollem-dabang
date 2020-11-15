@@ -142,7 +142,7 @@ const AnswerCreatePage = ({ match }) => {
     }
     const examiner = match.params.userId
     const sendAnswerData = { examiner, answerList}
-    axios.post('/answer', sendAnswerData, config)
+    axios.post('/api/answer', sendAnswerData, config)
       .then(() => {
         console.log('디비보자');
         history.push('/result')

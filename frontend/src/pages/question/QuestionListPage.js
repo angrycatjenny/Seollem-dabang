@@ -63,7 +63,7 @@ const QuestionListPage = () => {
       };
       fetchData();
       //유저 정보 가져오기  
-      axios.get('/my-profile', config)
+      axios.get('/api/my-profile', config)
       .then((response) => {
         setNickname(response.data.nickname)
       })
