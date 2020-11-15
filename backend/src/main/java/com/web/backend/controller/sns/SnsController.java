@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/api/post")
 public class SnsController {
 
     @Autowired
