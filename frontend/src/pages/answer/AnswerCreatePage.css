@@ -20,3 +20,9 @@
   outline: none;
   color: white;
 }
+.answerYes {
+  display: inline;
+}
+.notYetYes {
+  display: none;
+}

@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@RequestMapping(value="/api")
 @CrossOrigin(origins = {"*"})
 @RestController
 public class ConversationController {
@@ -69,7 +70,7 @@ public class ConversationController {
         String[] command = new String[3];
         command[0] = "python";
         command[1] = "/Users/multicampus/Desktop/PJT/PJT3/s03p31b103/backend/emotion_recognition/emotion_detection.py";
-        command[2] = "videoName";
+        command[2] = videoName;
 
         try {
             CommandLine commandLine = CommandLine.parse(command[0]);

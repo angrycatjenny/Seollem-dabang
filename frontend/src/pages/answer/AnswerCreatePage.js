@@ -5,7 +5,8 @@ import axios from 'axios';
 
 // CSS
 import './AnswerCreatePage.css';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Radio from '@material-ui/core/Radio';
 
 // History
 import { useHistory } from "react-router-dom";
@@ -17,19 +18,57 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   ansYes:{
-    backgroundColor:"#D08892",
-    color:"white",
-    border:"none",
-    outline:"none"
+    backgroundColor:"transparent",
+    color:"#5e1e27",
+    border:"2px solid #D08892",
+    outline:"none",
+    '&:hover':{
+      backgroundColor:"transparent",
+    },
+    '&:focus':{
+      border:"none",
+      outline:"none",
+      backgroundColor:"#D08892",
+      color:"white",
+    }
   },
   ansNo:{
     backgroundColor:"#9B8481",
     color:"white",
     border:"none",
     outline:"none",
-    marginLeft:"10px"
+    marginLeft:"10px",
+    '&:hover':{
+      backgroundColor:"#9B8481",
+    },
+    '&:focus':{
+      border:"none",
+      outline:"none",
+      backgroundColor:"#9B8481",
+      color:"white",
+    }
   }
 }));
+
+const YesRadio = withStyles({
+  root: {
+    color: "#D08892",
+    '&$checked': {
+      color: "#D08892",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
+
+const NoRadio = withStyles({
+  root: {
+    color: "#9B8481",
+    '&$checked': {
+      color: "#9B8481",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const AnswerCreatePage = ({ match }) => {
   const history = useHistory();
@@ -37,6 +76,9 @@ const AnswerCreatePage = ({ match }) => {
   const [ cookies, setCookie ] = useCookies(['accessToken']);
 
   const [ questions, setQuestions ] = useState(null);
+
+  const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
+
   const [ loading, setLoading ] = useState(false);
 
   const config = {
@@ -52,6 +94,7 @@ const AnswerCreatePage = ({ match }) => {
           '/question/list/' + `${match.params.userId}`, config
         );
         setQuestions(response.data);
+        console.log(response.data,'하하하하ㅏㅎ하ㅏㅎ')
       } catch (error) {
         console.log(error);
       }
@@ -60,12 +103,27 @@ const AnswerCreatePage = ({ match }) => {
     fetchData();
   }, []);
 
+  //정답 예
+  const onChangeAnsYes = (e) => {
+    const {id,value} = e.target;
+    setQuestions(questions.map((question) =>
+    question.id === id ? {...question, answer:1} : question))
+  }
+  //정답 아니오 
+  const onChangeAnsNo = (e) => {
+    const {id,value} = e.target;
+    setQuestions(questions.map((question) =>
+    question.id === id ? {...question, ans:0} : question))
+  }
+
   const selectedYes = (index) => {
+    console.log(questions[index], '하이하이')
     questions[index].answer = 1
     console.log(questions);
     setQuestions(questions);
   };
   const selectedNo = (index) => {
+    console.log(questions[index], '바이하이')
     questions[index].answer = 0
     console.log(questions);
     setQuestions(questions);
@@ -100,7 +158,7 @@ const AnswerCreatePage = ({ match }) => {
   };
 
   return (
-    <div style={{padding:"25px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
+    <div style={{minHeight:"530px", padding:"25px 0", display:"flex", flexDirection:"column", alignItems:"center"}}>
       <h2>레시피 답안지</h2>
 
       <div className="centerBox">
@@ -109,8 +167,62 @@ const AnswerCreatePage = ({ match }) => {
             <div className="answer-quest">
               <h4>{index+1}번. {question.content}</h4>
             </div>
-            <div className="answer-btn">
+
+            {/* <div>
+              <Radio
+              checked={question[index].answer===1}
+              onChange={onChangeAnsYes}
+              id={question.id}
+              value="1"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': 'A' }}
+              />
+              <Radio
+                checked={question[index].answer===0}
+                onChange={onChangeAnsNo}
+                id={question.id}
+                value="0"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': 'B' }}
+              />
+            </div> */}
+
+
+            {/* <div className="radio-box">
+              <YesRadio
+                checked={questions[index].answer===1}
+                onChange={selectedYes(index)}
+                id={index}
+                value="1"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': '예' }}
+              /><div>예</div>
+              <NoRadio
+                checked={questions[index].answer===0}
+                onChange={selectedNo(index)}
+                id={index}
+                value="0"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': '아니오' }}
+              /><div>아니오</div>
+            </div> */}
+
+            {/* 부트스트랩 ver */}
+            {/* <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active"> 
+                <input type="radio" name="options" id="option1" checked 
+                onClick={() => selectedYes(index)}/>예
+              </label>
+              <label class="btn btn-secondary active"> 
+                <input type="radio" name="options" id="option2" checked 
+                onClick={() => selectedNo(index)}/>아니오
+              </label>
+            </div> */}
+
+            {/* 제일 처음 ver */}
+            {/* <div className="answer-btn">
               <Button
+                id="recipeYes"
                 className={classes.ansYes}
                 variant="contained"
                 onClick={() => selectedYes(index)}
@@ -118,13 +230,14 @@ const AnswerCreatePage = ({ match }) => {
                 예
               </Button>
               <Button
+              id="recipeNo"
                 className={classes.ansNo}
                 variant="contained"
                 onClick={() => selectedNo(index)}
               >
                 아니오
               </Button>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
