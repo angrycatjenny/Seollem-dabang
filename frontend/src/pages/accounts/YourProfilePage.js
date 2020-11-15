@@ -21,7 +21,7 @@ const YourProfilePage = ({ match }) => {
     }
   }
   useEffect(() => {
-    axios.get(`/your-profile/${match.params.userId}`, config)
+    axios.get(`/api/your-profile/${match.params.userId}`, config)
       .then((response) => {
         setEmail(response.data.email)
         setObjectURL(response.data.imageDownloadUri)
