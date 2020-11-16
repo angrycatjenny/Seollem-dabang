@@ -1,54 +1,66 @@
-![image-20201023000746094](README.assets/image-20201023000746094.png)
+![image-20201116091439404](README.assets/image-20201116091439404.png)
 
 :computer: [DEMO][#]
 
 
 
-## :earth_asia: OVERVIEW :earth_africa:
+## :earth_asia: OVERVIEW 
 
-### 프로젝트 소개
+### :hibiscus: 프로젝트 소개
 
-> 만남의 시작이 "외모" 중심인 다른 소개팅 서비스와 달리 성향과 분위기가 첫 번째 판단요소가 되는 소개팅 서비스입니다.
+>   최근 소개팅 및 데이팅 어플리케이션의 인기가 높아지고 있습니다. 이에 따라 저희 팀은 SSAFY 기간동안 배우고, 익힌 기술을 활용해 4차 산업 혁명 기술에 기반한 소개팅 서비스를 제작했습니다. 많은 소개팅 어플리케이션들이 외모, 학벌, 직업 등 개인의 피상적인 정보를 활용해 매칭이 이루어지고 있습니다. 저희 서비스는 취향, 성향 그리고 분위기 등의 정성적인 정보를 활용하여 만남의 시작을 제공합니다. 이에따라 만남의 진정성, 사용자가 중심되는 추천, 매칭 시스템으로 서비스 만족도를 높이려 집중했습니다.
 
-![image-20201023000845002](README.assets/image-20201023000845002.png)
+![image-20201116091458868](README.assets/image-20201116091458868.png)
 
-### 와이어 프레임
-
-![image-20201023000924316](README.assets/image-20201023000924316.png)
-
-![image-20201023000954985](README.assets/image-20201023000954985.png)
-
-![image-20201023001007088](README.assets/image-20201023001007088.png)
-
-### 핵심 AI 기술
-
-![image-20201023001202292](README.assets/image-20201023001202292.png)
-
-- 한국어 형태소 분석기
-- STT(Speech to Text)
-- Face Detection
+![image-20201116091519448](README.assets/image-20201116091519448.png)
 
 
 
-### ERD 설계
+### :woman: 서비스 흐름
 
-https://www.erdcloud.com/d/MfDhFZnTHQv7ArBjY
+![image-20201116091543319](README.assets/image-20201116091543319.png)
 
-![image-20201023000635778](README.assets/image-20201023000635778.png)
+![image-20201116091620292](README.assets/image-20201116091620292.png)
 
-### API 설계
+![image-20201116091653717](README.assets/image-20201116091653717.png)
 
-https://docs.google.com/spreadsheets/d/1xhZJ7gVJMMfN37XFH8KtwAoNITPtgNAwOYauqZrRujI/edit#gid=1748123396
+![image-20201116091706992](README.assets/image-20201116091706992.png)
 
-![image-20201023000705722](README.assets/image-20201023000705722.png)
+![image-20201116091719365](README.assets/image-20201116091719365.png)
 
 
 
-## :boy: AUTHORS :woman:
+### :earth_africa: 핵심 AI 기술
+
+![image-20201116091729913](README.assets/image-20201116091729913.png)
+
+![image-20201116091743578](README.assets/image-20201116091743578.png)
+
+![image-20201116091747228](README.assets/image-20201116091747228.png)
+
+![image-20201116091754538](README.assets/image-20201116091754538.png)
+
+![image-20201116091759414](README.assets/image-20201116091759414.png)
+
+
+
+### :zap: ERD 설계
+
+![image-20201116091955532](README.assets/image-20201116091955532.png)
+
+
+
+### :memo: API 설계
+
+![image-20201116092029363](README.assets/image-20201116092029363.png)
+
+
+
+## :boy: AUTHORS 
 
 ###### 대전 1반 3팀, 설레임 연구소
 
-![image-20201023000540139](README.assets/image-20201023000540139.png)
+![image-20201116092050493](README.assets/image-20201116092050493.png)
 
 - 이한솔 - 팀장, Frontend, QA
 - 김도연 - Frontend, UCC, Presentation
@@ -58,13 +70,17 @@ https://docs.google.com/spreadsheets/d/1xhZJ7gVJMMfN37XFH8KtwAoNITPtgNAwOYauqZrR
 
 
 
-## :sunny: TECH STACK :zap:
+## :sunny: TECH STACK 
 
-![image-20201023000602399](README.assets/image-20201023000602399.png)
+![image-20201116092059353](README.assets/image-20201116092059353.png)
 
 ### Backend
 
 - Spring Boot
+
+#### 중개서버
+
+- Node express
 
 ### Frontend
 
@@ -82,7 +98,7 @@ https://docs.google.com/spreadsheets/d/1xhZJ7gVJMMfN37XFH8KtwAoNITPtgNAwOYauqZrR
 
 
 
-## :four_leaf_clover: STEPS TO RUN :hibiscus: 
+## :four_leaf_clover: STEPS TO RUN 
 
 #### frontend/
 
@@ -102,7 +118,25 @@ $ yarn start
 
 
 
-## :page_facing_up: LICENSE :memo:
+#### server.js
+
+###### npm
+
+```bash
+$ npm run server
+```
+
+###### yarn
+
+```bash
+$ yarn server
+```
+
+
+
+## :page_facing_up: LICENSE 
 
 Copyright © 2020 I 설레임 연구소.
 This project is MIT licensed.
+
+[#]: 
