@@ -1,6 +1,6 @@
 ![image-20201116091439404](README.assets/image-20201116091439404.png)
 
-:computer: [DEMO][https://k3b103.p.ssafy.io/]
+:computer: [DEMO](https://k3b103.p.ssafy.io/)
 
 
 
@@ -140,3 +140,5 @@ Copyright © 2020 I 설레임 연구소.
 This project is MIT licensed.
 
 [#]: 
+
+[#https://k3b103.p.ssafy.io/]: 
