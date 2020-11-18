@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Tape1 from '../../assets/profile/Tape1.png';
 import axios from 'axios';
-import './MyProfilePage.css';
+import './MyProfilePage.scss';
 import { useCookies } from 'react-cookie';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
