@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './SignupPage.css';
+import './SignupPage.scss';
 import { ReactMic } from 'react-mic';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -11,10 +11,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
 import RecordStart from '../../assets/signup/RecordStart.png';
 import RecordStop from '../../assets/signup/RecordStop.png';
 import RecordDelete from '../../assets/signup/RecordDelete.png';
