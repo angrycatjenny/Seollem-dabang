@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
-/// Axios
 import axios from 'axios';
-
-// React Router Dom
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-
-// CSS
 import './PostListPage.css';
-
-// Cookie
 import { useCookies } from 'react-cookie';
 
 const PostListPage = () => {
@@ -74,20 +66,6 @@ const PostListPage = () => {
 
             <audio className='post-audio' controls src={'https://k3b103.p.ssafy.io:8080/api/voice/' + post.voice} />
         </div>
-          // <div key={index}>
-          //   <div class='music-card playing'>
-          //     <img className="post-list-image image" 
-          //     src={'http://localhost:8080/image/' + post.image} />
-          //     {/* <div className='wave'></div>
-          //     <div className='wave'></div>
-          //     <div className='wave'></div> */}
-          //     <div className='info'>
-          //       <h2 className='title'>{post.user.nickname}</h2>
-          //       <div className='artist'>#{post.user.location} #{post.user.age}세</div>
-          //     </div>
-          //     <audio className='post-list-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
-          //   </div>
-          // </div>
         ))}
       </div>
     </div>

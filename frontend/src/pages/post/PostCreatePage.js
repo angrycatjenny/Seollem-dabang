@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
-
-/// Axios
 import axios from 'axios';
-
-// History
 import { useHistory } from "react-router-dom";
-
-// CSS
 import './PostCreatePage.css';
-
-// Material-UI
 import Input from '@material-ui/core/Input';
-
-// Audio Record
 import { ReactMic } from 'react-mic';
-
-// Audio Player
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
-// Cookie
 import { useCookies } from 'react-cookie';
-
-// Footer
 import FooterComp from '../../components/base/FooterComp';
 
 const PostCreatePage = () => {
