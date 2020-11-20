@@ -1,18 +1,8 @@
 import React from 'react';
-
-/// Axios
 import axios from 'axios';
-
-// React Router Dom
 import { Link } from 'react-router-dom';
-
-// History
 import { useHistory } from "react-router-dom";
-
-// CSS
 import './PostUpdatePage.css';
-
-// Footer
 import FooterComp from '../../components/base/FooterComp';
 
 const PostUpdatePage = () => {
