@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
-
 import './QuestionListPage.css';
-//Footer
 import FooterComp from '../../components/base/FooterComp';
+
 const QuestionListPage = () => {
   const history = useHistory();
   const [ exam, setExam ] = useState(null);
@@ -20,34 +19,6 @@ const QuestionListPage = () => {
       const fetchData = async() => {
         setIsExam(true);
         try {
-          // const getQuestions = () => {
-          //   axios.get(`/api/question/list`,config)
-          //   .then((response) => {
-          //     if(response.data.length>0){
-          //       console.log("뭔가 있음");
-          //       setExam(response.data);
-          //       const exam = response.data.map((question, idx) => {
-          //         return {
-          //           id:question.questionId,
-          //           content:question.content,
-          //           answer:question.correctAnswer,
-          //           user_id:question.user.id,
-          //           user_nickname:question.user.nickname,
-          //         };
-          //       })
-          //       console.log(exam,'??')
-          //       setExam(exam)
-          //       setIsExam(true)
-          //       console.log(questions,'zzz')
-          //     }else{
-          //       console.log('시험지 없뜜')
-          //       setIsExam(false)
-          //     }
-          //   })
-          //   .catch((err) => {
-          //     console.log(err)
-          //     })
-          // }
           const getExam = await axios.get(`/api/question/list`,config);
           if(getExam.data.length>0){
             console.log(getExam.data,'??')
@@ -62,7 +33,6 @@ const QuestionListPage = () => {
         setIsExam(false);
       };
       fetchData();
-      //유저 정보 가져오기  
       axios.get('/api/my-profile', config)
       .then((response) => {
         setNickname(response.data.nickname)
@@ -126,7 +96,6 @@ const QuestionListPage = () => {
           </div>
         </div>
       </div>
-      {/* <FooterComp/> */}
     </div>
     </div>
   );
