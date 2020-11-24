@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import './PostListPage.css';
 import { useCookies } from 'react-cookie';
-
+import { Button } from 'react-bootstrap';
 const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -59,8 +59,13 @@ const PostListPage = () => {
             src={'https://k3b103.p.ssafy.io:8080/api/image/' + post.image} />
 
             <div className='post-info'>
-              <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
-               className='post-writer'>{post.user.nickname}</h3>
+              <div className='post-button'>
+                <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
+                className='post-writer'>{post.user.nickname}</h3>
+                <Button onClick={() => history.push(`/post/update/${post.user.id}`)}>
+                  수정하기
+                </Button> 
+              </div>
               <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
 
