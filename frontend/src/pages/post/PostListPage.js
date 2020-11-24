@@ -15,6 +15,8 @@ const PostListPage = () => {
       'Authorization': 'Bearer ' + cookies.accessToken
     }
   }
+  const myId = cookies.user
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -62,9 +64,11 @@ const PostListPage = () => {
               <div className='post-button'>
                 <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
                 className='post-writer'>{post.user.nickname}</h3>
-                <Button onClick={() => history.push(`/post/update/${post.user.id}`)}>
-                  수정하기
-                </Button> 
+                  {myId == post.user.id && (
+                    <Button onClick={() => history.push(`/post/update/${post.snsId}`)}>
+                      수정하기
+                    </Button> 
+                  )}
               </div>
               <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
