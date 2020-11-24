@@ -72,7 +72,7 @@ const PostListPage = () => {
               </div>
               <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
-
+            
             <audio className='post-audio' controls src={'https://k3b103.p.ssafy.io:8080/api/voice/' + post.voice} />
         </div>
         ))}
