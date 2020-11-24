@@ -174,3 +174,7 @@
 .ptemp {
   min-height: 480px;
 }
+.post-button{
+  display: flex;
+  justify-content: space-between;
+}
