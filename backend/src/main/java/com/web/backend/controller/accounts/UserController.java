@@ -307,6 +307,7 @@ public class UserController {
             }
         }
         RecommendResponse userList = new RecommendResponse(curuser.getGender(), 1, recommendedUserList);
+        userList.removeAll(userDao.getUserByIdList(answerDao.findexaminerIdByexamineeId(user.getId())));
         return userList;
 
         //기존 코드

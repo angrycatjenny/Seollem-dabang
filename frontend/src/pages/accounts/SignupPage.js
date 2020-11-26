@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-
-// Axios
 import axios from 'axios';
-
-// CSS
-import './SignupPage.css';
-
-// Audio Record
+import './SignupPage.scss';
 import { ReactMic } from 'react-mic';
-
-// Audio Player
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
-// Material-UI
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -21,17 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-
-// Images
 import RecordStart from '../../assets/signup/RecordStart.png';
 import RecordStop from '../../assets/signup/RecordStop.png';
 import RecordDelete from '../../assets/signup/RecordDelete.png';
-
-// History
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
@@ -45,7 +27,6 @@ const MenuProps = {
     },
   },
 };
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -70,8 +51,7 @@ function getSteps() {
     '사진 입력',
     '목소리 녹음',
   ];
-}
-
+};
 const locations = [
   '서울',
   '경기',
@@ -91,7 +71,6 @@ const locations = [
   '제주',
   '광주',
 ];
-
 const genders = [
   "남자",
   "여자",
@@ -100,7 +79,6 @@ const genders = [
 const SignupPage = () => {
   const history = useHistory();
   const year = new Date();
-
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ passwordconfirm, setPasswordconfirm ] = useState('');
@@ -114,7 +92,6 @@ const SignupPage = () => {
   const [ voiceurl, setVoiceurl ] = useState('');
   const [ objectURL, setObjectURL ] = useState('');
   const [ imagePush, setImagePush] = useState(false)
-
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());

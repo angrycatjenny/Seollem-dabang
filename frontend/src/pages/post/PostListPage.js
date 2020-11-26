@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
-/// Axios
 import axios from 'axios';
-
-// React Router Dom
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-
-// CSS
 import './PostListPage.css';
-
-// Cookie
 import { useCookies } from 'react-cookie';
-
+import { Button } from 'react-bootstrap';
 const PostListPage = () => {
   const [ posts, setPosts ] = useState('');
   const [ cookies, setCookie ] = useCookies(['accessToken']);
@@ -23,6 +15,8 @@ const PostListPage = () => {
       'Authorization': 'Bearer ' + cookies.accessToken
     }
   }
+  const myId = cookies.user
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -67,27 +61,20 @@ const PostListPage = () => {
             src={'https://k3b103.p.ssafy.io:8080/api/image/' + post.image} />
 
             <div className='post-info'>
-              <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
-               className='post-writer'>{post.user.nickname}</h3>
+              <div className='post-button'>
+                <h3 onClick={() => history.push(`/answer/${post.user.id}`)}
+                className='post-writer'>{post.user.nickname}</h3>
+                  {myId == post.user.id && (
+                    <Button onClick={() => history.push(`/post/update/${post.snsId}`)}>
+                      수정하기
+                    </Button> 
+                  )}
+              </div>
               <div style={{fontSize: "20px"}}>#{post.user.location} #{post.user.age}세</div>
             </div>
-
+            
             <audio className='post-audio' controls src={'https://k3b103.p.ssafy.io:8080/api/voice/' + post.voice} />
         </div>
-          // <div key={index}>
-          //   <div class='music-card playing'>
-          //     <img className="post-list-image image" 
-          //     src={'http://localhost:8080/image/' + post.image} />
-          //     {/* <div className='wave'></div>
-          //     <div className='wave'></div>
-          //     <div className='wave'></div> */}
-          //     <div className='info'>
-          //       <h2 className='title'>{post.user.nickname}</h2>
-          //       <div className='artist'>#{post.user.location} #{post.user.age}세</div>
-          //     </div>
-          //     <audio className='post-list-audio' controls src={'http://localhost:8080/voice/' + post.voice} />
-          //   </div>
-          // </div>
         ))}
       </div>
     </div>

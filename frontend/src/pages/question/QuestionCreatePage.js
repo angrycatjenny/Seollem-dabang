@@ -2,38 +2,25 @@ import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-
-// History
 import { useHistory } from "react-router-dom";
-
-//materialUI
 import { makeStyles, withStyles, createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
-
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// CSS
 import '../../App.css';
 import './QuestionCreatePage.css';
 import { ContactsOutlined, SignalWifi1BarLock } from '../../../node_modules/@material-ui/icons/index';
-
-//Images
 import ExamBoard from '../../assets/question/board1.png' 
-
-//Footer
 import FooterComp from '../../components/base/FooterComp';
 
-//style
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -92,9 +79,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   alternativeLabel: {},
-  active: {}, //needed so that the &$active tag works
+  active: {},
   completed: {},
-  // disabled: {},
   labelContainer: {
     "& $alternativeLabel": {
       marginTop: 0
@@ -126,16 +112,13 @@ function getSteps() {
   return ['질문 개수', '레시피 작성', '미리보기'];
 }
 
-//로그인 여부에 따른 시험지 작성 허용
-//데이터 변수 하나 설정하고 조건부 렌더링
-//null이면 질문 개수 설정, !null이면 질문create
 const QuestionCreatePage = () => {
   const history = useHistory();
   const [ cnt, setCnt ] = useState(5);
   const [ isChecked, setIsChecked ] = useState(false);
   const [ noBlank, setNoBlank ] = useState(true);
-  const [exam, setExam] = useState([]);//질문 및 정답 모음
-  const [answers, setAnswers] = useState([]);//정답 모음 1:예, 2:아니오
+  const [exam, setExam] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [selectedValue, setSelectedValue] = useState(1);
   const [cookies, setCookie] = useCookies(['accessToken']);
   const config = {
@@ -143,10 +126,7 @@ const QuestionCreatePage = () => {
   }
   const [ isLoaded, setIsLoaded ] = useState(false)
   const [ nickname, setNickname ] = useState('')
-  //백에 보낼 데이터
-  //1.질문 리스트
   const contentList = [];
-  //2.정답 리스트
   const correctAnswerList = [];
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -155,25 +135,21 @@ const QuestionCreatePage = () => {
   const onChangeCnt = (e) => {
     setCnt(e.target.value);
   }
-  //질문 추가
   const onChangeQuest = (e) => {
     const {id, value} = e.target;
     setExam(exam.map((item) =>
     item.key === id ? {...item, quest:value} : item))
   }
-  //정답 예
   const onChangeAnsYes = (e) => {
     const {id,value} = e.target;
     setExam(exam.map((item) =>
     item.key === id ? {...item, ans:1} : item))
   }
-  //정답 아니오 
   const onChangeAnsNo = (e) => {
     const {id,value} = e.target;
     setExam(exam.map((item) =>
     item.key === id ? {...item, ans:0} : item))
   }
-  //create 요청 보내기
   const sendExamData = () => {
     {exam.map((item) => {
       contentList.push(item.quest)
@@ -210,7 +186,6 @@ const QuestionCreatePage = () => {
     )}
     return true
   };
-  //stepper
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -253,7 +228,6 @@ const QuestionCreatePage = () => {
 
   useEffect(()=>{
     if (activeStep === 1){
-      //질문 arr
       let arr = []
       for (let i =0; i<cnt; i++){
           arr = [...arr, i]
@@ -264,7 +238,6 @@ const QuestionCreatePage = () => {
         ans:-1
       }))
       setExam(objArr)
-      //정답 arr
       let ans = []
       for (let j=0; j<cnt; j++){
         ans = [...ans, j]
@@ -282,19 +255,13 @@ const QuestionCreatePage = () => {
   }
   }, [activeStep])
 
-  //질문, 정답 분리
   
 
   return (
     <>
       <div style={{display:"flex", justifyContent:"center",}}>
         <div className="test-box">
-        {/* stepper */}
         <div className="create-box" style={{}}>
-          {/* <div style={{border:"2px solid green", padding:"0", margin:"0", display:"flex", justifyContent:"center"}}>
-            <img className="board-img" src={ExamBoard} />
-          </div> */}
-          {/* <div className="in-board">하이하이</div> */}
           <div className="in-board">
             <Stepper activeStep={activeStep} alternativeLabel 
               classes={{
@@ -379,7 +346,7 @@ const QuestionCreatePage = () => {
                         </div>
                       </div>
                     ))}
-                    {/* <button onClick={() => console.log(exam)}>콘솔</button> */}
+                  
                   </div>
                   <div className="stepper-btn">
                     <Button
@@ -462,8 +429,6 @@ const QuestionCreatePage = () => {
             </div>
           </div>
         </div>
-        
-        {/* 취소버튼 */}
         <div className="cancel-btn">
           <Link to="/question" style={{textDecoration:"none",}}>
             <Button variant="contained"
@@ -472,7 +437,6 @@ const QuestionCreatePage = () => {
         </div>
         </div>
       </div>
-      {/* <FooterComp/> */}
     </>
   );
   };

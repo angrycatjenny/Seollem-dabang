@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import Tape1 from '../../assets/profile/Tape1.png';
-
-// Axios
 import axios from 'axios';
-
-// CSS
-import './MyProfileUpdatePage.css';
-
-// Audio Record
+import './MyProfileUpdatePage.scss';
 import { ReactMic } from 'react-mic';
-
-// Audio Player
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
-// Material-UI
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,10 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
-// History
 import { useHistory } from "react-router-dom";
-// Cookies
 import { useCookies } from 'react-cookie';
 
 const ITEM_HEIGHT = 48;
@@ -38,7 +25,6 @@ const MenuProps = {
     },
   },
 };
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -56,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%"
   },
 }));
-
 const locations = [
   '서울',
   '경기',
@@ -76,7 +61,6 @@ const locations = [
   '제주',
   '광주',
 ];
-
 const MyProfileUpdatePage = () => {
   const history = useHistory();
   const classes = useStyles();
@@ -93,8 +77,6 @@ const MyProfileUpdatePage = () => {
   const [ voicePush, setVoicePush] = useState(false)
   const [ voiceurl, setVoiceurl ] = useState('');
   const [ objectURL, setObjectURL ] = useState('');
-  // const [ currentUrl, setCurrentUrl ] = useState('');
-
   React.useEffect(() => {
     axios.get(`/api/my-profile`, axiosConfig)
         .then((response) => {
@@ -108,7 +90,6 @@ const MyProfileUpdatePage = () => {
             console.log(err)
         })
 }, [])
-
   const setNicknameText = e => {
     setNickname(e.target.value);
   };
@@ -120,7 +101,6 @@ const MyProfileUpdatePage = () => {
     setImage(e.target.files[0]);
     setObjectURL (URL.createObjectURL(e.target.files[0]))
   };
-
   const startRecording = () => {
     setRecord(true);
   };
@@ -136,7 +116,6 @@ const MyProfileUpdatePage = () => {
     setVoice('');
     setVoiceurl('');
   };
-
   const sendUpdateData = e => {
     e.preventDefault();
       const UpdateData = new FormData();
@@ -167,8 +146,6 @@ const MyProfileUpdatePage = () => {
   return (
     <div className="my-profile-template">
       <img className="profile-tape" src={Tape1} />
-      
-      {/* 프로필 사진 변경 */}
       <div>
         <h4 className="Update-logo">프로필 사진</h4>
         <div style={{display:"flex", justifyContent:"center"}}>
@@ -182,8 +159,6 @@ const MyProfileUpdatePage = () => {
             onChange={setImageText}
             />
       </div>
-      
-      {/* 기본 정보 변경 */}
       <div className="mt-4">      
         <h4 className="Update-logo">기본 정보</h4>
           <h5>닉네임 </h5>
@@ -195,7 +170,6 @@ const MyProfileUpdatePage = () => {
           />
           <h5 style={{marginTop:"10px"}}>지역 </h5>
           <FormControl className="Update-input">
-            {/* <InputLabel id="demo-mutiple-name-label">지역</InputLabel> */}
             <Select
               labelId="demo-mutiple-name-label"
               id="demo-mutiple-name"
@@ -212,8 +186,6 @@ const MyProfileUpdatePage = () => {
             </Select>
           </FormControl>
         </div>
-      
-      {/* 목소리 변경 */}
       <div>
         <h4 className="Update-logo">목소리</h4>
         {!voice && (

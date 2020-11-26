@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import Tape1 from '../../assets/profile/Tape1.png';
 import axios from 'axios';
-import './MyProfilePage.css';
+import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import Tape1 from '../../assets/profile/Tape1.png';
+import './MyProfilePage.scss';
 
 const MyProfilePage = () => {
-  const [cookies, setCookie] = useCookies(['accessToken']);
-  const [email, setEmail] = useState('');
-  const [objectURL, setObjectURL] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [voiceurl, setVoiceurl] = useState('');
-  const [location, setLocation] = useState('');
-  const [age, setAge] = useState('');
   const history = useHistory();
+  const [ cookies, setCookie ] = useCookies([ 'accessToken' ]);
+  const [ email, setEmail ] = useState('');
+  const [ objectURL, setObjectURL ] = useState('');
+  const [ nickname, setNickname ] = useState('');
+  const [ voiceurl, setVoiceurl ] = useState('');
+  const [ location, setLocation ] = useState('');
+  const [ age, setAge ] = useState('');
 
   const config = {
     headers: {
@@ -50,17 +50,9 @@ const MyProfilePage = () => {
           <h6>나이: {age}</h6>
         </div>
       </div>
-
       <h5 className="mt-5">음성소개</h5>
-      <AudioPlayer
-        src={voiceurl}
-        showJumpControls={false}
-        customVolumeControls={[]}
-        customAdditionalControls={[]}
-      />      
-      <button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')} className="profile-button">
-        개인정보수정
-      </button>
+      <AudioPlayer src={voiceurl} showJumpControls={false} customVolumeControls={[]} customAdditionalControls={[]} />      
+      <button variant="contained" color="primary" onClick={() => history.push('/myprofile/update')} className="profile-button">개인정보수정</button>
     </div>
   )
 };
