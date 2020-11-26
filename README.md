@@ -131,14 +131,3 @@ $ npm run server
 ```bash
 $ yarn server
 ```
-
-
-
-## :page_facing_up: LICENSE 
-
-Copyright © 2020 I 설레임 연구소.
-This project is MIT licensed.
-
-[#]: 
-
-[#https://k3b103.p.ssafy.io/]: 
